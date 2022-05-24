@@ -1,0 +1,82 @@
+@startuml クラス図(全体)
+
+class GameObject{
+    +void Update(void)
+}
+
+class Dx12{
+
+}
+
+
+
+abstract class Component{
+    +void Update(void)
+    -GameObject gameObject_
+}
+
+GameObject -- Component
+
+class Collider{
+    
+}
+
+Component <|-- Collider
+
+class CircleCollider{
+    -float r_
+}
+
+Collider <|-- CircleCollider
+
+class Animator{
+
+}
+
+class RenderTarget{
+    -Resource rt_
+    -Resource srv_
+    -Resource screenMat_
+}
+
+abstract class Resource{
+    -ComPtr<ID3D12Resource> resourse_
+    -ComPtr<ID3D12DescriptorHeap> descriptorHeap_ 
+}
+
+Component <|-- Resource
+
+class transform{
+    -Matrix3X3 mat_
+    -Matrix3X3* mappedMat_
+}
+
+Resource <|-- transform
+
+class Textur{
+}
+
+Resource <|-- Textur
+
+
+class Mesh{
+    -vector<Vertex> vert_
+    -D3D12_VERTEX_BUFFER_VIEW vbView_
+    ComPtr<ID3D12Resource> vb_;
+}
+
+Material *-- Mesh
+
+class Material{
+    -Render& render_
+    -Mesh mesh
+    -pair<Resource&,int> shaderPair_    
+}
+
+Component <|-- Material
+
+class Render{
+    
+}
+
+@enduml
