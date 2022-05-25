@@ -2,7 +2,7 @@
 #include <wrl.h>
 struct ID3D12Resource;
 struct ID3D12DescriptorHeap;
-
+struct D3D12_RESOURCE_DESC;
 
 class Dx12Resource
 {
@@ -18,7 +18,7 @@ public:
 private:
 	
 	virtual bool CreateView(void) = 0;
-	virtual bool CreateResource(void) = 0;
+	virtual bool CreateResource(D3D12_RESOURCE_DESC&  resourceDesc) = 0;
 protected:
 	bool CreateDescriptorHeap(void);
 	ComPtr<ID3D12Resource> resource_;

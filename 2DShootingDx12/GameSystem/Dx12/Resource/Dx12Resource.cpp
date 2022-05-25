@@ -23,5 +23,6 @@ bool Dx12Resource::CreateDescriptorHeap(void)
 	{
 		return false;
 	}
+	return true;
 
 }

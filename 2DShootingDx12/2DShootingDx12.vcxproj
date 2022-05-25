@@ -78,13 +78,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\DirectXTex;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\DirectXTex\debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DIRECTTEX_DIR);$(IncludePath)</IncludePath>
+    <LibraryPath>$(DIRECTTEX_DIR)\debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\DirectXTex;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\DirectXTex\release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DIRECTTEX_DIR);$(IncludePath)</IncludePath>
+    <LibraryPath>$(DIRECTTEX_DIR)release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -162,6 +162,7 @@
     <ClCompile Include="GameSystem\Dx12\Resource\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameSystem\Dx12\Resource\ConstantResource.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\Dx12Resource.h" />
     <ClInclude Include="GameSystem\Dx12\Render\BasicRender.h" />
     <ClInclude Include="common\Debug.h" />
