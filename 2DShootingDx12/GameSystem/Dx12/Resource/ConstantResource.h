@@ -22,8 +22,8 @@ public:
 	~ConstantResource();
 	bool CreateView(void) override;
 	bool CreateResource(D3D12_RESOURCE_DESC& resourceDesc) override;
-protected:
 	T* mapped_;
+protected:
 	std::size_t size_;
 };
 
@@ -34,9 +34,16 @@ inline ConstantResource<T>::ConstantResource()
 	if (!(CreateResource(resDesc)))
 	{
 		DebugLog("リソースの生成に失敗しました");
+		assert(false);
 		return;
 	}
 
+	if (!CreateView())
+	{
+		DebugLog("バッファービューの生成に失敗しました");
+		assert(false);
+		return;
+	}
 }
 
 template<CbC T>
