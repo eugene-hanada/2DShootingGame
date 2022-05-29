@@ -44,7 +44,7 @@ abstract class Resource{
     -ComPtr<ID3D12DescriptorHeap> descriptorHeap_ 
 }
 
-Component <|-- Resource
+
 
 class transform{
     -Matrix3X3 mat_

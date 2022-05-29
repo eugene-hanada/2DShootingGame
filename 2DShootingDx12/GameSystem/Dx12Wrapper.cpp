@@ -4,6 +4,7 @@
 #include <dxgi1_6.h>
 #include <d3dx12.h>
 #include "Window.h"
+#include "Dx12/Resource/CbMatrix.h"
 #include "Dx12Wrapper.h"
 
 #include "../common/Debug.h"
@@ -47,6 +48,12 @@ Dx12Wrapper::Dx12Wrapper(Window& wnd)
 	}
 
 
+	cbMat_ = std::make_unique<CbMatrix>(*this);
+	cbMat_->mat_.m[0][0] = 2.0f / wnd.GetSize<float>().x;
+	cbMat_->mat_.m[1][1] = -2.0f / wnd.GetSize<float>().y;
+	cbMat_->mat_.m[3][0] = -1.0f;
+	cbMat_->mat_.m[3][1] = 1.0f;
+	cbMat_->Update();
 }
 
 Dx12Wrapper::~Dx12Wrapper()
@@ -75,7 +82,8 @@ void Dx12Wrapper::BeginFinalRenderTarget(void)
 
 	// ビューポートとシザー矩形をセット
 	cmdList_->RSSetViewports(1, viewPort_.get());
-	cmdList_->RSSetScissorRects(1, scissorrect_.get());
+	cmdList_->RSSetScissorRects(1, scissorRect_.get());
+	
 }
 
 void Dx12Wrapper::EndFinalRenderTarget(void)
@@ -89,6 +97,7 @@ void Dx12Wrapper::EndFinalRenderTarget(void)
 
 void Dx12Wrapper::DrawFinalRenderTarget(void)
 {
+
 	// コマンドリストの命令を実行するためにクローズ
 	auto result = cmdList_->Close();
 
@@ -351,9 +360,6 @@ bool Dx12Wrapper::CreateFinalRenderTarget(void)
 
 		// レンダービューターゲットに設定
 		device_->CreateRenderTargetView(backBuffers_[i].Get(), &rtvDesc, handle);
-		std::wstringstream wss;
-		wss << TEXT("backBuffers") << i;
-		backBuffers_[i]->SetName(wss.str().c_str());
 
 		// ポインタをずらす
 		handle.ptr += device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
@@ -361,7 +367,7 @@ bool Dx12Wrapper::CreateFinalRenderTarget(void)
 	}
 
 	viewPort_ = std::make_unique<CD3DX12_VIEWPORT>(backBuffers_[0].Get());
-	scissorrect_ = std::make_unique<CD3DX12_RECT>(0, 0, swcDesc.Width, swcDesc.Height);
+	scissorRect_ = std::make_unique<CD3DX12_RECT>(0, 0, swcDesc.Width, swcDesc.Height);
 	DebugLog("ファイナルレンダーターゲットの生成に成功");
 	return true;
 }

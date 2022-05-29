@@ -16,6 +16,7 @@ struct CD3DX12_VIEWPORT;
 struct CD3DX12_RECT;
 
 class Window;
+class CbMatrix;
 
 class Dx12Wrapper
 {
@@ -42,6 +43,13 @@ public:
 	{
 		return device_;
 	}
+
+	ComPtr<ID3D12GraphicsCommandList>& CmdLlist(void)
+	{
+		return cmdList_;
+	}
+
+	CbMatrix& GetCbMat(void) { return *cbMat_; }
 
 private:
 	bool CreateDXGIDevice(void);
@@ -88,8 +96,10 @@ private:
 	std::unique_ptr<CD3DX12_VIEWPORT> viewPort_;
 
 	// シザー矩形
-	std::unique_ptr< CD3DX12_RECT> scissorrect_;
+	std::unique_ptr< CD3DX12_RECT> scissorRect_;
 
 	float clearColor_[4];
+
+	std::unique_ptr<CbMatrix> cbMat_;
 };
 

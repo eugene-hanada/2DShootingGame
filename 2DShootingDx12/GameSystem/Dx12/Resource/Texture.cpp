@@ -1,6 +1,5 @@
 #include <DirectXTex.h>
 #include <d3dx12.h>
-#include "../../GameSystem.h"
 #include "../../Dx12Wrapper.h"
 #include "Texture.h"
 #include "../../../common/Debug.h"
@@ -18,7 +17,8 @@ const LoadFuncMap Texture::loadFunc_{
 	return SUCCEEDED(DirectX::LoadFromDDSFile(path.c_str(), DirectX::DDS_FLAGS_NONE,data, img)); }},
 };
 
-Texture::Texture(const std::basic_string<TCHAR>& path)
+Texture::Texture(Dx12Wrapper& dx12,const std::basic_string<TCHAR>& path) :
+	Dx12Resource{dx12}
 {
 	std::basic_string_view<TCHAR> ext(path);
 	
@@ -50,18 +50,34 @@ Texture::Texture(const std::basic_string<TCHAR>& path)
 	size_.x = static_cast<float>(metadate.width);
 	size_.y = static_cast<float>(metadate.height);
 
-	if (!CreateResource(resDesc))
+	if (!CreateResource(dx12,resDesc))
 	{
 		DebugLog("テクスチャの作成に失敗しました");
 		return;
 	}
 
-	if (!CreateDescriptorHeap())
+	if (!CreateDescriptorHeap(dx12))
 	{
 		DebugLog("ディスクリプタヒープの生成に失敗しました");
 	}
 
-	if (!CreateView())
+	if (!CreateView(dx12))
+	{
+		DebugLog("ビューの生成に失敗しました");
+	}
+
+}
+
+Texture::Texture(Dx12Wrapper& dx12, ComPtr<ID3D12Resource>& resource) :
+	Dx12Resource{dx12}
+{
+	resource_ = resource;
+	if (!CreateDescriptorHeap(dx12))
+	{
+		return;
+	}
+
+	if (!CreateView(dx12))
 	{
 		DebugLog("ビューの生成に失敗しました");
 	}
@@ -72,7 +88,7 @@ Texture::~Texture()
 {
 }
 
-bool Texture::CreateView(void)
+bool Texture::CreateView(Dx12Wrapper& dx12)
 {
 	// テクスチャビューの設定
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
@@ -80,16 +96,16 @@ bool Texture::CreateView(void)
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;		// 2dテクスチャ
 	srvDesc.Texture2D.MipLevels = 1;
-	GameSys.GetDx12().Device()->CreateShaderResourceView(resource_.Get(), &srvDesc, descriptorHeap_->GetCPUDescriptorHandleForHeapStart());
+	dx12.Device()->CreateShaderResourceView(resource_.Get(), &srvDesc, descriptorHeap_->GetCPUDescriptorHandleForHeapStart());
 	return true;
 }
 
-bool Texture::CreateResource(D3D12_RESOURCE_DESC& resourceDesc)
+bool Texture::CreateResource(Dx12Wrapper& dx12,D3D12_RESOURCE_DESC& resourceDesc)
 {
 	D3D12_HEAP_PROPERTIES texHeapProp{ CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK, D3D12_MEMORY_POOL_L0) };
 
 	// リソース生成
-	if (FAILED(GameSys.GetDx12().Device()->CreateCommittedResource(
+	if (FAILED(dx12.Device()->CreateCommittedResource(
 		&texHeapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,

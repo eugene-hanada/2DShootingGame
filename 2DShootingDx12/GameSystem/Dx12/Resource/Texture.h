@@ -13,7 +13,6 @@ namespace DirectX
     struct Image;
 }
 
-
 using LoadFunc = std::function<bool(const std::basic_string<TCHAR>& , DirectX::TexMetadata*, DirectX::ScratchImage&)>;
 using LoadFuncMap = std::unordered_map < std::basic_string_view<TCHAR>, LoadFunc>;
 
@@ -21,11 +20,12 @@ class Texture :
     public Dx12Resource
 {
 public:
-    Texture(const std::basic_string<TCHAR>& path);
+    Texture(Dx12Wrapper& dx12, const std::basic_string<TCHAR>& path);
+    Texture(Dx12Wrapper& dx12, ComPtr<ID3D12Resource>& resource);
     ~Texture();
 private:
-    bool CreateView(void) override;
-    bool CreateResource(D3D12_RESOURCE_DESC& resourceDesc) override;
+    bool CreateView(Dx12Wrapper& dx12) override;
+    bool CreateResource(Dx12Wrapper& dx12,D3D12_RESOURCE_DESC& resourceDesc) override;
     static const LoadFuncMap loadFunc_;
 
     Math::Vector2 size_;

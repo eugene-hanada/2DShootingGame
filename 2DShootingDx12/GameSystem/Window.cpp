@@ -73,6 +73,7 @@ Window::~Window()
 {
 	CoUninitialize();
 	UnregisterClass(winClass_.lpszClassName, winClass_.hInstance);
+	DebugLog("ウィンドウを破棄");
 }
 
 bool Window::LoopMessageProcess(void)

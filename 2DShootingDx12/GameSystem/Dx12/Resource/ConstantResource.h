@@ -2,7 +2,6 @@
 #include <concepts>
 #include <d3dx12.h>
 #include <d3d12.h>
-#include "../../GameSystem.h"
 #include "../../Dx12Wrapper.h"
 #include "Dx12Resource.h"
 
@@ -10,7 +9,7 @@
 
 // 定数バッファ用コンセプト
 template<class T>
-concept CbC = std::integral<T> || std::floating_point<T>;
+concept CbC = std::integral<T> || std::floating_point<T> || std::is_class_v<T>;
 
 // 定数バッファ用クラス
 template<CbC T>
@@ -18,27 +17,36 @@ class ConstantResource :
 	public Dx12Resource
 {
 public:
-	ConstantResource();
-	~ConstantResource();
-	bool CreateView(void) override;
-	bool CreateResource(D3D12_RESOURCE_DESC& resourceDesc) override;
-	T* mapped_;
+	ConstantResource(Dx12Wrapper& dx12);
+	virtual ~ConstantResource();
+	bool CreateView(Dx12Wrapper& dx12) override;
+	bool CreateResource(Dx12Wrapper& dx12,D3D12_RESOURCE_DESC& resourceDesc) override;
+	virtual void Update(void) = 0;
+	
 protected:
+	T* mapped_;
 	std::size_t size_;
 };
 
 template<CbC T>
-inline ConstantResource<T>::ConstantResource()
+inline ConstantResource<T>::ConstantResource(Dx12Wrapper& dx12) :
+	Dx12Resource{ dx12 }, size_{ (sizeof(T) + 0xff) & ~0xff }, mapped_{ nullptr }
 {
-	D3D12_RESOURCE_DESC resDesc{ CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD) };
-	if (!(CreateResource(resDesc)))
+	if (!CreateDescriptorHeap(dx12))
+	{
+		assert(false);
+		return;
+	}
+
+	D3D12_RESOURCE_DESC resDesc{ CD3DX12_RESOURCE_DESC::Buffer(size_) };
+	if (!(CreateResource(dx12,resDesc)))
 	{
 		DebugLog("リソースの生成に失敗しました");
 		assert(false);
 		return;
 	}
 
-	if (!CreateView())
+	if (!CreateView(dx12))
 	{
 		DebugLog("バッファービューの生成に失敗しました");
 		assert(false);
@@ -52,26 +60,25 @@ inline ConstantResource<T>::~ConstantResource()
 }
 
 template<CbC T>
-inline bool ConstantResource<T>::CreateView(void)
+inline bool ConstantResource<T>::CreateView(Dx12Wrapper& dx12)
 {
 	D3D12_CONSTANT_BUFFER_VIEW_DESC cbvDesc = {};
-	cbvDesc.BufferLocation = worldBuff_->GetGPUVirtualAddress();
+	cbvDesc.BufferLocation = resource_->GetGPUVirtualAddress();
 	cbvDesc.SizeInBytes = static_cast<UINT>(size_);
-	GameSys.GetDx12().Device()->CreateConstantBufferView(&cbvDesc, resource_->GetCPUDescriptorHandleForHeapStart());
+	dx12.Device()->CreateConstantBufferView(&cbvDesc, descriptorHeap_->GetCPUDescriptorHandleForHeapStart());
 	return true;
 }
 
 template<CbC T>
-inline bool ConstantResource<T>::CreateResource(D3D12_RESOURCE_DESC& resourceDesc)
+inline bool ConstantResource<T>::CreateResource(Dx12Wrapper& dx12,D3D12_RESOURCE_DESC& resourceDesc)
 {
-	size_ = sizeof(T);
-	size_ = (buffSize + 0xff) & ~0xff;
-	auto resDesc = CD3DX12_RESOURCE_DESC::Buffer(size_);
+	
+	auto heapProp = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
 
-	if (FAILED(GameSys.GetDx12().Device()->CreateCommittedResource(
+	if (FAILED(dx12.Device()->CreateCommittedResource(
 		&heapProp,
 		D3D12_HEAP_FLAG_NONE,
-		&resDesc,
+		&resourceDesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
 		IID_PPV_ARGS(resource_.ReleaseAndGetAddressOf())

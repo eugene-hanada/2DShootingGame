@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="GameSystem\GameSystem.cpp">
+    <ClCompile Include="GameSystem\Application.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="common\Debug.cpp">
@@ -48,9 +48,24 @@
     <ClCompile Include="GameSystem\Dx12\Resource\Texture.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="GameSystem\Dx12\Resource\CbMatrix.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem\Dx12\Resource\RenderTarget.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem\Dx12\Resource\Mesh.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem\Dx12\Resource\MaterialBase.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Transform.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameSystem\GameSystem.h">
+    <ClInclude Include="GameSystem\Application.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="common\Debug.h">
@@ -86,5 +101,27 @@
     <ClInclude Include="GameSystem\Dx12\Resource\ConstantResource.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="GameSystem\Dx12\Resource\CbMatrix.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem\Dx12\Resource\RenderTarget.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem\Dx12\Resource\Mesh.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem\Dx12\Resource\MaterialBase.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Transform.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resource\shader\Basic2DVs.hlsl" />
+    <FxCompile Include="Resource\shader\Basic2DPs.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\shader\Basic2D.hlsli" />
   </ItemGroup>
 </Project>
