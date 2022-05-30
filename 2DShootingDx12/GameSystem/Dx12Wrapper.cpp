@@ -191,6 +191,7 @@ bool Dx12Wrapper::CreateDXGIDevice(void)
 			// 見つかったらやめる
 			fLavel = level;
 			DebugLog("Deviceの生成に成功");
+			device_->SetName(TEXT("Device"));
 			return true;
 		}
 	}
@@ -221,6 +222,7 @@ bool Dx12Wrapper::CreateCommand(void)
 		return false;
 	}
 	DebugLog("コマンドリストの生成に成功");
+
 	// cmdAllocator_->SetName(TEXT("CommandList"));
 
 	// 設定をDESC構造体で行う

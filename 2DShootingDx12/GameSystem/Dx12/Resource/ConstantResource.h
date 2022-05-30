@@ -91,6 +91,7 @@ inline bool ConstantResource<T>::CreateResource(Dx12Wrapper& dx12,D3D12_RESOURCE
 	{
 		return false;
 	}
+	resource_->SetName(TEXT("Resource"));
 	return true;
 }
 

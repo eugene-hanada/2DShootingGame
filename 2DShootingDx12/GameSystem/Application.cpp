@@ -25,20 +25,20 @@ int Application::Run(void)
 		return -1;
 	}
 
-	BasicRender rd(*dx12_);
+	//BasicRender rd(*dx12_);
 
-	MaterialBase mat(*dx12_, Math::Vector2{ 100.0f,100.0f });
+	/*MaterialBase mat(*dx12_, Math::Vector2{ 100.0f,100.0f });
 	auto t = std::make_shared<Transform>(*dx12_);
 	t->SetPos({ 1000,50 });
 	t->Update();
 	mat.SetTransform(t);
-	mat.PushResource(std::make_shared<Texture>(*dx12_,TEXT("Resource/image/Logo.jpg")));
+	mat.PushResource(std::make_shared<Texture>(*dx12_,TEXT("Resource/image/Logo.jpg")));*/
 
 	while (window_->LoopMessageProcess())
 	{
 		dx12_->BeginFinalRenderTarget();
 		
-		mat.Draw(rd, dx12_->GetCbMat());
+		//mat.Draw(rd, dx12_->GetCbMat());
 
 		dx12_->EndFinalRenderTarget();
 
