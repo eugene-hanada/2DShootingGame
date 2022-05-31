@@ -9,7 +9,7 @@ Dx12Resource::Dx12Resource(Dx12Wrapper& dx12)
 	if (!CreateDescriptorHeap(dx12))
 	{
 		DebugLog("デスクリプタヒープの生成に失敗");
-		assert(false);
+		Assert(false, "デスクリプタヒープの生成に失敗");
 	}
 }
 

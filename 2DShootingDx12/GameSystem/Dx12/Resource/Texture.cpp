@@ -111,11 +111,13 @@ bool Texture::CreateResource(Dx12Wrapper& dx12,D3D12_RESOURCE_DESC& resourceDesc
 		&resourceDesc,
 		D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE,
 		nullptr,
-		IID_PPV_ARGS(&resource_))))
+		IID_PPV_ARGS(resource_.ReleaseAndGetAddressOf()))))
 	{
 		DebugLog("ƒŠƒ\[ƒX¶¬‚ÉŽ¸”s");
 		return false;
 	}
+
+	
 
 	// 
 	auto image = img_->GetImage(0,0,0);

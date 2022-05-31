@@ -24,7 +24,7 @@ Window::Window(int sizeX, int sizeY, const std::basic_string<TCHAR>& titleText) 
 	if (FAILED(CoInitializeEx(nullptr, COINIT_MULTITHREADED)))
 	{
 		DebugLog("Comの初期化に失敗");
-		assert(false);
+		
 	}
 	DebugLog("Comの初期化に成功");
 
@@ -36,7 +36,7 @@ Window::Window(int sizeX, int sizeY, const std::basic_string<TCHAR>& titleText) 
 	if (!RegisterClassEx(&winClass_))
 	{
 		DebugLog("ウィンドウクラスの登録に失敗");
-		assert(false);
+		Assert(false,"ウィンドウクラスの登録に失敗");
 	}
 	DebugLog("ウィンドウクラスの登録に成功");
 
@@ -45,7 +45,7 @@ Window::Window(int sizeX, int sizeY, const std::basic_string<TCHAR>& titleText) 
 	if (!AdjustWindowRect(&wSize, WS_OVERLAPPEDWINDOW, false))
 	{
 		DebugLog("ウィンドウのサイズ設定に失敗");
-		assert(false);
+		Assert(false, "ウィンドウのサイズ設定に失敗");
 	}
 	DebugLog("ウィンドウのサイズ設定に成功");
 	

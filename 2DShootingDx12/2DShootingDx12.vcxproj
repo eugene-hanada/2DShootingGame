@@ -84,7 +84,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(DIRECTXTEX_DIR);$(IncludePath)</IncludePath>
-    <LibraryPath>$(DIRECTXTEX_DIR)release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(DIRECTXTEX_DIR)\release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Scene\BaseScene.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\CbMatrix.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\Dx12Resource.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\BasicRender.cpp" />
@@ -165,8 +166,10 @@
     <ClCompile Include="GameSystem\Dx12\Resource\Mesh.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\MaterialBase.cpp" />
     <ClCompile Include="Component\Transform.cpp" />
+    <ClCompile Include="Object\Object.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\CbMatrix.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\ConstantResource.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\Dx12Resource.h" />
@@ -184,6 +187,8 @@
     <ClInclude Include="GameSystem\Dx12\Resource\Mesh.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\MaterialBase.h" />
     <ClInclude Include="Component\Transform.h" />
+    <ClInclude Include="Object\Object.h" />
+    <ClInclude Include="Scene\SceneID.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resource\shader\Basic2DPs.hlsl">
