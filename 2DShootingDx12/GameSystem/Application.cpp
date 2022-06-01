@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "Dx12Wrapper.h"
+#include "../Scene/TitleScene.h"
 #include "Application.h"
 #include "Dx12/Render/BasicRender.h"
 #include "Dx12/Resource/MaterialBase.h"
@@ -25,6 +26,8 @@ int Application::Run(void)
 		return -1;
 	}
 
+	scene_ = std::make_unique<TitleScene>();
+
 	BasicRender rd(*dx12_);
 
 	MaterialBase mat(*dx12_, Math::Vector2{ 100.0f,100.0f });
@@ -36,9 +39,14 @@ int Application::Run(void)
 
 	while (window_->LoopMessageProcess())
 	{
+
+		scene_ = scene_->Update(std::move(scene_));
+
 		dx12_->BeginFinalRenderTarget();
 		
 		mat.Draw(rd, dx12_->GetCbMat());
+
+		scene_->Draw();
 
 		dx12_->EndFinalRenderTarget();
 

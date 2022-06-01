@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <Windows.h>
+#include "../Scene/SceneID.h"
 #include "../common/Math.h"
 
 #define App (Application::GetInstance())
@@ -9,6 +10,7 @@
 class Window;
 class Dx12Wrapper;
 class Mesh;
+class BaseScene;
 
 class Application
 {
@@ -23,7 +25,7 @@ public:
 	Window& GetWindow(void) { return *window_; };
 	Dx12Wrapper& GetDx12(void) { return *dx12_; }
 	int Run(void);
-
+	
 private:
 	Application();
 	~Application();
@@ -35,6 +37,7 @@ private:
 	static Application instance_;
 	std::unique_ptr<Window> window_;
 	std::unique_ptr<Dx12Wrapper> dx12_;
+	std::unique_ptr<BaseScene> scene_;
 	
 };
 

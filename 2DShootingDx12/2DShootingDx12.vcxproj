@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\BaseScene.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\CbMatrix.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\Dx12Resource.cpp" />
@@ -167,8 +168,10 @@
     <ClCompile Include="GameSystem\Dx12\Resource\MaterialBase.cpp" />
     <ClCompile Include="Component\Transform.cpp" />
     <ClCompile Include="Object\Object.cpp" />
+    <ClCompile Include="Scene\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\CbMatrix.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\ConstantResource.h" />
@@ -189,6 +192,7 @@
     <ClInclude Include="Component\Transform.h" />
     <ClInclude Include="Object\Object.h" />
     <ClInclude Include="Scene\SceneID.h" />
+    <ClInclude Include="Scene\TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resource\shader\Basic2DPs.hlsl">
