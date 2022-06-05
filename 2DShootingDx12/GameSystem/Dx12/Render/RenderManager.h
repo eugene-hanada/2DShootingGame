@@ -11,6 +11,7 @@ enum class RenderType
 class MaterialBase;
 class CbMatrix;
 class RenderBase;
+class Dx12Wrapper;
 
 class RenderManager
 {

@@ -11,16 +11,16 @@ class TimeClass
 public:
 
 	template<TimeC T>
-	T GetDeltaTime(void) const;
+	T GetDeltaTime(void) const noexcept;
 
 	template<TimeC T>
-	T GetGameTime(void) const;
+	T GetGameTime(void) const noexcept;
 	
-	void DeltaTimeStart(void);
+	void DeltaTimeStart(void) noexcept;
 
-	void DeltaTimeEnd(void);
+	void DeltaTimeEnd(void) noexcept;
 
-	void GameTimeEnd(void);
+	void GameTimeEnd(void) noexcept;
 
 private:
 
@@ -46,13 +46,13 @@ constexpr T  convertNano = static_cast<T>(1) / static_cast<T>(1000000000.0);
 
 
 template<TimeC T >
-inline T TimeClass::GetDeltaTime(void) const
+inline T TimeClass::GetDeltaTime(void) const noexcept
 {
 	return static_cast<T>(delta_);
 }
 
 template<TimeC T>
-inline T TimeClass::GetGameTime(void) const
+inline T TimeClass::GetGameTime(void) const noexcept
 {
 	return static_cast<T>(gameTime_);
 }

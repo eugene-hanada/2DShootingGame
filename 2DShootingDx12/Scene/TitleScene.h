@@ -1,15 +1,19 @@
 #pragma once
 #include "BaseScene.h"
 
+class MaterialBase;
+
 class TitleScene :
 	public BaseScene
 {
 public:
-	TitleScene();
+	TitleScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input);
 	~TitleScene();
 private:
 	SceneUPtr Update(SceneUPtr scene) final;
 	void Draw(void) final;
-	const SceneID GetID(void) const noexcept { return SceneID::Title; }
+	const SceneID GetID(void) const noexcept final { return SceneID::Title; }
+
+	std::unique_ptr< MaterialBase> testMaterial_;
 };
 

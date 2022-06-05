@@ -2,18 +2,27 @@
 #include <memory>
 #include "SceneID.h"
 
-
+class RenderTarget;
+class RenderManager;
+class Dx12Wrapper;
+class InputSystem;
+class CbMatrix;
 
 class BaseScene
 {
 public:
-	BaseScene();
+	BaseScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input);
 	virtual ~BaseScene();
 	using SceneUPtr = std::unique_ptr<BaseScene>;
 	virtual SceneUPtr Update(SceneUPtr scene) = 0;
+	void Draw(CbMatrix& cbMat);
 	virtual void Draw(void) = 0;
-private:
-	SceneUPtr scene_;
+	RenderTarget& GetRenderTarget(void) { return *rt_; }
+protected:
+	std::unique_ptr<RenderTarget> rt_;
+	std::shared_ptr<RenderManager>  renderMng_;
+	std::shared_ptr<InputSystem> input_;
+	Dx12Wrapper& dx12_;
 private:
 	virtual const SceneID GetID(void) const noexcept = 0;
 	

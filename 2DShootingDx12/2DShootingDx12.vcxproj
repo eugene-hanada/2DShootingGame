@@ -127,7 +127,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;DirectXTex.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;DirectXTex.lib;d3dcompiler.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,12 +145,13 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;DirectXTex.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;DirectXTex.lib;d3dcompiler.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameSystem\Dx12\Render\RenderManager.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\RenderBase.cpp" />
+    <ClCompile Include="GameSystem\Input\InputSystem.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\BaseScene.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\CbMatrix.cpp" />
@@ -161,7 +162,7 @@
     <ClCompile Include="common\Random.cpp" />
     <ClCompile Include="common\Time.cpp" />
     <ClCompile Include="GameSystem\Dx12Wrapper.cpp" />
-    <ClCompile Include="GameSystem\Application.cpp" />
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameSystem\Window.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\Texture.cpp" />
@@ -171,10 +172,12 @@
     <ClCompile Include="Component\Transform.cpp" />
     <ClCompile Include="Object\Object.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
+    <ClCompile Include="Scene\Transition\Transition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem\Dx12\Render\RenderManager.h" />
     <ClInclude Include="GameSystem\Dx12\Render\RenderBase.h" />
+    <ClInclude Include="GameSystem\Input\InputSystem.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\CbMatrix.h" />
@@ -187,7 +190,7 @@
     <ClInclude Include="common\Time.h" />
     <ClInclude Include="common\Vector2.h" />
     <ClInclude Include="GameSystem\Dx12Wrapper.h" />
-    <ClInclude Include="GameSystem\Application.h" />
+    <ClInclude Include="Application.h" />
     <ClInclude Include="GameSystem\Window.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\Texture.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\RenderTarget.h" />
@@ -197,6 +200,7 @@
     <ClInclude Include="Object\Object.h" />
     <ClInclude Include="Scene\SceneID.h" />
     <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="Scene\Transition\Transition.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resource\shader\Basic2DPs.hlsl">

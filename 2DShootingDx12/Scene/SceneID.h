@@ -3,5 +3,6 @@
 enum class SceneID
 {
 	Game,
-	Title
+	Title,
+	Transition,
 };

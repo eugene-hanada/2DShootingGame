@@ -8,6 +8,9 @@ class CbMatrix;
 class MaterialBase;
 class Texture;
 struct ID3D12Resource;
+struct CD3DX12_RECT;
+struct CD3DX12_VIEWPORT;
+struct ID3D12DescriptorHeap;
 
 class RenderTarget
 {
@@ -27,6 +30,9 @@ public:
 	void DrawBegin(void);
 	void DrawEnd(void);
 	void Clear(void);
+
+	MaterialBase& GetMaterial(void) { return *material_; }
+	CbMatrix& GetCbMat(void) { return *cbMat_; }
 private:
 	
 

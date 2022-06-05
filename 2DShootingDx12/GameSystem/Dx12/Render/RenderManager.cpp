@@ -4,6 +4,7 @@
 RenderManager::RenderManager(Dx12Wrapper& dx12)
 {
 	renderMap_.emplace(RenderType::Basic, std::make_unique<BasicRender>(dx12));
+
 }
 
 RenderManager::~RenderManager()

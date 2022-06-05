@@ -1,12 +1,12 @@
 #include "Time.h"
 
-void TimeClass::DeltaTimeStart(void)
+void TimeClass::DeltaTimeStart(void) noexcept
 {
 	deltaStart_ = std::chrono::system_clock::now();
 	gameTimeStart_ = std::chrono::system_clock::now();
 }
 
-void TimeClass::DeltaTimeEnd(void)
+void TimeClass::DeltaTimeEnd(void)noexcept
 {
 	
 
@@ -14,7 +14,7 @@ void TimeClass::DeltaTimeEnd(void)
 	delta_ =  std::chrono::duration_cast<std::chrono::nanoseconds>(deltaEnd_ - deltaStart_).count() / 1000000000.0;
 }
 
-void TimeClass::GameTimeEnd(void)
+void TimeClass::GameTimeEnd(void) noexcept
 {
 	
 	gameTimeEnd_ = std::chrono::system_clock::now();

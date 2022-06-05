@@ -12,7 +12,7 @@ RenderTarget::RenderTarget(Dx12Wrapper& dx12,const Math::Vector2& size) :
 	cbMat_->mat_.m[1][1] = -2.0f / size.y;
 	cbMat_->mat_.m[3][0] = -1.0f;
 	cbMat_->mat_.m[3][1] = 1.0f;
-
+	cbMat_->Update();
 	material_ = std::make_unique<MaterialBase>(dx12_, size_);
 	if (!CreateRenderTarget())
 	{
@@ -43,10 +43,6 @@ void RenderTarget::DrawBegin(void)
 	dx12_.CmdLlist()->RSSetViewports(1, viewPort_.get());
 	dx12_.CmdLlist()->RSSetScissorRects(1, scissorRect_.get());
 
-	// 変換用行列の定数バッファのデスクリプタヒープをセットする
-	ID3D12DescriptorHeap* dh[]{ cbMat_->DescriptorHeap().Get() };
-	dx12_.CmdLlist()->SetDescriptorHeaps(1, dh);
-	dx12_.CmdLlist()->SetGraphicsRootDescriptorTable(0, cbMat_->DescriptorHeap()->GetGPUDescriptorHandleForHeapStart());
 }
 
 void RenderTarget::DrawEnd(void)
@@ -134,8 +130,8 @@ bool RenderTarget::CreateRenderTarget(void)
 	scissorRect_ = std::make_unique<CD3DX12_RECT>(0, 0, static_cast<long>(resDesc.Width), static_cast<long>(resDesc.Height));
 
 	
-	std::shared_ptr<Texture> tex = std::make_shared<Texture>(dx12_, resource);
-	material_->PushResource(tex);
+	texure_ = std::make_shared<Texture>(dx12_, resource);
+	material_->PushResource(texure_);
 
 	return true;
 }
