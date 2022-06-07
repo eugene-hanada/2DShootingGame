@@ -8,5 +8,6 @@ public:
     Transform(Dx12Wrapper& dx12);
     ~Transform();
    void SetPos(const Math::Vector2& pos);
+   void SetPos(const Math::Vector2& pos, float angle, const Math::Vector2& scale);
 };
 

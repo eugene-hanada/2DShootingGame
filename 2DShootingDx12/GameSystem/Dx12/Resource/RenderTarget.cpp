@@ -131,7 +131,7 @@ bool RenderTarget::CreateRenderTarget(void)
 
 	
 	texure_ = std::make_shared<Texture>(dx12_, resource);
-	material_->PushResource(texure_);
+	material_->shaderResource_.emplace_back(texure_);
 
 	return true;
 }

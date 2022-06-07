@@ -37,11 +37,17 @@ void RenderBase::Draw(MaterialBase& mate, CbMatrix& cbMat)
 	dx12_.CmdLlist()->SetGraphicsRootDescriptorTable(1, mate.GetTransform()->DescriptorHeap()->GetGPUDescriptorHandleForHeapStart());
 
 	// シェーダに定数バッファやテクスチャ等のリソースをセットする
+	int  pramIdx{ 2 };
 	for (auto& r : mate.GetShaderResource())
 	{
-		ID3D12DescriptorHeap* dh[]{ r.first->DescriptorHeap().Get() };
+		if (r.expired())
+		{
+			continue;
+		}
+		ID3D12DescriptorHeap* dh[]{ r.lock()->DescriptorHeap().Get() };
 		dx12_.CmdLlist()->SetDescriptorHeaps(1, dh);
-		dx12_.CmdLlist()->SetGraphicsRootDescriptorTable(r.second, r.first->DescriptorHeap()->GetGPUDescriptorHandleForHeapStart());
+		dx12_.CmdLlist()->SetGraphicsRootDescriptorTable(pramIdx , r.lock()->DescriptorHeap()->GetGPUDescriptorHandleForHeapStart());
+		pramIdx++;
 	}
 
 	// 描画する

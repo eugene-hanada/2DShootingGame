@@ -149,9 +149,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameSystem\Dx12\Render\AlphaRender.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\RenderManager.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\RenderBase.cpp" />
     <ClCompile Include="GameSystem\Input\InputSystem.cpp" />
+    <ClCompile Include="Component\Material.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\BaseScene.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\CbMatrix.cpp" />
@@ -175,9 +177,11 @@
     <ClCompile Include="Scene\Transition\Transition.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameSystem\Dx12\Render\AlphaRender.h" />
     <ClInclude Include="GameSystem\Dx12\Render\RenderManager.h" />
     <ClInclude Include="GameSystem\Dx12\Render\RenderBase.h" />
     <ClInclude Include="GameSystem\Input\InputSystem.h" />
+    <ClInclude Include="Component\Material.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\CbMatrix.h" />
@@ -203,6 +207,12 @@
     <ClInclude Include="Scene\Transition\Transition.h" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="Resource\shader\Alpha2DPs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
     <FxCompile Include="Resource\shader\Basic2DPs.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>

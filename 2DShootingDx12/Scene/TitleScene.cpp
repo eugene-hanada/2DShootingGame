@@ -1,6 +1,6 @@
 #include "../GameSystem/Dx12/Resource/RenderTarget.h"
 #include "../GameSystem/Dx12/Render/RenderManager.h"
-#include "../GameSystem/Dx12/Resource/MaterialBase.h"
+#include "../Component/Material.h"
 #include "../GameSystem/Dx12/Resource/Texture.h"
 #include "../Component/Transform.h"
 
@@ -12,9 +12,9 @@
 TitleScene::TitleScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12,std::shared_ptr<InputSystem>& input) :
 	BaseScene{ renderMng, dx12,input}
 {
-	testMaterial_ = std::make_unique<MaterialBase>(dx12, Math::Vector2{ 100.0f,100.0f });
-	testMaterial_->PushResource(std::make_shared<Texture>(dx12, TEXT("Resource/image/Logo.jpg")));
-	testMaterial_->GetTransform()->SetPos(Math::Vector2{ 100.0f,100.0f });
+	testMaterial_ = std::make_unique<Material>(TEXT("Resource/image/Logo.jpg"),dx12, Math::Vector2{ 100.0f,100.0f });
+	testMaterial_->SetTransform(std::make_shared<Transform>(dx12));
+	testMaterial_->GetTransform()->SetPos(Math::Vector2{ 100.0f,100.0f }); 
 	testMaterial_->GetTransform()->Update();
 	rt_->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

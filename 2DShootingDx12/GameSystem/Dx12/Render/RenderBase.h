@@ -9,9 +9,9 @@ class CbMatrix;
 
 class RenderBase
 {
+public:
 	template<class T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
-public:
 	RenderBase(Dx12Wrapper& dx12);
 	virtual ~RenderBase();
 	void Draw(MaterialBase& mate, CbMatrix& cbMat);
