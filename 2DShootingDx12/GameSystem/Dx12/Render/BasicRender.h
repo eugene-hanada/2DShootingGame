@@ -1,5 +1,6 @@
 #pragma once
 #include <wrl.h>
+#include <d3dcommon.h>
 #include "RenderBase.h"
 
 class Dx12Wrapper;
@@ -14,12 +15,12 @@ class BasicRender :
 	template<class T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
 public:
-	BasicRender(Dx12Wrapper& dx12);
+	BasicRender(ComPtr<ID3DBlob>& vs, ComPtr<ID3DBlob>& ps,Dx12Wrapper& dx12);
 	~BasicRender();
 	/*void Draw(MaterialBase& mate, CbMatrix& cbMat);*/
 private:
 
-	bool CreatePipelineState(void);
+	bool CreatePipelineState(ComPtr<ID3DBlob>& vs, ComPtr<ID3DBlob>& ps);
 	bool CreateRootSignature(void);
 
 };

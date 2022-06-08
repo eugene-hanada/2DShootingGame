@@ -18,7 +18,7 @@ public:
 	ComPtr<ID3D12PipelineState>& GetPipelineState(void) { return pipeline_; }
 	ComPtr<ID3D12RootSignature>& GetRootSignature(void) { return rootSignature_; }
 protected:
-	virtual bool CreatePipelineState(void) = 0;
+	virtual bool CreatePipelineState(ComPtr<ID3DBlob>& vs, ComPtr<ID3DBlob>& ps) = 0;
 	virtual bool CreateRootSignature(void) = 0;
 	
 

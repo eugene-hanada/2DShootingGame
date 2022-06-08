@@ -149,6 +149,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameSystem\Dx12\Resource\CbValue.cpp" />
+    <ClCompile Include="Scene\Transition\FadeIn.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\AlphaRender.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\RenderManager.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\RenderBase.cpp" />
@@ -177,6 +179,8 @@
     <ClCompile Include="Scene\Transition\Transition.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameSystem\Dx12\Resource\CbValue.h" />
+    <ClInclude Include="Scene\Transition\FadeIn.h" />
     <ClInclude Include="GameSystem\Dx12\Render\AlphaRender.h" />
     <ClInclude Include="GameSystem\Dx12\Render\RenderManager.h" />
     <ClInclude Include="GameSystem\Dx12\Render\RenderBase.h" />

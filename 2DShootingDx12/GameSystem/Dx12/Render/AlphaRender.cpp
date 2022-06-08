@@ -4,14 +4,14 @@
 #include "../../../common/Debug.h"
 #include "AlphaRender.h"
 
-AlphaRender::AlphaRender(Dx12Wrapper& dx12) :
+AlphaRender::AlphaRender(ComPtr<ID3DBlob>& vs, ComPtr<ID3DBlob>& ps,Dx12Wrapper& dx12) :
 	RenderBase{dx12}
 {
 	if (!CreateRootSignature())
 	{
 		assert(false);
 	}
-	if (!CreatePipelineState())
+	if (!CreatePipelineState(vs,ps))
 	{
 		assert(false);
 	}
@@ -21,50 +21,9 @@ AlphaRender::~AlphaRender()
 {
 }
 
-bool AlphaRender::CreatePipelineState(void)
+bool AlphaRender::CreatePipelineState(ComPtr<ID3DBlob>& vs, ComPtr<ID3DBlob>& ps)
 {
-	// シェーダの設定
-	RenderBase::ComPtr<ID3DBlob> vsBlob{ nullptr };
-	RenderBase::ComPtr<ID3DBlob> psBlob{ nullptr };
-	RenderBase::ComPtr<ID3DBlob> errorBlob{ nullptr };
 
-	auto flag = D3DCOMPILE_SKIP_OPTIMIZATION;
-#ifdef _DEBUG
-	flag |= D3DCOMPILE_DEBUG;
-#endif
-
-	HRESULT result = D3DCompileFromFile(
-		L"Resource/shader/Basic2DVs.hlsl",
-		nullptr,
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		"main",
-		"vs_5_0",
-		flag,
-		0,
-		&vsBlob,
-		&errorBlob);
-	if (FAILED(result))
-	{
-		DebugLog("頂点シェーダのコンパイルに失敗");
-		return false;
-	}
-
-	result = D3DCompileFromFile(
-		L"Resource/shader/Basic2DPs.hlsl",
-		nullptr,
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		"main",
-		"ps_5_0",
-		flag,
-		0,
-		&psBlob,
-		&errorBlob
-	);
-	if (FAILED(result))
-	{
-		DebugLog("ピクセルシェーダのコンパイルに失敗");
-		return false;
-	}
 
 	// シェーダのインプットレイアウト
 	D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
@@ -93,8 +52,8 @@ bool AlphaRender::CreatePipelineState(void)
 	gpipeline.pRootSignature = rootSignature_.Get();
 
 	// シェーダをセット
-	gpipeline.VS = CD3DX12_SHADER_BYTECODE(vsBlob.Get());
-	gpipeline.PS = CD3DX12_SHADER_BYTECODE(psBlob.Get());
+	gpipeline.VS = CD3DX12_SHADER_BYTECODE(vs.Get());
+	gpipeline.PS = CD3DX12_SHADER_BYTECODE(ps.Get());
 
 	// デフォルトのサンプルマスク
 	gpipeline.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;

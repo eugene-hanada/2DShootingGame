@@ -1,7 +1,10 @@
 #pragma once
+#include "../GameSystem/Dx12/Resource/CbValue.h"
 #include "BaseScene.h"
 
 class MaterialBase;
+
+
 
 class TitleScene :
 	public BaseScene
@@ -15,5 +18,6 @@ private:
 	const SceneID GetID(void) const noexcept final { return SceneID::Title; }
 
 	std::unique_ptr< MaterialBase> testMaterial_;
+	std::shared_ptr<CbValue<float>> alpha_;
 };
 
