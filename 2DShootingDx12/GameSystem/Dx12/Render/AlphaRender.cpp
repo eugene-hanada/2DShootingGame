@@ -73,7 +73,10 @@ bool AlphaRender::CreatePipelineState(ComPtr<ID3DBlob>& vs, ComPtr<ID3DBlob>& ps
 	gpipeline.BlendState.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
 	gpipeline.BlendState.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
 	gpipeline.BlendState.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
-
+	gpipeline.BlendState.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_SRC_ALPHA;
+	gpipeline.BlendState.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_DEST_ALPHA;
+	//gpipeline.BlendState.RenderTarget[0].BlendOpAlpha = ;
+	
 	// 入力レイアウトを設定
 	gpipeline.InputLayout.pInputElementDescs = inputLayout;
 	gpipeline.InputLayout.NumElements = _countof(inputLayout);

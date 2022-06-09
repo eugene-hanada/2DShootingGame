@@ -4,7 +4,7 @@
 #include "Transition.h"
 
 Transition::Transition(SceneUPtr befor, SceneUPtr after, std::shared_ptr<RenderManager>& renderMng, Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input) :
-	BaseScene{renderMng,dx12,input}, stepTime_{0.0f}
+	BaseScene{renderMng,dx12,input}, stepTime_{0.0f},befor_{std::move(befor)}, after_{std::move(after)}
 {
 }
 
@@ -22,14 +22,3 @@ BaseScene::SceneUPtr Transition::Update(SceneUPtr scene)
 	return scene;
 }
 
-void Transition::Draw(void)
-{
-	befor_->Draw();
-	after_->Draw();
-
-	rt_->Clear();
-	rt_->DrawBegin();
-	renderMng_->Draw(befor_->GetRenderTarget().GetMaterial(), rt_->GetCbMat(), RenderType::Basic);
-	renderMng_->Draw(after_->GetRenderTarget().GetMaterial(), rt_->GetCbMat(), RenderType::Basic);
-	rt_->DrawEnd();
-}

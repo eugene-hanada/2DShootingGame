@@ -18,6 +18,7 @@ private:
 	const SceneID GetID(void) const noexcept final { return SceneID::Title; }
 
 	std::unique_ptr< MaterialBase> testMaterial_;
+	std::unique_ptr< MaterialBase> testMaterial2_;
 	std::shared_ptr<CbValue<float>> alpha_;
 };
 
