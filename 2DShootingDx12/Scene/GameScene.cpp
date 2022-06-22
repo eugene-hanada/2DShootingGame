@@ -8,6 +8,7 @@
 GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input) :
 	BaseScene{ renderMng,dx12,input}
 {
+	rt_->SetClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 GameScene::~GameScene()
@@ -21,4 +22,7 @@ BaseScene::SceneUPtr GameScene::Update(SceneUPtr scene)
 
 void GameScene::Draw(void)
 {
+	rt_->Clear();
+	rt_->DrawBegin();
+	rt_->DrawEnd();
 }

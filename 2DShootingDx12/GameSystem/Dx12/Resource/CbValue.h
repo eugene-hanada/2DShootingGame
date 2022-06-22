@@ -12,7 +12,7 @@ public:
     CbValue(Dx12Wrapper& dx12);
     ~CbValue();
     void Update(void) final { (*this->mapped_) = val_; }
-    T val_;
+    T val_{};
 };
 
 template<CbValueC T>
