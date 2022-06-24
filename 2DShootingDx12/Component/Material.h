@@ -9,7 +9,9 @@ class Material :
 	public MaterialBase
 {
 public:
-	Material(const std::basic_string<TCHAR>& path,Dx12Wrapper& dx12, const Math::Vector2& size);
+	//Material(const std::basic_string<TCHAR>& path,Dx12Wrapper& dx12, const Math::Vector2& size);
+
+	Material(std::shared_ptr<Dx12Resource>& tex, Dx12Wrapper& dx12, const Math::Vector2& size);
 	~Material();
 
 private:

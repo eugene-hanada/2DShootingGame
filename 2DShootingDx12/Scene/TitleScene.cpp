@@ -13,21 +13,22 @@
 TitleScene::TitleScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12,std::shared_ptr<InputSystem>& input) :
 	BaseScene{ renderMng, dx12,input}
 {
-	testMaterial_ = std::make_unique<Material>(TEXT("Resource/image/LogoBox.png"),dx12, Math::Vector2{ 100.0f,100.0f });
+	std::shared_ptr<Dx12Resource> t = std::make_shared<Texture>(dx12_, TEXT("Resource/image/Logo.png"));
+	testMaterial_ = std::make_unique<Material>(t,dx12, Math::Vector2{ 100.0f,100.0f });
 	testMaterial_->SetTransform(std::make_shared<Transform>(dx12));
 	testMaterial_->GetTransform()->SetPos(Math::Vector2{ 100.0f,100.0f }); 
 	testMaterial_->GetTransform()->Update();
 
-	testMaterial2_ = std::make_unique<Material>(TEXT("Resource/image/Logo.png"), dx12, Math::Vector2{ 100.0f,50.0f });
+	testMaterial2_ = std::make_unique<Material>(t,dx12, Math::Vector2{ 100.0f,100.0f });
 	testMaterial2_->SetTransform(std::make_shared<Transform>(dx12));
-	testMaterial2_->GetTransform()->SetPos(Math::Vector2{ 100.0f,100.0f });
+	testMaterial2_->GetTransform()->SetPos(Math::Vector2{ 100.0f,300.0f });
 	testMaterial2_->GetTransform()->Update();
 
 	rt_->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	alpha_ = std::make_shared<CbValue<float>>(dx12_);
+	/*alpha_ = std::make_shared<CbValue<float>>(dx12_);
 	alpha_->val_ = 0.5f;
 	alpha_->Update();
-	testMaterial_->shaderResource_.emplace_back(alpha_);
+	testMaterial_->shaderResource_.emplace_back(alpha_);*/
 	
 }
 
@@ -52,6 +53,6 @@ void TitleScene::Draw(void)
 	rt_->Clear();
 	rt_->DrawBegin();
 	renderMng_->Draw(*testMaterial2_, rt_->GetCbMat(), RenderType::Basic);
-	renderMng_->Draw(*testMaterial_, rt_->GetCbMat(), RenderType::Alpha);
+	renderMng_->Draw(*testMaterial_, rt_->GetCbMat(), RenderType::Basic);
 	rt_->DrawEnd();
 }
