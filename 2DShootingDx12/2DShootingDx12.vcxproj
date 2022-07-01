@@ -151,6 +151,9 @@
   <ItemGroup>
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\CbValue.cpp" />
+    <ClCompile Include="Component\ObjectBehavior\ObjectBehavior.cpp" />
+    <ClCompile Include="Component\ObjectBehavior\PlayerBehavior.cpp" />
+    <ClCompile Include="Object\ObjectManager.cpp" />
     <ClCompile Include="Scene\Transition\FadeIn.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\AlphaRender.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\RenderManager.cpp" />
@@ -183,6 +186,9 @@
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\componentID.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\CbValue.h" />
+    <ClInclude Include="Component\ObjectBehavior\ObjectBehavior.h" />
+    <ClInclude Include="Component\ObjectBehavior\PlayerBehavior.h" />
+    <ClInclude Include="Object\ObjectManager.h" />
     <ClInclude Include="Scene\Transition\FadeIn.h" />
     <ClInclude Include="GameSystem\Dx12\Render\AlphaRender.h" />
     <ClInclude Include="GameSystem\Dx12\Render\RenderManager.h" />

@@ -10,6 +10,7 @@ public:
 	~Object();
 	void AddComponent(std::unique_ptr<Component>&& component);
 	std::unique_ptr<Component>&& RemoveComponent(void);
+	void Update(void);
 private:
 };
 

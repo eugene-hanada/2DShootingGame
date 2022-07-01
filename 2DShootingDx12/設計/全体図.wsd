@@ -1,6 +1,6 @@
-@startuml クラス図(全体)
+@startuml クラス図(全�?)
 
-class GameObject{
+class Object{
     +void Update(void)
 }
 
@@ -32,6 +32,19 @@ Collider <|-- CircleCollider
 class Animator{
 
 }
+
+Component <|-- Animator
+
+abstract class ObjectBehavior{
+}
+
+Component <|-- ObjectBehavior
+
+class PlayerBehavior{
+
+}
+
+ObjectBehavior <|-- PlayerBehavior
 
 class RenderTarget{
     -Resource rt_
