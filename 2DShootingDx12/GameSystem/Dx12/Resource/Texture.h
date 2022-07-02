@@ -23,6 +23,7 @@ public:
     Texture(Dx12Wrapper& dx12, const std::basic_string<TCHAR>& path);
     Texture(Dx12Wrapper& dx12, ComPtr<ID3D12Resource>& resource);
     ~Texture();
+    const Math::Vector2& GetSize(void) const noexcept { return size_; }
 private:
     bool CreateView(Dx12Wrapper& dx12) override;
     bool CreateResource(Dx12Wrapper& dx12,D3D12_RESOURCE_DESC& resourceDesc) override;

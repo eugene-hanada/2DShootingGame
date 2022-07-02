@@ -1,7 +1,8 @@
 #pragma once
 #include <memory>
 #include <string>
-#include <Windows.h>
+
+#include <windef.h>
 #include "Scene/SceneID.h"
 #include "common/Time.h"
 #include "common/Math.h"

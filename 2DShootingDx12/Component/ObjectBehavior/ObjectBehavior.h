@@ -3,6 +3,8 @@
 class ObjectBehavior :
     public Component
 {
+public:
+    ObjectBehavior();
     virtual ~ObjectBehavior();
 };
 

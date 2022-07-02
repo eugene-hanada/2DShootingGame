@@ -1,5 +1,8 @@
 #pragma once
 #include "BaseScene.h"
+
+class ObjectManager;
+
 class GameScene :
 	public BaseScene
 {
@@ -10,6 +13,6 @@ private:
 	SceneUPtr Update(SceneUPtr scene) final;
 	void Draw(void) final;
 	const SceneID GetID(void) const noexcept final { return SceneID::Game; }
-
+	std::unique_ptr<ObjectManager> objManager_;
 };
 

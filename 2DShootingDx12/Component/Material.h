@@ -1,12 +1,11 @@
 #pragma once
 #include <string>
 #include <Windows.h>
-#include "../GameSystem/Dx12/Resource/MaterialBase.h"
 
 
+class MaterialBase;
 
-class Material :
-	public MaterialBase
+class Material
 {
 public:
 	//Material(const std::basic_string<TCHAR>& path,Dx12Wrapper& dx12, const Math::Vector2& size);
@@ -16,5 +15,6 @@ public:
 
 private:
 	std::shared_ptr<Dx12Resource> tex_;
+	std::shared_ptr<MaterialBase> materialBase_;
 };
 

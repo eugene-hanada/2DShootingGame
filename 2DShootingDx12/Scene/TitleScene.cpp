@@ -2,6 +2,7 @@
 #include "../GameSystem/Dx12/Render/RenderManager.h"
 #include "../Component/Material.h"
 #include "../GameSystem/Dx12/Resource/Texture.h"
+#include "../GameSystem/Dx12/Resource/MaterialBase.h"
 #include "../Component/Transform.h"
 #include "Transition/FadeIn.h"
 #include "../GameSystem/Dx12/Resource/CbValue.h"

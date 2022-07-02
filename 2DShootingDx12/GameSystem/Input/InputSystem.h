@@ -3,6 +3,7 @@
 #include <string_view>
 #include <array>
 #include <memory>
+#include <windows.h>
 #include <Xinput.h>
 
 enum class InputID
