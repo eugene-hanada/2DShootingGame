@@ -12,6 +12,7 @@ public:
 	ObjectManager(std::shared_ptr<InputSystem>& input);
 	~ObjectManager();
 	void Update(void);
+	void Draw(void);
 private:
 	std::list<std::unique_ptr<Object>> objList_;
 };

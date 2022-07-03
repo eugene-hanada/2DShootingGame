@@ -6,5 +6,7 @@ class ObjectBehavior :
 public:
     ObjectBehavior();
     virtual ~ObjectBehavior();
+private:
+    const ComponentID GetID(void) const noexcept final { return ComponentID::Behavior; }
 };
 

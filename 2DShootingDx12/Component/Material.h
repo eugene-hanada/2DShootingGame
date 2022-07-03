@@ -4,6 +4,7 @@
 
 
 class MaterialBase;
+class Dx12Resource;
 
 class Material
 {

@@ -5,7 +5,7 @@
 ObjectManager::ObjectManager(std::shared_ptr<InputSystem>& input) 
 {
 	auto& p = objList_.emplace_back(std::make_unique<Object>());
-	p->AddComponent(std::make_unique<PlayerBehavior>());
+	p->AddComponent(std::make_unique<PlayerBehavior>(input));
 
 }
 
@@ -18,5 +18,13 @@ void ObjectManager::Update(void)
 	for (auto& obj : objList_)
 	{
 		obj->Update();
+	}
+}
+
+void ObjectManager::Draw(void)
+{
+	for (auto& obj : objList_)
+	{
+		
 	}
 }

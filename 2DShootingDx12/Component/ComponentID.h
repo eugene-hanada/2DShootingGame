@@ -1,3 +1,4 @@
+#pragma once
 
 enum class ComponentID
 {
@@ -5,3 +6,4 @@ enum class ComponentID
 	Behavior,
 	Collider,
 };
+

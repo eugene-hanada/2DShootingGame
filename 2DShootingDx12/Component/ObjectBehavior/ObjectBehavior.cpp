@@ -2,6 +2,10 @@
 
 
 
+ObjectBehavior::ObjectBehavior()
+{
+}
+
 ObjectBehavior::~ObjectBehavior()
 {
 }

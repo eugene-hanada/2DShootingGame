@@ -3,12 +3,16 @@
 #include "../GameSystem/Dx12/Resource/MaterialBase.h"
 #include "../GameSystem/Dx12/Resource/Texture.h"
 #include "../Component/Transform.h"
+#include "../Object/ObjectManager.h"
+#include "../GameSystem/Input/InputSystem.h"
 #include "GameScene.h"
 
 GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input) :
 	BaseScene{ renderMng,dx12,input}
 {
 	rt_->SetClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	objManager_ = std::make_unique<ObjectManager>(input_);
+
 }
 
 GameScene::~GameScene()
@@ -17,6 +21,7 @@ GameScene::~GameScene()
 
 BaseScene::SceneUPtr GameScene::Update(SceneUPtr scene)
 {
+	objManager_->Update();
 	return scene;
 }
 
