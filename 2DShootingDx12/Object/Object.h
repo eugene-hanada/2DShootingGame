@@ -4,6 +4,8 @@
 #include "../Component/ComponentID.h"
 
 class Component;
+class Transform;
+class Dx12Wrapper;
 
 class Object
 {
@@ -13,24 +15,30 @@ class Object
 	using ComponentWkPtr = std::weak_ptr<T>;
 
 public:
-	Object();
+	Object(Dx12Wrapper& dx12);
 	~Object();
 	void AddComponent(ComponentShPtr&& component);
-	std::unique_ptr<Component>&& RemoveComponent(ComponentID id);
+	ComponentShPtr RemoveComponent(ComponentID id);
 	void Update(void);
-	
+
+	void Begin(void);
+	void End(void);
+
 	// 後でコンセプトに置き換えとけ
 	template<class T>
-	ComponentWkPtr<T> GetCcomponent(Component id)
+	ComponentWkPtr<T> GetCcomponent(ComponentID id)
 	{
 		if (componentMap_.contains(id))
 		{
-			return ComponentWkPtr<T>(std::dynamic_pointer_cast<T>{(componentMap_.at(id))};
+			return ComponentWkPtr<T>{std::dynamic_pointer_cast<T>(componentMap_.at(id))};
 		}
-		return ComponentWkPtr<T>{nullptr};
+		return ComponentWkPtr<T>{};
 	}
+
+	std::shared_ptr<Transform>& GetTransform(void) { return transform_; }
 
 private:
 	std::unordered_map<ComponentID, ComponentShPtr> componentMap_;
+	std::shared_ptr<Transform> transform_;
 };
 

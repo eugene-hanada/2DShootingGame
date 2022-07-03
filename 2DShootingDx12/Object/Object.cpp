@@ -1,5 +1,15 @@
 #include "../Component/Component.h"
+#include "../Component/Transform.h"
 #include "Object.h"
+
+Object::Object(Dx12Wrapper& dx12)
+{
+	transform_ = std::make_shared<Transform>(dx12);
+}
+
+Object::~Object()
+{
+}
 
 void Object::AddComponent(ComponentShPtr&& component)
 {
@@ -8,7 +18,7 @@ void Object::AddComponent(ComponentShPtr&& component)
 	
 }
 
-std::unique_ptr<Component>&& Object::RemoveComponent(ComponentID id)
+Object::ComponentShPtr Object::RemoveComponent(ComponentID id)
 {
 	auto comp = std::move(componentMap_[id]);
 	componentMap_.erase(id);
@@ -18,4 +28,24 @@ std::unique_ptr<Component>&& Object::RemoveComponent(ComponentID id)
 
 void Object::Update(void)
 {
+	for (auto& comp : componentMap_)
+	{
+		comp.second->Update();
+	}
+}
+
+void Object::Begin(void)
+{
+	for (auto& comp : componentMap_)
+	{
+		comp.second->Begin();
+	}
+}
+
+void Object::End(void)
+{
+	for (auto& comp : componentMap_)
+	{
+		comp.second->End();
+	}
 }

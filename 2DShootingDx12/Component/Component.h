@@ -11,7 +11,7 @@ public:
 
 	bool SetOwner(Object* owner);
 	virtual void Update(void){}
-	virtual void Start(void){}
+	virtual void Begin(void){}
 	virtual void End(void){}
 	virtual  const ComponentID GetID(void) const noexcept = 0;
 protected:

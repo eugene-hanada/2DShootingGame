@@ -12,6 +12,7 @@ public:
 	~PlayerBehavior();
 private:
 	void Update(void) final;
+	void Begin(void) final;
 	std::shared_ptr<InputSystem> input_;
 };
 

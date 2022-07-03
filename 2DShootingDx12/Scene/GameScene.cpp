@@ -10,8 +10,8 @@
 GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input) :
 	BaseScene{ renderMng,dx12,input}
 {
-	rt_->SetClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	objManager_ = std::make_unique<ObjectManager>(input_);
+	rt_->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	objManager_ = std::make_unique<ObjectManager>(input_,dx12_);
 
 }
 
@@ -29,5 +29,6 @@ void GameScene::Draw(void)
 {
 	rt_->Clear();
 	rt_->DrawBegin();
+	objManager_->Draw(*renderMng_, rt_->GetCbMat());
 	rt_->DrawEnd();
 }

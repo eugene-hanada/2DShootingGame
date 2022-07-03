@@ -9,5 +9,6 @@ public:
     ~Transform();
    void SetPos(const Math::Vector2& pos);
    void SetPos(const Math::Vector2& pos, float angle, const Math::Vector2& scale);
+   const Math::Vector2 GetPos(void);
 };
 

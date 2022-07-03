@@ -50,7 +50,7 @@ private:
 	// スクリーン状の座標からシェーダ用に変換する行列
 	std::unique_ptr<CbMatrix> cbMat_;
 
-	float color_[4];
+	float color_[4]{0.0f,0.0f,0.0f,0.0f};
 
 	//// リソース
 	//ComPtr<ID3D12Resource> resource_;
@@ -60,6 +60,7 @@ private:
 
 	std::unique_ptr<MaterialBase> material_;
 
+	// テクスチャ
 	std::shared_ptr<Texture> texure_;
 
 	// ビューポート

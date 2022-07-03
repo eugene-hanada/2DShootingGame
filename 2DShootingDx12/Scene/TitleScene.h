@@ -3,7 +3,7 @@
 #include "BaseScene.h"
 
 class MaterialBase;
-
+class Dx12Resource;
 
 
 class TitleScene :
@@ -20,5 +20,6 @@ private:
 	std::unique_ptr< MaterialBase> testMaterial_;
 	std::unique_ptr< MaterialBase> testMaterial2_;
 	std::shared_ptr<CbValue<float>> alpha_;
+	std::shared_ptr<Dx12Resource> tex_;
 };
 

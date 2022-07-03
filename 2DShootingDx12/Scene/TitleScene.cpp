@@ -14,15 +14,15 @@
 TitleScene::TitleScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12,std::shared_ptr<InputSystem>& input) :
 	BaseScene{ renderMng, dx12,input}
 {
-	std::shared_ptr<Dx12Resource> t = std::make_shared<Texture>(dx12_, TEXT("Resource/image/Logo.png"));
+	tex_= std::make_shared<Texture>(dx12_, TEXT("Resource/image/Logo.png"));
 	testMaterial_ = std::make_unique<MaterialBase>(dx12, Math::Vector2{ 100.0f,100.0f });
 	testMaterial_->SetTransform(std::make_shared<Transform>(dx12));
-	testMaterial_->shaderResource_.emplace_back(t);
+	testMaterial_->shaderResource_.emplace_back(tex_);
 	testMaterial_->GetTransform()->SetPos(Math::Vector2{ 100.0f,100.0f }); 
 	testMaterial_->GetTransform()->Update();
 
 	testMaterial2_ = std::make_unique<MaterialBase>(dx12, Math::Vector2{ 100.0f,100.0f });
-	testMaterial2_->shaderResource_.emplace_back(t);
+	testMaterial2_->shaderResource_.emplace_back(tex_);
 	testMaterial2_->SetTransform(std::make_shared<Transform>(dx12));
 	testMaterial2_->GetTransform()->SetPos(Math::Vector2{ 100.0f,300.0f });
 	testMaterial2_->GetTransform()->Update();

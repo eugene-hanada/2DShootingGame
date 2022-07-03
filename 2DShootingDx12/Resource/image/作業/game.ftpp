@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "version": "0.6.7"
+  },
+  "savePath": "C:\\Users\\eugen\\Desktop\\ほぼ個人\\VS-project\\DirectX12使用\\2DShootingGame\\2DShootingDx12\\Resource\\image",
+  "images": [
+    {
+      "name": "bulletA.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/bulletA.png",
+      "folder": ""
+    },
+    {
+      "name": "bulletC.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/bulletC.png",
+      "folder": ""
+    },
+    {
+      "name": "bulletD.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/bulletD.png",
+      "folder": ""
+    },
+    {
+      "name": "enemym1.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/enemym1.png",
+      "folder": ""
+    },
+    {
+      "name": "enemym2.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/enemym2.png",
+      "folder": ""
+    },
+    {
+      "name": "enemys1.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/enemys1.png",
+      "folder": ""
+    },
+    {
+      "name": "enemys2.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/enemys2.png",
+      "folder": ""
+    },
+    {
+      "name": "expm1.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm1.png",
+      "folder": ""
+    },
+    {
+      "name": "expm10.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm10.png",
+      "folder": ""
+    },
+    {
+      "name": "expm11.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm11.png",
+      "folder": ""
+    },
+    {
+      "name": "expm12.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm12.png",
+      "folder": ""
+    },
+    {
+      "name": "expm13.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm13.png",
+      "folder": ""
+    },
+    {
+      "name": "expm14.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm14.png",
+      "folder": ""
+    },
+    {
+      "name": "expm2.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm2.png",
+      "folder": ""
+    },
+    {
+      "name": "expm3.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm3.png",
+      "folder": ""
+    },
+    {
+      "name": "expm4.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm4.png",
+      "folder": ""
+    },
+    {
+      "name": "expm5.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm5.png",
+      "folder": ""
+    },
+    {
+      "name": "expm6.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm6.png",
+      "folder": ""
+    },
+    {
+      "name": "expm7.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm7.png",
+      "folder": ""
+    },
+    {
+      "name": "expm8.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm8.png",
+      "folder": ""
+    },
+    {
+      "name": "expm9.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/expm9.png",
+      "folder": ""
+    },
+    {
+      "name": "exps1.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/exps1.png",
+      "folder": ""
+    },
+    {
+      "name": "exps2.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/exps2.png",
+      "folder": ""
+    },
+    {
+      "name": "exps3.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/exps3.png",
+      "folder": ""
+    },
+    {
+      "name": "exps4.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/exps4.png",
+      "folder": ""
+    },
+    {
+      "name": "exps5.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/exps5.png",
+      "folder": ""
+    },
+    {
+      "name": "missileA.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/missileA.png",
+      "folder": ""
+    },
+    {
+      "name": "missileB.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/missileB.png",
+      "folder": ""
+    },
+    {
+      "name": "missileC.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/missileC.png",
+      "folder": ""
+    },
+    {
+      "name": "missileD.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/missileD.png",
+      "folder": ""
+    },
+    {
+      "name": "ship1.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/ship1.png",
+      "folder": ""
+    },
+    {
+      "name": "ship10.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/ship10.png",
+      "folder": ""
+    },
+    {
+      "name": "ship2.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/ship2.png",
+      "folder": ""
+    },
+    {
+      "name": "ship3.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/ship3.png",
+      "folder": ""
+    },
+    {
+      "name": "ship4.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/ship4.png",
+      "folder": ""
+    },
+    {
+      "name": "ship5.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/ship5.png",
+      "folder": ""
+    },
+    {
+      "name": "ship6.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/ship6.png",
+      "folder": ""
+    },
+    {
+      "name": "ship7.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/ship7.png",
+      "folder": ""
+    },
+    {
+      "name": "ship8.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/ship8.png",
+      "folder": ""
+    },
+    {
+      "name": "ship9.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/ship9.png",
+      "folder": ""
+    }
+  ],
+  "folders": [],
+  "packOptions": {
+    "textureName": "texture",
+    "textureFormat": "png",
+    "removeFileExtension": false,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "XML",
+    "fileName": "pack-result",
+    "savePath": "C:\\Users\\eugen\\Desktop\\ほぼ個人\\VS-project\\DirectX12使用\\2DShootingGame\\2DShootingDx12\\Resource\\image",
+    "width": 512,
+    "height": 512,
+    "fixedSize": false,
+    "powerOfTwo": true,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": true,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "OptimalPacker",
+    "packerMethod": "Automatic"
+  }
+}
