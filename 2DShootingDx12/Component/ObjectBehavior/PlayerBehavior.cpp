@@ -21,7 +21,7 @@ void PlayerBehavior::Update(void)
 	}
 	if (input_->IsPressedStay(InputID::Down))
 	{
-		owner_->GetTransform()->SetPos({ 0.0f, -1.0f });
+		owner_->GetTransform()->SetPos({ 0.0f, 1.0f });
 		owner_->GetTransform()->Update();
 	}
 }
