@@ -6,6 +6,16 @@ namespace TextureDataConvert
 	{
 		public static void Main(string[] args)
 		{
+			var loader = new DataLoader(args[0]);
+			
+			if (args.Length > 1)
+			{
+				loader.Export(args[1]);
+			}
+			else
+			{
+
+			}
 
 		}
 	}

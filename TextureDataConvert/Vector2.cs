@@ -20,7 +20,7 @@ namespace TextureDataConvert
 			this.y = vector2.y;
 		}
 
-		void Write(BinaryWriter bw)
+		public void Write(BinaryWriter bw)
 		{
 			bw.Write(x);
 			bw.Write(y);

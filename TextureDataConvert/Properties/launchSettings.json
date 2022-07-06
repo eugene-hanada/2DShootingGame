@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TextureDataConvert": {
+      "commandName": "Project",
+      "commandLineArgs": "texture.xml"
+    }
+  }
+}
