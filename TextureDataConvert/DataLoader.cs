@@ -11,7 +11,7 @@ namespace TextureDataConvert
 	internal class DataLoader
 	{
 		private string fileName_;
-		private string imageFileName_;
+		private string? imageFileName_;
 		private Dictionary<string,List<TextureData>> textureData_;
 		private int sum_ = 0;
 
@@ -94,6 +94,11 @@ namespace TextureDataConvert
 			bw.Write(sum_);
 
 			// 画像ファイル名を出力
+			if (imageFileName_ == null)
+			{
+				throw new Exception("画像ファイル名が有りません");
+			}
+
 			bw.Write(imageFileName_.Length);
 			bw.Write(imageFileName_.ToCharArray());
 
@@ -101,6 +106,7 @@ namespace TextureDataConvert
 			{
 				bw.Write(data.Key.Length);
 				bw.Write(data.Key.ToCharArray());
+				bw.Write(data.Value.ToArray().Length);
 				foreach(var texdata in data.Value)
 				{
 					texdata.Write(bw);
@@ -111,6 +117,11 @@ namespace TextureDataConvert
 			return true;
 		}
 
+		public bool Export()
+		{
+			return Export(fileName_.Substring(0, fileName_.Length - 4) + ".tdat");
+		}
+
 		private void CalcSub()
 		{
 			foreach (var data in textureData_)
@@ -119,44 +130,7 @@ namespace TextureDataConvert
 			}
 		}
 
-		private class TextureData
-		{
-			private Vector2 pos_;
-			private Vector2 wh_;
-
-			public TextureData(XElement? sprite)
-			{
-				if (sprite == null)
-				{
-					throw new ArgumentNullException(nameof(sprite));
-				}
-
-				var x = sprite.Attribute("x");
-				var y = sprite.Attribute("y");
-				if (x == null || y == null)
-				{
-					throw new ArgumentNullException("xもしくはyの値がありません");
-				}
-				pos_ = new Vector2(Int32.Parse(x.Value), Int32.Parse(y.Value));
-
-				var w = sprite.Attribute("w");
-				var h = sprite.Attribute("h");
-
-				if (w == null || h == null)
-				{
-					throw new ArgumentNullException("wもしくはhの値がありません");
-				}
-				wh_ = new Vector2(Int32.Parse(w.Value), Int32.Parse(h.Value));
-
-			}
-
-			public void Write(BinaryWriter bw)
-			{
-				pos_.Write(bw);
-				wh_.Write(bw);
-			}
-
-		}
+		
 		
 	}
 }

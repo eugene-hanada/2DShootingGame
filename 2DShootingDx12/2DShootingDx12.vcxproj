@@ -181,6 +181,7 @@
     <ClCompile Include="Object\Object.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="Scene\Transition\Transition.cpp" />
+    <ClCompile Include="common\TextureData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component\Component.h" />
@@ -218,6 +219,7 @@
     <ClInclude Include="Scene\SceneID.h" />
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Scene\Transition\Transition.h" />
+    <ClInclude Include="common\TextureData.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resource\shader\Alpha2DPs.hlsl">

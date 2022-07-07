@@ -14,7 +14,7 @@ namespace TextureDataConvert
 			}
 			else
 			{
-
+				loader.Export();
 			}
 
 		}
