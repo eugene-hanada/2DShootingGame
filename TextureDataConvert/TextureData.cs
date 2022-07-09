@@ -7,12 +7,18 @@ using System.Xml.Linq;
 
 namespace TextureDataConvert
 {
+	/// <summary> テクスチャデータ用クラス </summary>
 	internal class TextureData
 	{
+		/// <summary> 画像上の座標 </summary>
 		private Vector2 pos_;
+
+		/// <summary>  </summary>
 		private Vector2 wh_;
 
-		public TextureData(XElement? sprite)
+		private int num_;
+
+		public TextureData(XElement? sprite, int num, Vector2 size)
 		{
 			if (sprite == null)
 			{
@@ -25,7 +31,7 @@ namespace TextureDataConvert
 			{
 				throw new ArgumentNullException("xもしくはyの値がありません");
 			}
-			pos_ = new Vector2(float.Parse(x.Value), float.Parse(y.Value));
+			pos_ = new Vector2(float.Parse(x.Value)/size.x, float.Parse(y.Value) / size.y);
 
 			var w = sprite.Attribute("w");
 			var h = sprite.Attribute("h");
@@ -34,8 +40,9 @@ namespace TextureDataConvert
 			{
 				throw new ArgumentNullException("wもしくはhの値がありません");
 			}
-			wh_ = new Vector2(float.Parse(w.Value), float.Parse(h.Value));
+			wh_ = new Vector2(float.Parse(w.Value)/size.x, float.Parse(h.Value)/size.y);
 
+			this.num_ = num;
 		}
 
 		public void Write(BinaryWriter bw)
@@ -43,6 +50,22 @@ namespace TextureDataConvert
 			pos_.Write(bw);
 			wh_.Write(bw);
 		}
+
+		public int GetNum()
+		{
+			return num_;
+		}
+
+		public Vector2 GetPos()
+        {
+			return pos_;
+        }
+
+		public Vector2 GetWH()
+        {
+			return wh_;
+        }
+
 
 	}
 }

@@ -31,6 +31,10 @@ bool TextureData::Load(const std::wstring& fileName)
 	imgFileName.resize(size);
 	wif.read(reinterpret_cast<char*>(imgFileName.data()), sizeof(imgFileName[0]) * size);
 
+	// 画像サイズを取得
+	Math::Vector2 imgSize;
+	wif.read(reinterpret_cast<char*>(&imgSize), sizeof(imgSize));
+
 	// キーの名前を取得
 	int keyNameSize;
 	std::string keyName;
