@@ -35,17 +35,28 @@ bool TextureData::Load(const std::wstring& fileName)
 	Math::Vector2 imgSize;
 	wif.read(reinterpret_cast<char*>(&imgSize), sizeof(imgSize));
 
-	// キーの名前を取得
-	int keyNameSize;
-	std::string keyName;
-	wif.read(reinterpret_cast<char*>(&keyNameSize), sizeof(keyNameSize));
-	keyName.resize(keyNameSize);
-	wif.read(reinterpret_cast<char*>(keyName.data()), sizeof(keyName[0]) * keyNameSize);
+	while (true)
+	{
+		// キーの名前を取得
+		int keyNameSize;
+		std::string keyName;
+		wif.read(reinterpret_cast<char*>(&keyNameSize), sizeof(keyNameSize));
 
-	int numMax;
-	wif.read(reinterpret_cast<char*>(&numMax), sizeof(numMax));
-	textureDataMap_[keyName].resize(numMax);
-	wif.read(reinterpret_cast<char*>(&textureDataMap_[keyName][0]), sizeof(textureDataMap_[keyName][0]) * numMax);
-	std::reverse(textureDataMap_[keyName].begin(), textureDataMap_[keyName].end());
-	return false;
+		if (wif.eof())
+		{
+			break;
+		}
+
+		keyName.resize(keyNameSize);
+		wif.read(reinterpret_cast<char*>(keyName.data()), sizeof(keyName[0]) * keyNameSize);
+
+		int numMax;
+		wif.read(reinterpret_cast<char*>(&numMax), sizeof(numMax));
+		textureDataMap_[keyName].resize(numMax);
+		wif.read(reinterpret_cast<char*>(&textureDataMap_[keyName][0]), sizeof(textureDataMap_[keyName][0]) * numMax);
+		std::reverse(textureDataMap_[keyName].begin(), textureDataMap_[keyName].end());
+	}
+
+
+	return true;
 }
