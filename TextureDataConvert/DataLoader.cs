@@ -17,6 +17,7 @@ namespace TextureDataConvert
 
 		bool Load(string fnameName)
 		{
+			Console.WriteLine(fnameName + "を読み込みます");
 			XElement xml;
 			try
 			{
@@ -35,6 +36,7 @@ namespace TextureDataConvert
 
 		public bool Export(string fileName)
 		{
+			Console.WriteLine(fileName + "に出力します");
 			var file =  File.Create(fileName);
 			var bw = new BinaryWriter(file);
 

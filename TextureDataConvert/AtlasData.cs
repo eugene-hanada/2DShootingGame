@@ -25,6 +25,7 @@ namespace TextureDataConvert
 			}
 
 			imageName_ = img.Value;
+			Console.WriteLine("対象画像は" + imageName_);
 
 			var imgWidth  =data.Attribute("width");
 			if (imgWidth == null)
@@ -39,6 +40,7 @@ namespace TextureDataConvert
 			}
 
 			imgSize_ = new Vector2(float.Parse(imgWidth.Value), float.Parse(imgHeight.Value));
+			Console.WriteLine("対象画像のサイズは"　+ "縦" + imgSize_.x + " 横" + imgSize_.y);
 
 			foreach (var sp in data.Elements())
 			{
@@ -131,7 +133,7 @@ namespace TextureDataConvert
 					textureData_.Add(keyName, new List<TextureData>());
 				}
 
-				textureData_[keyName].Add(new TextureData(sp, num, imgSize_));
+				textureData_[keyName].Add(new TextureData(sp, num));
 
 			}
 			return true;

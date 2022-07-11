@@ -18,7 +18,7 @@ namespace TextureDataConvert
 
 		private int num_;
 
-		public TextureData(XElement? sprite, int num, Vector2 size)
+		public TextureData(XElement? sprite, int num)
 		{
 			if (sprite == null)
 			{
@@ -31,7 +31,7 @@ namespace TextureDataConvert
 			{
 				throw new ArgumentNullException("xもしくはyの値がありません");
 			}
-			pos_ = new Vector2(float.Parse(x.Value)/size.x, float.Parse(y.Value) / size.y);
+			pos_ = new Vector2(float.Parse(x.Value), float.Parse(y.Value));
 
 			var w = sprite.Attribute("w");
 			var h = sprite.Attribute("h");
@@ -40,7 +40,7 @@ namespace TextureDataConvert
 			{
 				throw new ArgumentNullException("wもしくはhの値がありません");
 			}
-			wh_ = new Vector2(float.Parse(w.Value)/size.x, float.Parse(h.Value)/size.y);
+			wh_ = new Vector2(float.Parse(w.Value), float.Parse(h.Value));
 
 			this.num_ = num;
 		}

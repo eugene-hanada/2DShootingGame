@@ -7,9 +7,8 @@ struct Header
 	int sum = 0;
 };
 
-TextureData::TextureData(const std::wstring& fileName)
+TextureData::TextureData(void)
 {
-	Load(fileName);
 }
 
 bool TextureData::Load(const std::wstring& fileName)
@@ -30,6 +29,11 @@ bool TextureData::Load(const std::wstring& fileName)
 	wif.read(reinterpret_cast<char*>(&size), sizeof(size));
 	imgFileName.resize(size);
 	wif.read(reinterpret_cast<char*>(imgFileName.data()), sizeof(imgFileName[0]) * size);
+
+	if (!dataMap_.contains(imgFileName))
+	{
+		return false;
+	}
 
 	// ‰æ‘œƒTƒCƒY‚ðŽæ“¾
 	Math::Vector2 imgSize;
@@ -52,11 +56,8 @@ bool TextureData::Load(const std::wstring& fileName)
 
 		int numMax;
 		wif.read(reinterpret_cast<char*>(&numMax), sizeof(numMax));
-		textureDataMap_[keyName].resize(numMax);
-		wif.read(reinterpret_cast<char*>(&textureDataMap_[keyName][0]), sizeof(textureDataMap_[keyName][0]) * numMax);
-		std::reverse(textureDataMap_[keyName].begin(), textureDataMap_[keyName].end());
+		dataMap_[imgFileName][keyName].resize(numMax);
+		wif.read(reinterpret_cast<char*>(&dataMap_[imgFileName][keyName][0]), sizeof(dataMap_[imgFileName][keyName][0]) * numMax);
 	}
-
-
 	return true;
 }
