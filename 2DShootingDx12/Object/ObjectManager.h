@@ -8,6 +8,7 @@ class InputSystem;
 class RenderManager;
 class CbMatrix;
 class Dx12Wrapper;
+class Dx12Resource;
 
 class ObjectManager
 {

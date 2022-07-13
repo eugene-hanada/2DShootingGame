@@ -2,9 +2,12 @@
 #include <string>
 #include <string_view>
 #include <windows.h>
+#include <memory>
 #include <unordered_map>
 #include <vector>
 #include "Math.h"
+
+class Texture;
 
 class TextureData
 {
@@ -14,7 +17,7 @@ class TextureData
 		Math::Vector2 wh;
 	};
 	using TextureDataMap = std::unordered_map<std::string, std::vector<Data>>;
-	using DataMap = std::unordered_map<std::string, TextureDataMap>;
+	using DataMap = std::unordered_map<std::string, std::pair<std::shared_ptr<Texture>,TextureDataMap>>;
 public:
 	TextureData(void);
 	const std::vector<Data>& GetData(std::string_view imgKey, std::string_view dataKey)
@@ -23,14 +26,16 @@ public:
 		{
 			throw "‰æ‘œ‚ª‘¶İ‚µ‚Ü‚¹‚ñ";
 		}
-		if (!dataMap_[imgKey.data()].contains(dataKey.data()))
+		if (!dataMap_[imgKey.data()].second.contains(dataKey.data()))
 		{
-			return dataMap_[imgKey.data()].begin()->second;
+			return dataMap_[imgKey.data()].second.begin()->second;
 		}
-		return dataMap_[imgKey.data()][dataKey.data()];
+		return dataMap_[imgKey.data()].second[dataKey.data()];
 	}
-private:
+
 	bool Load(const std::wstring& fileName);
+private:
+	
 
 	// ‰æ‘œ‚Ìƒf[ƒ^
 	DataMap dataMap_;

@@ -30,7 +30,7 @@ public:
 	{
 		if (componentMap_.contains(id))
 		{
-			return ComponentWkPtr<T>{std::dynamic_pointer_cast<T>(componentMap_.at(id))};
+			return ComponentWkPtr<T>{std::static_pointer_cast<T>(componentMap_.at(id))};
 		}
 		return ComponentWkPtr<T>{};
 	}
