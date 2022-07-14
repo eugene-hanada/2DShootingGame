@@ -33,6 +33,24 @@ public:
 		return dataMap_[imgKey.data()].second[dataKey.data()];
 	}
 
+	std::shared_ptr<Texture>& GetTexture(std::string_view imgKey)
+	{
+		if (!dataMap_.contains(imgKey.data()))
+		{
+			throw "‰æ‘œ‚ª‘¶İ‚µ‚Ü‚¹‚ñ";
+		}
+		return dataMap_[imgKey.data()].first;
+	}
+
+	void Remove(std::string_view imgKey)
+	{
+		if (!dataMap_.contains(imgKey.data()))
+		{
+			return;
+		}
+		dataMap_.erase(imgKey.data());
+	}
+
 	bool Load(const std::wstring& fileName);
 private:
 	

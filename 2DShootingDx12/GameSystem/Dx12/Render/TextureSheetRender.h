@@ -6,6 +6,9 @@
 #include "../../../common/Math.h"
 
 class Dx12Wrapper;
+class CbMatrices;
+class TextureData;
+
 struct ID3D12PipelineState;
 struct ID3D12RootSignature;
 struct D3D12_VERTEX_BUFFER_VIEW;
@@ -17,7 +20,7 @@ class TextureSheetRender
 	template<class T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
 public:
-	TextureSheetRender(Dx12Wrapper& dx12, std::uint32_t maxNum);
+	TextureSheetRender(Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum);
 	virtual ~TextureSheetRender();
 	void Draw(const Math::Vector2& pos);
 	void Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, std::string_view key);
@@ -28,8 +31,7 @@ private:
 	bool CreatePipeline(void);
 	bool CreateVertex(void);
 	bool CreateIdx(void);
-
-
+	
 	Dx12Wrapper& dx12_;
 
 	// パイプライン
@@ -56,8 +58,12 @@ private:
 	std::unique_ptr< D3D12_INDEX_BUFFER_VIEW> ibView_;
 	ComPtr<ID3D12Resource> ib_;
 	
-	std::vector<DirectX::XMFLOAT4X4> mat_;
-	DirectX::XMFLOAT4X4* mat_;
+
+	std::unique_ptr<CbMatrices> mat_;
+
+	std::string imgKey_;
+
+	std::shared_ptr< TextureData> texData_;
 
 	const std::uint32_t maxNum_;
 	std::uint32_t nowNum_;

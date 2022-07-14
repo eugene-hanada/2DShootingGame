@@ -1,20 +1,30 @@
 #include <d3dx12.h>
 #include <d3dcompiler.h>
 #include "../../Dx12Wrapper.h"
+#include "../../Dx12/Resource/CbMatrices.h"
+#include "../../../common/TextureData.h"
 #include "../../../common/Debug.h"
 #include "TextureSheetRender.h"
 
-TextureSheetRender::TextureSheetRender(Dx12Wrapper& dx12, std::uint32_t maxNum) :
-	dx12_{dx12}, maxNum_{maxNum}
+TextureSheetRender::TextureSheetRender(Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum) :
+	dx12_{dx12}, maxNum_{maxNum}, texData_{texData}
 {
+	mat_ = std::make_unique<CbMatrices>(dx12_, maxNum_);
 }
 
 TextureSheetRender::~TextureSheetRender()
 {
 }
 
+void TextureSheetRender::Draw(const Math::Vector2& pos)
+{
+	int nowIdx = nowNum_ * 4;
+	int idicIdx = nowNum_ * 6;
+}
+
 void TextureSheetRender::Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, std::string_view key)
 {
+	//auto& data = texData_->GetData(imgKey_, key)[0];
 	int nowIdx = nowNum_ * 4;
 	int idicIdx = nowNum_ * 6;
 	vertices_[nowIdx].no = nowNum_;
@@ -42,7 +52,7 @@ void TextureSheetRender::Draw(const Math::Vector2& lt, const Math::Vector2& rt, 
 	vertices_[nowIdx].uv;
 	idices_[idicIdx + 4] = nowIdx;
 	
-	DirectX::XMStoreFloat4x4(&mat_[nowNum_], DirectX::XMMatrixIdentity());
+	DirectX::XMStoreFloat4x4(&mat_->matrices_[nowNum_], DirectX::XMMatrixIdentity());
 	nowNum_++;
 }
 
@@ -238,3 +248,5 @@ bool TextureSheetRender::CreateIdx(void)
 
 	return false;
 }
+
+
