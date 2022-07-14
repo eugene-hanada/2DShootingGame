@@ -1,8 +1,28 @@
 @startuml クラス図(全�?)
 
+class TexturSheetRender{
+    +Draw(Vector2, string)
+    +Draw(Vector2,Vector2,Vector2,Vector2,string)
+    -string imgKey 
+}
+
+class ObjectManager{
+    +void Update(void)
+    +void Draw(void)
+    -TexturSheetRender TexturSheetRender_
+}
+
+ObjectManager -- TexturSheetRender
+
 class Object{
     +void Update(void)
+    +void Draw(void)
+    +Component GetComponent(ComponentID)
+    +void AddComponent(Component)
+    +Component RemoveComponent(ComponentID)
 }
+
+ObjectManager -- Object
 
 class Dx12{
 
@@ -11,13 +31,16 @@ class Dx12{
 
 
 abstract class Component{
-    +void Update(void)
-    -GameObject gameObject_
+    +void Update(void){abstract}
+    +void Update(void){abstract}
+    +void Begin(void){abstract}
+    +void End(void){abstract}
+    #Object owner_
 }
 
-GameObject -- Component
+Object -- Component
 
-class Collider{
+abstract class Collider{
     
 }
 
@@ -29,11 +52,24 @@ class CircleCollider{
 
 Collider <|-- CircleCollider
 
+abstract class ObjRender{
+    +void Draw()
+}
+
+
+Component <|-- ObjRender
+
 class Animator{
 
 }
 
-Component <|-- Animator
+class DefaltRender{
+
+}
+
+ObjRender <|-- DefaltRender
+
+ObjRender <|-- Animator
 
 abstract class ObjectBehavior{
 }
@@ -53,11 +89,32 @@ class RenderTarget{
 }
 
 abstract class Resource{
+    +ID3D12DescriptorHeap& DescriptorHeap(void)
+    +ComPtr<ID3D12Resource>& GetResource(void)
+    -bool CreateView(Dx12Wrapper&){abstract}
+    -bool CreateResource(Dx12Wrapper&,D3D12_RESOURCE_DESC&){abstract}
+    -bool CreateDescriptorHeap(Dx12Wrapper&)
     -ComPtr<ID3D12Resource> resourse_
     -ComPtr<ID3D12DescriptorHeap> descriptorHeap_ 
 }
 
+abstract class ConstantResource<T>{
+    +void Update(void){abstract}
+    #T*
+    #size_t size_
+}
 
+Resource <|-- ConstantResource
+
+class CbValue<T>{
+    +T val_
+}
+
+ConstantResource <|-- CbValue
+
+class CbMatrix{
+    
+}
 
 class transform{
     -Matrix3X3 mat_
@@ -86,7 +143,7 @@ class Material{
     -pair<Resource&,int> shaderPair_    
 }
 
-Component <|-- Material
+
 
 class Render{
     
