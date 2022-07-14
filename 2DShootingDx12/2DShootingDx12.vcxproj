@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameSystem\Dx12\Resource\CbMatrices.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\CbValue.cpp" />
     <ClCompile Include="Component\ObjectBehavior\ObjectBehavior.cpp" />
@@ -182,8 +183,10 @@
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="Scene\Transition\Transition.cpp" />
     <ClCompile Include="common\TextureData.cpp" />
+    <ClCompile Include="GameSystem\Dx12\Render\TextureSheetRender.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameSystem\Dx12\Resource\CbMatrices.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\ComponentID.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\CbValue.h" />
@@ -220,6 +223,7 @@
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Scene\Transition\Transition.h" />
     <ClInclude Include="common\TextureData.h" />
+    <ClInclude Include="GameSystem\Dx12\Render\TextureSheetRender.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resource\shader\Alpha2DPs.hlsl">

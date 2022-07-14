@@ -56,8 +56,8 @@ bool TextureData::Load(const std::wstring& fileName)
 
 		int numMax;
 		wif.read(reinterpret_cast<char*>(&numMax), sizeof(numMax));
-		dataMap_[imgFileName][keyName].resize(numMax);
-		wif.read(reinterpret_cast<char*>(&dataMap_[imgFileName][keyName][0]), sizeof(dataMap_[imgFileName][keyName][0]) * numMax);
+		dataMap_[imgFileName].second[keyName].resize(numMax);
+		wif.read(reinterpret_cast<char*>(&dataMap_[imgFileName].second[keyName][0]), sizeof(dataMap_[imgFileName].second[keyName][0]) * numMax);
 	}
 	return true;
 }

@@ -18,6 +18,7 @@ class ConstantResource :
 {
 public:
 	ConstantResource(Dx12Wrapper& dx12);
+	ConstantResource(Dx12Wrapper& dx12, size_t num);
 	virtual ~ConstantResource();
 	bool CreateView(Dx12Wrapper& dx12) override;
 	bool CreateResource(Dx12Wrapper& dx12,D3D12_RESOURCE_DESC& resourceDesc) override;
@@ -40,6 +41,32 @@ inline ConstantResource<T>::ConstantResource(Dx12Wrapper& dx12) :
 
 	D3D12_RESOURCE_DESC resDesc{ CD3DX12_RESOURCE_DESC::Buffer(size_) };
 	if (!(CreateResource(dx12,resDesc)))
+	{
+		DebugLog("リソースの生成に失敗しました");
+		assert(false);
+		return;
+	}
+
+	if (!CreateView(dx12))
+	{
+		DebugLog("バッファービューの生成に失敗しました");
+		assert(false);
+		return;
+	}
+}
+
+template<CbC T>
+inline ConstantResource<T>::ConstantResource(Dx12Wrapper& dx12, size_t num) :
+	Dx12Resource{ dx12 }, size{ ((sizeof(T) * num) + 0xff) & ~0xff }, mapped_{ nullptr }
+{
+	if (!CreateDescriptorHeap(dx12))
+	{
+		assert(false);
+		return;
+	}
+
+	D3D12_RESOURCE_DESC resDesc{ CD3DX12_RESOURCE_DESC::Buffer(size_) };
+	if (!(CreateResource(dx12, resDesc)))
 	{
 		DebugLog("リソースの生成に失敗しました");
 		assert(false);
