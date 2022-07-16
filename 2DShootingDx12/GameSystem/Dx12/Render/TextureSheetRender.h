@@ -8,6 +8,7 @@
 class Dx12Wrapper;
 class CbMatrices;
 class TextureData;
+class CbMatrix;
 
 struct ID3D12PipelineState;
 struct ID3D12RootSignature;
@@ -22,9 +23,9 @@ class TextureSheetRender
 public:
 	TextureSheetRender(Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum);
 	virtual ~TextureSheetRender();
-	void Draw(const Math::Vector2& pos, std::string_view key);
-	void Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, std::string_view key);
-	void Draw(void);
+	void Draw(const Math::Vector2& pos, std::string_view key, int idx = 0);
+	void Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, std::string_view key, int idx = 0);
+	void Draw(CbMatrix& cbMat);
 private:
 
 	bool CreateRootSignature(void);

@@ -1,4 +1,4 @@
-@startuml クラス図(全�?)
+@startuml classD
 
 class TexturSheetRender{
     +Draw(Vector2, string)

@@ -5,6 +5,7 @@
 #include "../../../common/TextureData.h"
 #include "../../../common/Debug.h"
 #include "../Resource/Texture.h"
+#include "../Resource/CbMatrix.h"
 #include "TextureSheetRender.h"
 
 TextureSheetRender::TextureSheetRender(Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum) :
@@ -17,23 +18,72 @@ TextureSheetRender::~TextureSheetRender()
 {
 }
 
-void TextureSheetRender::Draw(const Math::Vector2& pos, std::string_view key)
+void TextureSheetRender::Draw(const Math::Vector2& pos, std::string_view key, int idx)
 {
 	int nowIdx = nowNum_ * 4;
 	int idicIdx = nowNum_ * 6;
-	auto& data = texData_->GetData(imgKey_).first.at(key.data())[0];
+	auto& [texD, size] = texData_->GetData(imgKey_);
+	auto& data = texD.at(key.data())[idx];
 
 	// 左上
 	vertices_[nowIdx].no = nowNum_;
 	vertices_[nowIdx].pos = 0.0f;
 	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
 	idices_[idicIdx] = nowIdx;
+
+	nowIdx++;
+
+	// 右上
+	vertices_[nowIdx].no = nowNum_;
+	vertices_[nowIdx].pos = 0.0f;
+	vertices_[nowIdx].pos.x += data.wh.x;
+	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv.x += data.wh.x;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
+	idices_[idicIdx + 1] = nowIdx;
+	idices_[idicIdx + 3] = nowIdx;
+
+	nowIdx++;
+
+	// 左下
+	vertices_[nowIdx].no = nowNum_;
+	vertices_[nowIdx].pos = 0.0f;
+	vertices_[nowIdx].pos.y += data.wh.y;
+	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv.y += data.wh.y;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
+	idices_[idicIdx + 2] = nowIdx;
+	idices_[idicIdx + 5] = nowIdx;
+
+	nowIdx++;
+
+	// 右下
+	vertices_[nowIdx].no = nowNum_;
+	vertices_[nowIdx].pos = data.pos;
+	vertices_[nowIdx].pos += data.wh;
+	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv += data.wh;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
+	idices_[idicIdx + 4] = nowIdx;
+
+	DirectX::XMStoreFloat4x4(
+		&mat_->matrices_[nowNum_], 
+		DirectX::XMMatrixIdentity() * 
+		DirectX::XMMatrixTranslation(data.wh.x, data.wh.y,0.0f) *
+		DirectX::XMMatrixTranslation(pos.x, pos.y, 0.0f)
+	);
+	nowNum_++;
 }
 
-void TextureSheetRender::Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, std::string_view key)
+void TextureSheetRender::Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, std::string_view key, int idx)
 {
-	auto& data = texData_->GetData(imgKey_).first.at(key.data())[0];
-	
+	auto& [texD, size] = texData_->GetData(imgKey_);
+	auto& data = texD.at(key.data())[idx];
 	int nowIdx = nowNum_ * 4;
 	int idicIdx = nowNum_ * 6;
 
@@ -41,6 +91,8 @@ void TextureSheetRender::Draw(const Math::Vector2& lt, const Math::Vector2& rt, 
 	vertices_[nowIdx].no = nowNum_;
 	vertices_[nowIdx].pos = lt;
 	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
 	idices_[idicIdx] = nowIdx;
 
 	nowIdx++;
@@ -50,6 +102,8 @@ void TextureSheetRender::Draw(const Math::Vector2& lt, const Math::Vector2& rt, 
 	vertices_[nowIdx].pos = rt;
 	vertices_[nowIdx].uv = data.pos;
 	vertices_[nowIdx].uv.x += data.wh.x;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
 	idices_[idicIdx + 1] = nowIdx;
 	idices_[idicIdx + 3] = nowIdx;
 
@@ -60,6 +114,8 @@ void TextureSheetRender::Draw(const Math::Vector2& lt, const Math::Vector2& rt, 
 	vertices_[nowIdx].pos = lb;
 	vertices_[nowIdx].uv = data.pos;
 	vertices_[nowIdx].uv.y += data.wh.y;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
 	idices_[idicIdx + 2] = nowIdx;
 	idices_[idicIdx + 5] = nowIdx;
 
@@ -70,15 +126,104 @@ void TextureSheetRender::Draw(const Math::Vector2& lt, const Math::Vector2& rt, 
 	vertices_[nowIdx].pos = rb;
 	vertices_[nowIdx].uv = data.pos;
 	vertices_[nowIdx].uv += data.wh;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
 	idices_[idicIdx + 4] = nowIdx;
 	
 	DirectX::XMStoreFloat4x4(&mat_->matrices_[nowNum_], DirectX::XMMatrixIdentity());
 	nowNum_++;
 }
 
+void TextureSheetRender::Draw(CbMatrix& cbMat)
+{
+	// グラフィックパイプラインをセット
+	dx12_.CmdLlist()->SetPipelineState(pipeline_.Get());
+
+	// ルートシグネチャをセット
+	dx12_.CmdLlist()->SetGraphicsRootSignature(rootSignature_.Get());
+
+	// プリミティブトポロジーをセット
+	dx12_.CmdLlist()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	// インデクスをセット
+	dx12_.CmdLlist()->IASetIndexBuffer(ibView_.get());
+
+	// 頂点をセット
+	dx12_.CmdLlist()->IASetVertexBuffers(0, 1, vbView_.get());
+
+	// スクリーン座標系からの変換行列をセット
+	ID3D12DescriptorHeap* cbmatDh[]{ cbMat.DescriptorHeap().Get() };
+	dx12_.CmdLlist()->SetDescriptorHeaps(1, cbmatDh);
+	dx12_.CmdLlist()->SetGraphicsRootDescriptorTable(0, cbMat.DescriptorHeap()->GetGPUDescriptorHandleForHeapStart());
+
+	// 描画の四角一個ごとの変換行列をセット
+	ID3D12DescriptorHeap* matDh[]{ mat_->DescriptorHeap().Get()};
+	dx12_.CmdLlist()->SetDescriptorHeaps(1, matDh);
+	dx12_.CmdLlist()->SetGraphicsRootDescriptorTable(1, mat_->DescriptorHeap()->GetGPUDescriptorHandleForHeapStart());
+
+	// テクスチャをセット
+	ID3D12DescriptorHeap* texDh[]{ texData_->GetTexture(imgKey_)->DescriptorHeap().Get()};
+	dx12_.CmdLlist()->SetDescriptorHeaps(1, texDh);
+	dx12_.CmdLlist()->SetGraphicsRootDescriptorTable(2, texData_->GetTexture(imgKey_)->DescriptorHeap()->GetGPUDescriptorHandleForHeapStart());
+
+	// 描画する
+	dx12_.CmdLlist()->DrawIndexedInstanced(6 * nowNum_, 2, 0, 0,0);
+
+	nowNum_ = 0;
+}
+
 bool TextureSheetRender::CreateRootSignature(void)
 {
-	return false;
+	// ディスクリプタレンジ
+	CD3DX12_DESCRIPTOR_RANGE descTblRange[3] = {};
+
+	// 変換用行列(b0スロット)
+	descTblRange[0].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 0);
+
+	// 変形用行列(b1スロット)
+	descTblRange[1].Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 1);
+
+	// テクスチャ用(t0)
+	descTblRange[2].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0);
+
+	// ルートパラメーター
+	CD3DX12_ROOT_PARAMETER rootparam[3]{};
+	rootparam[0].InitAsDescriptorTable(1, &descTblRange[0]);
+	rootparam[1].InitAsDescriptorTable(1, &descTblRange[1]);
+	rootparam[2].InitAsDescriptorTable(1, &descTblRange[2]);
+
+	// サンプラー設定
+	CD3DX12_STATIC_SAMPLER_DESC samplerDesc[1]{};
+	samplerDesc[0].Init(0);
+
+
+	CD3DX12_ROOT_SIGNATURE_DESC rootSignatureDesc = {};
+	rootSignatureDesc.Init(static_cast<UINT>(std::size(rootparam)), rootparam, static_cast<UINT>(std::size(samplerDesc)), samplerDesc, D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+
+	ComPtr<ID3DBlob> rootSigBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
+	if (FAILED(D3D12SerializeRootSignature(
+		&rootSignatureDesc,
+		D3D_ROOT_SIGNATURE_VERSION_1,
+		&rootSigBlob,
+		&errorBlob)
+	))
+	{
+		DebugLog("ルートシグネチャのシリアライズに失敗");
+		return false;
+	}
+	if (FAILED(dx12_.Device()->CreateRootSignature(
+		0,
+		rootSigBlob->GetBufferPointer(),
+		rootSigBlob->GetBufferSize(),
+		IID_PPV_ARGS(rootSignature_.ReleaseAndGetAddressOf())))
+		)
+	{
+		DebugLog("ルートシグネチャの生成に失敗");
+		return false;
+	}
+
+	return true;
 }
 
 bool TextureSheetRender::CreatePipeline(void)
