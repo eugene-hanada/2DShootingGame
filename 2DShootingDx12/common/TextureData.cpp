@@ -38,7 +38,7 @@ bool TextureData::Load(const std::wstring& fileName)
 	// 画像サイズを取得
 	Math::Vector2 imgSize;
 	wif.read(reinterpret_cast<char*>(&imgSize), sizeof(imgSize));
-
+	dataMap_[imgFileName].second.second = imgSize;
 	while (true)
 	{
 		// キーの名前を取得
@@ -56,8 +56,8 @@ bool TextureData::Load(const std::wstring& fileName)
 
 		int numMax;
 		wif.read(reinterpret_cast<char*>(&numMax), sizeof(numMax));
-		dataMap_[imgFileName].second[keyName].resize(numMax);
-		wif.read(reinterpret_cast<char*>(&dataMap_[imgFileName].second[keyName][0]), sizeof(dataMap_[imgFileName].second[keyName][0]) * numMax);
+		dataMap_[imgFileName].second.first[keyName].resize(numMax);
+		wif.read(reinterpret_cast<char*>(&dataMap_[imgFileName].second.first[keyName][0]), sizeof(dataMap_[imgFileName].second.first[keyName][0]) * numMax);
 	}
 	return true;
 }

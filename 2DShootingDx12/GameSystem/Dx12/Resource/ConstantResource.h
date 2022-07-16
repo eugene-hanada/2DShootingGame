@@ -57,7 +57,7 @@ inline ConstantResource<T>::ConstantResource(Dx12Wrapper& dx12) :
 
 template<CbC T>
 inline ConstantResource<T>::ConstantResource(Dx12Wrapper& dx12, size_t num) :
-	Dx12Resource{ dx12 }, size{ ((sizeof(T) * num) + 0xff) & ~0xff }, mapped_{ nullptr }
+	Dx12Resource{ dx12 }, size_{ ((sizeof(T) * num) + 0xff) & ~0xff }, mapped_{ nullptr }
 {
 	if (!CreateDescriptorHeap(dx12))
 	{

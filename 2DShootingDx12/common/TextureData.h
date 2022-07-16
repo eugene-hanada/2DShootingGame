@@ -17,20 +17,18 @@ class TextureData
 		Math::Vector2 wh;
 	};
 	using TextureDataMap = std::unordered_map<std::string, std::vector<Data>>;
-	using DataMap = std::unordered_map<std::string, std::pair<std::shared_ptr<Texture>,TextureDataMap>>;
+	using TextureDataPair = std::pair<TextureDataMap, Math::Vector2>;
+	using DataMap = std::unordered_map<std::string, std::pair<std::shared_ptr<Texture>, TextureDataPair>>;
 public:
 	TextureData(void);
-	const std::vector<Data>& GetData(std::string_view imgKey, std::string_view dataKey)
+	const TextureDataPair& GetData(std::string_view imgKey)
 	{
 		if (!dataMap_.contains(imgKey.data()))
 		{
 			throw "‰æ‘œ‚ª‘¶İ‚µ‚Ü‚¹‚ñ";
 		}
-		if (!dataMap_[imgKey.data()].second.contains(dataKey.data()))
-		{
-			return dataMap_[imgKey.data()].second.begin()->second;
-		}
-		return dataMap_[imgKey.data()].second[dataKey.data()];
+		
+		return dataMap_[imgKey.data()].second;
 	}
 
 	std::shared_ptr<Texture>& GetTexture(std::string_view imgKey)

@@ -4,6 +4,7 @@
 #include "../../Dx12/Resource/CbMatrices.h"
 #include "../../../common/TextureData.h"
 #include "../../../common/Debug.h"
+#include "../Resource/Texture.h"
 #include "TextureSheetRender.h"
 
 TextureSheetRender::TextureSheetRender(Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum) :
@@ -16,40 +17,59 @@ TextureSheetRender::~TextureSheetRender()
 {
 }
 
-void TextureSheetRender::Draw(const Math::Vector2& pos)
+void TextureSheetRender::Draw(const Math::Vector2& pos, std::string_view key)
 {
 	int nowIdx = nowNum_ * 4;
 	int idicIdx = nowNum_ * 6;
+	auto& data = texData_->GetData(imgKey_).first.at(key.data())[0];
+
+	// ¶ã
+	vertices_[nowIdx].no = nowNum_;
+	vertices_[nowIdx].pos = 0.0f;
+	vertices_[nowIdx].uv = data.pos;
+	idices_[idicIdx] = nowIdx;
 }
 
 void TextureSheetRender::Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, std::string_view key)
 {
-	//auto& data = texData_->GetData(imgKey_, key)[0];
+	auto& data = texData_->GetData(imgKey_).first.at(key.data())[0];
+	
 	int nowIdx = nowNum_ * 4;
 	int idicIdx = nowNum_ * 6;
+
+	// ¶ã
 	vertices_[nowIdx].no = nowNum_;
 	vertices_[nowIdx].pos = lt;
-	vertices_[nowIdx].uv;
+	vertices_[nowIdx].uv = data.pos;
 	idices_[idicIdx] = nowIdx;
 
 	nowIdx++;
+
+	// ‰Eã
 	vertices_[nowIdx].no = nowNum_;
 	vertices_[nowIdx].pos = rt;
-	vertices_[nowIdx].uv;
+	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv.x += data.wh.x;
 	idices_[idicIdx + 1] = nowIdx;
 	idices_[idicIdx + 3] = nowIdx;
 
 	nowIdx++;
+
+	// ¶‰º
 	vertices_[nowIdx].no = nowNum_;
 	vertices_[nowIdx].pos = lb;
-	vertices_[nowIdx].uv;
+	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv.y += data.wh.y;
 	idices_[idicIdx + 2] = nowIdx;
 	idices_[idicIdx + 5] = nowIdx;
 
 	nowIdx++;
+
+	// ‰E‰º
 	vertices_[nowIdx].no = nowNum_;
 	vertices_[nowIdx].pos = rb;
-	vertices_[nowIdx].uv;
+	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv += data.wh;
 	idices_[idicIdx + 4] = nowIdx;
 	
 	DirectX::XMStoreFloat4x4(&mat_->matrices_[nowNum_], DirectX::XMMatrixIdentity());

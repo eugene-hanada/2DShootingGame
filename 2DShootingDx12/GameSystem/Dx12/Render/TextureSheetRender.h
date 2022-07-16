@@ -22,7 +22,7 @@ class TextureSheetRender
 public:
 	TextureSheetRender(Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum);
 	virtual ~TextureSheetRender();
-	void Draw(const Math::Vector2& pos);
+	void Draw(const Math::Vector2& pos, std::string_view key);
 	void Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, std::string_view key);
 	void Draw(void);
 private:
