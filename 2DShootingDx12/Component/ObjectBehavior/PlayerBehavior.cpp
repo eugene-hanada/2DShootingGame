@@ -16,13 +16,11 @@ void PlayerBehavior::Update(void)
 {
 	if (input_->IsPressedStay(InputID::Up))
 	{
-		owner_->GetTransform()->SetPos({ 0.0f, -1.0f });
-		owner_->GetTransform()->Update();
+		owner_->pos_ += Math::upVector2<float> * 1.0f;
 	}
 	if (input_->IsPressedStay(InputID::Down))
 	{
-		owner_->GetTransform()->SetPos({ 0.0f, 1.0f });
-		owner_->GetTransform()->Update();
+		owner_->pos_ += Math::downVector2<float> *1.0f;
 	}
 }
 

@@ -1,4 +1,6 @@
 #include <fstream>
+#include "../GameSystem/Dx12/Resource/Texture.h"
+#include "../common/Utility.h"
 #include "TextureData.h"
 
 struct Header
@@ -7,7 +9,8 @@ struct Header
 	int sum = 0;
 };
 
-TextureData::TextureData(void)
+TextureData::TextureData(Dx12Wrapper& dx12) :
+	dx12_{dx12}
 {
 }
 
@@ -30,7 +33,7 @@ bool TextureData::Load(const std::wstring& fileName)
 	imgFileName.resize(size);
 	wif.read(reinterpret_cast<char*>(imgFileName.data()), sizeof(imgFileName[0]) * size);
 
-	if (!dataMap_.contains(imgFileName))
+	if (dataMap_.contains(imgFileName))
 	{
 		return false;
 	}
@@ -39,6 +42,7 @@ bool TextureData::Load(const std::wstring& fileName)
 	Math::Vector2 imgSize;
 	wif.read(reinterpret_cast<char*>(&imgSize), sizeof(imgSize));
 	dataMap_[imgFileName].second.second = imgSize;
+	dataMap_[imgFileName].first = std::make_shared<Texture>(dx12_, Utility::StringToWidthString("Resource/image/" + imgFileName));
 	while (true)
 	{
 		// ÉLÅ[ÇÃñºëOÇéÊìæ

@@ -13,10 +13,10 @@ GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12
 	BaseScene{ renderMng,dx12,input}
 {
 	rt_->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	objManager_ = std::make_unique<ObjectManager>(input_,dx12_);
+	textureData_ = std::make_shared<TextureData>(dx12_);
+	textureData_->Load(L"Resource/image/texture.tdat");
+	objManager_ = std::make_unique<ObjectManager>(textureData_,input_,dx12_);
 
-	auto texLoad = std::make_unique<TextureData>();
-	texLoad->Load(L"Resource/image/texture.tdat");
 }
 
 GameScene::~GameScene()

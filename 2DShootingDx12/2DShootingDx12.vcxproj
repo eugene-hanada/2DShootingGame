@@ -149,12 +149,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Component\Render\DefaultRender.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\CbMatrices.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\CbValue.cpp" />
     <ClCompile Include="Component\ObjectBehavior\ObjectBehavior.cpp" />
     <ClCompile Include="Component\ObjectBehavior\PlayerBehavior.cpp" />
     <ClCompile Include="Object\ObjectManager.cpp" />
+    <ClCompile Include="Component\Render\ObjRender.cpp" />
     <ClCompile Include="Scene\Transition\FadeIn.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\AlphaRender.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\RenderManager.cpp" />
@@ -184,8 +186,10 @@
     <ClCompile Include="Scene\Transition\Transition.cpp" />
     <ClCompile Include="common\TextureData.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\TextureSheetRender.cpp" />
+    <ClCompile Include="common\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component\Render\DefaultRender.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\CbMatrices.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\ComponentID.h" />
@@ -193,6 +197,7 @@
     <ClInclude Include="Component\ObjectBehavior\ObjectBehavior.h" />
     <ClInclude Include="Component\ObjectBehavior\PlayerBehavior.h" />
     <ClInclude Include="Object\ObjectManager.h" />
+    <ClInclude Include="Component\Render\ObjRender.h" />
     <ClInclude Include="Scene\Transition\FadeIn.h" />
     <ClInclude Include="GameSystem\Dx12\Render\AlphaRender.h" />
     <ClInclude Include="GameSystem\Dx12\Render\RenderManager.h" />
@@ -224,6 +229,7 @@
     <ClInclude Include="Scene\Transition\Transition.h" />
     <ClInclude Include="common\TextureData.h" />
     <ClInclude Include="GameSystem\Dx12\Render\TextureSheetRender.h" />
+    <ClInclude Include="common\Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resource\shader\Alpha2DPs.hlsl">
@@ -231,6 +237,24 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Resource\shader\Atlas2DPs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Resource\shader\Atlas2DVs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resource\shader\Basic2DPs.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -250,6 +274,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resource\shader\Atlas2D.hlsli" />
     <None Include="Resource\shader\Basic2D.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

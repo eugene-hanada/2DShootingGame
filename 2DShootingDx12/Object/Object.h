@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <unordered_map>
+#include "../common/Math.h"
 #include "../Component/ComponentID.h"
 
 class Component;
@@ -40,5 +41,9 @@ public:
 private:
 	std::unordered_map<ComponentID, ComponentShPtr> componentMap_;
 	std::shared_ptr<Transform> transform_;
+	Math::Vector2 pos_;
+
+	friend class DefaultRender;
+	friend class PlayerBehavior;
 };
 

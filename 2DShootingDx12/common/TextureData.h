@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <string_view>
 #include <windows.h>
 #include <memory>
 #include <unordered_map>
@@ -8,6 +7,7 @@
 #include "Math.h"
 
 class Texture;
+class Dx12Wrapper;
 
 class TextureData
 {
@@ -20,33 +20,33 @@ class TextureData
 	using TextureDataPair = std::pair<TextureDataMap, Math::Vector2>;
 	using DataMap = std::unordered_map<std::string, std::pair<std::shared_ptr<Texture>, TextureDataPair>>;
 public:
-	TextureData(void);
-	const TextureDataPair& GetData(std::string_view imgKey)
+	TextureData(Dx12Wrapper& dx12);
+	const TextureDataPair& GetData(const std::string& imgKey)
 	{
-		if (!dataMap_.contains(imgKey.data()))
+		if (!dataMap_.contains(imgKey))
 		{
 			throw "‰æ‘œ‚ª‘¶İ‚µ‚Ü‚¹‚ñ";
 		}
 		
-		return dataMap_[imgKey.data()].second;
+		return dataMap_[imgKey].second;
 	}
 
-	std::shared_ptr<Texture>& GetTexture(std::string_view imgKey)
+	std::shared_ptr<Texture>& GetTexture(const std::string& imgKey)
 	{
-		if (!dataMap_.contains(imgKey.data()))
+		if (!dataMap_.contains(imgKey))
 		{
 			throw "‰æ‘œ‚ª‘¶İ‚µ‚Ü‚¹‚ñ";
 		}
-		return dataMap_[imgKey.data()].first;
+		return dataMap_[imgKey].first;
 	}
 
-	void Remove(std::string_view imgKey)
+	void Remove(const std::string& imgKey)
 	{
-		if (!dataMap_.contains(imgKey.data()))
+		if (!dataMap_.contains(imgKey))
 		{
 			return;
 		}
-		dataMap_.erase(imgKey.data());
+		dataMap_.erase(imgKey);
 	}
 
 	bool Load(const std::wstring& fileName);
@@ -55,6 +55,8 @@ private:
 
 	// ‰æ‘œ‚Ìƒf[ƒ^
 	DataMap dataMap_;
+
+	Dx12Wrapper& dx12_;
 
 };
 

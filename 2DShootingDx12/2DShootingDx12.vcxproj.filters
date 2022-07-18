@@ -120,6 +120,15 @@
     <ClCompile Include="GameSystem\Dx12\Resource\CbMatrices.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Render\ObjRender.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Render\DefaultRender.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Utility.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -236,13 +245,25 @@
     <ClInclude Include="GameSystem\Dx12\Resource\CbMatrices.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Render\ObjRender.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Render\DefaultRender.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Utility.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resource\shader\Basic2DVs.hlsl" />
     <FxCompile Include="Resource\shader\Basic2DPs.hlsl" />
     <FxCompile Include="Resource\shader\Alpha2DPs.hlsl" />
+    <FxCompile Include="Resource\shader\Atlas2DVs.hlsl" />
+    <FxCompile Include="Resource\shader\Atlas2DPs.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\shader\Basic2D.hlsli" />
+    <None Include="Resource\shader\Atlas2D.hlsli" />
   </ItemGroup>
 </Project>

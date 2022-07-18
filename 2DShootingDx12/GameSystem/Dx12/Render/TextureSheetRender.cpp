@@ -8,25 +8,44 @@
 #include "../Resource/CbMatrix.h"
 #include "TextureSheetRender.h"
 
-TextureSheetRender::TextureSheetRender(Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum) :
-	dx12_{dx12}, maxNum_{maxNum}, texData_{texData}
+TextureSheetRender::TextureSheetRender(const std::string& imgKey, Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum) :
+	dx12_{dx12}, maxNum_{maxNum}, texData_{texData}, imgKey_{imgKey}
 {
 	mat_ = std::make_unique<CbMatrices>(dx12_, maxNum_);
+
+	if (!CreateVertex())
+	{
+		assert(false);
+	}
+
+	if (!CreateIdx())
+	{
+		assert(false);
+	}
+
+	if (!CreateRootSignature())
+	{
+		assert(false);
+	}
+	if (!CreatePipeline())
+	{
+		assert(false);
+	}
+
 }
 
 TextureSheetRender::~TextureSheetRender()
 {
 }
 
-void TextureSheetRender::Draw(const Math::Vector2& pos, std::string_view key, int idx)
+void TextureSheetRender::Draw(const Math::Vector2& pos, const std::string& key, int idx)
 {
 	int nowIdx = nowNum_ * 4;
 	int idicIdx = nowNum_ * 6;
 	auto& [texD, size] = texData_->GetData(imgKey_);
-	auto& data = texD.at(key.data())[idx];
+	auto& data = texD.at(key)[idx];
 
 	// 左上
-	vertices_[nowIdx].no = nowNum_;
 	vertices_[nowIdx].pos = 0.0f;
 	vertices_[nowIdx].uv = data.pos;
 	vertices_[nowIdx].uv /= size;
@@ -36,7 +55,6 @@ void TextureSheetRender::Draw(const Math::Vector2& pos, std::string_view key, in
 	nowIdx++;
 
 	// 右上
-	vertices_[nowIdx].no = nowNum_;
 	vertices_[nowIdx].pos = 0.0f;
 	vertices_[nowIdx].pos.x += data.wh.x;
 	vertices_[nowIdx].uv = data.pos;
@@ -49,7 +67,6 @@ void TextureSheetRender::Draw(const Math::Vector2& pos, std::string_view key, in
 	nowIdx++;
 
 	// 左下
-	vertices_[nowIdx].no = nowNum_;
 	vertices_[nowIdx].pos = 0.0f;
 	vertices_[nowIdx].pos.y += data.wh.y;
 	vertices_[nowIdx].uv = data.pos;
@@ -62,8 +79,7 @@ void TextureSheetRender::Draw(const Math::Vector2& pos, std::string_view key, in
 	nowIdx++;
 
 	// 右下
-	vertices_[nowIdx].no = nowNum_;
-	vertices_[nowIdx].pos = data.pos;
+	vertices_[nowIdx].pos = 0.0f;
 	vertices_[nowIdx].pos += data.wh;
 	vertices_[nowIdx].uv = data.pos;
 	vertices_[nowIdx].uv += data.wh;
@@ -74,16 +90,21 @@ void TextureSheetRender::Draw(const Math::Vector2& pos, std::string_view key, in
 	DirectX::XMStoreFloat4x4(
 		&mat_->matrices_[nowNum_], 
 		DirectX::XMMatrixIdentity() * 
-		DirectX::XMMatrixTranslation(data.wh.x, data.wh.y,0.0f) *
+		DirectX::XMMatrixTranslation(data.wh.x/2.0f, data.wh.y/2.0f,0.0f) *
 		DirectX::XMMatrixTranslation(pos.x, pos.y, 0.0f)
 	);
+	/*DirectX::XMStoreFloat4x4(
+		&mat_->matrices_[nowNum_],
+		DirectX::XMMatrixIdentity()
+	);*/
+	
 	nowNum_++;
 }
 
-void TextureSheetRender::Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, std::string_view key, int idx)
+void TextureSheetRender::Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, const std::string& key, int idx)
 {
 	auto& [texD, size] = texData_->GetData(imgKey_);
-	auto& data = texD.at(key.data())[idx];
+	auto& data = texD.at(key)[idx];
 	int nowIdx = nowNum_ * 4;
 	int idicIdx = nowNum_ * 6;
 
@@ -172,6 +193,13 @@ void TextureSheetRender::Draw(CbMatrix& cbMat)
 	nowNum_ = 0;
 }
 
+void TextureSheetRender::Update(void)
+{
+	std::copy(vertices_.begin(), vertices_.end(), vertMap_);
+	std::copy(idices_.begin(), idices_.end(), idMap_);
+	mat_->Update();
+}
+
 bool TextureSheetRender::CreateRootSignature(void)
 {
 	// ディスクリプタレンジ
@@ -235,7 +263,7 @@ bool TextureSheetRender::CreatePipeline(void)
 	ComPtr<ID3DBlob> vs{};
 	ComPtr<ID3DBlob> errorBlob{ nullptr };
 	HRESULT result = D3DCompileFromFile(
-		L"",
+		L"Resource/shader/Atlas2DVs.hlsl",
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE,
 		"main",
@@ -252,7 +280,7 @@ bool TextureSheetRender::CreatePipeline(void)
 
 	ComPtr<ID3DBlob> ps{};
 	result = D3DCompileFromFile(
-		L"",
+		L"Resource/shader/Atlas2DPs.hlsl",
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE,
 		"main",
@@ -325,6 +353,8 @@ bool TextureSheetRender::CreatePipeline(void)
 	gpipeline.BlendState.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
 	gpipeline.BlendState.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
 	gpipeline.BlendState.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
+	gpipeline.BlendState.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_SRC_ALPHA;
+	gpipeline.BlendState.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_DEST_ALPHA;
 
 	// 入力レイアウトを設定
 	gpipeline.InputLayout.pInputElementDescs = inputLayout;
@@ -398,11 +428,11 @@ bool TextureSheetRender::CreateIdx(void)
 	}
 
 	// 作ったバッファにインデックスデータをコピー
-	if (FAILED(ib_->Map(0, nullptr, (void**)&idMap)))
+	if (FAILED(ib_->Map(0, nullptr, (void**)&idMap_)))
 	{
 		return false;
 	}
-	std::copy(std::begin(idices_), std::end(idices_), idMap);
+	std::copy(std::begin(idices_), std::end(idices_), idMap_);
 
 
 	// インデックスバッファビューを作成する
@@ -411,7 +441,7 @@ bool TextureSheetRender::CreateIdx(void)
 	ibView_->Format = DXGI_FORMAT_R16_UINT;
 	ibView_->SizeInBytes = static_cast<UINT>(sizeof(idices_[0]) * idices_.size());
 
-	return false;
+	return true;
 }
 
 

@@ -1,8 +1,9 @@
 #pragma once
+#include <memory>
 #include <vector>
 #include <DirectXMath.h>
 #include <wrl.h>
-#include <string_view>
+#include <string>
 #include "../../../common/Math.h"
 
 class Dx12Wrapper;
@@ -21,11 +22,12 @@ class TextureSheetRender
 	template<class T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
 public:
-	TextureSheetRender(Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum);
+	TextureSheetRender(const std::string& imgKey,Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum);
 	virtual ~TextureSheetRender();
-	void Draw(const Math::Vector2& pos, std::string_view key, int idx = 0);
-	void Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, std::string_view key, int idx = 0);
+	void Draw(const Math::Vector2& pos, const std::string& key, int idx = 0);
+	void Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, const std::string& key, int idx = 0);
 	void Draw(CbMatrix& cbMat);
+	void Update(void);
 private:
 
 	bool CreateRootSignature(void);
@@ -46,17 +48,17 @@ private:
 	{
 		Math::Vector2 pos;
 		Math::Vector2 uv;
-		std::uint32_t no;
+		std::uint32_t no = 0u;
 	};
 
 	std::vector<Vertex> vertices_;
 	Vertex* vertMap_;
 	std::unique_ptr<D3D12_VERTEX_BUFFER_VIEW> vbView_;
-	ComPtr< ID3D12Resource> vb_;
+	ComPtr<ID3D12Resource> vb_;
 
 	std::vector<std::uint16_t> idices_;
-	std::uint16_t* idMap;
-	std::unique_ptr< D3D12_INDEX_BUFFER_VIEW> ibView_;
+	std::uint16_t* idMap_;
+	std::unique_ptr<D3D12_INDEX_BUFFER_VIEW> ibView_;
 	ComPtr<ID3D12Resource> ib_;
 	
 
@@ -64,7 +66,7 @@ private:
 
 	std::string imgKey_;
 
-	std::shared_ptr< TextureData> texData_;
+	std::shared_ptr<TextureData> texData_;
 
 	const std::uint32_t maxNum_;
 	std::uint32_t nowNum_;

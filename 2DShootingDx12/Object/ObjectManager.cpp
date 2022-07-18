@@ -2,15 +2,23 @@
 #include "../Component/ObjectBehavior/PlayerBehavior.h"
 #include "../Component/Material.h"
 #include "../GameSystem/Dx12/Resource/Texture.h"
+#include "../Component/Render/ObjRender.h"
+#include "../GameSystem/Dx12/Render/TextureSheetRender.h"
+#include "../common/TextureData.h"
+#include "../Component/Render/DefaultRender.h"
 #include "ObjectManager.h"
 
-ObjectManager::ObjectManager(std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
+ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
 {
 	auto& p = objList_.emplace_back(std::make_unique<Object>(dx12));
 	p->AddComponent(std::make_unique<PlayerBehavior>(input));
-	tex_ = std::make_shared<Texture>(dx12, TEXT("Resource/image/Logo.png"));
-	p->AddComponent(std::make_shared<Material>(tex_, dx12));
+	
+	p->AddComponent(std::make_shared<DefaultRender>());
+	p->GetCcomponent<ObjRender>(ComponentID::Render).lock()->SetImgKey("ship");
 	p->Begin();
+
+	
+	texSheetRender_ = std::make_unique< TextureSheetRender>("texture.png", dx12, textureData, 256);
 }
 
 ObjectManager::~ObjectManager()
@@ -33,10 +41,12 @@ void ObjectManager::Draw(RenderManager& renderMng, CbMatrix& cbMat)
 {
 	for (auto& obj : objList_)
 	{
-		auto com = obj->GetCcomponent<Material>(ComponentID::Material);
+		auto com = obj->GetCcomponent<ObjRender>(ComponentID::Render);
 		if (!com.expired())
 		{
-			com.lock()->Draw(renderMng, cbMat);
+			com.lock()->Draw(*texSheetRender_);
 		}
 	}
+	texSheetRender_->Update();
+	texSheetRender_->Draw(cbMat);
 }
