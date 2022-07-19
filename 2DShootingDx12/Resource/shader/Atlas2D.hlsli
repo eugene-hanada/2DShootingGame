@@ -21,8 +21,11 @@ struct PsOutput
 
 matrix rtMat : register(b0);
 
-matrix transMat[256] : register(b1);
-
+// matrix transMat : register(b1);
+cbuffer TransMat : register(b1)
+{
+	matrix transMat[256];
+}
 // テクスチャ
 Texture2D<float4> tex : register(t0);
 

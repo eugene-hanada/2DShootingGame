@@ -149,6 +149,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Component\Animator\Animator.cpp" />
+    <ClCompile Include="Component\Render\AnimationRender.cpp" />
     <ClCompile Include="Component\Render\DefaultRender.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\CbMatrices.cpp" />
     <ClCompile Include="Component\Component.cpp" />
@@ -189,6 +191,8 @@
     <ClCompile Include="common\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component\Animator\Animator.h" />
+    <ClInclude Include="Component\Render\AnimationRender.h" />
     <ClInclude Include="Component\Render\DefaultRender.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\CbMatrices.h" />
     <ClInclude Include="Component\Component.h" />

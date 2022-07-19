@@ -12,7 +12,7 @@ TextureSheetRender::TextureSheetRender(const std::string& imgKey, Dx12Wrapper& d
 	dx12_{dx12}, maxNum_{maxNum}, texData_{texData}, imgKey_{imgKey}
 {
 	mat_ = std::make_unique<CbMatrices>(dx12_, maxNum_);
-
+	
 	if (!CreateVertex())
 	{
 		assert(false);
@@ -88,11 +88,12 @@ void TextureSheetRender::Draw(const Math::Vector2& pos, const std::string& key, 
 	idices_[idicIdx + 4] = nowIdx;
 
 	DirectX::XMStoreFloat4x4(
-		&mat_->matrices_[nowNum_], 
+		&mat_->matrices_[nowNum_],
 		DirectX::XMMatrixIdentity() * 
 		DirectX::XMMatrixTranslation(data.wh.x/2.0f, data.wh.y/2.0f,0.0f) *
 		DirectX::XMMatrixTranslation(pos.x, pos.y, 0.0f)
 	);
+	
 	/*DirectX::XMStoreFloat4x4(
 		&mat_->matrices_[nowNum_],
 		DirectX::XMMatrixIdentity()
@@ -188,7 +189,7 @@ void TextureSheetRender::Draw(CbMatrix& cbMat)
 	dx12_.CmdLlist()->SetGraphicsRootDescriptorTable(2, texData_->GetTexture(imgKey_)->DescriptorHeap()->GetGPUDescriptorHandleForHeapStart());
 
 	// •`‰æ‚·‚é
-	dx12_.CmdLlist()->DrawIndexedInstanced(6 * nowNum_, 2, 0, 0,0);
+	dx12_.CmdLlist()->DrawIndexedInstanced(6 * nowNum_, 1, 0, 0,0);
 
 	nowNum_ = 0;
 }

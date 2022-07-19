@@ -36,11 +36,9 @@ public:
 		return ComponentWkPtr<T>{};
 	}
 
-	std::shared_ptr<Transform>& GetTransform(void) { return transform_; }
 
 private:
 	std::unordered_map<ComponentID, ComponentShPtr> componentMap_;
-	std::shared_ptr<Transform> transform_;
 	Math::Vector2 pos_;
 
 	friend class DefaultRender;

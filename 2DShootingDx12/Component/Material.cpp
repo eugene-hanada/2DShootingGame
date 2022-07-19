@@ -31,5 +31,5 @@ void Material::Draw(RenderManager& renderMng, CbMatrix& cbMat)
 
 void Material::Begin(void)
 {
-	materialBase_->SetTransform(owner_->GetTransform());
+	//materialBase_->SetTransform(owner_->GetTransform());
 }

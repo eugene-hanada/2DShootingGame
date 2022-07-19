@@ -4,7 +4,6 @@
 
 Object::Object(Dx12Wrapper& dx12)
 {
-	transform_ = std::make_shared<Transform>(dx12);
 }
 
 Object::~Object()

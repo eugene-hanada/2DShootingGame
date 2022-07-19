@@ -5,7 +5,7 @@
 VsOutput main(VsInput input)
 {
 	VsOutput output;
-	output.pos = mul(transMat[0],input.pos);
+	output.pos = mul(transMat[input.no], input.pos);
 	output.svPos = mul(rtMat, output.pos);
 	output.uv = input.uv;
 	return output;

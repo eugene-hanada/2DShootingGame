@@ -6,5 +6,6 @@ enum class ComponentID
 	Behavior,
 	Collider,
 	Render,
+	Animator,
 };
 
