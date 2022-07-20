@@ -26,7 +26,7 @@ public:
 	void End(void);
 
 	// 後でコンセプトに置き換えとけ
-	template<class T>
+	template<class T = Component>
 	ComponentWkPtr<T> GetCcomponent(ComponentID id)
 	{
 		if (componentMap_.contains(id))
@@ -42,6 +42,7 @@ private:
 	Math::Vector2 pos_;
 
 	friend class DefaultRender;
+	friend class AnimationRender;
 	friend class PlayerBehavior;
 };
 

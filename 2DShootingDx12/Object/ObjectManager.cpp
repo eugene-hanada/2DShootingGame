@@ -50,3 +50,14 @@ void ObjectManager::Draw(RenderManager& renderMng, CbMatrix& cbMat)
 	texSheetRender_->Update();
 	texSheetRender_->Draw(cbMat);
 }
+
+void ObjectManager::AddAnimationRender(Object& obj)
+{
+	
+	obj.AddComponent(std::move(animeRenderPool_.back()));
+	animeRenderPool_.pop_back();
+}
+
+void ObjectManager::RemoveAnimationRender(Object& obj)
+{
+}

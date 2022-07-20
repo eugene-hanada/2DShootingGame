@@ -6,11 +6,10 @@ class Animator :
 public:
     Animator();
     ~Animator();
-
+    const int GetIdx(void) const noexcept;
 private:
     void Begin(void) final;
     void Update(void) final;
-    void Begin(void) final;
     const ComponentID GetID(void) const noexcept final { return ComponentID::Animator; }
 };
 

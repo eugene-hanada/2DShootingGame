@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="common\AnimationData.cpp" />
     <ClCompile Include="Component\Animator\Animator.cpp" />
     <ClCompile Include="Component\Render\AnimationRender.cpp" />
     <ClCompile Include="Component\Render\DefaultRender.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="common\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="common\AnimationData.h" />
     <ClInclude Include="Component\Animator\Animator.h" />
     <ClInclude Include="Component\Render\AnimationRender.h" />
     <ClInclude Include="Component\Render\DefaultRender.h" />
