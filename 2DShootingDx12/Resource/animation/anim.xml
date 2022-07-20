@@ -1,0 +1,41 @@
+<root>
+<AnimationData Name="ship">
+	<Animation Name="Non" loop="-1">
+		<Data>4,0.2</Data>
+		<Data>5,0.2</Data>
+	</Animation>
+</AnimationData>
+<AnimationData Name="expm">
+	<Animation Name="exp" loop="1">
+		<Data>0,0.2</Data>
+		<Data>1,0.2</Data>
+		<Data>2,0.2</Data>
+		<Data>3,0.2</Data>
+		<Data>4,0.2</Data>
+		<Data>5,0.2</Data>
+		<Data>6,0.2</Data>
+		<Data>7,0.2</Data>
+		<Data>8,0.2</Data>
+		<Data>9,0.2</Data>
+		<Data>10,0.2</Data>
+		<Data>11,0.2</Data>
+		<Data>12,0.2</Data>
+		<Data>13,0.2</Data>
+	</Animation>
+</AnimationData>
+<AnimationData Name="exps">
+	<Animation Name="exp" loop="1">
+		<Data>0,0.2</Data>
+		<Data>1,0.2</Data>
+		<Data>2,0.2</Data>
+		<Data>3,0.2</Data>
+		<Data>4,0.2</Data>
+	</Animation>
+</AnimationData>
+<AnimationData Name="enemy">
+	<Animation Name="Non" loop="-1">
+		<Data>0,0.2</Data>
+		<Data>1,0.2</Data>
+	</Animation>
+</AnimationData>
+</root>
