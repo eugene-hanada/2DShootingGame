@@ -4,6 +4,10 @@
 		<Data>4,0.2</Data>
 		<Data>5,0.2</Data>
 	</Animation>
+	<Animation Name="Test" loop="-1">
+		<Data>2,0.2</Data>
+		<Data>3,0.2</Data>
+	</Animation>
 </AnimationData>
 <AnimationData Name="expm">
 	<Animation Name="exp" loop="1">
