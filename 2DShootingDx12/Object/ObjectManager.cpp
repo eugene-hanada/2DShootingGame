@@ -60,4 +60,5 @@ void ObjectManager::AddAnimationRender(Object& obj)
 
 void ObjectManager::RemoveAnimationRender(Object& obj)
 {
+	animeRenderPool_.emplace_back(obj.RemoveComponent(ComponentID::Render));
 }
