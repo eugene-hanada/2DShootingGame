@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "ConvertAnimationData": {
+      "commandName": "Project",
+      "commandLineArgs": "./anim.xml ./anim.data"
+    },
+    "プロファイル 1": {
+      "commandName": "Project",
+      "commandLineArgs": "./anim.xml ./anim.data"
+    }
+  }
+}

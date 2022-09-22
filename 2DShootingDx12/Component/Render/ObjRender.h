@@ -16,6 +16,10 @@ public:
 	{
 		imgKey_ = imgKey;
 	}
+	const std::string& GetImgKey(void) const
+	{
+		return imgKey_;
+	}
 protected:
 	std::string imgKey_;
 private:

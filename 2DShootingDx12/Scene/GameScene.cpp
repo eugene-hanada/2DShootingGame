@@ -5,6 +5,7 @@
 #include "../Component/Transform.h"
 #include "../Object/ObjectManager.h"
 #include "../GameSystem/Input/InputSystem.h"
+#include "../common/AnimationData.h"
 #include "GameScene.h"
 
 #include "../common/TextureData.h"
@@ -16,7 +17,8 @@ GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12
 	textureData_ = std::make_shared<TextureData>(dx12_);
 	textureData_->Load(L"Resource/image/texture.tdat");
 	objManager_ = std::make_unique<ObjectManager>(textureData_,input_,dx12_);
-
+	animData_ = std::make_shared<AnimationData>();
+	animData_->Load("Resource/animation/anim.adat");
 }
 
 GameScene::~GameScene()

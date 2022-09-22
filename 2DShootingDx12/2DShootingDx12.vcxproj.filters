@@ -132,10 +132,10 @@
     <ClCompile Include="Component\Render\AnimationRender.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Animator\Animator.cpp">
+    <ClCompile Include="common\AnimationData.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="common\AnimationData.cpp">
+    <ClCompile Include="Component\Animator\Animator.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -266,10 +266,10 @@
     <ClInclude Include="Component\Render\AnimationRender.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Component\Animator\Animator.h">
+    <ClInclude Include="common\AnimationData.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="common\AnimationData.h">
+    <ClInclude Include="Component\Animator\Animator.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

@@ -40,7 +40,7 @@ void PlayerBehavior::Update(void)
 	if (isMove)
 	{
 		moveVec.Normalize();
-		moveVec *= 2.0f;
+		moveVec *= 5.0f;
 		owner_->pos_ += moveVec;
 	}
 }
