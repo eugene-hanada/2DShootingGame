@@ -7,7 +7,8 @@
 #include "../GameSystem/Input/InputSystem.h"
 #include "../common/AnimationData.h"
 #include "GameScene.h"
-
+#include "../Application.h"
+#include "../common/Debug.h"
 #include "../common/TextureData.h"
 
 GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input) :
@@ -16,9 +17,11 @@ GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12
 	rt_->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	textureData_ = std::make_shared<TextureData>(dx12_);
 	textureData_->Load(L"Resource/image/texture.tdat");
-	objManager_ = std::make_unique<ObjectManager>(textureData_,input_,dx12_);
 	animData_ = std::make_shared<AnimationData>();
 	animData_->Load("Resource/animation/anim.adat");
+
+	objManager_ = std::make_unique<ObjectManager>(textureData_,animData_,input_,dx12_);
+	
 }
 
 GameScene::~GameScene()

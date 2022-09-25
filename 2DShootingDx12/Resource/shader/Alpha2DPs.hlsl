@@ -10,5 +10,6 @@ PsOutput main(VsOutput input)
 	PsOutput output;
 	output.svColor = tex.Sample(smp, input.uv);
 	output.svColor.a = val;
+
 	return output;
 }

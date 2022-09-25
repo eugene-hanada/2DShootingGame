@@ -20,21 +20,23 @@ void Object::AddComponent(ComponentShPtr&& component)
 Object::ComponentShPtr Object::RemoveComponent(ComponentID id)
 {
 	auto comp = std::move(componentMap_[id]);
+	comp->SetOwner(nullptr);
 	componentMap_.erase(id);
 	return std::move(comp);
 }
 
 
-void Object::Update(void)
+void Object::Update(ObjectManager& objectManager)
 {
 	for (auto& comp : componentMap_)
 	{
-		comp.second->Update();
+		comp.second->Update(objectManager);
 	}
 }
 
-void Object::Begin(void)
+void Object::Begin(std::list<std::unique_ptr<Object>>::iterator thisItr)
 {
+	thisItr_ = thisItr;
 	for (auto& comp : componentMap_)
 	{
 		comp.second->Begin();

@@ -7,6 +7,7 @@
 class Component;
 class Transform;
 class Dx12Wrapper;
+class ObjectManager;
 
 class Object
 {
@@ -20,9 +21,9 @@ public:
 	~Object();
 	void AddComponent(ComponentShPtr&& component);
 	ComponentShPtr RemoveComponent(ComponentID id);
-	void Update(void);
+	void Update(ObjectManager& objectManager);
 
-	void Begin(void);
+	void Begin(std::list<std::unique_ptr<Object>>::iterator thisItr);
 	void End(void);
 
 	// 後でコンセプトに置き換えとけ
@@ -39,10 +40,13 @@ public:
 
 private:
 	std::unordered_map<ComponentID, ComponentShPtr> componentMap_;
+	std::list<std::unique_ptr<Object>>::iterator thisItr_;
 	Math::Vector2 pos_;
 
 	friend class DefaultRender;
 	friend class AnimationRender;
 	friend class PlayerBehavior;
+	friend class NormalBullet;
+	friend class BulletFactory;
 };
 

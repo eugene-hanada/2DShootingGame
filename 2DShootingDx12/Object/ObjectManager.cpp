@@ -6,16 +6,19 @@
 #include "../GameSystem/Dx12/Render/TextureSheetRender.h"
 #include "../common/TextureData.h"
 #include "../Component/Render/DefaultRender.h"
+#include "../Component/Render/AnimationRender.h"
+#include "../Component/Animator/Animator.h"
 #include "ObjectManager.h"
 
-ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
+ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::shared_ptr< AnimationData>& animData, std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
 {
-	auto& p = objList_.emplace_back(std::make_unique<Object>(dx12));
+	auto& p = objList_.emplace_front(std::make_unique<Object>(dx12));
 	p->AddComponent(std::make_unique<PlayerBehavior>(input));
-	
-	p->AddComponent(std::make_shared<DefaultRender>());
-	p->GetCcomponent<ObjRender>(ComponentID::Render).lock()->SetImgKey("ship");
-	p->Begin();
+	p->AddComponent(std::make_unique<Animator>(animData));
+	p->GetCcomponent<Animator>(ComponentID::Animator).lock()->SetState("Non");
+	p->AddComponent(std::make_shared<AnimationRender>());
+	p->GetCcomponent< AnimationRender>(ComponentID::Render).lock()->SetImgKey("ship");
+	p->Begin(objList_.begin());
 
 	
 	texSheetRender_ = std::make_unique< TextureSheetRender>("texture.png", dx12, textureData, 256);
@@ -33,7 +36,7 @@ void ObjectManager::Update(void)
 {
 	for (auto& obj : objList_)
 	{
-		obj->Update();
+		obj->Update(*this);
 	}
 }
 
@@ -51,14 +54,18 @@ void ObjectManager::Draw(RenderManager& renderMng, CbMatrix& cbMat)
 	texSheetRender_->Draw(cbMat);
 }
 
-void ObjectManager::AddAnimationRender(Object& obj)
+void ObjectManager::AddObject(std::unique_ptr<Object>&& object)
 {
-	
-	obj.AddComponent(std::move(animeRenderPool_.back()));
-	animeRenderPool_.pop_back();
+	objList_.emplace_front(std::move(object));
+	auto itr = objList_.begin();
+	(*itr)->Begin(itr);
 }
 
-void ObjectManager::RemoveAnimationRender(Object& obj)
+std::unique_ptr<Object> ObjectManager::RemovObjecte(std::list<std::unique_ptr<Object>>::iterator itr)
 {
-	animeRenderPool_.emplace_back(obj.RemoveComponent(ComponentID::Render));
+	auto obj = std::move(*itr);
+	(*itr)->End();
+	objList_.erase(itr);
+	return std::move(obj);
 }
+

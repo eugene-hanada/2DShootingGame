@@ -1,12 +1,28 @@
 <root>
 <AnimationData Name="ship">
 	<Animation Name="Non" loop="-1">
-		<Data>4,0.2</Data>
-		<Data>5,0.2</Data>
+		<Data>4,0.05</Data>
+		<Data>5,0.05</Data>
 	</Animation>
-	<Animation Name="Test" loop="-1">
-		<Data>2,0.2</Data>
+	<Animation Name="TiltLeft" loop="1">
 		<Data>3,0.2</Data>
+		<Data>2,0.2</Data>
+		<Data>1,0.2</Data>
+		<Data>0,0.05</Data>
+	</Animation>
+	<Animation Name="Left" loop="-1">
+		<Data>1,0.05</Data>
+		<Data>0,0.05</Data>
+	</Animation>
+	<Animation Name="TiltRight" loop="1">
+		<Data>6,0.1</Data>
+		<Data>7,0.1</Data>
+		<Data>8,0.1</Data>
+		<Data>9,0.1</Data>
+	</Animation>
+	<Animation Name="Right" loop="-1">
+		<Data>8,0.05</Data>
+		<Data>9,0.05</Data>
 	</Animation>
 </AnimationData>
 <AnimationData Name="expm">

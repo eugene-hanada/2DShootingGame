@@ -2,6 +2,7 @@
 #include "../Animator/Animator.h"
 #include "../../GameSystem/Dx12/Render/TextureSheetRender.h"
 #include "AnimationRender.h"
+#include "../../common/Debug.h"
 
 AnimationRender::AnimationRender()
 {
@@ -15,7 +16,7 @@ void AnimationRender::Draw(TextureSheetRender& texSheetRender)
 {
 	if (!animator_.expired())
 	{
-		//texSheetRender.Draw(owner_->pos_, imgKey_, animator_.lock()->GetIdx());
+		texSheetRender.Draw(owner_->pos_, imgKey_, animator_.lock()->GetIdx());
 	}
 }
 

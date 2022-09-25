@@ -8,6 +8,8 @@
 #include "../Resource/CbMatrix.h"
 #include "TextureSheetRender.h"
 
+#include "../../../common/Debug.h"
+
 TextureSheetRender::TextureSheetRender(const std::string& imgKey, Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum) :
 	dx12_{dx12}, maxNum_{maxNum}, texData_{texData}, imgKey_{imgKey}
 {
@@ -45,6 +47,9 @@ void TextureSheetRender::Draw(const Math::Vector2& pos, const std::string& key, 
 	auto& [texD, size] = texData_->GetData(imgKey_);
 	auto& data = texD.at(key)[idx];
 
+	//DebugLog(data.pos.x, ":", data.pos.y, "a=", idx);
+	//DebugLog(idx);
+	
 	// ç∂è„
 	vertices_[nowIdx].pos = 0.0f;
 	vertices_[nowIdx].uv = data.pos;
