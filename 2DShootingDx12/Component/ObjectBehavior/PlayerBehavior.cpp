@@ -2,11 +2,13 @@
 #include "../Transform.h"
 #include "../../Object/Object.h"
 #include "../Animator/Animator.h"
+#include "../../Object/ObjectFactory/BulletFactory.h"
 #include "PlayerBehavior.h"
 
 PlayerBehavior::PlayerBehavior(std::shared_ptr<InputSystem>& input) :
 	input_{input}
 {
+	bulletFactory_ = std::make_unique<BulletFactory>();
 }
 
 PlayerBehavior::~PlayerBehavior()
@@ -77,6 +79,11 @@ void PlayerBehavior::Update(ObjectManager& objectManager)
 	}
 
 	(this->*moveStateFunc_)();
+
+	if (input_->IsPressed(InputID::Shot1))
+	{
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_, moveVec);
+	}
 }
 
 void PlayerBehavior::Begin(void)

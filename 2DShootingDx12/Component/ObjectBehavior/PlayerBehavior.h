@@ -4,6 +4,7 @@
 
 class InputSystem;
 class Animator;
+class BulletFactory;
 
 class PlayerBehavior :
 	public ObjectBehavior
@@ -34,5 +35,6 @@ private:
 	std::shared_ptr<InputSystem> input_;
 	std::weak_ptr<Animator> animator_;
 	MoveState state_;
+	std::unique_ptr< BulletFactory> bulletFactory_;
 };
 

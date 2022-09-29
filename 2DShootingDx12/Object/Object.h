@@ -17,14 +17,14 @@ class Object
 	using ComponentWkPtr = std::weak_ptr<T>;
 
 public:
-	Object(Dx12Wrapper& dx12);
+	Object();
 	~Object();
 	void AddComponent(ComponentShPtr&& component);
 	ComponentShPtr RemoveComponent(ComponentID id);
 	void Update(ObjectManager& objectManager);
 
-	void Begin(std::list<std::unique_ptr<Object>>::iterator thisItr);
-	void End(void);
+	void Begin(std::list<std::unique_ptr<Object>>::iterator itr);
+	void End(ObjectManager& objectManager);
 
 	// 後でコンセプトに置き換えとけ
 	template<class T = Component>
@@ -37,12 +37,21 @@ public:
 		return ComponentWkPtr<T>{};
 	}
 
+	void Destory(void)
+	{
+		isActive_ = false;
+	}
+
+	const bool IsActive(void) const
+	{
+		return isActive_;
+	}
 
 private:
 	std::unordered_map<ComponentID, ComponentShPtr> componentMap_;
-	std::list<std::unique_ptr<Object>>::iterator thisItr_;
+	std::list<std::unique_ptr<Object>>::iterator itr_;
 	Math::Vector2 pos_;
-
+	bool isActive_;
 	friend class DefaultRender;
 	friend class AnimationRender;
 	friend class PlayerBehavior;

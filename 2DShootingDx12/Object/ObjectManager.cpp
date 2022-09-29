@@ -12,7 +12,7 @@
 
 ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::shared_ptr< AnimationData>& animData, std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
 {
-	auto& p = objList_.emplace_front(std::make_unique<Object>(dx12));
+	auto& p = objList_.emplace_front(std::make_unique<Object>());
 	p->AddComponent(std::make_unique<PlayerBehavior>(input));
 	p->AddComponent(std::make_unique<Animator>(animData));
 	p->GetCcomponent<Animator>(ComponentID::Animator).lock()->SetState("Non");
@@ -26,10 +26,6 @@ ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::sha
 
 ObjectManager::~ObjectManager()
 {
-	for (auto& obj : objList_)
-	{
-		obj->End();
-	}
 }
 
 void ObjectManager::Update(void)
@@ -37,6 +33,15 @@ void ObjectManager::Update(void)
 	for (auto& obj : objList_)
 	{
 		obj->Update(*this);
+	}
+
+	auto itr = std::find_if(objList_.begin(), objList_.end(), [](auto& obj) {
+		return !obj->IsActive();
+		});
+	if (itr != objList_.end())
+	{
+		(*itr)->End(*this);
+		objList_.erase(itr);
 	}
 }
 
@@ -64,8 +69,8 @@ void ObjectManager::AddObject(std::unique_ptr<Object>&& object)
 std::unique_ptr<Object> ObjectManager::RemovObjecte(std::list<std::unique_ptr<Object>>::iterator itr)
 {
 	auto obj = std::move(*itr);
-	(*itr)->End();
 	objList_.erase(itr);
 	return std::move(obj);
 }
+
 

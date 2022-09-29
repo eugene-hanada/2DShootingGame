@@ -2,7 +2,7 @@
 #include "../Component/Transform.h"
 #include "Object.h"
 
-Object::Object(Dx12Wrapper& dx12)
+Object::Object()
 {
 }
 
@@ -14,7 +14,7 @@ void Object::AddComponent(ComponentShPtr&& component)
 {
 	bool rtn =component->SetOwner(this);
 	rtn =  (componentMap_.try_emplace(component->GetID(), std::move(component))).second;
-	
+	isActive_ = false;
 }
 
 Object::ComponentShPtr Object::RemoveComponent(ComponentID id)
@@ -34,19 +34,21 @@ void Object::Update(ObjectManager& objectManager)
 	}
 }
 
-void Object::Begin(std::list<std::unique_ptr<Object>>::iterator thisItr)
+void Object::Begin(std::list<std::unique_ptr<Object>>::iterator itr)
 {
-	thisItr_ = thisItr;
+	isActive_ = true;
+	itr_ = itr;
 	for (auto& comp : componentMap_)
 	{
 		comp.second->Begin();
 	}
 }
 
-void Object::End(void)
+void Object::End(ObjectManager& objectManager)
 {
+	isActive_ = false;
 	for (auto& comp : componentMap_)
 	{
-		comp.second->End();
+		comp.second->End(objectManager);
 	}
 }

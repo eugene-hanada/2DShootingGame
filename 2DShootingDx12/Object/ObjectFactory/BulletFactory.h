@@ -13,7 +13,7 @@ public:
 	using ComponentShPtr = std::shared_ptr<Component>;
 	BulletFactory();
 	void CreateNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec);
-	void DeleteNormalBullet(Object& object, ObjectManager& objectManager);
+	void DeleteNormalBullet(Object& obj,ObjectManager& objectManager);
 private:
 	std::list<ComponentShPtr> normalShotBehaviorList_;
 	std::list<ComponentShPtr> renderList_;

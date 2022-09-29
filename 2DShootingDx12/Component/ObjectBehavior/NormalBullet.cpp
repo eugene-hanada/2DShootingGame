@@ -3,6 +3,7 @@
 #include "../../Object/ObjectManager.h"
 #include "../../Application.h"
 #include "../../Object/ObjectFactory/BulletFactory.h"
+#include "../../GameSystem/Window.h"
 #include "NormalBullet.h"
 
 NormalBullet::NormalBullet(BulletFactory& factory) :
@@ -26,10 +27,16 @@ void NormalBullet::SetSpeed(float speed)
 
 void NormalBullet::Update(ObjectManager& objectManager)
 {
-	owner_->pos_ += moveVec_ * (moveVec_ * Time.GetDeltaTime<float>());
+	owner_->pos_ += moveVec_ * (speed_ * Time.GetDeltaTime<float>());
+	if (owner_->pos_.x < 0 || owner_->pos_.x > App.GetWindow().GetSize<float>().x || owner_->pos_.y < 0 || owner_->pos_.y > App.GetWindow().GetSize<float>().y)
+	{
+		owner_->Destory();
+	}
 }
 
-void NormalBullet::Destory(ObjectManager& objectManager)
+void NormalBullet::End(ObjectManager& objectManager)
 {
-	factoy_.DeleteNormalBullet(*owner_, objectManager);
+	factoy_.DeleteNormalBullet(*owner_,objectManager);
 }
+
+

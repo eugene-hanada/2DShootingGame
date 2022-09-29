@@ -14,7 +14,7 @@ public:
 	void SetSpeed(float speed);
 private:
 	void Update(ObjectManager& objectManager) final;
-	void Destory(ObjectManager& objectManager);
+	void End(ObjectManager& objectManager) final;
 	BulletFactory& factoy_;
 	Math::Vector2 moveVec_;
 	float speed_;

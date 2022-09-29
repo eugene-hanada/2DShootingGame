@@ -25,7 +25,7 @@ void AnimationRender::Begin(void)
 	animator_ = owner_->GetCcomponent<Animator>(ComponentID::Animator);
 }
 
-void AnimationRender::End(void)
+void AnimationRender::End(ObjectManager& objectManager)
 {
 	animator_.reset();
 }
