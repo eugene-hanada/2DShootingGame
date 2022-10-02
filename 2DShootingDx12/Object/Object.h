@@ -23,8 +23,8 @@ public:
 	ComponentShPtr RemoveComponent(ComponentID id);
 	void Update(ObjectManager& objectManager);
 
-	void Begin(std::list<std::unique_ptr<Object>>::iterator itr);
-	void End(ObjectManager& objectManager);
+	void Begin(void);
+	void End(std::unique_ptr<Object>&& obj);
 
 	// 後でコンセプトに置き換えとけ
 	template<class T = Component>
@@ -49,7 +49,6 @@ public:
 
 private:
 	std::unordered_map<ComponentID, ComponentShPtr> componentMap_;
-	std::list<std::unique_ptr<Object>>::iterator itr_;
 	Math::Vector2 pos_;
 	bool isActive_;
 	friend class DefaultRender;

@@ -94,7 +94,7 @@ void TextureSheetRender::Draw(const Math::Vector2& pos, const std::string& key, 
 
 	DirectX::XMStoreFloat4x4(
 		&mat_->matrices_[nowNum_],
-		DirectX::XMMatrixTranslation(data.wh.x / 2.0f, data.wh.y / 2.0f, 0.0f)*
+		DirectX::XMMatrixTranslation(-(data.wh.x / 2.0f), -(data.wh.y / 2.0f), 0.0f)*
 		DirectX::XMMatrixTranslation(pos.x, pos.y, 0.0f) 
 		
 		

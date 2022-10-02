@@ -29,15 +29,28 @@ void BulletFactory::CreateNormalBullet(ObjectManager& objectManager, const Math:
 	{
 		return;
 	}
+	CreateNormalBullet(objectManager, pos + (Math::rightVector2<float> * 5.0f));
+	CreateNormalBullet(objectManager, pos + (Math::leftVector2<float> *5.0f));
+}
+
+void BulletFactory::DeleteNormalBullet(std::unique_ptr<Object>&& obj)
+{
+	normalShotBehaviorList_.emplace_back(std::move(obj->RemoveComponent(ComponentID::Behavior)));
+	renderList_.emplace_back(std::move(obj->RemoveComponent(ComponentID::Render)));
+	objPool_.emplace_back(std::move(obj));
+}
+
+void BulletFactory::CreateNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos)
+{
 	// オブジェクトクラスを取得
 	auto obj = std::move(objPool_.front());
 	objPool_.pop_front();
-	
+
 	// ビヘイビアクラスを取る
 	auto behavior = std::static_pointer_cast<NormalBullet>(std::move(normalShotBehaviorList_.front()));
 	normalShotBehaviorList_.pop_front();
 	behavior->SetMoveVec(Math::upVector2<float>);
-	behavior->SetSpeed(120.0f);
+	behavior->SetSpeed(160.0f);
 	obj->AddComponent(std::move(behavior));
 
 	// レンダークラスをセット
@@ -48,14 +61,4 @@ void BulletFactory::CreateNormalBullet(ObjectManager& objectManager, const Math:
 	obj->AddComponent(std::move(render));
 	obj->pos_ = pos;
 	objectManager.AddObject(std::move(obj));
-}
-
-void BulletFactory::DeleteNormalBullet(Object& obj, ObjectManager& objectManager)
-{
-	/*normalShotBehaviorList_.emplace_back(std::move((*itr)->RemoveComponent(ComponentID::Behavior)));
-	renderList_.emplace_back(std::move((*itr)->RemoveComponent(ComponentID::Render)));
-	std::unique_ptr<Object> obj;
-	obj.swap(*itr);*/
-
-	//objPool_.emplace_back(std::move(obj));
 }

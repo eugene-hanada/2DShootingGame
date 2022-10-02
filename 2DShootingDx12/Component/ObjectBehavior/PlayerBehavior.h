@@ -26,9 +26,19 @@ private:
 	void Update(ObjectManager& objectManager) final;
 	void Begin(void) final;
 	
+	// ˆÚ“®ˆ—
+	void Move(void);
+
+	// ¶ˆÚ“®‚Ìˆ—
 	void TiltLeft(void);
+
+	// ‰EˆÚ“®‚Ìˆ—
 	void TiltRight(void);
+
+	// ‚»‚Ì‘¼ˆÚ“®‚Ìˆ—
 	void Other(void);
+
+	void Shot(ObjectManager& objectManager);
 
 	void (PlayerBehavior::* moveStateFunc_)(void);
 
@@ -36,5 +46,6 @@ private:
 	std::weak_ptr<Animator> animator_;
 	MoveState state_;
 	std::unique_ptr< BulletFactory> bulletFactory_;
+	float shotTime_;
 };
 

@@ -18,7 +18,7 @@ ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::sha
 	p->GetCcomponent<Animator>(ComponentID::Animator).lock()->SetState("Non");
 	p->AddComponent(std::make_shared<AnimationRender>());
 	p->GetCcomponent< AnimationRender>(ComponentID::Render).lock()->SetImgKey("ship");
-	p->Begin(objList_.begin());
+	p->Begin();
 
 	
 	texSheetRender_ = std::make_unique< TextureSheetRender>("texture.png", dx12, textureData, 256);
@@ -40,8 +40,7 @@ void ObjectManager::Update(void)
 		});
 	if (itr != objList_.end())
 	{
-		(*itr)->End(*this);
-		objList_.erase(itr);
+		(*itr)->End(std::move(*itr));
 	}
 }
 
@@ -63,7 +62,7 @@ void ObjectManager::AddObject(std::unique_ptr<Object>&& object)
 {
 	objList_.emplace_front(std::move(object));
 	auto itr = objList_.begin();
-	(*itr)->Begin(itr);
+	(*itr)->Begin();
 }
 
 std::unique_ptr<Object> ObjectManager::RemovObjecte(std::list<std::unique_ptr<Object>>::iterator itr)

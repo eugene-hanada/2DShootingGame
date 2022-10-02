@@ -4,6 +4,8 @@
 #include "../Animator/Animator.h"
 #include "../../Object/ObjectFactory/BulletFactory.h"
 #include "PlayerBehavior.h"
+#include "../../Application.h"
+#include "../../common/Debug.h"
 
 PlayerBehavior::PlayerBehavior(std::shared_ptr<InputSystem>& input) :
 	input_{input}
@@ -17,13 +19,27 @@ PlayerBehavior::~PlayerBehavior()
 
 void PlayerBehavior::Update(ObjectManager& objectManager)
 {
+	Move();
+	Shot(objectManager);
+}
+
+void PlayerBehavior::Begin(void)
+{
+	animator_ = owner_->GetCcomponent<Animator>(ComponentID::Animator);
+	state_ = MoveState::Other;
+	moveStateFunc_ = &PlayerBehavior::Other;
+	shotTime_ = 0.0f;
+}
+
+void PlayerBehavior::Move(void)
+{
 	Math::Vector2 moveVec;
 	bool isMove = false;
 	if (input_->IsPressedStay(InputID::Up))
 	{
 		state_ = MoveState::Other;
 		isMove = true;
-		moveVec += Math::upVector2<float> * 1.0f;
+		moveVec += Math::upVector2<float> *1.0f;
 	}
 	if (input_->IsPressedStay(InputID::Down))
 	{
@@ -45,7 +61,7 @@ void PlayerBehavior::Update(ObjectManager& objectManager)
 				moveStateFunc_ = &PlayerBehavior::TiltRight;
 			}
 		}
-		
+
 	}
 	if (input_->IsPressedStay(InputID::Left))
 	{
@@ -79,18 +95,6 @@ void PlayerBehavior::Update(ObjectManager& objectManager)
 	}
 
 	(this->*moveStateFunc_)();
-
-	if (input_->IsPressed(InputID::Shot1))
-	{
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_, moveVec);
-	}
-}
-
-void PlayerBehavior::Begin(void)
-{
-	animator_ = owner_->GetCcomponent<Animator>(ComponentID::Animator);
-	state_ = MoveState::Other;
-	moveStateFunc_ = &PlayerBehavior::Other;
 }
 
 void PlayerBehavior::TiltLeft(void)
@@ -122,6 +126,16 @@ void PlayerBehavior::TiltRight(void)
 void PlayerBehavior::Other(void)
 {
 	// “Á‚É‰½‚à‚µ‚È‚¢
+}
+
+void PlayerBehavior::Shot(ObjectManager& objectManager)
+{
+	shotTime_ -= Time.GetDeltaTime<float>();
+	if (input_->IsPressedStay(InputID::Shot1) && shotTime_ <= 0.0f)
+	{
+		shotTime_ = 0.15f;
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_, Math::zeroVector2<float>);
+	}
 }
 
 

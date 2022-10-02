@@ -1,5 +1,6 @@
 #include "../Component/Component.h"
 #include "../Component/Transform.h"
+#include "../Component/ObjectBehavior/ObjectBehavior.h"
 #include "Object.h"
 
 Object::Object()
@@ -34,21 +35,22 @@ void Object::Update(ObjectManager& objectManager)
 	}
 }
 
-void Object::Begin(std::list<std::unique_ptr<Object>>::iterator itr)
+void Object::Begin(void)
 {
 	isActive_ = true;
-	itr_ = itr;
 	for (auto& comp : componentMap_)
 	{
 		comp.second->Begin();
 	}
 }
 
-void Object::End(ObjectManager& objectManager)
+void Object::End(std::unique_ptr<Object>&& obj)
 {
 	isActive_ = false;
 	for (auto& comp : componentMap_)
 	{
-		comp.second->End(objectManager);
+		comp.second->End();
 	}
+	std::static_pointer_cast<ObjectBehavior>(componentMap_[ComponentID::Behavior])->Destory(std::move(obj));
+
 }

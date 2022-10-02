@@ -6,6 +6,7 @@ class ObjectBehavior :
 public:
     ObjectBehavior();
     virtual ~ObjectBehavior();
+    virtual void Destory(std::unique_ptr<Object>&& obj){}
 private:
     const ComponentID GetID(void) const noexcept final { return ComponentID::Behavior; }
 };

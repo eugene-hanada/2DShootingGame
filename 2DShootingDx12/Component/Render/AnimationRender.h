@@ -13,7 +13,7 @@ public:
 private:
 	void Draw(TextureSheetRender& texSheetRender) final;
 	void Begin(void) final;
-	void End(ObjectManager& objectManager) final;
+	void End(void) final;
 	std::weak_ptr<Animator> animator_;
 };
 

@@ -34,9 +34,10 @@ void NormalBullet::Update(ObjectManager& objectManager)
 	}
 }
 
-void NormalBullet::End(ObjectManager& objectManager)
+
+void NormalBullet::Destory(std::unique_ptr<Object>&& obj)
 {
-	factoy_.DeleteNormalBullet(*owner_,objectManager);
+	factoy_.DeleteNormalBullet(std::move(obj));
 }
 
 
