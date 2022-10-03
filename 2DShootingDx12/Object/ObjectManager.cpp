@@ -41,6 +41,7 @@ void ObjectManager::Update(void)
 	if (itr != objList_.end())
 	{
 		(*itr)->End(std::move(*itr));
+		objList_.erase(itr);
 	}
 }
 

@@ -133,7 +133,7 @@ void PlayerBehavior::Shot(ObjectManager& objectManager)
 	shotTime_ -= Time.GetDeltaTime<float>();
 	if (input_->IsPressedStay(InputID::Shot1) && shotTime_ <= 0.0f)
 	{
-		shotTime_ = 0.15f;
+		shotTime_ = 0.2f;
 		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_, Math::zeroVector2<float>);
 	}
 }
