@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Component\Collider\Collider.cpp" />
     <ClCompile Include="Component\ObjectBehavior\NormalBullet.cpp" />
     <ClCompile Include="Object\ObjectFactory\BulletFactory.cpp" />
     <ClCompile Include="common\AnimationData.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="common\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component\Collider\Collider.h" />
     <ClInclude Include="Component\ObjectBehavior\NormalBullet.h" />
     <ClInclude Include="Object\ObjectFactory\BulletFactory.h" />
     <ClInclude Include="common\AnimationData.h" />
