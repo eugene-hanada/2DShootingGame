@@ -12,5 +12,16 @@ Collider::~Collider()
 
 void Collider::Begin(void)
 {
-	auto b = owner_->GetCcomponent<ObjectBehavior>(ComponentID::Behavior);
+	behavior_ = owner_->GetCcomponent<ObjectBehavior>(ComponentID::Behavior);
+}
+
+void Collider::OnHit(Collider& collider)
+{
+	if (behavior_.expired())
+	{
+		if (behavior_.lock()->IsActive())
+		{
+			behavior_.lock()->OnHit(collider);
+		}
+	}
 }

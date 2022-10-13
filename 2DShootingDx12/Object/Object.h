@@ -47,6 +47,10 @@ public:
 		return isActive_;
 	}
 
+	const Math::Vector2& GetPos(void) const&
+	{
+		return pos_;
+	}
 private:
 	std::unordered_map<ComponentID, ComponentShPtr> componentMap_;
 	Math::Vector2 pos_;
