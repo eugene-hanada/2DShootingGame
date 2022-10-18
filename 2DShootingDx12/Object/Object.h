@@ -60,5 +60,6 @@ private:
 	friend class PlayerBehavior;
 	friend class NormalBullet;
 	friend class BulletFactory;
+	friend class EnemyBehavior;
 };
 

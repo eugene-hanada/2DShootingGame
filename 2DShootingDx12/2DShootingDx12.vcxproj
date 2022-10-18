@@ -152,6 +152,8 @@
     <ClCompile Include="Component\Collider\CircleCollider.cpp" />
     <ClCompile Include="Component\Collider\Collider.cpp" />
     <ClCompile Include="Component\ObjectBehavior\NormalBullet.cpp" />
+    <ClCompile Include="Component\ObjectBehavior\EnemyBehavior.cpp" />
+    <ClCompile Include="Object\ObjectFactory\EnemyFactory.cpp" />
     <ClCompile Include="Object\ObjectFactory\BulletFactory.cpp" />
     <ClCompile Include="common\AnimationData.cpp" />
     <ClCompile Include="Component\Animator\Animator.cpp" />
@@ -194,11 +196,14 @@
     <ClCompile Include="common\TextureData.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\TextureSheetRender.cpp" />
     <ClCompile Include="common\Utility.cpp" />
+    <ClCompile Include="Component\ObjectBehavior\StageBehavior.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component\Collider\CircleCollider.h" />
     <ClInclude Include="Component\Collider\Collider.h" />
     <ClInclude Include="Component\ObjectBehavior\NormalBullet.h" />
+    <ClInclude Include="Component\ObjectBehavior\EnemyBehavior.h" />
+    <ClInclude Include="Object\ObjectFactory\EnemyFactory.h" />
     <ClInclude Include="Object\ObjectFactory\BulletFactory.h" />
     <ClInclude Include="common\AnimationData.h" />
     <ClInclude Include="Component\Animator\Animator.h" />
@@ -244,6 +249,7 @@
     <ClInclude Include="common\TextureData.h" />
     <ClInclude Include="GameSystem\Dx12\Render\TextureSheetRender.h" />
     <ClInclude Include="common\Utility.h" />
+    <ClInclude Include="Component\ObjectBehavior\StageBehavior.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resource\shader\Alpha2DPs.hlsl">
