@@ -81,12 +81,73 @@ class PlayerBehavior{
 }
 
 ObjectBehavior <|-- PlayerBehavior
+PlayerBehavior -- BulletFactory
 
 class RenderTarget{
     -Resource rt_
     -Resource srv_
     -Resource screenMat_
 }
+
+class EnemyBehavior
+{
+    
+}
+
+ObjectBehavior <|-- EnemyBehavior
+
+class EnemyFactory
+{
+
+}
+
+EnemyBehavior -- EnemyFactory
+EnemyBehavior -- BulletFactory
+
+class EnemyMove
+{
+
+}
+
+EnemyBehavior <|-- EnemyMove
+
+class EnemyMoveToPos
+{
+
+}
+
+EnemyBehavior <|-- EnemyMoveToPos
+
+class 
+
+class NormalBulletBehavior
+{
+
+}
+
+
+NormalBulletBehavior -- BulletFactory
+ObjectBehavior <|-- NormalBulletBehavior
+
+class BulletFactory
+{
+
+}
+
+class EffectBehavior
+{
+
+}
+ObjectBehavior <|-- EffectBehavior
+
+class EffectFactory
+{
+
+}
+
+PlayerBehavior -- EffectFactory
+EnemyBehavior -- EffectFactory
+NormalBulletBehavior -- EffectFactory
 
 abstract class Resource{
     +ID3D12DescriptorHeap& DescriptorHeap(void)
