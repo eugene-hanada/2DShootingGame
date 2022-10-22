@@ -153,6 +153,7 @@
     <ClCompile Include="Component\Collider\Collider.cpp" />
     <ClCompile Include="Component\ObjectBehavior\NormalBullet.cpp" />
     <ClCompile Include="Component\ObjectBehavior\EnemyBehavior.cpp" />
+    <ClCompile Include="Component\ObjectBehavior\EnemyMoveToPos.cpp" />
     <ClCompile Include="Object\ObjectFactory\EnemyFactory.cpp" />
     <ClCompile Include="Object\ObjectFactory\BulletFactory.cpp" />
     <ClCompile Include="common\AnimationData.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="Component\Collider\Collider.h" />
     <ClInclude Include="Component\ObjectBehavior\NormalBullet.h" />
     <ClInclude Include="Component\ObjectBehavior\EnemyBehavior.h" />
+    <ClInclude Include="Component\ObjectBehavior\EnemyMoveToPos.h" />
     <ClInclude Include="Object\ObjectFactory\EnemyFactory.h" />
     <ClInclude Include="Object\ObjectFactory\BulletFactory.h" />
     <ClInclude Include="common\AnimationData.h" />

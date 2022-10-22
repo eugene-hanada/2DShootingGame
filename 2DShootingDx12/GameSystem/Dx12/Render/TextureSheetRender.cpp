@@ -40,7 +40,7 @@ TextureSheetRender::~TextureSheetRender()
 {
 }
 
-void TextureSheetRender::Draw(const Math::Vector2& pos, const std::string& key, int idx)
+void TextureSheetRender::Draw(const Math::Vector2& pos, const std::string& key,float rot, int idx)
 {
 	int nowIdx = nowNum_ * 4;
 	int idicIdx = nowNum_ * 6;
@@ -95,10 +95,21 @@ void TextureSheetRender::Draw(const Math::Vector2& pos, const std::string& key, 
 	DirectX::XMStoreFloat4x4(
 		&mat_->matrices_[nowNum_],
 		DirectX::XMMatrixTranslation(-(data.wh.x / 2.0f), -(data.wh.y / 2.0f), 0.0f)*
+		DirectX::XMMatrixRotationZ(rot) *
 		DirectX::XMMatrixTranslation(pos.x, pos.y, 0.0f) 
 		
 		
 	);
+
+	//DirectX::XMStoreFloat4x4(
+	//		&mat_->matrices_[nowNum_],
+	//		DirectX::XMMatrixTranslation(pos.x, pos.y, 0.0f)*
+	//		DirectX::XMMatrixRotationY(rot) *
+	//		DirectX::XMMatrixTranslation(-(data.wh.x / 2.0f), -(data.wh.y / 2.0f), 0.0f)
+	//		
+	//		
+	//	);
+
 	
 	/*DirectX::XMStoreFloat4x4(
 		&mat_->matrices_[nowNum_],

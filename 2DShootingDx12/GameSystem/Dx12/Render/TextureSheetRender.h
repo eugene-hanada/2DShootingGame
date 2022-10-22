@@ -24,7 +24,7 @@ class TextureSheetRender
 public:
 	TextureSheetRender(const std::string& imgKey,Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum);
 	virtual ~TextureSheetRender();
-	void Draw(const Math::Vector2& pos, const std::string& key, int idx = 0);
+	void Draw(const Math::Vector2& pos, const std::string& key, float rot = 0.0f,int idx = 0);
 	void Draw(const Math::Vector2& lt, const Math::Vector2& rt, const Math::Vector2& lb, const Math::Vector2& rb, const std::string& key, int idx = 0);
 	void Draw(CbMatrix& cbMat);
 	void Update(void);

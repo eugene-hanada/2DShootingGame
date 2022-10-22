@@ -133,7 +133,8 @@ void PlayerBehavior::Shot(ObjectManager& objectManager)
 	if (input_->IsPressedStay(InputID::Shot1) && shotTime_ <= 0.0f)
 	{
 		shotTime_ = 0.2f;
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_, Math::zeroVector2<float>);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> * 5.0f, Math::upVector2<float>, 180.0f);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
 	}
 }
 

@@ -90,5 +90,6 @@ private:
 	friend class NormalBullet;
 	friend class BulletFactory;
 	friend class EnemyBehavior;
+	friend class EnemyMoveToPos;
 };
 

@@ -12,11 +12,11 @@ class BulletFactory
 public:
 	using ComponentShPtr = std::shared_ptr<Component>;
 	BulletFactory();
-	void CreateNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec);
+	void CreateNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed);
 	void DeleteNormalBullet(std::unique_ptr<Object>&& obj);
 
-	void CreateEnemyNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec);
-	void DeleteEnemyNormalBullet(std::unique_ptr<Object>&& obj);
+	void CreateEnemyNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed);
+	
 private:
 	void CreateNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos);
 	std::list<ComponentShPtr> normalShotBehaviorList_;

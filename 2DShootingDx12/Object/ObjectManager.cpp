@@ -9,22 +9,27 @@
 #include "../Component/Render/AnimationRender.h"
 #include "../Component/Animator/Animator.h"
 #include "../Component/ObjectBehavior/StageBehavior.h"
-#include "../Component/Collider/Collider.h"
+#include "../Component/Collider/CircleCollider.h"
+#include "../Object/ObjectFactory/BulletFactory.h"
 #include "ObjectManager.h"
 
 ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::shared_ptr< AnimationData>& animData, std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
 {
+	auto bulletFactory = std::make_shared<BulletFactory>();
 	auto& p = objList_.emplace_front(std::make_unique<Object>());
-	p->AddComponent(std::make_unique<PlayerBehavior>(input));
+	p->AddComponent(std::make_unique<PlayerBehavior>(input, bulletFactory));
 	p->AddComponent(std::make_unique<Animator>(animData));
 	p->GetCcomponent<Animator>(ComponentID::Animator).lock()->SetState("Non");
 	p->AddComponent(std::make_shared<AnimationRender>());
 	p->GetCcomponent< AnimationRender>(ComponentID::Render).lock()->SetImgKey("ship");
+	p->AddComponent(std::make_shared<CircleCollider>());
+	p->GetCcomponent<CircleCollider>(ComponentID::Collider).lock()->SetRadius(10.0f);
+	p->SetID(ObjectID::Player);
 	p->Begin();
 
 	
 	auto& stage = objList_.emplace_front(std::make_unique<Object>());
-	stage->AddComponent(std::make_unique<StageBehavior>(animData));
+	stage->AddComponent(std::make_unique<StageBehavior>(animData, bulletFactory));
 	stage->Begin();
 
 	texSheetRender_ = std::make_unique< TextureSheetRender>("texture.png", dx12, textureData, 256);

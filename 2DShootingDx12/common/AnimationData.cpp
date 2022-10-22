@@ -4,7 +4,7 @@
 struct Header
 {
 	char sig[4];
-	int sum;
+	int num;
 };
 
 AnimationData::AnimationData()
@@ -20,10 +20,11 @@ bool AnimationData::Load(const std::filesystem::path& path)
 	}
 	Header h;
 	file.read(reinterpret_cast<char*>(&h), sizeof(h));
-	dataMap_.reserve(h.sum);
+	dataMap_.reserve(h.num);
 	
-	for (int i = 0; i < h.sum; i++)
+	for (int i = 0; i < h.num; i++)
 	{
+
 		std::string name;
 		int nameSize{0};
 		int stateCount{0};

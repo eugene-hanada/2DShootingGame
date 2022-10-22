@@ -16,7 +16,7 @@ void AnimationRender::Draw(TextureSheetRender& texSheetRender)
 {
 	if (!animator_.expired())
 	{
-		texSheetRender.Draw(owner_->pos_, imgKey_, animator_.lock()->GetIdx());
+		texSheetRender.Draw(owner_->pos_, imgKey_, rotation_,animator_.lock()->GetIdx());
 	}
 }
 

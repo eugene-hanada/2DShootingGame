@@ -7,12 +7,13 @@ class Component;
 class Object;
 class ObjectManager;
 class AnimationData;
+class BulletFactory;
 
 class EnemyFactory
 {
 	using ComponentShPtr = std::shared_ptr<Component>;
 public:
-	EnemyFactory(std::shared_ptr<AnimationData>& animData);
+	EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory);
 
 	void CreateMoveToPosEnemy(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end);
 	void DestoryMoveToPosEnemy(std::unique_ptr<Object>&& obj);

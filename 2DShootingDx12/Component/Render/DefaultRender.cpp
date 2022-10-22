@@ -12,5 +12,5 @@ DefaultRender::~DefaultRender()
 
 void DefaultRender::Draw(TextureSheetRender& texSheetRender)
 {
-	texSheetRender.Draw(owner_->pos_, imgKey_);
+	texSheetRender.Draw(owner_->pos_, imgKey_, rotation_);
 }

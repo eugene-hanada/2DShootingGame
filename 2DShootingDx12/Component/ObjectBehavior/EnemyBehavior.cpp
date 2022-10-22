@@ -7,23 +7,12 @@
 
 
 EnemyBehavior::EnemyBehavior(EnemyFactory& factory, std::shared_ptr< BulletFactory>& bulletFactory) :
-	factory_{factory}, hp_{0}, update_{nullptr}, bulletFactory_{ bulletFactory }
+	factory_{factory}, hp_{0}, bulletFactory_{ bulletFactory }, shotSpeed_{0.0f}, shotTimer_{0.0f}
 {
 }
 
-void EnemyBehavior::Update(ObjectManager& objectManager)
+EnemyBehavior::~EnemyBehavior()
 {
-	(this->*update_)(objectManager);
-}
-
-void EnemyBehavior::Destory(std::unique_ptr<Object>&& obj)
-{
-	factory_.DestoryMoveToPosEnemy(std::move(obj));
-}
-
-void EnemyBehavior::SetDestination(const Math::Vector2& dest)
-{
-	dest_ = dest;
 }
 
 void EnemyBehavior::OnHit(Collider& collider)
@@ -36,24 +25,4 @@ void EnemyBehavior::OnHit(Collider& collider)
 			owner_->Destory();
 		}
 	}
-}
-
-void EnemyBehavior::Begin(void)
-{
-	update_ = &EnemyBehavior::UpdateMove;
-	moveVec_ = (dest_ - owner_->pos_).Normalized();
-}
-
-void EnemyBehavior::UpdateMove(ObjectManager& objectManager)
-{
-	auto moveSpeed = Time.GetDeltaTime<float>() * 120.0f;
-	owner_->pos_ += moveVec_ * moveSpeed;
-	if ((owner_->pos_ - dest_).SqMagnitude() <= Math::Square(moveSpeed))
-	{
-		update_ = &EnemyBehavior::UpdateShot;
-	}
-}
-
-void EnemyBehavior::UpdateShot(ObjectManager& objectManager)
-{
 }

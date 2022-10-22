@@ -4,15 +4,15 @@
 #include "../../Object/Object.h"
 #include "../../Application.h"
 
-StageBehavior::StageBehavior(std::shared_ptr<AnimationData>& animData)
+StageBehavior::StageBehavior(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory)
 {
-	enemyFactory_ = std::make_unique<EnemyFactory>(animData);
+	enemyFactory_ = std::make_unique<EnemyFactory>(animData, bulletFactory);
 }
 
 void StageBehavior::Update(ObjectManager& objectManager)
 {
 	timer_ += Time.GetDeltaTime<float>();
-	if (timer_ >= 10.0f)
+	if (timer_ >= 30.0f)
 	{
 		timer_ = 0.0f;
 		auto spPos = Math::Vector2{ App.GetWindow().GetSize<float>()/2.0f };
@@ -25,5 +25,5 @@ void StageBehavior::Update(ObjectManager& objectManager)
 
 void StageBehavior::Begin(void)
 {
-	timer_ = 0.0f;
+	timer_ = 30.0f;
 }

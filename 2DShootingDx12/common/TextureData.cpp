@@ -6,7 +6,7 @@
 struct Header
 {
 	char sig[4] = { 't','d', 'a','t' };
-	int sum = 0;
+	int num = 0;
 };
 
 TextureData::TextureData(Dx12Wrapper& dx12) :

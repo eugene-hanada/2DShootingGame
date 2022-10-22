@@ -58,4 +58,10 @@
 		<Data>1,0.2</Data>
 	</Animation>
 </AnimationData>
+<AnimationData Name="enemys">
+		<Animation Name="Non" loop="-1">
+			<Data>0,0.2</Data>
+			<Data>1,0.2</Data>
+		</Animation>
+</AnimationData>
 </root>

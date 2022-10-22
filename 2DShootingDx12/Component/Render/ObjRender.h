@@ -20,8 +20,13 @@ public:
 	{
 		return imgKey_;
 	}
+	void SetRotation(float rot)
+	{
+		rotation_ = rot;
+	}
 protected:
 	std::string imgKey_;
+	float rotation_;
 private:
 	const ComponentID GetID(void) const noexcept final { return ComponentID::Render; }
 };

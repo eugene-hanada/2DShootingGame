@@ -24,7 +24,7 @@ public:
 	void SetSpeed(float speed);
 
 	/// <summary>
-	/// 弾を貫通させる
+	/// 弾を貫通させる状態にする
 	/// </summary>
 	/// <param name=""></param>
 	void ArmorPiercing(void);
@@ -34,13 +34,21 @@ public:
 	/// </summary>
 	/// <param name="collider"></param>
 	void OnHit(Collider& collider);
+
+	void SetShooterID(ObjectID id)
+	{
+		shooterID_ = id;
+	}
+
 private:
 	void Update(ObjectManager& objectManager) final;
 	virtual void Destory(std::unique_ptr<Object>&& obj) final;
-	void Begin(void) final;
 	BulletFactory& factoy_;
 	Math::Vector2 moveVec_;
 	float speed_;
 	bool isAp_;
+
+	// 自らを発射したオブジェクトのID
+	ObjectID shooterID_;
 };
 
