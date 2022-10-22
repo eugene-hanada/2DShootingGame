@@ -294,6 +294,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Resource\shader\Atlas2D.hlsli" />
     <None Include="Resource\shader\Basic2D.hlsli" />
   </ItemGroup>

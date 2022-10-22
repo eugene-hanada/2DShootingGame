@@ -6,20 +6,21 @@
 class Component;
 class Object;
 class ObjectManager;
-
+class AnimationData;
 
 class EnemyFactory
 {
 	using ComponentShPtr = std::shared_ptr<Component>;
 public:
-	EnemyFactory();
+	EnemyFactory(std::shared_ptr<AnimationData>& animData);
 
 	void CreateMoveToPosEnemy(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end);
 	void DestoryMoveToPosEnemy(std::unique_ptr<Object>&& obj);
 private:
-	std::list<ComponentShPtr> normalShotBehaviorList_;
+	std::list<ComponentShPtr> moveToPosBehaviorList_;
 	std::list<ComponentShPtr> renderList_;
 	std::list<ComponentShPtr> colliderList_;
+	std::list<ComponentShPtr> animatorList_;
 	std::list<std::unique_ptr<Object>> objPool_;
 };
 

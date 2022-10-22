@@ -9,6 +9,14 @@ class Transform;
 class Dx12Wrapper;
 class ObjectManager;
 
+enum class ObjectID
+{
+	Player,
+	PlayerBullet,
+	Enemy,
+	EnemyBullet,
+};
+
 class Object
 {
 	using ComponentShPtr = std::shared_ptr<Component>;
@@ -37,6 +45,11 @@ public:
 		return ComponentWkPtr<T>{};
 	}
 
+	bool HaveComponent(ComponentID id)
+	{
+		return componentMap_.contains(id);
+	}
+
 	void Destory(void)
 	{
 		isActive_ = false;
@@ -51,10 +64,26 @@ public:
 	{
 		return pos_;
 	}
+
+	void SetPos(const Math::Vector2& pos)
+	{
+		pos_ = pos;
+	}
+
+	ObjectID GetID(void)
+	{
+		return objID_;
+	}
+
+	void SetID(ObjectID id)
+	{
+		objID_ = id;
+	}
 private:
 	std::unordered_map<ComponentID, ComponentShPtr> componentMap_;
 	Math::Vector2 pos_;
 	bool isActive_;
+	ObjectID objID_;
 	friend class DefaultRender;
 	friend class AnimationRender;
 	friend class PlayerBehavior;

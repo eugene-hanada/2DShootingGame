@@ -7,10 +7,9 @@
 #include "../../Application.h"
 #include "../../common/Debug.h"
 
-PlayerBehavior::PlayerBehavior(std::shared_ptr<InputSystem>& input) :
-	input_{input}
+PlayerBehavior::PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory) :
+	input_{input}, bulletFactory_{bulletFactory}
 {
-	bulletFactory_ = std::make_unique<BulletFactory>();
 }
 
 PlayerBehavior::~PlayerBehavior()

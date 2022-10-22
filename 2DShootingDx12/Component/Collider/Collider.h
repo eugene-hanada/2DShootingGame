@@ -18,12 +18,15 @@ class Collider :
 public:
 	Collider();
 	~Collider();
-	void Begin(void) final;
 	virtual void Check(Collider& collider) = 0;
 	virtual bool Check(CircleCollider& collider) = 0;
 	void OnHit(Collider& collider);
 
-	void SetTarget(int target);
+	void SetTarget(int target)
+	{
+		targetType_ = target;
+	}
+
 	int GetTarget(void)
 	{
 		return targetType_;

@@ -13,6 +13,7 @@ public:
 	virtual ~Component();
 
 	bool SetOwner(Object* owner);
+	Object* GetOnwer(void);
 	virtual void Update(ObjectManager& objectManager){}
 	virtual void Begin(void){}
 	virtual void End(void) { }

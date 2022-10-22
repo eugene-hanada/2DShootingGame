@@ -10,7 +10,7 @@ class PlayerBehavior :
 	public ObjectBehavior
 {
 public:
-	PlayerBehavior(std::shared_ptr<InputSystem>& input);
+	PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory);
 	~PlayerBehavior();
 private:
 
@@ -45,7 +45,7 @@ private:
 	std::shared_ptr<InputSystem> input_;
 	std::weak_ptr<Animator> animator_;
 	MoveState state_;
-	std::unique_ptr< BulletFactory> bulletFactory_;
+	std::shared_ptr< BulletFactory> bulletFactory_;
 	float shotTime_;
 };
 

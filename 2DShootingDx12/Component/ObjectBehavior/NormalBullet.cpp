@@ -7,7 +7,7 @@
 #include "NormalBullet.h"
 
 NormalBullet::NormalBullet(BulletFactory& factory) :
-	factoy_{factory}
+	factoy_{factory},speed_{0.0f}
 {
 }
 
@@ -25,6 +25,20 @@ void NormalBullet::SetSpeed(float speed)
 	speed_ = speed;
 }
 
+void NormalBullet::ArmorPiercing(void)
+{
+	isAp_ = true;
+}
+
+void NormalBullet::OnHit(Collider& collider)
+{
+	if (isAp_)
+	{
+		return;
+	}
+	owner_->Destory();
+}
+
 void NormalBullet::Update(ObjectManager& objectManager)
 {
 	owner_->pos_ += moveVec_ * (speed_ * Time.GetDeltaTime<float>());
@@ -38,6 +52,11 @@ void NormalBullet::Update(ObjectManager& objectManager)
 void NormalBullet::Destory(std::unique_ptr<Object>&& obj)
 {
 	factoy_.DeleteNormalBullet(std::move(obj));
+}
+
+void NormalBullet::Begin(void)
+{
+	owner_->SetID(ObjectID::PlayerBullet);
 }
 
 

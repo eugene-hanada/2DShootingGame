@@ -17,7 +17,7 @@ void Collider::Begin(void)
 
 void Collider::OnHit(Collider& collider)
 {
-	if (behavior_.expired())
+	if (!behavior_.expired())
 	{
 		if (behavior_.lock()->IsActive())
 		{

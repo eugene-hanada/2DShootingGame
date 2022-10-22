@@ -325,5 +325,6 @@
   <ItemGroup>
     <None Include="Resource\shader\Basic2D.hlsli" />
     <None Include="Resource\shader\Atlas2D.hlsli" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
