@@ -1,3 +1,4 @@
+#include <unordered_map>
 #include "../../GameSystem/Input/InputSystem.h"
 #include "../Transform.h"
 #include "../../Object/Object.h"
@@ -5,10 +6,18 @@
 #include "../../Object/ObjectFactory/BulletFactory.h"
 #include "PlayerBehavior.h"
 #include "../../Application.h"
+#include "../Collider/Collider.h"
 #include "../../common/Debug.h"
 
+std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&)> PlayerBehavior::hitFuncTbl_
+{
+	{ObjectID::EnemyBullet, &PlayerBehavior::HitEnemy},
+	{ObjectID::PowerUpItem, &PlayerBehavior::HitPowerUpItem},
+
+};
+
 PlayerBehavior::PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory) :
-	input_{input}, bulletFactory_{bulletFactory}
+	input_{input}, bulletFactory_{bulletFactory}, moveStateFunc_{nullptr}, shotTime_{0.0f}, state_{MoveState::Other}
 {
 }
 
@@ -28,6 +37,22 @@ void PlayerBehavior::Begin(void)
 	state_ = MoveState::Other;
 	moveStateFunc_ = &PlayerBehavior::Other;
 	shotTime_ = 0.0f;
+}
+
+void PlayerBehavior::HitPowerUpItem(Collider& collider)
+{
+}
+
+void PlayerBehavior::HitEnemy(Collider& collider)
+{
+}
+
+void PlayerBehavior::OnHit(Collider& collider)
+{
+	if (hitFuncTbl_.contains(collider.GetOnwer()->GetID()))
+	{
+		(this->*hitFuncTbl_[collider.GetOnwer()->GetID()])(collider);
+	}
 }
 
 void PlayerBehavior::Move(void)

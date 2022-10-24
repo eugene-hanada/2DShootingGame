@@ -167,6 +167,8 @@
     <ClCompile Include="Component\ObjectBehavior\PlayerBehavior.cpp" />
     <ClCompile Include="Object\ObjectManager.cpp" />
     <ClCompile Include="Component\Render\ObjRender.cpp" />
+    <ClCompile Include="Component\ObjectBehavior\PowerUpItemBehavior.cpp" />
+    <ClCompile Include="Object\ObjectFactory\PowerUpItemFactory.cpp" />
     <ClCompile Include="Scene\Transition\FadeIn.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\AlphaRender.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\RenderManager.cpp" />
@@ -219,6 +221,8 @@
     <ClInclude Include="Component\ObjectBehavior\PlayerBehavior.h" />
     <ClInclude Include="Object\ObjectManager.h" />
     <ClInclude Include="Component\Render\ObjRender.h" />
+    <ClInclude Include="Component\ObjectBehavior\PowerUpItemBehavior.h" />
+    <ClInclude Include="Object\ObjectFactory\PowerUpItemFactory.h" />
     <ClInclude Include="Scene\Transition\FadeIn.h" />
     <ClInclude Include="GameSystem\Dx12\Render\AlphaRender.h" />
     <ClInclude Include="GameSystem\Dx12\Render\RenderManager.h" />

@@ -15,6 +15,7 @@ enum class ObjectID
 	PlayerBullet,
 	Enemy,
 	EnemyBullet,
+	PowerUpItem
 };
 
 class Object

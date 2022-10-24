@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <unordered_map>
 #include "ObjectBehavior.h"
 
 class InputSystem;
@@ -26,6 +27,12 @@ private:
 	void Update(ObjectManager& objectManager) final;
 	void Begin(void) final;
 	
+	void HitPowerUpItem(Collider& collider);
+
+	void HitEnemy(Collider& collider);
+
+	void OnHit(Collider& collider) final;
+
 	// ˆÚ“®ˆ—
 	void Move(void);
 
@@ -47,5 +54,7 @@ private:
 	MoveState state_;
 	std::shared_ptr< BulletFactory> bulletFactory_;
 	float shotTime_;
+
+	static std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&)> hitFuncTbl_;
 };
 
