@@ -16,9 +16,19 @@ std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&)> PlayerBehavior:
 
 };
 
+std::vector<void(PlayerBehavior::*)(ObjectManager&)> PlayerBehavior::shotFuncs_
+{
+	&PlayerBehavior::ShotLevel1,
+	&PlayerBehavior::ShotLevel2,
+	&PlayerBehavior::ShotLevel3
+};
+
+constexpr float speed_{ 300.0f };
+
 PlayerBehavior::PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory) :
 	input_{input}, bulletFactory_{bulletFactory}, moveStateFunc_{nullptr}, shotTime_{0.0f}, state_{MoveState::Other}
 {
+	nowShotItr_ = shotFuncs_.cbegin();
 }
 
 PlayerBehavior::~PlayerBehavior()
@@ -37,6 +47,7 @@ void PlayerBehavior::Begin(void)
 	state_ = MoveState::Other;
 	moveStateFunc_ = &PlayerBehavior::Other;
 	shotTime_ = 0.0f;
+	nowShotItr_ = shotFuncs_.cbegin();
 }
 
 void PlayerBehavior::HitPowerUpItem(Collider& collider)
@@ -85,7 +96,6 @@ void PlayerBehavior::Move(void)
 				moveStateFunc_ = &PlayerBehavior::TiltRight;
 			}
 		}
-
 	}
 	if (input_->IsPressedStay(InputID::Left))
 	{
@@ -105,7 +115,11 @@ void PlayerBehavior::Move(void)
 	if (isMove)
 	{
 		moveVec.Normalize();
-		moveVec *= 5.0f;
+		moveVec *= speed_ * Time.GetDeltaTime<float>();
+		if (input_->IsPressedStay(InputID::Speed))
+		{
+			moveVec *= 0.35f;
+		}
 		owner_->pos_ += moveVec;
 	}
 	else
@@ -152,15 +166,28 @@ void PlayerBehavior::Other(void)
 	// “Á‚É‰½‚à‚µ‚È‚¢
 }
 
-void PlayerBehavior::Shot(ObjectManager& objectManager)
+void PlayerBehavior::ShotLevel1(ObjectManager& objectManager)
 {
 	shotTime_ -= Time.GetDeltaTime<float>();
 	if (input_->IsPressedStay(InputID::Shot1) && shotTime_ <= 0.0f)
 	{
 		shotTime_ = 0.2f;
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> * 5.0f, Math::upVector2<float>, 180.0f);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
 		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
 	}
+}
+
+void PlayerBehavior::ShotLevel2(ObjectManager& objectManager)
+{
+}
+
+void PlayerBehavior::ShotLevel3(ObjectManager& objectManager)
+{
+}
+
+void PlayerBehavior::Shot(ObjectManager& objectManager)
+{
+	(this->*(*nowShotItr_))(objectManager);
 }
 
 

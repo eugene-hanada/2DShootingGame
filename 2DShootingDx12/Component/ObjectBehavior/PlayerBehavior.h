@@ -45,6 +45,12 @@ private:
 	// ‚»‚Ì‘¼ˆÚ“®‚Ìˆ—
 	void Other(void);
 
+	void ShotLevel1(ObjectManager& objectManager);
+
+	void ShotLevel2(ObjectManager& objectManager);
+
+	void ShotLevel3(ObjectManager& objectManager);
+
 	void Shot(ObjectManager& objectManager);
 
 	void (PlayerBehavior::* moveStateFunc_)(void);
@@ -56,5 +62,9 @@ private:
 	float shotTime_;
 
 	static std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&)> hitFuncTbl_;
+
+	std::vector<void(PlayerBehavior::*)(ObjectManager&)>::const_iterator nowShotItr_;
+
+	static std::vector<void(PlayerBehavior::*)(ObjectManager&)> shotFuncs_;
 };
 
