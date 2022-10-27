@@ -14,19 +14,19 @@ BulletFactory::BulletFactory()
 {
 	for (int i = 0; i < normalBulletMax; i++)
 	{
-		normalShotBehaviorList_.emplace_back(std::make_shared<NormalBullet>(*this));
+		normalShotBehaviorList_.emplace_front(std::make_shared<NormalBullet>(*this));
 	}
 	for (int i = 0; i < maxBullet; i++)
 	{
-		objPool_.emplace_back(std::make_unique<Object>());
-		renderList_.emplace_back(std::make_shared<DefaultRender>());
-		colliderList_.emplace_back(std::make_shared<CircleCollider>());
+		objPool_.emplace_front(std::make_unique<Object>());
+		renderList_.emplace_front(std::make_shared<DefaultRender>());
+		colliderList_.emplace_front(std::make_shared<CircleCollider>());
 	}
 }
 
 void BulletFactory::CreateNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed)
 {
-	if (normalShotBehaviorList_.size() <= 0)
+	if (normalShotBehaviorList_.empty())
 	{
 		return;
 	}
@@ -63,10 +63,10 @@ void BulletFactory::CreateNormalBullet(ObjectManager& objectManager, const Math:
 
 void BulletFactory::DeleteNormalBullet(std::unique_ptr<Object>&& obj)
 {
-	normalShotBehaviorList_.emplace_back(std::move(obj->RemoveComponent(ComponentID::Behavior)));
-	renderList_.emplace_back(std::move(obj->RemoveComponent(ComponentID::Render)));
-	colliderList_.emplace_back(std::move(obj->RemoveComponent(ComponentID::Collider)));
-	objPool_.emplace_back(std::move(obj));
+	normalShotBehaviorList_.emplace_front(std::move(obj->RemoveComponent(ComponentID::Behavior)));
+	renderList_.emplace_front(std::move(obj->RemoveComponent(ComponentID::Render)));
+	colliderList_.emplace_front(std::move(obj->RemoveComponent(ComponentID::Collider)));
+	objPool_.emplace_front(std::move(obj));
 }
 
 void BulletFactory::CreateEnemyNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed)
@@ -109,7 +109,7 @@ void BulletFactory::CreateEnemyNormalBullet(ObjectManager& objectManager, const 
 
 void BulletFactory::CreateApBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed)
 {
-	if (normalShotBehaviorList_.size() <= 0)
+	if (normalShotBehaviorList_.empty())
 	{
 		return;
 	}

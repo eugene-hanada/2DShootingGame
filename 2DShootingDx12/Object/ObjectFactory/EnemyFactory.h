@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <list>
+#include <forward_list>
 #include "../../common/Math.h"
 
 class Component;
@@ -18,10 +18,10 @@ public:
 	void CreateMoveToPosEnemy(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end);
 	void DestoryMoveToPosEnemy(std::unique_ptr<Object>&& obj);
 private:
-	std::list<ComponentShPtr> moveToPosBehaviorList_;
-	std::list<ComponentShPtr> renderList_;
-	std::list<ComponentShPtr> colliderList_;
-	std::list<ComponentShPtr> animatorList_;
-	std::list<std::unique_ptr<Object>> objPool_;
+	std::forward_list<ComponentShPtr> moveToPosBehaviorList_;
+	std::forward_list<ComponentShPtr> renderList_;
+	std::forward_list<ComponentShPtr> colliderList_;
+	std::forward_list<ComponentShPtr> animatorList_;
+	std::forward_list<std::unique_ptr<Object>> objPool_;
 };
 

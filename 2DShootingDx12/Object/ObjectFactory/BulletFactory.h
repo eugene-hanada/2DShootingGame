@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <list>
+#include <forward_list>
 #include "../../common/Math.h"
 
 class ObjectManager;
@@ -19,10 +19,10 @@ public:
 	
 	void CreateApBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed);
 private:
-	std::list<ComponentShPtr> normalShotBehaviorList_;
-	std::list<ComponentShPtr> renderList_;
-	std::list<ComponentShPtr> colliderList_;
-	std::list<std::unique_ptr<Object>> objPool_;
+	std::forward_list<ComponentShPtr> normalShotBehaviorList_;
+	std::forward_list<ComponentShPtr> renderList_;
+	std::forward_list<ComponentShPtr> colliderList_;
+	std::forward_list<std::unique_ptr<Object>> objPool_;
 
 };
 

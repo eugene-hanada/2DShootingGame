@@ -22,6 +22,7 @@ void EnemyBehavior::OnHit(Collider& collider)
 		// ƒvƒŒƒCƒ„[‚Ì’e‚É“–‚½‚Á‚½hp‚ğŒ¸‚ç‚·
 		if (--hp_ <= 0)
 		{
+			
 			owner_->Destory();
 		}
 	}

@@ -15,14 +15,14 @@ EnemyFactory::EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared
 {
 	for (int i = 0; i < maxMoveToPosEnemy; i++)
 	{
-		moveToPosBehaviorList_.emplace_back(std::make_shared<EnemyMoveToPos>(*this, bulletFactory));
+		moveToPosBehaviorList_.emplace_front(std::make_shared<EnemyMoveToPos>(*this, bulletFactory));
 	}
 	for (int i = 0; i < maxEnemy; i++)
 	{
-		renderList_.emplace_back(std::make_shared<AnimationRender>());
-		colliderList_.emplace_back(std::make_shared<CircleCollider>());
-		animatorList_.emplace_back(std::make_shared<Animator>(animData));
-		objPool_.emplace_back(std::make_unique<Object>());
+		renderList_.emplace_front(std::make_shared<AnimationRender>());
+		colliderList_.emplace_front(std::make_shared<CircleCollider>());
+		animatorList_.emplace_front(std::make_shared<Animator>(animData));
+		objPool_.emplace_front(std::make_unique<Object>());
 	}
 }
 
@@ -71,9 +71,9 @@ void EnemyFactory::CreateMoveToPosEnemy(ObjectManager& objManager, const Math::V
 
 void EnemyFactory::DestoryMoveToPosEnemy(std::unique_ptr<Object>&& obj)
 {
-	renderList_.emplace_back(std::move(obj->RemoveComponent(ComponentID::Render)));
-	animatorList_.emplace_back(std::move(obj->RemoveComponent(ComponentID::Animator)));
-	moveToPosBehaviorList_.emplace_back(std::move(obj->RemoveComponent(ComponentID::Behavior)));
-	colliderList_.emplace_back(std::move(obj->RemoveComponent(ComponentID::Collider)));
-	objPool_.emplace_back(std::move(obj));
+	renderList_.emplace_front(std::move(obj->RemoveComponent(ComponentID::Render)));
+	animatorList_.emplace_front(std::move(obj->RemoveComponent(ComponentID::Animator)));
+	moveToPosBehaviorList_.emplace_front(std::move(obj->RemoveComponent(ComponentID::Behavior)));
+	colliderList_.emplace_front(std::move(obj->RemoveComponent(ComponentID::Collider)));
+	objPool_.emplace_front(std::move(obj));
 }

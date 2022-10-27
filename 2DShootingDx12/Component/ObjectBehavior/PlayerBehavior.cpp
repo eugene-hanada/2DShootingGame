@@ -192,6 +192,8 @@ void PlayerBehavior::ShotLevel2(ObjectManager& objectManager)
 		shotTime_ = 0.1f;
 		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
 		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float> + Math::leftVector2<float>, 180.0f);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float> + Math::rightVector2<float>, 180.0f);
 	}
 }
 
