@@ -17,8 +17,8 @@ public:
 
 	void CreateEnemyNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed);
 	
+	void CreateApBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed);
 private:
-	void CreateNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos);
 	std::list<ComponentShPtr> normalShotBehaviorList_;
 	std::list<ComponentShPtr> renderList_;
 	std::list<ComponentShPtr> colliderList_;

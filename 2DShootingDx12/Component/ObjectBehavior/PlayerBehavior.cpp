@@ -16,17 +16,17 @@ std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&)> PlayerBehavior:
 
 };
 
-std::vector<void(PlayerBehavior::*)(ObjectManager&)> PlayerBehavior::shotFuncs_
+PlayerBehavior::ShotFuncPair PlayerBehavior::shotFuncs_
 {
-	&PlayerBehavior::ShotLevel1,
-	&PlayerBehavior::ShotLevel2,
-	&PlayerBehavior::ShotLevel3
+	{&PlayerBehavior::ShotLevel1,5},
+	{&PlayerBehavior::ShotLevel2,10},
+	{&PlayerBehavior::ShotLevel3,0}
 };
 
 constexpr float speed_{ 300.0f };
 
 PlayerBehavior::PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory) :
-	input_{input}, bulletFactory_{bulletFactory}, moveStateFunc_{nullptr}, shotTime_{0.0f}, state_{MoveState::Other}
+	input_{input}, bulletFactory_{bulletFactory}, moveStateFunc_{nullptr}, shotTime_{0.0f}, state_{MoveState::Other}, powerItemCount_{0}
 {
 	nowShotItr_ = shotFuncs_.cbegin();
 }
@@ -52,10 +52,17 @@ void PlayerBehavior::Begin(void)
 
 void PlayerBehavior::HitPowerUpItem(Collider& collider)
 {
+	powerItemCount_++;
+	if (powerItemCount_ >= nowShotItr_->second)
+	{
+		++nowShotItr_;
+	}
 }
 
 void PlayerBehavior::HitEnemy(Collider& collider)
 {
+	nowShotItr_ = shotFuncs_.cbegin();
+	powerItemCount_ = 0U;
 }
 
 void PlayerBehavior::OnHit(Collider& collider)
@@ -179,6 +186,13 @@ void PlayerBehavior::ShotLevel1(ObjectManager& objectManager)
 
 void PlayerBehavior::ShotLevel2(ObjectManager& objectManager)
 {
+	shotTime_ -= Time.GetDeltaTime<float>();
+	if (input_->IsPressedStay(InputID::Shot1) && shotTime_ <= 0.0f)
+	{
+		shotTime_ = 0.1f;
+		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
+		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
+	}
 }
 
 void PlayerBehavior::ShotLevel3(ObjectManager& objectManager)
@@ -187,7 +201,7 @@ void PlayerBehavior::ShotLevel3(ObjectManager& objectManager)
 
 void PlayerBehavior::Shot(ObjectManager& objectManager)
 {
-	(this->*(*nowShotItr_))(objectManager);
+	(this->*(*nowShotItr_).first)(objectManager);
 }
 
 

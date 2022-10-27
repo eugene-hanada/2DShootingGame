@@ -10,6 +10,7 @@ class BulletFactory;
 class PlayerBehavior :
 	public ObjectBehavior
 {
+	using ShotFuncPair =std::vector< std::pair<void(PlayerBehavior::*)(ObjectManager&), unsigned int>>;
 public:
 	PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory);
 	~PlayerBehavior();
@@ -56,15 +57,24 @@ private:
 	void (PlayerBehavior::* moveStateFunc_)(void);
 
 	std::shared_ptr<InputSystem> input_;
+
 	std::weak_ptr<Animator> animator_;
+
 	MoveState state_;
 	std::shared_ptr< BulletFactory> bulletFactory_;
+
 	float shotTime_;
+
+	unsigned int powerItemCount_;
+
+	ShotFuncPair::const_iterator nowShotItr_;
+
 
 	static std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&)> hitFuncTbl_;
 
-	std::vector<void(PlayerBehavior::*)(ObjectManager&)>::const_iterator nowShotItr_;
+	
 
-	static std::vector<void(PlayerBehavior::*)(ObjectManager&)> shotFuncs_;
+	static ShotFuncPair shotFuncs_;
+
 };
 

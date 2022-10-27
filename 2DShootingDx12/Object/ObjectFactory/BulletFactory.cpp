@@ -107,3 +107,41 @@ void BulletFactory::CreateEnemyNormalBullet(ObjectManager& objectManager, const 
 
 }
 
+void BulletFactory::CreateApBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed)
+{
+	if (normalShotBehaviorList_.size() <= 0)
+	{
+		return;
+	}
+
+	// オブジェクトクラスを取得
+	auto obj = std::move(objPool_.front());
+	objPool_.pop_front();
+
+	// ビヘイビアクラスを取る
+	auto behavior = std::static_pointer_cast<NormalBullet>(std::move(normalShotBehaviorList_.front()));
+	normalShotBehaviorList_.pop_front();
+	behavior->SetMoveVec(Math::upVector2<float>);
+	behavior->SetSpeed(speed);
+	behavior->SetShooterID(ObjectID::Player);
+	behavior->ArmorPiercing();
+	obj->AddComponent(std::move(behavior));
+
+	// レンダークラスをセット
+	auto render = std::static_pointer_cast<DefaultRender>(std::move(renderList_.front()));
+	renderList_.pop_front();
+	render->SetImgKey("bulletD");
+	render->SetRotation(moveVec.GetAngle());
+	obj->AddComponent(std::move(render));
+	obj->pos_ = pos;
+
+	// 当たり判定クラスを追加する
+	auto col = std::static_pointer_cast<CircleCollider>(std::move(colliderList_.front()));
+	colliderList_.pop_front();
+	col->SetRadius(bulletRadius);
+	obj->AddComponent(std::move(col));
+
+	obj->SetID(ObjectID::PlayerBullet);
+	objectManager.AddObject(std::move(obj));
+}
+
