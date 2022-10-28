@@ -5,6 +5,11 @@
   "savePath": "C:\\Users\\eugen\\Desktop\\ほぼ個人\\VS-project\\DirectX12使用\\2DShootingGame\\2DShootingDx12\\Resource\\image",
   "images": [
     {
+      "name": "PowerUpItem.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/PowerUpItem.png",
+      "folder": ""
+    },
+    {
       "name": "bulletA.png",
       "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/bulletA.png",
       "folder": ""

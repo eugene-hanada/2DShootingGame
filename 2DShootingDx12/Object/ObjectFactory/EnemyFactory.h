@@ -8,6 +8,7 @@ class Object;
 class ObjectManager;
 class AnimationData;
 class BulletFactory;
+class PowerUpItemFactory;
 
 class EnemyFactory
 {
@@ -23,5 +24,6 @@ private:
 	std::forward_list<ComponentShPtr> colliderList_;
 	std::forward_list<ComponentShPtr> animatorList_;
 	std::forward_list<std::unique_ptr<Object>> objPool_;
+	std::unique_ptr< PowerUpItemFactory> itemfactory_;
 };
 

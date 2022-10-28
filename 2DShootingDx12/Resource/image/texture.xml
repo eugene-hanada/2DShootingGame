@@ -36,23 +36,24 @@ r => 'y' if sprite is rotated-->
   <sprite n="ship4.png" x="62" y="109" w="14" h="24" pX="0.5" pY="0.5" oX="1" oY="0" oW="16" oH="24"/>
   <sprite n="ship7.png" x="32" y="113" w="14" h="24" pX="0.5" pY="0.5" oX="1" oY="0" oW="16" oH="24"/>
   <sprite n="ship8.png" x="46" y="113" w="14" h="24" pX="0.5" pY="0.5" oX="1" oY="0" oW="16" oH="24"/>
-  <sprite n="enemys1.png" x="90" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
-  <sprite n="enemys2.png" x="90" y="16" w="16" h="16" pX="0.5" pY="0.5"/>
-  <sprite n="exps4.png" x="90" y="32" w="16" h="15" pX="0.5" pY="0.5" oX="0" oY="0" oW="16" oH="16"/>
-  <sprite n="exps3.png" x="90" y="47" w="15" h="14" pX="0.5" pY="0.5" oX="0" oY="0" oW="16" oH="16"/>
+  <sprite n="PowerUpItem.png" x="90" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+  <sprite n="enemys1.png" x="90" y="16" w="16" h="16" pX="0.5" pY="0.5"/>
+  <sprite n="enemys2.png" x="90" y="32" w="16" h="16" pX="0.5" pY="0.5"/>
+  <sprite n="exps4.png" x="90" y="48" w="16" h="15" pX="0.5" pY="0.5" oX="0" oY="0" oW="16" oH="16"/>
   <sprite n="bulletD.png" x="63" y="54" w="14" h="4" pX="0.5" pY="0.5" oX="28" oY="30" oW="64" oH="64"/>
   <sprite n="missileD.png" x="77" y="54" w="13" h="6" pX="0.5" pY="0.5" oX="26" oY="29" oW="64" oH="64"/>
-  <sprite n="expm1.png" x="90" y="61" w="15" h="13" pX="0.5" pY="0.5" oX="8" oY="9" oW="32" oH="32"/>
-  <sprite n="exps5.png" x="90" y="74" w="14" h="15" pX="0.5" pY="0.5" oX="1" oY="0" oW="16" oH="16"/>
-  <sprite n="ship1.png" x="99" y="89" w="12" h="24" pX="0.5" pY="0.5" oX="2" oY="0" oW="16" oH="24"/>
-  <sprite n="exps2.png" x="106" y="0" w="13" h="10" pX="0.5" pY="0.5" oX="2" oY="3" oW="16" oH="16"/>
-  <sprite n="bulletA.png" x="106" y="10" w="13" h="4" pX="0.5" pY="0.5" oX="30" oY="30" oW="64" oH="64"/>
-  <sprite n="bulletC.png" x="106" y="14" w="13" h="4" pX="0.5" pY="0.5" oX="30" oY="30" oW="64" oH="64"/>
-  <sprite n="ship10.png" x="106" y="18" w="12" h="24" pX="0.5" pY="0.5" oX="2" oY="0" oW="16" oH="24"/>
-  <sprite n="ship2.png" x="106" y="42" w="12" h="24" pX="0.5" pY="0.5" oX="2" oY="0" oW="16" oH="24"/>
-  <sprite n="missileC.png" x="105" y="66" w="12" h="6" pX="0.5" pY="0.5" oX="27" oY="29" oW="64" oH="64"/>
-  <sprite n="missileB.png" x="105" y="72" w="12" h="5" pX="0.5" pY="0.5" oX="27" oY="29" oW="64" oH="64"/>
-  <sprite n="missileA.png" x="104" y="77" w="10" h="5" pX="0.5" pY="0.5" oX="27" oY="30" oW="64" oH="64"/>
-  <sprite n="exps1.png" x="104" y="82" w="8" h="5" pX="0.5" pY="0.5" oX="3" oY="6" oW="16" oH="16"/>
-  <sprite n="ship9.png" x="111" y="87" w="12" h="24" pX="0.5" pY="0.5" oX="2" oY="0" oW="16" oH="24"/>
+  <sprite n="exps3.png" x="90" y="63" w="15" h="14" pX="0.5" pY="0.5" oX="0" oY="0" oW="16" oH="16"/>
+  <sprite n="exps2.png" x="90" y="77" w="13" h="10" pX="0.5" pY="0.5" oX="2" oY="3" oW="16" oH="16"/>
+  <sprite n="ship1.png" x="99" y="87" w="12" h="24" pX="0.5" pY="0.5" oX="2" oY="0" oW="16" oH="24"/>
+  <sprite n="expm1.png" x="106" y="0" w="15" h="13" pX="0.5" pY="0.5" oX="8" oY="9" oW="32" oH="32"/>
+  <sprite n="exps5.png" x="106" y="13" w="14" h="15" pX="0.5" pY="0.5" oX="1" oY="0" oW="16" oH="16"/>
+  <sprite n="bulletA.png" x="106" y="28" w="13" h="4" pX="0.5" pY="0.5" oX="30" oY="30" oW="64" oH="64"/>
+  <sprite n="bulletC.png" x="106" y="32" w="13" h="4" pX="0.5" pY="0.5" oX="30" oY="30" oW="64" oH="64"/>
+  <sprite n="ship10.png" x="106" y="36" w="12" h="24" pX="0.5" pY="0.5" oX="2" oY="0" oW="16" oH="24"/>
+  <sprite n="ship2.png" x="106" y="60" w="12" h="24" pX="0.5" pY="0.5" oX="2" oY="0" oW="16" oH="24"/>
+  <sprite n="ship9.png" x="99" y="111" w="12" h="24" pX="0.5" pY="0.5" oX="2" oY="0" oW="16" oH="24"/>
+  <sprite n="missileC.png" x="60" y="133" w="12" h="6" pX="0.5" pY="0.5" oX="27" oY="29" oW="64" oH="64"/>
+  <sprite n="missileB.png" x="32" y="137" w="12" h="5" pX="0.5" pY="0.5" oX="27" oY="29" oW="64" oH="64"/>
+  <sprite n="missileA.png" x="44" y="137" w="10" h="5" pX="0.5" pY="0.5" oX="27" oY="30" oW="64" oH="64"/>
+  <sprite n="exps1.png" x="72" y="133" w="8" h="5" pX="0.5" pY="0.5" oX="3" oY="6" oW="16" oH="16"/>
 </TextureAtlas>

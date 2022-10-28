@@ -5,6 +5,7 @@
 #include "../../Component/Animator/Animator.h"
 #include "../../Object/Object.h"
 #include "../../Object/ObjectManager.h"
+#include "../ObjectFactory/PowerUpItemFactory.h"
 
 constexpr int maxEnemy{ 50 };
 constexpr int maxMoveToPosEnemy{ 10 };
@@ -13,6 +14,7 @@ constexpr float typeMRedius{ 15.0f };
 
 EnemyFactory::EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory)
 {
+	itemfactory_ = std::make_unique<PowerUpItemFactory>();
 	for (int i = 0; i < maxMoveToPosEnemy; i++)
 	{
 		moveToPosBehaviorList_.emplace_front(std::make_shared<EnemyMoveToPos>(*this, bulletFactory));
