@@ -11,6 +11,7 @@ enum class CollType
 
 class ObjectBehavior;
 class CircleCollider;
+class ObjectManager;
 
 class Collider :
 	public Component
@@ -18,9 +19,9 @@ class Collider :
 public:
 	Collider();
 	~Collider();
-	virtual void Check(Collider& collider) = 0;
+	virtual void Check(Collider& collider, ObjectManager& objectManager) = 0;
 	virtual bool Check(CircleCollider& collider) = 0;
-	void OnHit(Collider& collider);
+	void OnHit(Collider& collider, ObjectManager& objectManager);
 
 	void SetTarget(int target)
 	{

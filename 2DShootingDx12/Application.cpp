@@ -9,6 +9,7 @@
 #include "GameSystem/Dx12/../../Component/Transform.h"
 #include "GameSystem/Dx12/Render/RenderManager.h"
 #include "GameSystem/Input/InputSystem.h"
+#include "common/Random.h"
 #include "common/Debug.h"
 
 #include "GameSystem/Dx12/Resource/RenderTarget.h"
@@ -19,6 +20,7 @@ bool Application::Init(int x, int y, const std::basic_string<TCHAR>& titleText)
 {
 	window_ = std::make_unique<Window>(x, y, titleText);
 	dx12_ = std::make_unique<Dx12Wrapper>(*window_);
+	random_ = std::make_unique<Random>();
 	return true;
 }
 
@@ -64,6 +66,11 @@ int Application::Run(void)
 		time_.DeltaTimeEnd();
 	}
 	return 0;
+}
+
+Random& Application::GetRandom(void)&
+{
+	return *random_;
 }
 
 Application::Application()

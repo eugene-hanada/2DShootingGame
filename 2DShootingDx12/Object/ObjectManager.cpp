@@ -54,14 +54,14 @@ void ObjectManager::Update(void)
 		auto end = --objList_.end();
 		for (auto b = start; b != end; ++b)
 		{
-			if (!(*b)->HaveComponent(ComponentID::Collider))
+			if (!(*b)->HaveComponent(ComponentID::Collider) && !(*b)->IsActive())
 			{
 				continue;
 			}
 
 			for (auto s = ++start; s != objList_.end(); ++s)
 			{
-				if (!(*s)->HaveComponent(ComponentID::Collider))
+				if (!(*s)->HaveComponent(ComponentID::Collider) && !(*s)->IsActive())
 				{
 					continue;
 				}
@@ -69,7 +69,7 @@ void ObjectManager::Update(void)
 				auto colB = (*s)->GetCcomponent<Collider>(ComponentID::Collider);
 				if (!colA.expired() && !colB.expired())
 				{
-					colA.lock()->Check(*colB.lock());
+					colA.lock()->Check(*colB.lock(), *this);
 				}
 			}
 		}
@@ -115,4 +115,11 @@ std::unique_ptr<Object> ObjectManager::RemovObjecte(std::list<std::unique_ptr<Ob
 	return std::move(obj);
 }
 
+
+const std::pair<ObjectManager::ObjectList::const_iterator, bool> ObjectManager::FindObject(ObjectID id)
+{
+	auto itr = std::find_if(objList_.begin(), objList_.end(), [id](auto& obj) { return obj->GetID() == id; });
+	auto ret = itr != objList_.end();
+	return { itr,ret };
+}
 

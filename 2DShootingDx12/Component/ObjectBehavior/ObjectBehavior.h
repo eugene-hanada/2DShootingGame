@@ -10,7 +10,7 @@ public:
 	ObjectBehavior();
 	virtual ~ObjectBehavior();
 	virtual void Destory(std::unique_ptr<Object>&& obj){}
-	virtual void OnHit(Collider& collider){};
+	virtual void OnHit(Collider& collider, ObjectManager& objectManager){};
 private:
 	const ComponentID GetID(void) const noexcept final { return ComponentID::Behavior; }
 };

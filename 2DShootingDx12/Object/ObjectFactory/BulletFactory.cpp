@@ -38,7 +38,7 @@ void BulletFactory::CreateNormalBullet(ObjectManager& objectManager, const Math:
 	// ビヘイビアクラスを取る
 	auto behavior = std::static_pointer_cast<NormalBullet>(std::move(normalShotBehaviorList_.front()));
 	normalShotBehaviorList_.pop_front();
-	behavior->SetMoveVec(Math::upVector2<float>);
+	behavior->SetMoveVec(moveVec);
 	behavior->SetSpeed(speed);
 	behavior->SetShooterID(ObjectID::Player);
 	obj->AddComponent(std::move(behavior));
@@ -91,7 +91,7 @@ void BulletFactory::CreateEnemyNormalBullet(ObjectManager& objectManager, const 
 	// レンダークラスをセット
 	auto render = std::static_pointer_cast<DefaultRender>(std::move(renderList_.front()));
 	renderList_.pop_front();
-	render->SetImgKey("bulletC");
+	render->SetImgKey("bulletA");
 	render->SetRotation(moveVec.GetAngle());
 	obj->AddComponent(std::move(render));
 	obj->pos_ = pos;

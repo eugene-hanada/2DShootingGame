@@ -4,7 +4,7 @@
 
 Random::Random()
 {
-	mt_.seed(seed_());
+	mt_.seed(std::random_device()());
 }
 
 bool Random::GetRandom(const double& p)

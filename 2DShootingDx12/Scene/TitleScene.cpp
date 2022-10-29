@@ -43,7 +43,7 @@ BaseScene::SceneUPtr TitleScene::Update(SceneUPtr scene)
 {
 
 	
-	if (input_->IsPressed(InputID::Shot1))
+	if (input_->IsPressed(InputID::Shot))
 	{
 		return std::make_unique<FadeIn>(std::move(scene), std::make_unique<GameScene>(renderMng_, dx12_, input_), renderMng_, dx12_, input_);
 	}

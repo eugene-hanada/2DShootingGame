@@ -32,7 +32,7 @@ private:
 
 	void HitEnemy(Collider& collider);
 
-	void OnHit(Collider& collider) final;
+	void OnHit(Collider& collider, ObjectManager& objectManager) final;
 
 	// ˆÚ“®ˆ—
 	void Move(void);

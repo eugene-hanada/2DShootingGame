@@ -18,8 +18,8 @@ std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&)> PlayerBehavior:
 
 PlayerBehavior::ShotFuncPair PlayerBehavior::shotFuncs_
 {
-	{&PlayerBehavior::ShotLevel1,5},
-	{&PlayerBehavior::ShotLevel2,10},
+	{&PlayerBehavior::ShotLevel1,2},
+	{&PlayerBehavior::ShotLevel2,4},
 	{&PlayerBehavior::ShotLevel3,0}
 };
 
@@ -52,6 +52,11 @@ void PlayerBehavior::Begin(void)
 
 void PlayerBehavior::HitPowerUpItem(Collider& collider)
 {
+	DebugLog("アイテムゲット");
+	if (nowShotItr_ == --shotFuncs_.end())
+	{
+		return;
+	}
 	powerItemCount_++;
 	if (powerItemCount_ >= nowShotItr_->second)
 	{
@@ -65,7 +70,7 @@ void PlayerBehavior::HitEnemy(Collider& collider)
 	powerItemCount_ = 0U;
 }
 
-void PlayerBehavior::OnHit(Collider& collider)
+void PlayerBehavior::OnHit(Collider& collider, ObjectManager& objectManager)
 {
 	if (hitFuncTbl_.contains(collider.GetOnwer()->GetID()))
 	{
@@ -176,7 +181,7 @@ void PlayerBehavior::Other(void)
 void PlayerBehavior::ShotLevel1(ObjectManager& objectManager)
 {
 	shotTime_ -= Time.GetDeltaTime<float>();
-	if (input_->IsPressedStay(InputID::Shot1) && shotTime_ <= 0.0f)
+	if (input_->IsPressedStay(InputID::Shot) && shotTime_ <= 0.0f)
 	{
 		shotTime_ = 0.2f;
 		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
@@ -187,18 +192,27 @@ void PlayerBehavior::ShotLevel1(ObjectManager& objectManager)
 void PlayerBehavior::ShotLevel2(ObjectManager& objectManager)
 {
 	shotTime_ -= Time.GetDeltaTime<float>();
-	if (input_->IsPressedStay(InputID::Shot1) && shotTime_ <= 0.0f)
+	if (input_->IsPressedStay(InputID::Shot) && shotTime_ <= 0.0f)
 	{
 		shotTime_ = 0.1f;
-		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
-		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float> + Math::leftVector2<float>, 180.0f);
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float> + Math::rightVector2<float>, 180.0f);
+		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, 240.0f);
+		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, 240.0f);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float> + Math::leftVector2<float>, 360.0f);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float> + Math::rightVector2<float>, 360.0f);
 	}
 }
 
 void PlayerBehavior::ShotLevel3(ObjectManager& objectManager)
 {
+	shotTime_ -= Time.GetDeltaTime<float>();
+	if (input_->IsPressedStay(InputID::Shot) && shotTime_ <= 0.0f)
+	{
+		shotTime_ = 0.1f;
+		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, 240.0f);
+		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, 240.0f);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float> +Math::leftVector2<float>, 360.0f);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float> +Math::rightVector2<float>, 360.0f);
+	}
 }
 
 void PlayerBehavior::Shot(ObjectManager& objectManager)

@@ -5,6 +5,7 @@ class AnimationData;
 class EnemyFactory;
 class BulletFactory;
 
+
 class StageBehavior :
     public ObjectBehavior
 {

@@ -6,7 +6,7 @@ class CircleCollider :
 public:
 	CircleCollider();
 	~CircleCollider();
-	void Check(Collider& collider) final;
+	void Check(Collider& collider, ObjectManager& objectManager) final;
 	bool Check(CircleCollider& collider) final;
 
 	void SetRadius(const float radius)

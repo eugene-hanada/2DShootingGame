@@ -17,7 +17,7 @@ EnemyFactory::EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared
 	itemfactory_ = std::make_unique<PowerUpItemFactory>();
 	for (int i = 0; i < maxMoveToPosEnemy; i++)
 	{
-		moveToPosBehaviorList_.emplace_front(std::make_shared<EnemyMoveToPos>(*this, bulletFactory));
+		moveToPosBehaviorList_.emplace_front(std::make_shared<EnemyMoveToPos>(*this, bulletFactory, *itemfactory_));
 	}
 	for (int i = 0; i < maxEnemy; i++)
 	{

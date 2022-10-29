@@ -4,7 +4,7 @@ class EnemyMoveToPos :
 	public EnemyBehavior
 {
 public:
-	EnemyMoveToPos(EnemyFactory& factory, std::shared_ptr<BulletFactory>& bulletFactory);
+	EnemyMoveToPos(EnemyFactory& factory, std::shared_ptr<BulletFactory>& bulletFactory, PowerUpItemFactory& itemFactory);
 	void SetDestination(const Math::Vector2& dest);
 
 private:

@@ -17,8 +17,8 @@ void EnemyMoveToPos::Begin(void)
 	shotTimer_ = 0.0f;
 }
 
-EnemyMoveToPos::EnemyMoveToPos(EnemyFactory& factory, std::shared_ptr<BulletFactory>& bulletFactory) :
-	EnemyBehavior{factory, bulletFactory}, update_{nullptr}
+EnemyMoveToPos::EnemyMoveToPos(EnemyFactory& factory, std::shared_ptr<BulletFactory>& bulletFactory, PowerUpItemFactory& itemFactory) :
+	EnemyBehavior{factory, bulletFactory, itemFactory}, update_{nullptr}
 {
 }
 

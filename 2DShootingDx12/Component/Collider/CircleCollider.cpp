@@ -9,12 +9,12 @@ CircleCollider::~CircleCollider()
 {
 }
 
-void CircleCollider::Check(Collider& collider)
+void CircleCollider::Check(Collider& collider, ObjectManager& objectManager)
 {
 	if (collider.Check(*this))
 	{
-		OnHit(collider);
-		collider.OnHit(*this);
+		OnHit(collider, objectManager);
+		collider.OnHit(*this, objectManager);
 	}
 }
 

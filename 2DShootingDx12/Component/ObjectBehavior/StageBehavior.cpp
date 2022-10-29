@@ -2,6 +2,7 @@
 #include "../../Object/ObjectFactory/EnemyFactory.h"
 #include "../../GameSystem/Window.h"
 #include "../../Object/Object.h"
+#include "../../Object/ObjectFactory/PowerUpItemFactory.h"
 #include "../../Application.h"
 
 StageBehavior::StageBehavior(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory)
@@ -26,4 +27,5 @@ void StageBehavior::Update(ObjectManager& objectManager)
 void StageBehavior::Begin(void)
 {
 	timer_ = 30.0f;
+	owner_->SetID(ObjectID::Stage);
 }

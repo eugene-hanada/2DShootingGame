@@ -32,6 +32,5 @@ public:
 	double GetRandom(const double& minVal, const double& maxVal);
 private:
 	std::mt19937_64 mt_;
-	std::random_device seed_;
 };
 
