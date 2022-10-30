@@ -27,7 +27,7 @@ bool Application::Init(int x, int y, const std::basic_string<TCHAR>& titleText)
 
 int Application::Run(void)
 {
-	if (!Init(1280, 720, TEXT("Dx12")))
+	if (!Init(800, 600, TEXT("Dx12")))
 	{
 		return -1;
 	}

@@ -65,8 +65,8 @@ bool TextureData::Load(const std::wstring& fileName)
 		for (auto& d : dataMap_[imgFileName].second.first[keyName])
 		{
 			// åÎç∑Ç≈Ç‘ÇÍÇÈÇÃÇ≈è≠Çµè¨Ç≥ÇﬂÇ…èCê≥
-			d.pos += 0.2f;
-			d.wh -= 0.2f;
+			d.pos += 0.25f;
+			d.wh -= 0.25f;
 		}
 	}
 	return true;

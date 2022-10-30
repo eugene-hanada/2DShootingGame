@@ -53,7 +53,7 @@ void NormalBullet::Update(ObjectManager& objectManager)
 {
 	owner_->pos_ += moveVec_ * (speed_ * Time.GetDeltaTime<float>());
 	//DebugLog("À•Wx=", owner_->pos_.x, "y=", owner_->pos_.y);
-	if (owner_->pos_.x < 0 || owner_->pos_.x > App.GetWindow().GetSize<float>().x || owner_->pos_.y < 0 || owner_->pos_.y > App.GetWindow().GetSize<float>().y)
+	if (owner_->pos_.x < 0 || owner_->pos_.x > ObjectManager::fieldSize_.x || owner_->pos_.y < 0 || owner_->pos_.y >ObjectManager::fieldSize_.y)
 	{
 		owner_->Destory();
 	}

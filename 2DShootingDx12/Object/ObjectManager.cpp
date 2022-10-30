@@ -13,12 +13,23 @@
 #include "../Object/ObjectFactory/BulletFactory.h"
 #include "ObjectManager.h"
 
-ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::shared_ptr< AnimationData>& animData, std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
+ObjectManager::ObjectManager(std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
 {
+	// テクスチャデータロード
+	textureData_ = std::make_shared<TextureData>(dx12);
+	textureData_->Load(L"Resource/image/texture.tdat");
+
+	// アニメーションデータロード
+	animData_ = std::make_shared<AnimationData>();
+	animData_->Load("Resource/animation/anim.adat");
+
+	// 弾の生成クラス作成
 	auto bulletFactory = std::make_shared<BulletFactory>();
+
+	// プレイヤー作成
 	auto& p = objList_.emplace_front(std::make_unique<Object>());
 	p->AddComponent(std::make_unique<PlayerBehavior>(input, bulletFactory));
-	p->AddComponent(std::make_unique<Animator>(animData));
+	p->AddComponent(std::make_unique<Animator>(animData_));
 	p->GetCcomponent<Animator>(ComponentID::Animator).lock()->SetState("Non");
 	p->AddComponent(std::make_shared<AnimationRender>());
 	p->GetCcomponent< AnimationRender>(ComponentID::Render).lock()->SetImgKey("ship");
@@ -28,11 +39,13 @@ ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::sha
 	p->Begin();
 
 	
+	// ステージ作成
 	auto& stage = objList_.emplace_front(std::make_unique<Object>());
-	stage->AddComponent(std::make_unique<StageBehavior>(animData, bulletFactory));
+	stage->AddComponent(std::make_unique<StageBehavior>(animData_, bulletFactory));
 	stage->Begin();
 
-	texSheetRender_ = std::make_unique< TextureSheetRender>("texture.png", dx12, textureData, 256);
+	// テクスチャを描画するクラスを作成
+	texSheetRender_ = std::make_unique< TextureSheetRender>("texture.png", dx12, textureData_, 256);
 }
 
 ObjectManager::~ObjectManager()

@@ -16,7 +16,6 @@ private:
 	void Draw(void) final;
 	const SceneID GetID(void) const noexcept final { return SceneID::Game; }
 	std::unique_ptr<ObjectManager> objManager_;
-	std::shared_ptr<TextureData> textureData_;
-	std::shared_ptr< AnimationData> animData_;
+	std::unique_ptr<RenderTarget> objRt_;
 };
 

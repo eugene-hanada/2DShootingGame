@@ -65,9 +65,12 @@ private:
 
 	float shotTime_;
 
+	float missileTime_;
+
 	unsigned int powerItemCount_;
 
 	ShotFuncPair::const_iterator nowShotItr_;
+
 
 
 	static std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&)> hitFuncTbl_;

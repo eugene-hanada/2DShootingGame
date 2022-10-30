@@ -9,6 +9,22 @@
 #include "../Collider/Collider.h"
 #include "../../common/Debug.h"
 
+constexpr struct Shot1
+{
+	float speed{ 180.0f };
+	float interval{ 0.2f };
+} shot1;
+
+
+constexpr struct Shot2
+{
+	float apSpeed{ 240.0f };		// AP弾のスピード
+	float speed{ 360.0f };			// 普通の弾のスピード
+	float interval{ 0.1f };			// 発射interval
+	float radR{ Math::Deg2Rad(270.0f + 10.0f) };		// 発射の角度
+	float radL{ Math::Deg2Rad(270.0f - 10.0f) };		// 発射の角度
+} shot2;
+
 std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&)> PlayerBehavior::hitFuncTbl_
 {
 	{ObjectID::EnemyBullet, &PlayerBehavior::HitEnemy},
@@ -183,9 +199,9 @@ void PlayerBehavior::ShotLevel1(ObjectManager& objectManager)
 	shotTime_ -= Time.GetDeltaTime<float>();
 	if (input_->IsPressedStay(InputID::Shot) && shotTime_ <= 0.0f)
 	{
-		shotTime_ = 0.2f;
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, 180.0f);
+		shotTime_ = shot1.interval;
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, shot1.speed);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, shot1.speed);
 	}
 }
 
@@ -194,11 +210,11 @@ void PlayerBehavior::ShotLevel2(ObjectManager& objectManager)
 	shotTime_ -= Time.GetDeltaTime<float>();
 	if (input_->IsPressedStay(InputID::Shot) && shotTime_ <= 0.0f)
 	{
-		shotTime_ = 0.1f;
-		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, 240.0f);
-		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, 240.0f);
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float> + Math::leftVector2<float>, 360.0f);
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float> + Math::rightVector2<float>, 360.0f);
+		shotTime_ = shot2.interval;
+		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);
+		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::Vector2{std::cos(shot2.radL), std::sin(shot2.radL)}, shot2.speed);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::Vector2{ std::cos(shot2.radR), std::sin(shot2.radR) }, shot2.speed);
 	}
 }
 
@@ -207,11 +223,12 @@ void PlayerBehavior::ShotLevel3(ObjectManager& objectManager)
 	shotTime_ -= Time.GetDeltaTime<float>();
 	if (input_->IsPressedStay(InputID::Shot) && shotTime_ <= 0.0f)
 	{
-		shotTime_ = 0.1f;
-		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, 240.0f);
-		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, 240.0f);
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float> +Math::leftVector2<float>, 360.0f);
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float> +Math::rightVector2<float>, 360.0f);
+		shotTime_ = shot2.interval;
+		missileTime_ = shot2.interval;
+		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);
+		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::Vector2{ std::cos(shot2.radL), std::sin(shot2.radL) }, shot2.speed);
+		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::Vector2{ std::cos(shot2.radR), std::sin(shot2.radR) }, shot2.speed);
 	}
 }
 

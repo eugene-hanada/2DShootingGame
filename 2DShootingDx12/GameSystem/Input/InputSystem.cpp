@@ -13,6 +13,7 @@ InputSystem::InputSystem()
 	inputTable_.emplace(InputID::Left, InputCode{ VK_LEFT,XINPUT_GAMEPAD_DPAD_LEFT });
 	inputTable_.emplace(InputID::Esc, InputCode{ VK_ESCAPE,XINPUT_GAMEPAD_START});
 	inputTable_.emplace(InputID::Shot, InputCode{ 'Z',XINPUT_GAMEPAD_A });
+	inputTable_.emplace(InputID::Shot2, InputCode{ 'X',XINPUT_GAMEPAD_B });
 	inputTable_.emplace(InputID::Speed, InputCode{ VK_LSHIFT,XINPUT_GAMEPAD_LEFT_THUMB });
 
 	key_.fill(0);
@@ -34,11 +35,7 @@ void InputSystem::Update()
 	{
 		return;
 	}
-	if (XInputGetState(0, padState_.get()) != ERROR_SUCCESS)
-	{
-		return;
-	}
-
+	
 	for (auto& code : inputTable_)
 	{
 		inputResult_[code.first].second = inputResult_[code.first].first;
