@@ -155,6 +155,7 @@
     <ClCompile Include="Component\ObjectBehavior\EnemyBehavior.cpp" />
     <ClCompile Include="Component\ObjectBehavior\EnemyMoveToPos.cpp" />
     <ClCompile Include="Component\ObjectBehavior\EffectBehavior.cpp" />
+    <ClCompile Include="Object\ObjectFactory\EffectFactory.cpp" />
     <ClCompile Include="Object\ObjectFactory\EnemyFactory.cpp" />
     <ClCompile Include="Object\ObjectFactory\BulletFactory.cpp" />
     <ClCompile Include="common\AnimationData.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Component\ObjectBehavior\EnemyBehavior.h" />
     <ClInclude Include="Component\ObjectBehavior\EnemyMoveToPos.h" />
     <ClInclude Include="Component\ObjectBehavior\EffectBehavior.h" />
+    <ClInclude Include="Object\ObjectFactory\EffectFactory.h" />
     <ClInclude Include="Object\ObjectFactory\EnemyFactory.h" />
     <ClInclude Include="Object\ObjectFactory\BulletFactory.h" />
     <ClInclude Include="common\AnimationData.h" />

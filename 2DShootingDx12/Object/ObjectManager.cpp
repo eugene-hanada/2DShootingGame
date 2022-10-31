@@ -11,6 +11,7 @@
 #include "../Component/ObjectBehavior/StageBehavior.h"
 #include "../Component/Collider/CircleCollider.h"
 #include "../Object/ObjectFactory/BulletFactory.h"
+#include "../Object/ObjectFactory/EffectFactory.h"
 #include "ObjectManager.h"
 
 ObjectManager::ObjectManager(std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
@@ -25,6 +26,8 @@ ObjectManager::ObjectManager(std::shared_ptr<InputSystem>& input, Dx12Wrapper& d
 
 	// 弾の生成クラス作成
 	auto bulletFactory = std::make_shared<BulletFactory>();
+
+	auto effectFactory = std::make_shared<EffectFactory>(animData_);
 
 	// プレイヤー作成
 	auto& p = objList_.emplace_front(std::make_unique<Object>());

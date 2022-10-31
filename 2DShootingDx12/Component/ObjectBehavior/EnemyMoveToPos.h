@@ -9,7 +9,7 @@ public:
 
 private:
 	void Update(ObjectManager& objectManager) final;
-	void Destory(std::unique_ptr<Object>&& obj);
+	void Destory(std::unique_ptr<Object>&& obj) final;
 	void UpdateMove(ObjectManager& objectManager);
 	void UpdateShot(ObjectManager& objectManager);
 	void Begin(void) final;
