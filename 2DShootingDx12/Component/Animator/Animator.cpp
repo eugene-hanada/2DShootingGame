@@ -63,11 +63,11 @@ void Animator::Update(ObjectManager& objectManager)
 	playTime_ += Time.GetDeltaTime<float>();
 	if (nowItr_->second <= playTime_)
 	{
-		loopCount_++;
 		++nowItr_;
 		playTime_ = 0.0f;
 		if (nowItr_ == data_->idxData.end())
 		{
+			loopCount_++;
 			if (data_->loop == -1 || loopCount_ < data_->loop)
 			{
 				nowItr_ = data_->idxData.begin();

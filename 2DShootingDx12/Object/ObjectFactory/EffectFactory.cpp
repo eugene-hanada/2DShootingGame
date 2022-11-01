@@ -3,6 +3,7 @@
 #include "../../Component/ObjectBehavior/EffectBehavior.h"
 #include "../../Component/Render/AnimationRender.h"
 #include "../../Component/Animator/Animator.h"
+#include "../ObjectManager.h"
 
 EffectFactory::EffectFactory(std::shared_ptr<AnimationData>& animData)
 {
@@ -33,8 +34,11 @@ void EffectFactory::CreateExpM(ObjectManager& objectManager, const Math::Vector2
 	behaviorPool_.pop_front();
 
 	auto anim = std::static_pointer_cast<Animator>(std::move(animatorPool_.front()));
-	anim->SetState("expm");
-	obj->AddComponent(std::move(anim));
+	animatorPool_.pop_front();
+	obj->AddComponent(anim);
+	anim->SetState("exp");
+	obj->SetPos(pos);
+	objectManager.AddObject(std::move(obj));
 }
 
 void EffectFactory::Delete(std::unique_ptr<Object>&& obj)

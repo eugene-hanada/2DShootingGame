@@ -3,6 +3,8 @@
 #include "../Animator/Animator.h"
 #include "../../Object/ObjectFactory/EffectFactory.h"
 
+#include "../../common/Debug.h"
+
 EffectBehavior::EffectBehavior(EffectFactory& factory) :
 	factory_{factory}
 {
@@ -12,6 +14,7 @@ void EffectBehavior::Update(ObjectManager& objectManager)
 {
 	if (!animator_.expired())
 	{
+		DebugLog(animator_.lock()->GetIdx());
 		if (animator_.lock()->IsEnd())
 		{
 			owner_->Destory();

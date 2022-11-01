@@ -6,9 +6,9 @@
 #include "../../Object/ObjectManager.h"
 #include "../../Application.h"
 
-StageBehavior::StageBehavior(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory)
+StageBehavior::StageBehavior(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory)
 {
-	enemyFactory_ = std::make_unique<EnemyFactory>(animData, bulletFactory);
+	enemyFactory_ = std::make_unique<EnemyFactory>(animData, bulletFactory, effectFactory);
 }
 
 void StageBehavior::Update(ObjectManager& objectManager)

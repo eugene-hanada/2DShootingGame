@@ -6,11 +6,12 @@
 #include "../../common/Random.h"
 #include "../../Object/ObjectFactory/PowerUpItemFactory.h"
 #include "../../Application.h"
+#include "../../Object/ObjectFactory/EffectFactory.h"
 
 #include "../../common/Debug.h"
 
-EnemyBehavior::EnemyBehavior(EnemyFactory& factory, std::shared_ptr< BulletFactory>& bulletFactory, PowerUpItemFactory& itemFactory) :
-	factory_{factory},itemFactory_{itemFactory}, hp_{0}, bulletFactory_{bulletFactory}, shotSpeed_{0.0f}, shotTimer_{0.0f}
+EnemyBehavior::EnemyBehavior(EnemyFactory& factory, std::shared_ptr< BulletFactory>& bulletFactory, PowerUpItemFactory& itemFactory, EffectFactory& effectFactory) :
+	factory_{factory},itemFactory_{itemFactory}, hp_{0}, bulletFactory_{bulletFactory}, effectFactory_{effectFactory}, shotSpeed_{0.0f}, shotTimer_{0.0f}, bulletSpeed_{0.0f}, moveSpeed_{0.0f}
 {
 }
 
@@ -30,6 +31,7 @@ void EnemyBehavior::OnHit(Collider& collider, ObjectManager& objectManager)
 				itemFactory_.Create(objectManager,owner_->pos_);
 			}
 			DebugLog("Ž€–S");
+			effectFactory_.CreateExpM(objectManager, owner_->pos_);
 			owner_->Destory();
 		}
 	}

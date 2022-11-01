@@ -12,12 +12,13 @@ constexpr int maxMoveToPosEnemy{ 10 };
 
 constexpr float typeMRedius{ 15.0f };
 
-EnemyFactory::EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory)
+EnemyFactory::EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory) :
+	effectFactory_{effectFactory}
 {
 	itemfactory_ = std::make_unique<PowerUpItemFactory>();
 	for (int i = 0; i < maxMoveToPosEnemy; i++)
 	{
-		moveToPosBehaviorList_.emplace_front(std::make_shared<EnemyMoveToPos>(*this, bulletFactory, *itemfactory_));
+		moveToPosBehaviorList_.emplace_front(std::make_shared<EnemyMoveToPos>(*this, bulletFactory, *itemfactory_, *effectFactory_));
 	}
 	for (int i = 0; i < maxEnemy; i++)
 	{

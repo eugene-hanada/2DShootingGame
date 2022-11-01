@@ -6,12 +6,13 @@
 class EnemyFactory;
 class BulletFactory;
 class PowerUpItemFactory;
+class EffectFactory;
 
 class EnemyBehavior :
 	public ObjectBehavior
 {
 public:
-	EnemyBehavior(EnemyFactory& factory, std::shared_ptr<BulletFactory>& bulletFactory,PowerUpItemFactory& itemFactory);
+	EnemyBehavior(EnemyFactory& factory, std::shared_ptr<BulletFactory>& bulletFactory,PowerUpItemFactory& itemFactory, EffectFactory& effectFactory);
 	virtual ~EnemyBehavior();
 
 	void OnHit(Collider& collider, ObjectManager& objectManager) final;
@@ -43,6 +44,7 @@ protected:
 
 	EnemyFactory& factory_;
 	PowerUpItemFactory& itemFactory_;
+	EffectFactory& effectFactory_;
 	std::shared_ptr< BulletFactory> bulletFactory_;
 	int hp_;
 

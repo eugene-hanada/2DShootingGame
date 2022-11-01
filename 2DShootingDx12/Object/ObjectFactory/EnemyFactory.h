@@ -9,12 +9,13 @@ class ObjectManager;
 class AnimationData;
 class BulletFactory;
 class PowerUpItemFactory;
+class EffectFactory;
 
 class EnemyFactory
 {
 	using ComponentShPtr = std::shared_ptr<Component>;
 public:
-	EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory);
+	EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory);
 
 	void CreateMoveToPosEnemy(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end);
 	void DestoryMoveToPosEnemy(std::unique_ptr<Object>&& obj);
@@ -25,5 +26,6 @@ private:
 	std::forward_list<ComponentShPtr> animatorList_;
 	std::forward_list<std::unique_ptr<Object>> objPool_;
 	std::unique_ptr< PowerUpItemFactory> itemfactory_;
+	std::shared_ptr< EffectFactory> effectFactory_;
 };
 

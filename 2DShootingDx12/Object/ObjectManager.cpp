@@ -44,7 +44,7 @@ ObjectManager::ObjectManager(std::shared_ptr<InputSystem>& input, Dx12Wrapper& d
 	
 	// ステージ作成
 	auto& stage = objList_.emplace_front(std::make_unique<Object>());
-	stage->AddComponent(std::make_unique<StageBehavior>(animData_, bulletFactory));
+	stage->AddComponent(std::make_unique<StageBehavior>(animData_, bulletFactory, effectFactory));
 	stage->Begin();
 
 	// テクスチャを描画するクラスを作成

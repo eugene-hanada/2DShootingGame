@@ -15,10 +15,10 @@
 		<Data>0,0.05</Data>
 	</Animation>
 	<Animation Name="TiltRight" loop="1">
-		<Data>6,0.1</Data>
-		<Data>7,0.1</Data>
-		<Data>8,0.1</Data>
-		<Data>9,0.1</Data>
+		<Data>6,0.2</Data>
+		<Data>7,0.2</Data>
+		<Data>8,0.2</Data>
+		<Data>9,0.05</Data>
 	</Animation>
 	<Animation Name="Right" loop="-1">
 		<Data>8,0.05</Data>
@@ -27,29 +27,29 @@
 </AnimationData>
 <AnimationData Name="expm">
 	<Animation Name="exp" loop="1">
-		<Data>0,0.2</Data>
-		<Data>1,0.2</Data>
-		<Data>2,0.2</Data>
-		<Data>3,0.2</Data>
-		<Data>4,0.2</Data>
-		<Data>5,0.2</Data>
-		<Data>6,0.2</Data>
-		<Data>7,0.2</Data>
-		<Data>8,0.2</Data>
-		<Data>9,0.2</Data>
-		<Data>10,0.2</Data>
-		<Data>11,0.2</Data>
-		<Data>12,0.2</Data>
-		<Data>13,0.2</Data>
+		<Data>0,0.05</Data>
+		<Data>1,0.05</Data>
+		<Data>2,0.05</Data>
+		<Data>3,0.05</Data>
+		<Data>4,0.05</Data>
+		<Data>5,0.05</Data>
+		<Data>6,0.05</Data>
+		<Data>7,0.05</Data>
+		<Data>8,0.05</Data>
+		<Data>9,0.05</Data>
+		<Data>10,0.05</Data>
+		<Data>11,0.05</Data>
+		<Data>12,0.05</Data>
+		<Data>13,0.05</Data>
 	</Animation>
 </AnimationData>
 <AnimationData Name="exps">
 	<Animation Name="exp" loop="1">
-		<Data>0,0.2</Data>
-		<Data>1,0.2</Data>
-		<Data>2,0.2</Data>
-		<Data>3,0.2</Data>
-		<Data>4,0.2</Data>
+		<Data>0,0.05</Data>
+		<Data>1,0.05</Data>
+		<Data>2,0.05</Data>
+		<Data>3,0.05</Data>
+		<Data>4,0.05</Data>
 	</Animation>
 </AnimationData>
 <AnimationData Name="enemym">
@@ -63,5 +63,34 @@
 			<Data>0,0.2</Data>
 			<Data>1,0.2</Data>
 		</Animation>
+</AnimationData>
+<AnimationData Name="score">
+		<Animation Name="100" loop="1">
+			<Data>0,1</Data>
+		</Animation>
+	<Animation Name="200" loop="1">
+		<Data>1,1</Data>
+	</Animation>
+	<Animation Name="300" loop="1">
+		<Data>2,1</Data>
+	</Animation>
+	<Animation Name="400" loop="1">
+		<Data>3,1</Data>
+	</Animation>
+	<Animation Name="500" loop="1">
+		<Data>4,1</Data>
+	</Animation>
+	<Animation Name="600" loop="1">
+		<Data>5,1</Data>
+	</Animation>
+	<Animation Name="700" loop="1">
+		<Data>6,1</Data>
+	</Animation>
+	<Animation Name="800" loop="1">
+		<Data>7,1</Data>
+	</Animation>
+	<Animation Name="900" loop="1">
+		<Data>8,1</Data>
+	</Animation>
 </AnimationData>
 </root>
