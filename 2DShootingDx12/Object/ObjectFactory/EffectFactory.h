@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <forward_list>
+#include <string>
 #include "../../common/Math.h"
 
 class Component;

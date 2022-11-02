@@ -32,6 +32,7 @@ void EnemyBehavior::OnHit(Collider& collider, ObjectManager& objectManager)
 			}
 			DebugLog("Ž€–S");
 			effectFactory_.CreateExpM(objectManager, owner_->pos_);
+			effectFactory_.CreateScore(objectManager, owner_->pos_, "100");
 			owner_->Destory();
 		}
 	}
