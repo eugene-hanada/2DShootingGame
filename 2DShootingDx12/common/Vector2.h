@@ -34,7 +34,10 @@ namespace Math
 
 		T Magnitude(void) const;
 
-		T SqMagnitude(void) const;
+		constexpr T SqMagnitude(void) const
+		{
+			return x * x + y * y;
+		}
 
 		void Normalize(void);
 
@@ -126,11 +129,7 @@ namespace Math
 		return std::sqrt(x * x + y * y);
 	}
 
-	template<Vec2C T>
-	inline T Vector2Tmp<T>::SqMagnitude(void) const
-	{
-		return x * x + y * y;
-	}
+
 
 	template<Vec2C T>
 	inline void Vector2Tmp<T>::Normalize(void)

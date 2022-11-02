@@ -14,7 +14,7 @@ public:
 	using ComponentShPtr = std::shared_ptr<Component>;
 	EffectFactory(std::shared_ptr<AnimationData>& animData);
 	void CreateExpM(ObjectManager& objectManager, const Math::Vector2& pos);
-	void CreateScore(ObjectManager& objectManager, const Math::Vector2& pos);
+	void CreateScore(ObjectManager& objectManager, const Math::Vector2& pos,const std::string& scoreStr);
 	void Delete(std::unique_ptr<Object>&& obj);
 private:
 	std::forward_list<std::unique_ptr<Object>> objPool_;
