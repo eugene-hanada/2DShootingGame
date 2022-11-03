@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "version": "0.6.7"
+  },
+  "savePath": "C:\\Users\\eugen\\Desktop\\ほぼ個人\\VS-project\\DirectX12使用\\2DShootingGame\\2DShootingDx12\\Resource\\image",
+  "images": [
+    {
+      "name": "num1.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/Ui/num1.png",
+      "folder": ""
+    },
+    {
+      "name": "num10.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/Ui/num10.png",
+      "folder": ""
+    },
+    {
+      "name": "num2.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/Ui/num2.png",
+      "folder": ""
+    },
+    {
+      "name": "num3.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/Ui/num3.png",
+      "folder": ""
+    },
+    {
+      "name": "num4.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/Ui/num4.png",
+      "folder": ""
+    },
+    {
+      "name": "num5.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/Ui/num5.png",
+      "folder": ""
+    },
+    {
+      "name": "num6.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/Ui/num6.png",
+      "folder": ""
+    },
+    {
+      "name": "num7.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/Ui/num7.png",
+      "folder": ""
+    },
+    {
+      "name": "num8.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/Ui/num8.png",
+      "folder": ""
+    },
+    {
+      "name": "num9.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/Ui/num9.png",
+      "folder": ""
+    },
+    {
+      "name": "score.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/Ui/score.png",
+      "folder": ""
+    }
+  ],
+  "folders": [],
+  "packOptions": {
+    "textureName": "GameUi",
+    "textureFormat": "png",
+    "removeFileExtension": false,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "XML",
+    "fileName": "pack-result",
+    "savePath": "C:\\Users\\eugen\\Desktop\\ほぼ個人\\VS-project\\DirectX12使用\\2DShootingGame\\2DShootingDx12\\Resource\\image",
+    "width": 256,
+    "height": 256,
+    "fixedSize": false,
+    "powerOfTwo": true,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": false,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "OptimalPacker",
+    "packerMethod": "Automatic"
+  }
+}

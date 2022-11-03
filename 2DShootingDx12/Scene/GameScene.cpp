@@ -40,7 +40,7 @@ GameScene::~GameScene()
 BaseScene::SceneUPtr GameScene::Update(SceneUPtr scene)
 {
 	objManager_->Update();
-	uiManager_->Update();
+	uiManager_->Update(*objManager_);
 	return scene;
 }
 

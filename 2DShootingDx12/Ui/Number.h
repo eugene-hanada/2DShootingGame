@@ -6,11 +6,11 @@ class Number :
 	public UiBase
 {
 public:
-	Number(std::function<int(void)>&& bindFunc, const int digit, const Math::Vector2& pos, const std::string& imgKey);
+	Number(std::function<int(ObjectManager&)>&& bindFunc, const int digit, const Math::Vector2& pos, const std::string& imgKey);
 private:
-	void Update(void) final;
+	void Update(ObjectManager& objectManager) final;
 	void Draw(TextureSheetRender& render) final;
-	std::function<int(void)> bindFunc_;
+	std::function<int(ObjectManager&)> bindFunc_;
 	const int digit_;
 	int value_;
 };

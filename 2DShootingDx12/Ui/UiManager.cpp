@@ -2,6 +2,10 @@
 #include "../common/TextureData.h"
 #include "../GameSystem/Dx12/Render/TextureSheetRender.h"
 #include "Number.h"
+#include "Image.h"
+#include "../Object/ObjectManager.h"
+#include "../Object/Object.h"
+
 
 UiManager::UiManager(const std::string& texFile, std::shared_ptr<TextureData>& textureData, Dx12Wrapper& dx12) :
 	textureData_{textureData}
@@ -12,11 +16,11 @@ UiManager::UiManager(const std::string& texFile, std::shared_ptr<TextureData>& t
 
 }
 
-void UiManager::Update(void)
+void UiManager::Update(ObjectManager& objectManager)
 {
 	for (auto& ui : uiList_)
 	{
-		ui->Update();
+		ui->Update(objectManager);
 	}
 }
 
@@ -32,5 +36,14 @@ void UiManager::Draw(RenderManager& renderMng, CbMatrix& cbMat)
 
 void UiManager::CreateGameUi(void)
 {
-	uiList_.emplace_back(std::make_unique<Number>([]() {return 100; }, 4, Math::zeroVector2<float>, "num"));
+	uiList_.emplace_back(
+		std::make_unique<Number>(
+			[](ObjectManager& objMng) {
+				objMng.FindObject(ObjectID::Stage);
+				return 100; 
+			},
+			4, Math::zeroVector2<float>, "num"
+				)
+	);
+	uiList_.emplace_back(std::make_unique<Image>(Math::Vector2{ 0.0f, 100.0f }, "score"));
 }

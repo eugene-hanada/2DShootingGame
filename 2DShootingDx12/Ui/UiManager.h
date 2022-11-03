@@ -9,12 +9,13 @@ class CbMatrix;
 class TextureSheetRender;
 class TextureData;
 class UiBase;
+class ObjectManager;
 
 class UiManager
 {
 public:
 	UiManager(const std::string& texFile, std::shared_ptr<TextureData>& textureData, Dx12Wrapper& dx12);
-	void Update(void);
+	void Update(ObjectManager& objectManager);
 	void Draw(RenderManager& renderMng, CbMatrix& cbMat);
 	void CreateGameUi(void);
 private:

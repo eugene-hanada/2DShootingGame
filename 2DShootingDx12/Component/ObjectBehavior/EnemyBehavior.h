@@ -7,6 +7,7 @@ class EnemyFactory;
 class BulletFactory;
 class PowerUpItemFactory;
 class EffectFactory;
+class StageBehavior;
 
 class EnemyBehavior :
 	public ObjectBehavior

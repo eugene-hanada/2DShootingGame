@@ -173,6 +173,7 @@
     <ClCompile Include="Component\ObjectBehavior\EnemyBehavior.cpp" />
     <ClCompile Include="Component\ObjectBehavior\EnemyMoveToPos.cpp" />
     <ClCompile Include="Component\ObjectBehavior\EffectBehavior.cpp" />
+    <ClCompile Include="Ui\Image.cpp" />
     <ClCompile Include="Ui\Number.cpp" />
     <ClCompile Include="Object\ObjectFactory\EffectFactory.cpp" />
     <ClCompile Include="Object\ObjectFactory\EnemyFactory.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Component\ObjectBehavior\EnemyBehavior.h" />
     <ClInclude Include="Component\ObjectBehavior\EnemyMoveToPos.h" />
     <ClInclude Include="Component\ObjectBehavior\EffectBehavior.h" />
+    <ClInclude Include="Ui\Image.h" />
     <ClInclude Include="Ui\Number.h" />
     <ClInclude Include="Object\ObjectFactory\EffectFactory.h" />
     <ClInclude Include="Object\ObjectFactory\EnemyFactory.h" />
