@@ -118,8 +118,6 @@ class EnemyMoveToPos
 
 EnemyBehavior <|-- EnemyMoveToPos
 
-class 
-
 class NormalBulletBehavior
 {
 
