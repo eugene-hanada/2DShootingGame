@@ -2,6 +2,7 @@
 #include <string>
 #include "ObjRender.h"
 
+// •’Ê‚Ì•`‰æ‚ğ‚·‚éƒNƒ‰ƒX
 class DefaultRender :
 	public ObjRender
 {

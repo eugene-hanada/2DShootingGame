@@ -96,6 +96,6 @@ namespace Math
 
 	double GetNormalizedAngle(double angle, double valMin = 0.0f, double valMax = pi2<double>);
 	
-	float Clamp(float val, float minVal, float maxVal);
+	//float Clamp(float val, float minVal, float maxVal);
 }
 

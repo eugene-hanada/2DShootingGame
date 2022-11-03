@@ -38,6 +38,7 @@ void EffectFactory::CreateExpM(ObjectManager& objectManager, const Math::Vector2
 	obj->AddComponent(anim);
 	anim->SetState("exp");
 	obj->SetPos(pos);
+	obj->SetID(ObjectID::Effect);
 	objectManager.AddObject(std::move(obj));
 }
 
@@ -63,6 +64,7 @@ void EffectFactory::CreateScore(ObjectManager& objectManager, const Math::Vector
 	obj->AddComponent(anim);
 	anim->SetState(scoreStr);
 	obj->SetPos(pos + ((Math::upVector2<float> + Math::leftVector2<float>).Normalized() * 10.0f));
+	obj->SetID(ObjectID::Effect);
 	objectManager.AddObject(std::move(obj));
 }
 

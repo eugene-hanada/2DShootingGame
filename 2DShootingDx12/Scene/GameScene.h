@@ -2,6 +2,7 @@
 #include "BaseScene.h"
 
 class ObjectManager;
+class UiManager;
 class TextureData;
 class AnimationData;
 
@@ -16,6 +17,9 @@ private:
 	void Draw(void) final;
 	const SceneID GetID(void) const noexcept final { return SceneID::Game; }
 	std::unique_ptr<ObjectManager> objManager_;
+	std::unique_ptr< UiManager> uiManager_;
 	std::unique_ptr<RenderTarget> objRt_;
+	std::unique_ptr<RenderTarget> uiRt_;
+	std::shared_ptr<TextureData> textureData_;
 };
 

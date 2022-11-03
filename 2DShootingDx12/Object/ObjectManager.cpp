@@ -14,11 +14,10 @@
 #include "../Object/ObjectFactory/EffectFactory.h"
 #include "ObjectManager.h"
 
-ObjectManager::ObjectManager(std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
+ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
 {
-	// テクスチャデータロード
-	textureData_ = std::make_shared<TextureData>(dx12);
-	textureData_->Load(L"Resource/image/texture.tdat");
+	// テクスチャデータ
+	textureData_ = textureData;
 
 	// アニメーションデータロード
 	animData_ = std::make_shared<AnimationData>();

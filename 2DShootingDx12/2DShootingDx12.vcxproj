@@ -173,6 +173,7 @@
     <ClCompile Include="Component\ObjectBehavior\EnemyBehavior.cpp" />
     <ClCompile Include="Component\ObjectBehavior\EnemyMoveToPos.cpp" />
     <ClCompile Include="Component\ObjectBehavior\EffectBehavior.cpp" />
+    <ClCompile Include="Ui\Number.cpp" />
     <ClCompile Include="Object\ObjectFactory\EffectFactory.cpp" />
     <ClCompile Include="Object\ObjectFactory\EnemyFactory.cpp" />
     <ClCompile Include="Object\ObjectFactory\BulletFactory.cpp" />
@@ -194,7 +195,6 @@
     <ClCompile Include="GameSystem\Dx12\Render\RenderManager.cpp" />
     <ClCompile Include="GameSystem\Dx12\Render\RenderBase.cpp" />
     <ClCompile Include="GameSystem\Input\InputSystem.cpp" />
-    <ClCompile Include="Component\Material.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\BaseScene.cpp" />
     <ClCompile Include="GameSystem\Dx12\Resource\CbMatrix.cpp" />
@@ -220,6 +220,8 @@
     <ClCompile Include="GameSystem\Dx12\Render\TextureSheetRender.cpp" />
     <ClCompile Include="common\Utility.cpp" />
     <ClCompile Include="Component\ObjectBehavior\StageBehavior.cpp" />
+    <ClCompile Include="Ui\UiBase.cpp" />
+    <ClCompile Include="Ui\UiManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component\Collider\CircleCollider.h" />
@@ -228,6 +230,7 @@
     <ClInclude Include="Component\ObjectBehavior\EnemyBehavior.h" />
     <ClInclude Include="Component\ObjectBehavior\EnemyMoveToPos.h" />
     <ClInclude Include="Component\ObjectBehavior\EffectBehavior.h" />
+    <ClInclude Include="Ui\Number.h" />
     <ClInclude Include="Object\ObjectFactory\EffectFactory.h" />
     <ClInclude Include="Object\ObjectFactory\EnemyFactory.h" />
     <ClInclude Include="Object\ObjectFactory\BulletFactory.h" />
@@ -250,7 +253,6 @@
     <ClInclude Include="GameSystem\Dx12\Render\RenderManager.h" />
     <ClInclude Include="GameSystem\Dx12\Render\RenderBase.h" />
     <ClInclude Include="GameSystem\Input\InputSystem.h" />
-    <ClInclude Include="Component\Material.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="GameSystem\Dx12\Resource\CbMatrix.h" />
@@ -278,6 +280,8 @@
     <ClInclude Include="GameSystem\Dx12\Render\TextureSheetRender.h" />
     <ClInclude Include="common\Utility.h" />
     <ClInclude Include="Component\ObjectBehavior\StageBehavior.h" />
+    <ClInclude Include="Ui\UiBase.h" />
+    <ClInclude Include="Ui\UiManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resource\shader\Alpha2DPs.hlsl">

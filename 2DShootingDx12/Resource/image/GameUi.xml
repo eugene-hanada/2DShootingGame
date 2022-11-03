@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+Format:
+n  => name
+x  => x pos
+y  => y pos
+w  => width
+h  => height
+pX => x pos of the pivot point
+pY => y pos of the pivot point
+oX => x-corner offset
+oY => y-corner offset
+oW => original width
+oH => original height
+r => 'y' if sprite is rotated-->
+<TextureAtlas imagePath="GameUi.png" width="8" height="128" scale="1" format="RGBA8888">
+  <sprite n="num1.png" x="0" y="0" w="8" h="10" pX="0.5" pY="0.5" oX="4" oY="4" oW="16" oH="16"/>
+  <sprite n="num10.png" x="0" y="10" w="8" h="10" pX="0.5" pY="0.5" oX="4" oY="4" oW="16" oH="16"/>
+  <sprite n="num2.png" x="0" y="20" w="8" h="10" pX="0.5" pY="0.5" oX="4" oY="4" oW="16" oH="16"/>
+  <sprite n="num3.png" x="0" y="30" w="8" h="10" pX="0.5" pY="0.5" oX="4" oY="4" oW="16" oH="16"/>
+  <sprite n="num4.png" x="0" y="40" w="8" h="10" pX="0.5" pY="0.5" oX="4" oY="4" oW="16" oH="16"/>
+  <sprite n="num5.png" x="0" y="50" w="8" h="10" pX="0.5" pY="0.5" oX="4" oY="4" oW="16" oH="16"/>
+  <sprite n="num6.png" x="0" y="60" w="8" h="10" pX="0.5" pY="0.5" oX="4" oY="4" oW="16" oH="16"/>
+  <sprite n="num7.png" x="0" y="70" w="8" h="10" pX="0.5" pY="0.5" oX="4" oY="4" oW="16" oH="16"/>
+  <sprite n="num8.png" x="0" y="80" w="8" h="10" pX="0.5" pY="0.5" oX="4" oY="4" oW="16" oH="16"/>
+  <sprite n="num9.png" x="0" y="90" w="8" h="10" pX="0.5" pY="0.5" oX="4" oY="4" oW="16" oH="16"/>
+</TextureAtlas>

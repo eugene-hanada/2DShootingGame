@@ -101,21 +101,63 @@ void TextureSheetRender::Draw(const Math::Vector2& pos, const std::string& key,f
 		
 	);
 
-	//DirectX::XMStoreFloat4x4(
-	//		&mat_->matrices_[nowNum_],
-	//		DirectX::XMMatrixTranslation(pos.x, pos.y, 0.0f)*
-	//		DirectX::XMMatrixRotationY(rot) *
-	//		DirectX::XMMatrixTranslation(-(data.wh.x / 2.0f), -(data.wh.y / 2.0f), 0.0f)
-	//		
-	//		
-	//	);
+	
+	nowNum_++;
+}
 
-	
-	/*DirectX::XMStoreFloat4x4(
+void TextureSheetRender::DrawLT(const Math::Vector2& pos, const std::string& key, int idx)
+{
+	int nowIdx = nowNum_ * 4;
+	int idicIdx = nowNum_ * 6;
+	auto& [texD, size] = texData_->GetData(imgKey_);
+	auto& data = texD.at(key)[idx];
+
+	// ¶ã
+	vertices_[nowIdx].pos = 0.0f;
+	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
+	idices_[idicIdx] = nowIdx;
+
+	nowIdx++;
+
+	// ‰Eã
+	vertices_[nowIdx].pos = 0.0f;
+	vertices_[nowIdx].pos.x += data.wh.x;
+	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv.x += data.wh.x;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
+	idices_[idicIdx + 1] = nowIdx;
+	idices_[idicIdx + 3] = nowIdx;
+
+	nowIdx++;
+
+	// ¶‰º
+	vertices_[nowIdx].pos = 0.0f;
+	vertices_[nowIdx].pos.y += data.wh.y;
+	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv.y += data.wh.y;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
+	idices_[idicIdx + 2] = nowIdx;
+	idices_[idicIdx + 5] = nowIdx;
+
+	nowIdx++;
+
+	// ‰E‰º
+	vertices_[nowIdx].pos = 0.0f;
+	vertices_[nowIdx].pos += data.wh;
+	vertices_[nowIdx].uv = data.pos;
+	vertices_[nowIdx].uv += data.wh;
+	vertices_[nowIdx].uv /= size;
+	vertices_[nowIdx].no = nowNum_;
+	idices_[idicIdx + 4] = nowIdx;
+
+	DirectX::XMStoreFloat4x4(
 		&mat_->matrices_[nowNum_],
-		DirectX::XMMatrixIdentity()
-	);*/
-	
+		DirectX::XMMatrixTranslation(pos.x, pos.y, 0.0f)
+	);
 	nowNum_++;
 }
 
@@ -216,6 +258,13 @@ void TextureSheetRender::Update(void)
 	std::copy(vertices_.begin(), vertices_.end(), vertMap_);
 	std::copy(idices_.begin(), idices_.end(), idMap_);
 	mat_->Update();
+}
+
+const Math::Vector2& TextureSheetRender::GetImgSize(const std::string& key)
+{
+	auto& [texD, size] = texData_->GetData(imgKey_);
+	auto& data = texD.at(key)[0];
+	return data.wh;
 }
 
 bool TextureSheetRender::CreateRootSignature(void)

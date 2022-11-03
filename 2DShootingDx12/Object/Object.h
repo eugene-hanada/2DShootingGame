@@ -5,7 +5,6 @@
 #include "../Component/ComponentID.h"
 
 class Component;
-class Transform;
 class Dx12Wrapper;
 class ObjectManager;
 
@@ -17,6 +16,7 @@ enum class ObjectID
 	EnemyBullet,
 	PowerUpItem,
 	Stage,
+	Effect,
 };
 
 class Object
