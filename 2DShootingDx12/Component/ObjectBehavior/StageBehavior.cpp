@@ -6,7 +6,8 @@
 #include "../../Object/ObjectManager.h"
 #include "../../Application.h"
 
-StageBehavior::StageBehavior(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory)
+StageBehavior::StageBehavior(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory) :
+	score_{0u}
 {
 	enemyFactory_ = std::make_unique<EnemyFactory>(animData, bulletFactory, effectFactory);
 }
@@ -25,8 +26,25 @@ void StageBehavior::Update(ObjectManager& objectManager)
 	}
 }
 
-void StageBehavior::Begin(void)
+void StageBehavior::Begin(ObjectManager& objectManager)
 {
 	timer_ = 30.0f;
 	owner_->SetID(ObjectID::Stage);
+}
+
+void StageBehavior::AddScore(unsigned int addValue)
+{
+	score_ += addValue;
+}
+
+void StageBehavior::SubScore(unsigned int subValue)
+{
+	if (score_ < subValue)
+	{
+		score_ = 0u;
+	}
+	else
+	{
+		score_ -= subValue;
+	}
 }

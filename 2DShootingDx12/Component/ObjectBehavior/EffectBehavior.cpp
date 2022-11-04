@@ -22,7 +22,7 @@ void EffectBehavior::Update(ObjectManager& objectManager)
 	}
 }
 
-void EffectBehavior::Begin(void)
+void EffectBehavior::Begin(ObjectManager& objectManager)
 {
 	animator_ = owner_->GetCcomponent<Animator>(ComponentID::Animator);
 }

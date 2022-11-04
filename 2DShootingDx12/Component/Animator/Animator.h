@@ -38,7 +38,7 @@ public:
 	/// <returns> 終了時true、アニメーション中false </returns>
 	const bool IsEnd(void) const;
 private:
-	void Begin(void) final;
+	void Begin(ObjectManager& objectManager) final;
 	void Update(ObjectManager& objectManager) final;
 	const ComponentID GetID(void) const noexcept final { return ComponentID::Animator; }
 	

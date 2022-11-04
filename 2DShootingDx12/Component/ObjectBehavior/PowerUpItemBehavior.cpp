@@ -33,7 +33,7 @@ void PowerUpItemBehavior::Update(ObjectManager& objectManager)
 	}
 }
 
-void PowerUpItemBehavior::Begin(void)
+void PowerUpItemBehavior::Begin(ObjectManager& objectManager)
 {
 }
 

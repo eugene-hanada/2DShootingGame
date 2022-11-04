@@ -4,6 +4,7 @@
 #include "../../Object/Object.h"
 #include "../Animator/Animator.h"
 #include "../../Object/ObjectFactory/BulletFactory.h"
+#include "../../Object/ObjectFactory/EffectFactory.h"
 #include "PlayerBehavior.h"
 #include "../../Application.h"
 #include "../Collider/Collider.h"
@@ -25,7 +26,7 @@ constexpr struct Shot2
 	float radL{ Math::Deg2Rad(270.0f - 10.0f) };		// 発射の角度
 } shot2;
 
-std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&)> PlayerBehavior::hitFuncTbl_
+std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&, ObjectManager&)> PlayerBehavior::hitFuncTbl_
 {
 	{ObjectID::EnemyBullet, &PlayerBehavior::HitEnemy},
 	{ObjectID::PowerUpItem, &PlayerBehavior::HitPowerUpItem},
@@ -41,8 +42,9 @@ PlayerBehavior::ShotFuncPair PlayerBehavior::shotFuncs_
 
 constexpr float speed_{ 300.0f };
 
-PlayerBehavior::PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory) :
-	input_{input}, bulletFactory_{bulletFactory}, moveStateFunc_{nullptr}, shotTime_{0.0f}, state_{MoveState::Other}, powerItemCount_{0}
+PlayerBehavior::PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory) :
+	input_{input}, bulletFactory_{bulletFactory}, moveStateFunc_{nullptr},effectFactory_{effectFactory},
+	shotTime_{0.0f}, state_{MoveState::Other}, powerItemCount_{0}, nowLevel_{1u}
 {
 	nowShotItr_ = shotFuncs_.cbegin();
 }
@@ -51,13 +53,18 @@ PlayerBehavior::~PlayerBehavior()
 {
 }
 
+const unsigned int PlayerBehavior::GetLevel(void) const
+{
+	return nowLevel_;
+}
+
 void PlayerBehavior::Update(ObjectManager& objectManager)
 {
 	Move();
 	Shot(objectManager);
 }
 
-void PlayerBehavior::Begin(void)
+void PlayerBehavior::Begin(ObjectManager& objectManager)
 {
 	animator_ = owner_->GetCcomponent<Animator>(ComponentID::Animator);
 	state_ = MoveState::Other;
@@ -66,7 +73,7 @@ void PlayerBehavior::Begin(void)
 	nowShotItr_ = shotFuncs_.cbegin();
 }
 
-void PlayerBehavior::HitPowerUpItem(Collider& collider)
+void PlayerBehavior::HitPowerUpItem(Collider& collider, ObjectManager& objectManager)
 {
 	DebugLog("アイテムゲット");
 	if (nowShotItr_ == --shotFuncs_.end())
@@ -76,21 +83,25 @@ void PlayerBehavior::HitPowerUpItem(Collider& collider)
 	powerItemCount_++;
 	if (powerItemCount_ >= nowShotItr_->second)
 	{
+		nowLevel_++;
 		++nowShotItr_;
 	}
 }
 
-void PlayerBehavior::HitEnemy(Collider& collider)
+void PlayerBehavior::HitEnemy(Collider& collider, ObjectManager& objectManager)
 {
 	nowShotItr_ = shotFuncs_.cbegin();
 	powerItemCount_ = 0U;
+	nowLevel_ = 0u;
+	effectFactory_->CreateExpM(objectManager, owner_->pos_);
+	owner_->Destory();
 }
 
 void PlayerBehavior::OnHit(Collider& collider, ObjectManager& objectManager)
 {
 	if (hitFuncTbl_.contains(collider.GetOnwer()->GetID()))
 	{
-		(this->*hitFuncTbl_[collider.GetOnwer()->GetID()])(collider);
+		(this->*hitFuncTbl_[collider.GetOnwer()->GetID()])(collider, objectManager);
 	}
 }
 

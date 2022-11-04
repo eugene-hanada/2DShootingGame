@@ -12,6 +12,7 @@
 #include "../Component/Collider/CircleCollider.h"
 #include "../Object/ObjectFactory/BulletFactory.h"
 #include "../Object/ObjectFactory/EffectFactory.h"
+#include "../Application.h"
 #include "ObjectManager.h"
 
 ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
@@ -30,7 +31,7 @@ ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::sha
 
 	// プレイヤー作成
 	auto& p = objList_.emplace_front(std::make_unique<Object>());
-	p->AddComponent(std::make_unique<PlayerBehavior>(input, bulletFactory));
+	p->AddComponent(std::make_unique<PlayerBehavior>(input, bulletFactory, effectFactory));
 	p->AddComponent(std::make_unique<Animator>(animData_));
 	p->GetCcomponent<Animator>(ComponentID::Animator).lock()->SetState("Non");
 	p->AddComponent(std::make_shared<AnimationRender>());
@@ -38,13 +39,13 @@ ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::sha
 	p->AddComponent(std::make_shared<CircleCollider>());
 	p->GetCcomponent<CircleCollider>(ComponentID::Collider).lock()->SetRadius(10.0f);
 	p->SetID(ObjectID::Player);
-	p->Begin();
+	p->Begin(*this);
 
 	
 	// ステージ作成
 	auto& stage = objList_.emplace_front(std::make_unique<Object>());
 	stage->AddComponent(std::make_unique<StageBehavior>(animData_, bulletFactory, effectFactory));
-	stage->Begin();
+	stage->Begin(*this);
 
 	// テクスチャを描画するクラスを作成
 	texSheetRender_ = std::make_unique< TextureSheetRender>("texture.png", dx12, textureData_, 256);
@@ -54,7 +55,7 @@ ObjectManager::~ObjectManager()
 {
 }
 
-void ObjectManager::Update(void)
+bool ObjectManager::Update(void)
 {
 	// オブジェクト全部更新
 	for (auto& obj : objList_)
@@ -100,6 +101,17 @@ void ObjectManager::Update(void)
 		(*itr)->End(std::move(*itr));
 		objList_.erase(itr);
 	}
+
+	if (isEnd_)
+	{
+		endTimer_ += Time.GetDeltaTime<float>();
+		if (endTimer_ >= 5.0f)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void ObjectManager::Draw(RenderManager& renderMng, CbMatrix& cbMat)
@@ -116,11 +128,16 @@ void ObjectManager::Draw(RenderManager& renderMng, CbMatrix& cbMat)
 	texSheetRender_->Draw(cbMat);
 }
 
+void ObjectManager::GameEnd(void)
+{
+	isEnd_ = true;
+}
+
 void ObjectManager::AddObject(std::unique_ptr<Object>&& object)
 {
 	objList_.emplace_front(std::move(object));
 	auto itr = objList_.begin();
-	(*itr)->Begin();
+	(*itr)->Begin(*this);
 }
 
 std::unique_ptr<Object> ObjectManager::RemovObjecte(std::list<std::unique_ptr<Object>>::iterator itr)

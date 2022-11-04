@@ -37,7 +37,7 @@ public:
 	/// オブジェクトが有効になった時の処理
 	/// </summary>
 	/// <param name=""></param>
-	virtual void Begin(void){}
+	virtual void Begin(ObjectManager& objectManager){}
 
 	/// <summary>
 	/// オブジェクトが無効になった時の処理

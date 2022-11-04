@@ -6,14 +6,17 @@
 class InputSystem;
 class Animator;
 class BulletFactory;
+class EffectFactory;
 
 class PlayerBehavior :
 	public ObjectBehavior
 {
 	using ShotFuncPair =std::vector< std::pair<void(PlayerBehavior::*)(ObjectManager&), unsigned int>>;
 public:
-	PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory);
+	PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory);
 	~PlayerBehavior();
+
+	const unsigned int GetLevel(void) const;
 private:
 
 	enum class MoveState
@@ -26,11 +29,11 @@ private:
 	};
 
 	void Update(ObjectManager& objectManager) final;
-	void Begin(void) final;
+	void Begin(ObjectManager& objectManager) final;
 	
-	void HitPowerUpItem(Collider& collider);
+	void HitPowerUpItem(Collider& collider, ObjectManager& objectManager);
 
-	void HitEnemy(Collider& collider);
+	void HitEnemy(Collider& collider, ObjectManager& objectManager);
 
 	void OnHit(Collider& collider, ObjectManager& objectManager) final;
 
@@ -62,6 +65,7 @@ private:
 
 	MoveState state_;
 	std::shared_ptr< BulletFactory> bulletFactory_;
+	std::shared_ptr< EffectFactory> effectFactory_;
 
 	float shotTime_;
 
@@ -69,11 +73,13 @@ private:
 
 	unsigned int powerItemCount_;
 
+	unsigned int nowLevel_;
+
 	ShotFuncPair::const_iterator nowShotItr_;
 
 
 
-	static std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&)> hitFuncTbl_;
+	static std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&, ObjectManager&)> hitFuncTbl_;
 
 	
 

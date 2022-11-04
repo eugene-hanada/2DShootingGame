@@ -14,7 +14,7 @@ public:
 private:
 
 	void Draw(TextureSheetRender& texSheetRender) final;
-	void Begin(void) final;
+	void Begin(ObjectManager& objectManager) final;
 	void End(void) final;
 	
 	// アニメーション制御クラス

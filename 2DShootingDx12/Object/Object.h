@@ -33,7 +33,7 @@ public:
 	ComponentShPtr RemoveComponent(ComponentID id);
 	void Update(ObjectManager& objectManager);
 
-	void Begin(void);
+	void Begin(ObjectManager& objectManager);
 	void End(std::unique_ptr<Object>&& obj);
 
 	// 後でコンセプトに置き換えとけ

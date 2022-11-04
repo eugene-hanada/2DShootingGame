@@ -77,6 +77,6 @@ protected:
 	int targetType_;
 private:
 	const ComponentID GetID(void) const noexcept final { return ComponentID::Collider; }
-	virtual void Begin(void) override;
+	virtual void Begin(ObjectManager& objectManager) override;
 };
 

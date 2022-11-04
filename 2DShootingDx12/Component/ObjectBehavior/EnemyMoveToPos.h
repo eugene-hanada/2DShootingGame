@@ -12,7 +12,7 @@ private:
 	void Destory(std::unique_ptr<Object>&& obj) final;
 	void UpdateMove(ObjectManager& objectManager);
 	void UpdateShot(ObjectManager& objectManager);
-	void Begin(void) final;
+	void Begin(ObjectManager& objectManager) final;
 	Math::Vector2 dest_;
 	Math::Vector2 moveVec_;
 	void (EnemyMoveToPos::* update_)(ObjectManager&);

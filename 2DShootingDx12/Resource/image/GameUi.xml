@@ -15,15 +15,16 @@ oW => original width
 oH => original height
 r => 'y' if sprite is rotated-->
 <TextureAtlas imagePath="GameUi.png" width="256" height="64" scale="1" format="RGBA8888">
-  <sprite n="score.png" x="0" y="0" w="124" h="26" pX="0.5" pY="0.5"/>
-  <sprite n="num1.png" x="124" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
-  <sprite n="num10.png" x="140" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
-  <sprite n="num2.png" x="156" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
-  <sprite n="num3.png" x="172" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
-  <sprite n="num4.png" x="188" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
-  <sprite n="num5.png" x="204" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
-  <sprite n="num6.png" x="220" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
-  <sprite n="num7.png" x="236" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
-  <sprite n="num8.png" x="124" y="20" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
-  <sprite n="num9.png" x="140" y="20" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
+  <sprite n="num1.png" x="0" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
+  <sprite n="num10.png" x="16" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
+  <sprite n="num2.png" x="32" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
+  <sprite n="num3.png" x="48" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
+  <sprite n="num4.png" x="64" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
+  <sprite n="num5.png" x="80" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
+  <sprite n="num6.png" x="96" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
+  <sprite n="num7.png" x="112" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
+  <sprite n="num8.png" x="128" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
+  <sprite n="num9.png" x="144" y="0" w="16" h="20" pX="0.5" pY="0.5" oX="8" oY="8" oW="32" oH="32"/>
+  <sprite n="power.png" x="0" y="20" w="129" h="26" pX="0.5" pY="0.5"/>
+  <sprite n="score.png" x="129" y="20" w="124" h="26" pX="0.5" pY="0.5"/>
 </TextureAtlas>

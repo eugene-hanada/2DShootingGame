@@ -11,7 +11,7 @@ public:
     ~PowerUpItemBehavior();
 private:
     void Update(ObjectManager& objectManager) final;
-    void Begin(void) final;
+    void Begin(ObjectManager& objectManager) final;
     void OnHit(Collider& collider, ObjectManager& objectManager) final;
     void Destory(std::unique_ptr<Object>&& obj) final;
     PowerUpItemFactory& factory_;

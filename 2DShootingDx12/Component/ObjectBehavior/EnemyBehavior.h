@@ -36,6 +36,12 @@ public:
 	{
 		moveSpeed_ = speed;
 	}
+
+	void SetScore(unsigned int score)
+	{
+		score_ = score;
+	}
+
 protected:
 
 	bool IsShot(void) const
@@ -43,10 +49,15 @@ protected:
 		return shotTimer_ >= shotSpeed_;
 	}
 
+	void Begin(ObjectManager& objectManager) override;
+
 	EnemyFactory& factory_;
 	PowerUpItemFactory& itemFactory_;
 	EffectFactory& effectFactory_;
 	std::shared_ptr< BulletFactory> bulletFactory_;
+
+	std::weak_ptr<StageBehavior> stage_;
+
 	int hp_;
 
 	// 発射タイミングを図る変数
@@ -57,7 +68,11 @@ protected:
 
 	float moveSpeed_;
 
+	// 倒されたとき加算されるscore
+	unsigned int score_;
+
 private:
+	
 	// 発射スピード
 	float shotSpeed_;
 

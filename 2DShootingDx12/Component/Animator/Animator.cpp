@@ -46,7 +46,7 @@ const bool Animator::IsEnd(void) const
 	return loopCount_ >= data_->loop && data_->loop != -1;
 }
 
-void Animator::Begin(void)
+void Animator::Begin(ObjectManager& objectManager)
 {
 	auto render = owner_->GetCcomponent<ObjRender>(ComponentID::Render);
 	if (!render.expired())

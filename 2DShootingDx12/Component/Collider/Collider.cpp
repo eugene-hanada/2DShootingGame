@@ -10,7 +10,7 @@ Collider::~Collider()
 {
 }
 
-void Collider::Begin(void)
+void Collider::Begin(ObjectManager& objectManager)
 {
 	behavior_ = owner_->GetCcomponent<ObjectBehavior>(ComponentID::Behavior);
 }

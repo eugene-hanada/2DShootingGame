@@ -35,12 +35,12 @@ void Object::Update(ObjectManager& objectManager)
 	}
 }
 
-void Object::Begin(void)
+void Object::Begin(ObjectManager& objectManager)
 {
 	isActive_ = true;
 	for (auto& comp : componentMap_)
 	{
-		comp.second->Begin();
+		comp.second->Begin(objectManager);
 	}
 }
 

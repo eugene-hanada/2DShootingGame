@@ -10,8 +10,9 @@
 
 
 
-void EnemyMoveToPos::Begin(void)
+void EnemyMoveToPos::Begin(ObjectManager& objectManager)
 {
+	EnemyBehavior::Begin(objectManager);
 	update_ = &EnemyMoveToPos::UpdateMove;
 	moveVec_ = (dest_ - owner_->GetPos()).Normalized();
 	shotTimer_ = 0.0f;

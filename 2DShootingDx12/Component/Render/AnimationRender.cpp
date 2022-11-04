@@ -20,7 +20,7 @@ void AnimationRender::Draw(TextureSheetRender& texSheetRender)
 	}
 }
 
-void AnimationRender::Begin(void)
+void AnimationRender::Begin(ObjectManager& objectManager)
 {
 	animator_ = owner_->GetCcomponent<Animator>(ComponentID::Animator);
 }
