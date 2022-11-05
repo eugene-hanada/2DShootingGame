@@ -7,6 +7,8 @@
 
 #include "SoundResource.h"
 
+#include "Wave.h"
+
 #pragma comment(lib,"xaudio2.lib")
 
 
@@ -24,7 +26,8 @@ int main(void)
 		return -1;
 	}
 
-
+	Wave wave;
+	wave.Load("Pickup_Coin.wav");
 
 	// XAudio2‚Ì‰Šú‰»
 	ComPtr<IXAudio2> xAudio2{ nullptr };
