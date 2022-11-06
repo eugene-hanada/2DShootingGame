@@ -4,7 +4,7 @@ class Transition :
     public BaseScene
 {
 public:
-    Transition(SceneUPtr befor, SceneUPtr after ,std::shared_ptr<RenderManager>& renderMng, Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input);
+    Transition(SceneUPtr befor, SceneUPtr after ,std::shared_ptr<RenderManager>& renderMng, Dx12Wrapper& dx12, Xaudio2& xaudio, std::shared_ptr<InputSystem>& input);
     virtual ~Transition();
 protected:
     virtual bool TransitionUpdate(void) = 0;

@@ -8,6 +8,7 @@
 #include "PlayerBehavior.h"
 #include "../../Application.h"
 #include "../Collider/Collider.h"
+#include "../Sound/Sound.h"
 #include "../../common/Debug.h"
 
 constexpr struct Shot1
@@ -71,6 +72,7 @@ void PlayerBehavior::Begin(ObjectManager& objectManager)
 	moveStateFunc_ = &PlayerBehavior::Other;
 	shotTime_ = 0.0f;
 	nowShotItr_ = shotFuncs_.cbegin();
+	sound_ = owner_->GetCcomponent<Sound>(ComponentID::Sound);
 }
 
 void PlayerBehavior::HitPowerUpItem(Collider& collider, ObjectManager& objectManager)
@@ -210,6 +212,7 @@ void PlayerBehavior::ShotLevel1(ObjectManager& objectManager)
 	shotTime_ -= Time.GetDeltaTime<float>();
 	if (input_->IsPressedStay(InputID::Shot) && shotTime_ <= 0.0f)
 	{
+		sound_.lock()->Start();
 		shotTime_ = shot1.interval;
 		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, shot1.speed);
 		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, shot1.speed);
@@ -221,6 +224,7 @@ void PlayerBehavior::ShotLevel2(ObjectManager& objectManager)
 	shotTime_ -= Time.GetDeltaTime<float>();
 	if (input_->IsPressedStay(InputID::Shot) && shotTime_ <= 0.0f)
 	{
+		sound_.lock()->Start();
 		shotTime_ = shot2.interval;
 		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);
 		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);
@@ -234,6 +238,7 @@ void PlayerBehavior::ShotLevel3(ObjectManager& objectManager)
 	shotTime_ -= Time.GetDeltaTime<float>();
 	if (input_->IsPressedStay(InputID::Shot) && shotTime_ <= 0.0f)
 	{
+		sound_.lock()->Start();
 		shotTime_ = shot2.interval;
 		missileTime_ = shot2.interval;
 		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);

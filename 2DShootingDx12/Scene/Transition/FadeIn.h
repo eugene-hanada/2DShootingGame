@@ -6,7 +6,7 @@ class FadeIn :
 	public Transition
 {
 public:
-	FadeIn(SceneUPtr befor, SceneUPtr after, std::shared_ptr<RenderManager>& renderMng, Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input);
+	FadeIn(SceneUPtr befor, SceneUPtr after, std::shared_ptr<RenderManager>& renderMng, Dx12Wrapper& dx12, Xaudio2& xaudio, std::shared_ptr<InputSystem>& input);
 	~FadeIn();
 private:
 	void Draw(void) final;

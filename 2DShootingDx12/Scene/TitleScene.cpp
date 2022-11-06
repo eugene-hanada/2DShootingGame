@@ -11,8 +11,8 @@
 
 #include "TitleScene.h"
 
-TitleScene::TitleScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12,std::shared_ptr<InputSystem>& input) :
-	BaseScene{ renderMng, dx12,input}
+TitleScene::TitleScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, Xaudio2& xaudio,std::shared_ptr<InputSystem>& input) :
+	BaseScene{ renderMng, dx12,xaudio,input}
 {
 	tex_= std::make_shared<Texture>(dx12_, TEXT("Resource/image/Logo.png"));
 	testMaterial_ = std::make_unique<MaterialBase>(dx12, Math::Vector2{ 100.0f,100.0f });
@@ -45,7 +45,7 @@ BaseScene::SceneUPtr TitleScene::Update(SceneUPtr scene)
 	
 	if (input_->IsPressed(InputID::Shot))
 	{
-		return std::make_unique<FadeIn>(std::move(scene), std::make_unique<GameScene>(renderMng_, dx12_, input_), renderMng_, dx12_, input_);
+		return std::make_unique<FadeIn>(std::move(scene), std::make_unique<GameScene>(renderMng_, dx12_, xaudio_, input_), renderMng_, dx12_,xaudio_, input_);
 	}
 	
 	return scene;

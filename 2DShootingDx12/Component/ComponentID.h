@@ -6,5 +6,6 @@ enum class ComponentID
 	Collider,
 	Render,
 	Animator,
+	Sound,
 };
 

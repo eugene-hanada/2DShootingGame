@@ -15,8 +15,8 @@
 #include "../Ui/UiBase.h"
 #include "../GameSystem/Window.h"
 
-GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input) :
-	BaseScene{ renderMng,dx12,input}
+GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, Xaudio2& xaudio, std::shared_ptr<InputSystem>& input) :
+	BaseScene{ renderMng,dx12,xaudio,input}
 {
 	textureData_ = std::make_shared<TextureData>(dx12);
 	textureData_->Load(L"Resource/image/texture.tdat");
@@ -28,7 +28,7 @@ GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12
 	uiRt_->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	uiRt_->GetMaterial().GetTransform()->SetPos({ ObjectManager::fieldSize_.x, 0.0f });
 	uiRt_->GetMaterial().GetTransform()->Update();
-	objManager_ = std::make_unique<ObjectManager>(textureData_,input_,dx12_);
+	objManager_ = std::make_unique<ObjectManager>(textureData_,input_,dx12_,xaudio_);
 	uiManager_ = std::make_unique<UiManager>("GameUi.png", textureData_, dx12_);
 	uiManager_->CreateGameUi();
 }

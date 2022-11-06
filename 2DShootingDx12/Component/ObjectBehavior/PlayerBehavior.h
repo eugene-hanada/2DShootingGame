@@ -7,6 +7,7 @@ class InputSystem;
 class Animator;
 class BulletFactory;
 class EffectFactory;
+class Sound;
 
 class PlayerBehavior :
 	public ObjectBehavior
@@ -62,6 +63,8 @@ private:
 	std::shared_ptr<InputSystem> input_;
 
 	std::weak_ptr<Animator> animator_;
+
+	std::weak_ptr <Sound> sound_;
 
 	MoveState state_;
 	std::shared_ptr< BulletFactory> bulletFactory_;

@@ -10,7 +10,7 @@ class GameScene :
 	public BaseScene
 {
 public:
-	GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input);
+	GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, Xaudio2& xaudio, std::shared_ptr<InputSystem>& input);
 	~GameScene();
 private:
 	SceneUPtr Update(SceneUPtr scene) final;

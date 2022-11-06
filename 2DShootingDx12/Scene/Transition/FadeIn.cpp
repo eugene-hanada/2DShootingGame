@@ -5,8 +5,8 @@
 
 constexpr float timeMax{ 2.0f };
 
-FadeIn::FadeIn(SceneUPtr befor, SceneUPtr after, std::shared_ptr<RenderManager>& renderMng, Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input) :
-	Transition{std::move(befor), std::move(after),renderMng,dx12,input}
+FadeIn::FadeIn(SceneUPtr befor, SceneUPtr after, std::shared_ptr<RenderManager>& renderMng, Dx12Wrapper& dx12, Xaudio2& xaudio, std::shared_ptr<InputSystem>& input) :
+	Transition{std::move(befor), std::move(after),renderMng,dx12, xaudio,input}
 {
 	alpha_ = std::make_shared < CbValue<float>>(dx12);
 	alpha_->val_ = 0.0;

@@ -127,7 +127,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;DirectXTex.lib;d3dcompiler.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;DirectXTex.lib;d3dcompiler.lib;xinput.lib;xaudio2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
       <Inputs>%(Inputs)</Inputs>
@@ -154,7 +154,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;DirectXTex.lib;d3dcompiler.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;DirectXTex.lib;d3dcompiler.lib;xinput.lib;xaudio2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
       <Inputs>%(Inputs)</Inputs>
@@ -173,6 +173,9 @@
     <ClCompile Include="Component\ObjectBehavior\EnemyBehavior.cpp" />
     <ClCompile Include="Component\ObjectBehavior\EnemyMoveToPos.cpp" />
     <ClCompile Include="Component\ObjectBehavior\EffectBehavior.cpp" />
+    <ClCompile Include="Component\Sound\Sound.cpp" />
+    <ClCompile Include="GameSystem\Xaudio2\Wave.cpp" />
+    <ClCompile Include="GameSystem\Xaudio2\Xaudio2.cpp" />
     <ClCompile Include="Ui\Image.cpp" />
     <ClCompile Include="Ui\Number.cpp" />
     <ClCompile Include="Object\ObjectFactory\EffectFactory.cpp" />
@@ -231,6 +234,9 @@
     <ClInclude Include="Component\ObjectBehavior\EnemyBehavior.h" />
     <ClInclude Include="Component\ObjectBehavior\EnemyMoveToPos.h" />
     <ClInclude Include="Component\ObjectBehavior\EffectBehavior.h" />
+    <ClInclude Include="Component\Sound\Sound.h" />
+    <ClInclude Include="GameSystem\Xaudio2\Wave.h" />
+    <ClInclude Include="GameSystem\Xaudio2\Xaudio2.h" />
     <ClInclude Include="Ui\Image.h" />
     <ClInclude Include="Ui\Number.h" />
     <ClInclude Include="Object\ObjectFactory\EffectFactory.h" />

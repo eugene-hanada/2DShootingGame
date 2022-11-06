@@ -7,11 +7,12 @@ class RenderManager;
 class Dx12Wrapper;
 class InputSystem;
 class CbMatrix;
+class Xaudio2;
 
 class BaseScene
 {
 public:
-	BaseScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input);
+	BaseScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, Xaudio2& xaudio, std::shared_ptr<InputSystem>& input);
 	virtual ~BaseScene();
 	using SceneUPtr = std::unique_ptr<BaseScene>;
 	virtual SceneUPtr Update(SceneUPtr scene) = 0;
@@ -23,6 +24,7 @@ protected:
 	std::shared_ptr<RenderManager>  renderMng_;
 	std::shared_ptr<InputSystem> input_;
 	Dx12Wrapper& dx12_;
+	Xaudio2& xaudio_;
 private:
 	virtual const SceneID GetID(void) const noexcept = 0;
 	

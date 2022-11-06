@@ -12,6 +12,7 @@ class Dx12Wrapper;
 class TextureData;
 class TextureSheetRender;
 class AnimationData;
+class Xaudio2;
 enum class ObjectID;
 
 class ObjectManager
@@ -19,7 +20,7 @@ class ObjectManager
 	using ObjectUptr = std::unique_ptr<Object>;
 	using ObjectList = std::list<ObjectUptr>;
 public:
-	ObjectManager(std::shared_ptr<TextureData>& textureData,std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12);
+	ObjectManager(std::shared_ptr<TextureData>& textureData,std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12, Xaudio2& xaudio);
 	~ObjectManager();
 	bool Update(void);
 	void Draw(RenderManager& renderMng, CbMatrix& cbMat);

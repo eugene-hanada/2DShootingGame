@@ -3,8 +3,8 @@
 #include "../Application.h"
 #include "BaseScene.h"
 
-BaseScene::BaseScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input) :
-	renderMng_{renderMng}, input_{input},dx12_{dx12}
+BaseScene::BaseScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, Xaudio2& xaudio, std::shared_ptr<InputSystem>& input) :
+	renderMng_{renderMng}, input_{input},dx12_{dx12}, xaudio_{xaudio}
 {
 	rt_ = std::make_unique<RenderTarget>(dx12_, Math::Vector2{ 1280.0f,720.0f });
 }

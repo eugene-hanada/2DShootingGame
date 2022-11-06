@@ -10,7 +10,7 @@ class TitleScene :
 	public BaseScene
 {
 public:
-	TitleScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, std::shared_ptr<InputSystem>& input);
+	TitleScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, Xaudio2& xaudio, std::shared_ptr<InputSystem>& input);
 	~TitleScene();
 private:
 	SceneUPtr Update(SceneUPtr scene) final;

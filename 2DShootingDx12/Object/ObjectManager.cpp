@@ -10,12 +10,14 @@
 #include "../Component/Animator/Animator.h"
 #include "../Component/ObjectBehavior/StageBehavior.h"
 #include "../Component/Collider/CircleCollider.h"
+#include "../Component/Sound/Sound.h"
+#include "../GameSystem/Xaudio2/Wave.h"
 #include "../Object/ObjectFactory/BulletFactory.h"
 #include "../Object/ObjectFactory/EffectFactory.h"
 #include "../Application.h"
 #include "ObjectManager.h"
 
-ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12)
+ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::shared_ptr<InputSystem>& input, Dx12Wrapper& dx12, Xaudio2& xaudio)
 {
 	// テクスチャデータ
 	textureData_ = textureData;
@@ -27,7 +29,7 @@ ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::sha
 	// 弾の生成クラス作成
 	auto bulletFactory = std::make_shared<BulletFactory>();
 
-	auto effectFactory = std::make_shared<EffectFactory>(animData_);
+	auto effectFactory = std::make_shared<EffectFactory>(animData_, xaudio);
 
 	// プレイヤー作成
 	auto& p = objList_.emplace_front(std::make_unique<Object>());
@@ -38,6 +40,9 @@ ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::sha
 	p->GetCcomponent< AnimationRender>(ComponentID::Render).lock()->SetImgKey("ship");
 	p->AddComponent(std::make_shared<CircleCollider>());
 	p->GetCcomponent<CircleCollider>(ComponentID::Collider).lock()->SetRadius(10.0f);
+	auto wave{ std::make_shared<Wave>() };
+	wave->Load("Resource/Sound/Shot1.wav");
+	p->AddComponent(std::make_shared<Sound>(xaudio, wave));
 	p->SetID(ObjectID::Player);
 	p->Begin(*this);
 

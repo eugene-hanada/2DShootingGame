@@ -11,7 +11,7 @@
 #include "GameSystem/Input/InputSystem.h"
 #include "common/Random.h"
 #include "common/Debug.h"
-
+#include "GameSystem/Xaudio2/Xaudio2.h"
 #include "GameSystem/Dx12/Resource/RenderTarget.h"
 
 Application Application::instance_;
@@ -20,6 +20,7 @@ bool Application::Init(int x, int y, const std::basic_string<TCHAR>& titleText)
 {
 	window_ = std::make_unique<Window>(x, y, titleText);
 	dx12_ = std::make_unique<Dx12Wrapper>(*window_);
+	xaudio2_ = std::make_unique<Xaudio2>();
 	random_ = std::make_unique<Random>();
 	return true;
 }
@@ -34,7 +35,7 @@ int Application::Run(void)
 
 	renderMng_ = std::make_shared<RenderManager>(*dx12_);
 	input_ = std::make_shared<InputSystem>();
-	scene_ = std::make_unique<TitleScene>(renderMng_, *dx12_,input_);
+	scene_ = std::make_unique<TitleScene>(renderMng_, *dx12_, *xaudio2_,input_);
 	
 	time_.DeltaTimeStart();
 	time_.DeltaTimeEnd();

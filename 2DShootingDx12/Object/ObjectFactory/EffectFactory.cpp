@@ -4,9 +4,20 @@
 #include "../../Component/Render/AnimationRender.h"
 #include "../../Component/Animator/Animator.h"
 #include "../ObjectManager.h"
+#include "../../GameSystem/Xaudio2/Wave.h"
+#include "../../Component/Sound/Sound.h"
 
-EffectFactory::EffectFactory(std::shared_ptr<AnimationData>& animData)
+constexpr int expMMax{ 10 };
+
+EffectFactory::EffectFactory(std::shared_ptr<AnimationData>& animData, Xaudio2& xaudio2)
 {
+	std::shared_ptr<Wave> expM = std::make_shared<Wave>();
+	expM->Load("Resource/Sound/ExpM.wav");
+	for (int i = 0; i < expMMax; i++)
+	{
+		expMSound_.emplace_front(std::make_shared<Sound>(xaudio2,expM));
+	}
+
 	for (int i = 0; i < 50; i++)
 	{
 		objPool_.emplace_front(std::make_unique<Object>());
@@ -30,8 +41,15 @@ void EffectFactory::CreateExpM(ObjectManager& objectManager, const Math::Vector2
 	obj->AddComponent(std::move(render));
 	renderPool_.pop_front();
 
-	obj->AddComponent(std::move(behaviorPool_.front()));
+	auto behavior = std::static_pointer_cast<EffectBehavior>(std::move(behaviorPool_.front()));
+	behavior->SetType(EffectType::ExpM);
+	obj->AddComponent(std::move(behavior));
 	behaviorPool_.pop_front();
+
+	// ƒTƒEƒ“ƒh‚Ì‚â‚Â‚ð’Ç‰Á
+	std::static_pointer_cast<Sound>(expMSound_.front())->Start();
+	obj->AddComponent(std::move(expMSound_.front()));
+	expMSound_.pop_front();
 
 	auto anim = std::static_pointer_cast<Animator>(std::move(animatorPool_.front()));
 	animatorPool_.pop_front();
@@ -69,6 +87,30 @@ void EffectFactory::CreateScore(ObjectManager& objectManager, const Math::Vector
 }
 
 void EffectFactory::Delete(std::unique_ptr<Object>&& obj)
+{
+	
+}
+
+void EffectFactory::DeleteExpM(std::unique_ptr<Object>&& obj)
+{
+	animatorPool_.emplace_front(obj->RemoveComponent(ComponentID::Animator));
+	renderPool_.emplace_front(obj->RemoveComponent(ComponentID::Render));
+	behaviorPool_.emplace_front(obj->RemoveComponent(ComponentID::Behavior));
+	expMSound_.emplace_front(obj->RemoveComponent(ComponentID::Sound));
+	objPool_.emplace_front(std::move(obj));
+}
+
+void EffectFactory::DeleteExpS(std::unique_ptr<Object>&& obj)
+{
+	animatorPool_.emplace_front(obj->RemoveComponent(ComponentID::Animator));
+	renderPool_.emplace_front(obj->RemoveComponent(ComponentID::Render));
+	behaviorPool_.emplace_front(obj->RemoveComponent(ComponentID::Behavior));
+	expSSound_.emplace_front(obj->RemoveComponent(ComponentID::Sound));
+	objPool_.emplace_front(std::move(obj));
+
+}
+
+void EffectFactory::DeleteScore(std::unique_ptr<Object>&& obj)
 {
 	animatorPool_.emplace_front(obj->RemoveComponent(ComponentID::Animator));
 	renderPool_.emplace_front(obj->RemoveComponent(ComponentID::Render));

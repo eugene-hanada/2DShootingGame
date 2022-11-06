@@ -12,6 +12,7 @@
 #define Rand (Application::GetInstance().GetRandom())
 class Window;
 class Dx12Wrapper;
+class Xaudio2;
 class Mesh;
 class BaseScene;
 class RenderManager;
@@ -45,6 +46,7 @@ private:
 	TimeClass time_;
 	std::unique_ptr<Window> window_;
 	std::unique_ptr<Dx12Wrapper> dx12_;
+	std::unique_ptr<Xaudio2> xaudio2_;
 	std::unique_ptr<BaseScene> scene_;
 	std::unique_ptr<Random> random_;
 	std::shared_ptr<RenderManager> renderMng_;
