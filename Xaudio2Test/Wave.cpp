@@ -7,7 +7,7 @@ Wave::Wave()
 
 bool Wave::Load(const std::filesystem::path& path)
 {
-    std::ifstream file{ path };
+    std::ifstream file{ path , std::ios::binary};
 
     if (!file)
     {
@@ -26,6 +26,7 @@ bool Wave::Load(const std::filesystem::path& path)
 
     data_.resize(dh.size);
     file.read(reinterpret_cast<char*>(data_.data()), dh.size);
+
 
     return false;
 }

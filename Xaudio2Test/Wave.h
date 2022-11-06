@@ -18,6 +18,16 @@ public:
 
 	Wave();
 	bool Load(const std::filesystem::path& path);
+	const FMT& GetFmt(void) const&
+	{
+		return fmt_;
+	}
+
+	const std::vector<unsigned char>& GetData(void) const&
+	{
+		return data_;
+	}
+
 private:
 	std::vector<unsigned char> data_;
 	FMT fmt_;
