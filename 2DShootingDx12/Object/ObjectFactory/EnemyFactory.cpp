@@ -29,7 +29,7 @@ EnemyFactory::EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared
 	}
 }
 
-void EnemyFactory::CreateMoveToPosEnemy(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end)
+void EnemyFactory::CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end)
 {
 	if (moveToPosBehaviorList_.empty())
 	{
@@ -70,6 +70,48 @@ void EnemyFactory::CreateMoveToPosEnemy(ObjectManager& objManager, const Math::V
 	obj->SetPos(start);
 	objManager.AddObject(std::move(obj));
 
+}
+
+void EnemyFactory::CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end)
+{
+	if (moveToPosBehaviorList_.empty())
+	{
+		return;
+	}
+
+	auto obj = std::move(objPool_.front());
+	objPool_.pop_front();
+
+	// アニメーション描画用クラスを追加
+	auto render = std::static_pointer_cast<AnimationRender>(std::move(renderList_.front()));
+	renderList_.pop_front();
+	render->SetImgKey("enemym");
+	obj->AddComponent(std::move(render));
+
+	// アニメーション制御用クラスを追加
+	auto anim = std::static_pointer_cast<Animator>(std::move(animatorList_.front()));
+	animatorList_.pop_front();
+	obj->AddComponent(std::move(anim));
+	obj->GetCcomponent<Animator>(ComponentID::Animator).lock()->SetState("Non");
+
+	// ビヘイビアクラスを追加
+	auto behavior = std::static_pointer_cast<EnemyMoveToPos>(std::move(moveToPosBehaviorList_.front()));
+	moveToPosBehaviorList_.pop_front();
+	behavior->SetDestination(end);
+	behavior->SetHp(6);
+	behavior->SetShotSpeed(5.0f);
+	behavior->SetBulletSpeed(180.0f);
+	obj->AddComponent(std::move(behavior));
+
+	// 当たり判定用クラス
+	auto col = std::static_pointer_cast<CircleCollider>(std::move(colliderList_.front()));
+	colliderList_.pop_front();
+	col->SetRadius(typeMRedius);
+	obj->AddComponent(std::move(col));
+
+	obj->SetID(ObjectID::Enemy);
+	obj->SetPos(start);
+	objManager.AddObject(std::move(obj));
 }
 
 void EnemyFactory::DestoryMoveToPosEnemy(std::unique_ptr<Object>&& obj)
