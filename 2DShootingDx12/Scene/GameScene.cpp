@@ -13,6 +13,8 @@
 #include "../GameSystem/Dx12/Render/TextureSheetRender.h"
 #include "../Ui/UiManager.h"
 #include "../Ui/UiBase.h"
+#include "Transition/FadeIn.h"
+#include "ResultScene.h"
 #include "../GameSystem/Window.h"
 
 GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, Xaudio2& xaudio, std::shared_ptr<InputSystem>& input) :
@@ -39,7 +41,11 @@ GameScene::~GameScene()
 
 BaseScene::SceneUPtr GameScene::Update(SceneUPtr scene)
 {
-	objManager_->Update();
+	if (!objManager_->Update())
+	{
+		//
+		return std::make_unique<FadeIn>(std::move(scene), std::make_unique<ResultScene>(renderMng_, dx12_, xaudio_, input_), renderMng_, dx12_, xaudio_, input_);
+	}
 	uiManager_->Update(*objManager_);
 	return scene;
 }

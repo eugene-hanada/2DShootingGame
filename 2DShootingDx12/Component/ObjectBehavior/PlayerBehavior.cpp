@@ -9,6 +9,7 @@
 #include "../../Application.h"
 #include "../Collider/Collider.h"
 #include "../Sound/Sound.h"
+#include "../../Object/ObjectManager.h"
 #include "../../common/Debug.h"
 
 constexpr struct Shot1
@@ -96,6 +97,7 @@ void PlayerBehavior::HitEnemy(Collider& collider, ObjectManager& objectManager)
 	powerItemCount_ = 0U;
 	nowLevel_ = 0u;
 	effectFactory_->CreateExpM(objectManager, owner_->pos_);
+	objectManager.GameEnd();
 	owner_->Destory();
 }
 
