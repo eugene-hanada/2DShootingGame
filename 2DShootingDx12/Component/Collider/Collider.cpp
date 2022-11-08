@@ -2,7 +2,8 @@
 #include "../ObjectBehavior/ObjectBehavior.h"
 #include "Collider.h"
 
-Collider::Collider()
+Collider::Collider():
+	myType_{},targetType_{0}
 {
 }
 

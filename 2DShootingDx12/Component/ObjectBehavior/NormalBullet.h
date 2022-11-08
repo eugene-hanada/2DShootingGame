@@ -4,6 +4,7 @@
 
 class BulletFactory;
 
+// 通常の弾の動き
 class NormalBullet :
 	public ObjectBehavior
 {
@@ -35,6 +36,10 @@ public:
 	/// <param name="collider"></param>
 	void OnHit(Collider& collider);
 
+	/// <summary>
+	/// 発射したオブジェクトのID
+	/// </summary>
+	/// <param name="id"> オブジェクトのID </param>
 	void SetShooterID(ObjectID id)
 	{
 		shooterID_ = id;
@@ -43,9 +48,17 @@ public:
 private:
 	void Update(ObjectManager& objectManager) final;
 	virtual void Destory(std::unique_ptr<Object>&& obj) final;
+
+	// 弾の生成クラス
 	BulletFactory& factoy_;
+
+	// 移動方向
 	Math::Vector2 moveVec_;
+
+	// スピード
 	float speed_;
+
+	// 貫通弾か？
 	bool isAp_;
 
 	// 自らを発射したオブジェクトのID

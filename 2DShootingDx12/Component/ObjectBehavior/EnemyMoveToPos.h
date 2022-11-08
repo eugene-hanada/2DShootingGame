@@ -1,10 +1,17 @@
 #pragma once
 #include "EnemyBehavior.h"
+
+// 指定座標まで移動する敵の動き
 class EnemyMoveToPos :
 	public EnemyBehavior
 {
 public:
 	EnemyMoveToPos(EnemyFactory& factory, std::shared_ptr<BulletFactory>& bulletFactory, PowerUpItemFactory& itemFactory, EffectFactory& effectFactory);
+	
+	/// <summary>
+	/// 移動目標をセットする
+	/// </summary>
+	/// <param name="dest"> 移動目標 </param>
 	void SetDestination(const Math::Vector2& dest);
 
 private:
@@ -13,8 +20,14 @@ private:
 	void UpdateMove(ObjectManager& objectManager);
 	void UpdateShot(ObjectManager& objectManager);
 	void Begin(ObjectManager& objectManager) final;
+
+	// 移動目標の座標
 	Math::Vector2 dest_;
+
+	// 移動方向
 	Math::Vector2 moveVec_;
+
+	// 更新処理
 	void (EnemyMoveToPos::* update_)(ObjectManager&);
 };
 

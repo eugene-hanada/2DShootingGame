@@ -13,6 +13,7 @@ void CircleCollider::Check(Collider& collider, ObjectManager& objectManager)
 {
 	if (collider.Check(*this))
 	{
+		// ƒqƒbƒgŽž
 		OnHit(collider, objectManager);
 		collider.OnHit(*this, objectManager);
 	}
