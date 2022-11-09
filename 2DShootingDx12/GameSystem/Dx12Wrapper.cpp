@@ -113,14 +113,18 @@ void Dx12Wrapper::DrawFinalRenderTarget(void)
 		// イベントを取得
 		auto ev = CreateEvent(nullptr, false, false, nullptr);
 
-		// イベントをセット
-		fence_->SetEventOnCompletion(fenceVal_, ev);
+		if (ev != 0)
+		{
 
-		// イベントが発生するまで待つ
-		WaitForSingleObject(ev, INFINITE);
+			// イベントをセット
+			fence_->SetEventOnCompletion(fenceVal_, ev);
 
-		// イベントを閉じる
-		CloseHandle(ev);
+			// イベントが発生するまで待つ
+			WaitForSingleObject(ev, INFINITE);
+
+			// イベントを閉じる
+			CloseHandle(ev);
+		}
 	}
 
 	// コマンドキューとコマンドリストの命令の再受け入れ処理

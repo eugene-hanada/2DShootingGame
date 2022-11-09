@@ -1,7 +1,8 @@
 #include "Wave.h"
 #include <fstream>
 
-Wave::Wave()
+Wave::Wave():
+    fmt_{}
 {
 }
 

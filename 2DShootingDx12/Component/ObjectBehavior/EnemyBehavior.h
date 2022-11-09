@@ -107,6 +107,7 @@ protected:
 	// 弾のスピード
 	float bulletSpeed_;
 
+	// 移動スピード
 	float moveSpeed_;
 
 	// 倒されたとき加算されるscore
@@ -116,8 +117,6 @@ private:
 	
 	// 発射スピード
 	float shotSpeed_;
-
-	
 
 };
 

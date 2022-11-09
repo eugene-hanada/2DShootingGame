@@ -7,11 +7,13 @@ class ObjectManager;
 class Object;
 class Component;
 
+// íeÇÃê∂ê¨ÉNÉâÉX
 class BulletFactory
 {
 public:
 	using ComponentShPtr = std::shared_ptr<Component>;
 	BulletFactory();
+
 	void CreateNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed);
 	void DeleteNormalBullet(std::unique_ptr<Object>&& obj);
 
