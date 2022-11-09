@@ -12,7 +12,12 @@ public:
 	template<class T>
 	const Math::Vector2Tmp<T> GetSize(void) const { return static_cast<Math::Vector2Tmp<T>>(size_); }
 
-	HWND& GetWwnd(void) { return hwnd_; }
+	/// <summary>
+	/// ウィンドウハンドルの取得
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
+	HWND& GetWndHandle(void) { return hwnd_; }
 
 	// メッセージ処理をする
 	bool LoopMessageProcess(void);

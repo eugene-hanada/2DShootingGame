@@ -293,7 +293,7 @@ bool Dx12Wrapper::CreateSwapChain(Window& wnd)
 	// スワップチェインの生成
 	IDXGISwapChain1* swapchain = nullptr;
 
-	if (FAILED(dxgiFactory_->CreateSwapChainForHwnd(cmdQueue_.Get(), wnd.GetWwnd(), &swapchainDesc, nullptr, nullptr, &swapchain)))
+	if (FAILED(dxgiFactory_->CreateSwapChainForHwnd(cmdQueue_.Get(), wnd.GetWndHandle(), &swapchainDesc, nullptr, nullptr, &swapchain)))
 	{
 		DebugLog("スワップチェインの生成に失敗");
 		return false;
