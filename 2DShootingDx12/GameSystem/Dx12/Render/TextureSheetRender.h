@@ -17,6 +17,7 @@ struct D3D12_VERTEX_BUFFER_VIEW;
 struct D3D12_INDEX_BUFFER_VIEW;
 struct ID3D12Resource;
 
+// １枚のテクスチャから描画する用のクラス
 class TextureSheetRender
 {
 	template<class T>
@@ -49,31 +50,51 @@ private:
 	// ルートシグネチャ
 	ComPtr<ID3D12RootSignature> rootSignature_{ nullptr };
 
+	// 頂点
 	struct Vertex
 	{
-		Math::Vector2 pos;
-		Math::Vector2 uv;
-		std::uint32_t no = 0u;
+		Math::Vector2 pos;		// 座標
+		Math::Vector2 uv;		// uv
+		std::uint32_t no = 0u;	// 使用する行列の番号
 	};
 
+	// 頂点
 	std::vector<Vertex> vertices_;
+
+	// マップされたアドレス
 	Vertex* vertMap_;
+
+	// 頂点ビュー
 	std::unique_ptr<D3D12_VERTEX_BUFFER_VIEW> vbView_;
+
+	// 頂点のリソース
 	ComPtr<ID3D12Resource> vb_;
 
+	// インデックス
 	std::vector<std::uint16_t> idices_;
+
+	// マップされたアドレス
 	std::uint16_t* idMap_;
+
+	// インデックスビュー
 	std::unique_ptr<D3D12_INDEX_BUFFER_VIEW> ibView_;
+
+	// インデックスのリソース
 	ComPtr<ID3D12Resource> ib_;
 	
-
+	// 行列
 	std::unique_ptr<CbMatrices> mat_;
 
+	// 画像のキー
 	std::string imgKey_;
 
+	// テクスチャのデータ
 	std::shared_ptr<TextureData> texData_;
 
+	// 最大数
 	const std::uint32_t maxNum_;
+
+	// 現在の描画数
 	std::uint32_t nowNum_;
 };
 

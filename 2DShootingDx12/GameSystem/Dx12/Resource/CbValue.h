@@ -4,6 +4,7 @@
 template<class T>
 concept CbValueC = std::integral<T> || std::floating_point<T>;
 
+// 定数バッファ用の基底クラス
 template<CbValueC T>
 class CbValue :
     public ConstantResource<T>

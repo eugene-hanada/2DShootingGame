@@ -7,6 +7,7 @@ struct ID3D12RootSignature;
 class MaterialBase;
 class CbMatrix;
 
+// directX12のパイプラインステートとルードシグネチャをまとめたクラス
 class RenderBase
 {
 public:

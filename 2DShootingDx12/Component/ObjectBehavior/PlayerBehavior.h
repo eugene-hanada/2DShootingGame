@@ -136,7 +136,7 @@ private:
 	// ヒット時の処理のテーブル
 	static std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&, ObjectManager&)> hitFuncTbl_;
 
-	// 
+	// 次へレベルアップするまでのパワーアップアイテムの取得数とそのレベルの発射処理の関数をまとめたもの
 	static ShotFuncPair shotFuncs_;
 
 };
