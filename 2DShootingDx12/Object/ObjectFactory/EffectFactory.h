@@ -10,6 +10,7 @@ class Object;
 class AnimationData;
 class Xaudio2;
 
+// エフェクト生成クラス
 class EffectFactory
 {
 public:
