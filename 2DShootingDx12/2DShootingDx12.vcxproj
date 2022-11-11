@@ -174,6 +174,7 @@
     <ClCompile Include="Component\ObjectBehavior\EnemyMoveToPos.cpp" />
     <ClCompile Include="Component\ObjectBehavior\EffectBehavior.cpp" />
     <ClCompile Include="Component\Sound\Sound.cpp" />
+    <ClCompile Include="Scene\Transition\FadeOut.cpp" />
     <ClCompile Include="GameSystem\Xaudio2\Wave.cpp" />
     <ClCompile Include="GameSystem\Xaudio2\Xaudio2.cpp" />
     <ClCompile Include="Scene\ResultScene.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="Component\ObjectBehavior\EnemyMoveToPos.h" />
     <ClInclude Include="Component\ObjectBehavior\EffectBehavior.h" />
     <ClInclude Include="Component\Sound\Sound.h" />
+    <ClInclude Include="Scene\Transition\FadeOut.h" />
     <ClInclude Include="GameSystem\Xaudio2\Wave.h" />
     <ClInclude Include="GameSystem\Xaudio2\Xaudio2.h" />
     <ClInclude Include="Scene\ResultScene.h" />

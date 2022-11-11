@@ -31,7 +31,7 @@ void FadeIn::Draw(void)
 
 bool FadeIn::TransitionUpdate(void)
 {
-	alpha_->val_ = (stepTime_ / timeMax);
+	alpha_->val_ = 1 - (stepTime_ / timeMax);
 	alpha_->Update();
 	if (stepTime_ >= timeMax)
 	{
