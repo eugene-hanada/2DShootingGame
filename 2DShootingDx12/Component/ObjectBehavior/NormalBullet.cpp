@@ -11,7 +11,7 @@
 #include "../../common/Debug.h"
 
 NormalBullet::NormalBullet(BulletFactory& factory) :
-	factoy_{factory},speed_{0.0f}, isAp_{false}
+	factoy_{factory},speed_{0.0f}, isAp_{false}, shooterID_{ObjectID::Enemy}
 {
 }
 

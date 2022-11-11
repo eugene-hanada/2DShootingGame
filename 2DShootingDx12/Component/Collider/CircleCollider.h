@@ -7,7 +7,19 @@ class CircleCollider :
 public:
 	CircleCollider();
 	~CircleCollider();
+
+	/// <summary>
+	/// 当たり判定をチェックを開始する
+	/// </summary>
+	/// <param name="collider"> コライダー </param>
+	/// <param name="objectManager"> オブジェクトマネージャー </param>
 	void Check(Collider& collider, ObjectManager& objectManager) final;
+
+	/// <summary>
+	/// 円形との当たり判定をチェックする
+	/// </summary>
+	/// <param name="collider"> 円形の当たり判定 </param>
+	/// <returns> 当たっているときtrue </returns>
 	bool Check(CircleCollider& collider) final;
 
 	/// <summary>

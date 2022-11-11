@@ -38,7 +38,11 @@ public:
 	/// <returns> 長押しされていればtrue </returns>
 	bool IsPressedStay(InputID id) const { return inputResult_.at(id).first && inputResult_.at(id).second; }
 
-
+	/// <summary>
+	/// キーを話しな瞬間か
+	/// </summary>
+	/// <param name="id"> キーの種類 </param>
+	/// <returns> 話した瞬間ならtrue </returns>
 	bool IsRelesed(InputID id) const { return !inputResult_.at(id).first && inputResult_.at(id).second; }
 
 private:
@@ -49,9 +53,16 @@ private:
 		int pad = 0;
 	};
 
+	// 入力の結果
 	std::unordered_map<InputID, std::pair<bool,bool>> inputResult_;
+
+	// キーボードの入力情報
 	std::array<unsigned char, 256> key_;
+
+	// ゲームパッドの入力情報
 	std::unique_ptr<XINPUT_STATE> padState_;
+
+	// idとコードのテーブル
 	std::unordered_map<InputID, InputCode> inputTable_;
 };
 

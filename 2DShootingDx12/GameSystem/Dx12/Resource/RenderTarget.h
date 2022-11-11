@@ -12,6 +12,7 @@ struct CD3DX12_RECT;
 struct CD3DX12_VIEWPORT;
 struct ID3D12DescriptorHeap;
 
+// レンダーターゲットのクラス
 class RenderTarget
 {
 	template<class T>
@@ -19,6 +20,8 @@ class RenderTarget
 public:
 	RenderTarget(Dx12Wrapper& dx12,const Math::Vector2& size);
 	~RenderTarget();
+
+	// 初期化用のカラーをセット
 	void SetClearColor(float r, float g, float b, float a)
 	{
 		color_[0] = r;
@@ -27,18 +30,48 @@ public:
 		color_[3] = a;
 	}
 
+	/// <summary>
+	/// 描画開始
+	/// </summary>
+	/// <param name=""></param>
 	void DrawBegin(void);
+
+	/// <summary>
+	/// 描画終了
+	/// </summary>
+	/// <param name=""></param>
 	void DrawEnd(void);
+
+	/// <summary>
+	/// クリア
+	/// </summary>
+	/// <param name=""></param>
 	void Clear(void);
 
+	/// <summary>
+	/// マテリアルの取得
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	MaterialBase& GetMaterial(void) { return *material_; }
+
+	/// <summary>
+	/// 変換用行列の取得
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	CbMatrix& GetCbMat(void) { return *cbMat_; }
 private:
 	
-
+	/// <summary>
+	/// レンダーターゲットの作成
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	bool CreateRenderTarget(void);
 
 
+	// directXのラップクラス
 	Dx12Wrapper& dx12_;
 
 	// レンダーターゲットのサイズ(高さと幅)
@@ -50,6 +83,7 @@ private:
 	// スクリーン状の座標からシェーダ用に変換する行列
 	std::unique_ptr<CbMatrix> cbMat_;
 
+	// クリア時のカラー
 	float color_[4]{0.0f,0.0f,0.0f,0.0f};
 
 	//// リソース

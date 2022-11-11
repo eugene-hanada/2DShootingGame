@@ -18,6 +18,7 @@ struct CD3DX12_RECT;
 class Window;
 class CbMatrix;
 
+// directX12のラップクラス
 class Dx12Wrapper
 {
 	template<class T>
@@ -26,11 +27,25 @@ public:
 	Dx12Wrapper(Window& wnd);
 	~Dx12Wrapper();
 
-	
+	/// <summary>
+	/// 最後のレンダーターゲットに描画開始する
+	/// </summary>
+	/// <param name=""></param>
 	void BeginFinalRenderTarget(void);
+
+	/// <summary>
+	/// 最後のレンダーターゲットの描画処理を終了する
+	/// </summary>
+	/// <param name=""></param>
 	void EndFinalRenderTarget(void);
+
+	/// <summary>
+	/// 最後のレンダーターゲットを描画する
+	/// </summary>
+	/// <param name=""></param>
 	void DrawFinalRenderTarget(void);
 
+	// クリアカラーをセットする
 	void SetClearRenderTarget(float r, float g, float b, float a)
 	{
 		clearColor_[0] = r;
@@ -39,25 +54,61 @@ public:
 		clearColor_[3] = a;
 	}
 
+	/// <summary>
+	/// デバイスの取得
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	ComPtr<ID3D12Device>& Device(void)
 	{
 		return device_;
 	}
 
+	/// <summary>
+	/// コマンドリストの取得
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	ComPtr<ID3D12GraphicsCommandList>& CmdLlist(void)
 	{
 		return cmdList_;
 	}
 
+	/// <summary>
+	/// 行列の取得
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	CbMatrix& GetCbMat(void) { return *cbMat_; }
 
 private:
+
+	/// <summary>
+	/// デバイスの生成
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	bool CreateDXGIDevice(void);
 
+	/// <summary>
+	/// コマンド類の生成
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	bool CreateCommand(void);
 
+	/// <summary>
+	/// スワップチェインの生成
+	/// </summary>
+	/// <param name="wnd"></param>
+	/// <returns></returns>
 	bool CreateSwapChain(Window& wnd);
 
+	/// <summary>
+	/// レンダーターゲットの生成
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	bool CreateFinalRenderTarget(void);
 
 	// デバイス
@@ -98,8 +149,10 @@ private:
 	// シザー矩形
 	std::unique_ptr< CD3DX12_RECT> scissorRect_;
 
+	// クリアカラー
 	float clearColor_[4];
 
+	// 行列
 	std::unique_ptr<CbMatrix> cbMat_;
 };
 

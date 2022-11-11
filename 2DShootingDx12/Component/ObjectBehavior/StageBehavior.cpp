@@ -20,9 +20,9 @@ void StageBehavior::Update(ObjectManager& objectManager)
 		timer_ = 0.0f;
 		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ /2.0f };
 		spPos.y = 0.0f;
-		enemyFactory_->CreateMoveToPosEnemy(objectManager, spPos, Math::Vector2{ spPos.x, spPos.y + 250.0f });
-		enemyFactory_->CreateMoveToPosEnemy(objectManager, spPos, Math::Vector2{ spPos.x + 100.0f, spPos.y + 250.0f });
-		enemyFactory_->CreateMoveToPosEnemy(objectManager, spPos, Math::Vector2{ spPos.x - 100.0f, spPos.y + 250.0f });
+		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x, spPos.y + 250.0f });
+		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x + 100.0f, spPos.y + 250.0f });
+		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x - 100.0f, spPos.y + 250.0f });
 	}
 }
 

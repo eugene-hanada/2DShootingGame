@@ -3,17 +3,20 @@
 
 class PowerUpItemFactory;
 
+// パワーアップアイテムの動き
 class PowerUpItemBehavior :
-    public ObjectBehavior
+	public ObjectBehavior
 {
 public:
-    PowerUpItemBehavior(PowerUpItemFactory& factory);
-    ~PowerUpItemBehavior();
+	PowerUpItemBehavior(PowerUpItemFactory& factory);
+	~PowerUpItemBehavior();
 private:
-    void Update(ObjectManager& objectManager) final;
-    void Begin(ObjectManager& objectManager) final;
-    void OnHit(Collider& collider, ObjectManager& objectManager) final;
-    void Destory(std::unique_ptr<Object>&& obj) final;
-    PowerUpItemFactory& factory_;
+	void Update(ObjectManager& objectManager) final;
+	void Begin(ObjectManager& objectManager) final;
+	void OnHit(Collider& collider, ObjectManager& objectManager) final;
+	void Destory(std::unique_ptr<Object>&& obj) final;
+
+	// パワーアップアイテムの生成クラス
+	PowerUpItemFactory& factory_;
 };
 

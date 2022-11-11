@@ -428,10 +428,10 @@ bool TextureSheetRender::CreatePipeline(void)
 	gpipeline.InputLayout.NumElements = _countof(inputLayout);
 
 	// ポリゴンの表示についての設定
-	gpipeline.IBStripCutValue = D3D12_INDEX_BUFFER_STRIP_CUT_VALUE_DISABLED;		// インデックスバッファを使う
-	gpipeline.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;		// 三角形を表す
-	gpipeline.NumRenderTargets = 1;		// 今は一つなので
-	gpipeline.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;		// 正規化されたRGBAを渡す
+	gpipeline.IBStripCutValue = D3D12_INDEX_BUFFER_STRIP_CUT_VALUE_DISABLED;
+	gpipeline.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+	gpipeline.NumRenderTargets = 1;
+	gpipeline.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
 
 	// アンチエイリアシングに関する設定
 	gpipeline.SampleDesc.Count = 1;

@@ -12,6 +12,7 @@ enum class EffectType
 	Score
 };
 
+// エフェクト制御ようクラス
 class EffectBehavior :
 	public ObjectBehavior
 {
@@ -26,14 +27,36 @@ public:
 private:
 	void Update(ObjectManager& objectManager) final;
 	void Begin(ObjectManager& objectManager) final;
-	void Destory(std::unique_ptr<Object>&& obj);
+	void Destory(std::unique_ptr<Object>&& obj) final;
+
+	/// <summary>
+	/// 爆発Mの破棄用
+	/// </summary>
+	/// <param name="obj"></param>
 	void DestoryExpM(std::unique_ptr<Object>&& obj);
+
+	/// <summary>
+	/// 爆発sの破棄用
+	/// </summary>
+	/// <param name="obj"></param>
 	void DestoryExpS(std::unique_ptr<Object>&& obj);
+
+	/// <summary>
+	/// スコア用
+	/// </summary>
+	/// <param name="obj"></param>
 	void DestoryScore(std::unique_ptr<Object>&& obj);
+
+	// アニメーション制御クラス
 	std::weak_ptr<Animator> animator_;
+
+	// エフェクト生成クラス
 	EffectFactory& factory_;
+
+	// 敵のタイプ
 	EffectType type_;
 
+	// 破棄用の関数
 	static std::unordered_map<EffectType, void(EffectBehavior::*)(std::unique_ptr<Object>&&)> destoryFunc_;
 };
 

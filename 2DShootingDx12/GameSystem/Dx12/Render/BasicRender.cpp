@@ -32,13 +32,13 @@ bool BasicRender::CreatePipelineState(ComPtr<ID3DBlob>& vs, ComPtr<ID3DBlob>& ps
 	// シェーダのインプットレイアウト
 	D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
 		{	// 座標情報
-			"POSITION",		// セマンティクス名　座標情報なのでPOSITION
-			0,			// 同じセマンティクス名の時に使うので0でよい
-			DXGI_FORMAT_R32G32_FLOAT,	// フォーマット
-			0,		// 入力スロットインデックス
-			D3D12_APPEND_ALIGNED_ELEMENT,		// データのオフセット位置これでよい
-			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,		// これでよい
-			0		// 一度に描画するインスタンスの数なので0
+			"POSITION",
+			0,
+			DXGI_FORMAT_R32G32_FLOAT,
+			0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
+			0
 		},
 		{	// uv情報
 			"TEXCOORD",
@@ -83,10 +83,10 @@ bool BasicRender::CreatePipelineState(ComPtr<ID3DBlob>& vs, ComPtr<ID3DBlob>& ps
 	gpipeline.InputLayout.NumElements = _countof(inputLayout);
 
 	// ポリゴンの表示についての設定
-	gpipeline.IBStripCutValue = D3D12_INDEX_BUFFER_STRIP_CUT_VALUE_DISABLED;		// インデックスバッファを使う
-	gpipeline.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;		// 三角形を表す
+	gpipeline.IBStripCutValue = D3D12_INDEX_BUFFER_STRIP_CUT_VALUE_DISABLED;
+	gpipeline.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 	gpipeline.NumRenderTargets = 1;		// 今は一つなので
-	gpipeline.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;		// 正規化されたRGBAを渡す
+	gpipeline.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
 
 	// アンチエイリアシングに関する設定
 	gpipeline.SampleDesc.Count = 1;

@@ -1,6 +1,7 @@
 #pragma once
 #include "RenderBase.h"
 
+// alphaƒuƒŒƒ“ƒh”Å
 class AlphaRender :
 	public RenderBase
 {

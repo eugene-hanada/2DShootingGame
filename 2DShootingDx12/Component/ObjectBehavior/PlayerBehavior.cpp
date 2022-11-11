@@ -9,15 +9,17 @@
 #include "../../Application.h"
 #include "../Collider/Collider.h"
 #include "../Sound/Sound.h"
+#include "../../Object/ObjectManager.h"
 #include "../../common/Debug.h"
 
+// レベル1の射撃に使う定数類
 constexpr struct Shot1
 {
 	float speed{ 180.0f };
 	float interval{ 0.2f };
 } shot1;
 
-
+// レベル2の射撃に使う定数類
 constexpr struct Shot2
 {
 	float apSpeed{ 240.0f };		// AP弾のスピード
@@ -27,6 +29,7 @@ constexpr struct Shot2
 	float radL{ Math::Deg2Rad(270.0f - 10.0f) };		// 発射の角度
 } shot2;
 
+// オブジェクトごとのヒット時の処理のテーブル
 std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&, ObjectManager&)> PlayerBehavior::hitFuncTbl_
 {
 	{ObjectID::EnemyBullet, &PlayerBehavior::HitEnemy},
@@ -34,6 +37,7 @@ std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&, ObjectManager&)>
 
 };
 
+// 各レベルの射撃処理と次への取得数
 PlayerBehavior::ShotFuncPair PlayerBehavior::shotFuncs_
 {
 	{&PlayerBehavior::ShotLevel1,2},
@@ -41,6 +45,7 @@ PlayerBehavior::ShotFuncPair PlayerBehavior::shotFuncs_
 	{&PlayerBehavior::ShotLevel3,0}
 };
 
+// 移動スピード
 constexpr float speed_{ 300.0f };
 
 PlayerBehavior::PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory) :
@@ -61,7 +66,10 @@ const unsigned int PlayerBehavior::GetLevel(void) const
 
 void PlayerBehavior::Update(ObjectManager& objectManager)
 {
+	// 移動処理
 	Move();
+
+	// 射撃処理
 	Shot(objectManager);
 }
 
@@ -80,11 +88,13 @@ void PlayerBehavior::HitPowerUpItem(Collider& collider, ObjectManager& objectMan
 	DebugLog("アイテムゲット");
 	if (nowShotItr_ == --shotFuncs_.end())
 	{
+		// 最後のレベルの射撃まで到達時処理しない
 		return;
 	}
 	powerItemCount_++;
 	if (powerItemCount_ >= nowShotItr_->second)
 	{
+		// レベルが上がるまでの数取得しているとき
 		nowLevel_++;
 		++nowShotItr_;
 	}
@@ -96,6 +106,7 @@ void PlayerBehavior::HitEnemy(Collider& collider, ObjectManager& objectManager)
 	powerItemCount_ = 0U;
 	nowLevel_ = 0u;
 	effectFactory_->CreateExpM(objectManager, owner_->pos_);
+	objectManager.GameEnd();
 	owner_->Destory();
 }
 

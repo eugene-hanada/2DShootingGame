@@ -9,6 +9,7 @@ struct ID3D12RootSignature;
 class MaterialBase;
 class CbMatrix;
 
+// ’Êí”Å
 class BasicRender :
 	public RenderBase
 {

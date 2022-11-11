@@ -64,7 +64,11 @@ public:
 	/// </summary>
 	/// <param name="type"> タイプ </param>
 	/// <returns></returns>
-	void SetMyType(CollType type);
+	void SetMyType(CollType type)
+	{
+		myType_ = type;
+	}
+
 protected:
 
 	// 動きに関するクラス
