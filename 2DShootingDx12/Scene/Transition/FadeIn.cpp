@@ -13,6 +13,8 @@ FadeIn::FadeIn(SceneUPtr befor, SceneUPtr after, std::shared_ptr<RenderManager>&
 	rt_->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	alpha_->Update();
 	after_->GetRenderTarget().GetMaterial().shaderResource_.emplace_back(alpha_);
+	after_->Draw();
+
 }
 
 FadeIn::~FadeIn()
@@ -31,11 +33,11 @@ void FadeIn::Draw(void)
 
 bool FadeIn::TransitionUpdate(void)
 {
-	alpha_->val_ = 1 - (stepTime_ / timeMax);
+	alpha_->val_ = (stepTime_ / timeMax);
 	alpha_->Update();
 	if (stepTime_ >= timeMax)
 	{
-		after_->GetRenderTarget().GetMaterial().shaderResource_.back().reset();
+		after_->GetRenderTarget().GetMaterial().shaderResource_.erase(--after_->GetRenderTarget().GetMaterial().shaderResource_.end());
 		return true;
 	}
 	return false;

@@ -7,7 +7,8 @@
 #include "../Object/Object.h"
 #include "../Component/ObjectBehavior/StageBehavior.h"
 #include "../Component/ObjectBehavior/PlayerBehavior.h"
-
+#include "../Application.h"
+#include "../GameSystem/Window.h"
 
 UiManager::UiManager(const std::string& texFile, std::shared_ptr<TextureData>& textureData, Dx12Wrapper& dx12) :
 	textureData_{textureData}
@@ -52,7 +53,7 @@ void UiManager::CreateGameUi(void)
 				}
 				return 0; 
 			},
-			4, Math::zeroVector2<float>, "num"
+			4, Math::Vector2{ 0.0f, 130.0f }, "num"
 				)
 	);
 	uiList_.emplace_back(std::make_unique<Image>(Math::Vector2{ 0.0f, 100.0f }, "score"));
@@ -72,6 +73,13 @@ void UiManager::CreateGameUi(void)
 				}
 				return 0;
 			},
-			4, Math::Vector2{ 0.0f, 220.0f }, "num"
+			4, Math::Vector2{ 0.0f, 230.0f }, "num"
 	));
+}
+
+void UiManager::CreateTitleUi(void)
+{
+	const auto scrX = App.GetWindow().GetSize<float>().x / 2.0f;
+	uiList_.emplace_back(std::make_unique<Image>(Math::Vector2{ scrX - 245.75f, 120.0f }, "TitleLogo"));
+	uiList_.emplace_back(std::make_unique<Image>(Math::Vector2{ scrX - 377.25f, 300.0f }, "TitleMess"));
 }

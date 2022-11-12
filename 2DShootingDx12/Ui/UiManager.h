@@ -18,6 +18,7 @@ public:
 	void Update(ObjectManager& objectManager);
 	void Draw(RenderManager& renderMng, CbMatrix& cbMat);
 	void CreateGameUi(void);
+	void CreateTitleUi(void);
 private:
 	std::unique_ptr< TextureSheetRender> texSheetRender_;
 	std::shared_ptr<TextureData> textureData_;

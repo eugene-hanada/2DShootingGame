@@ -4,7 +4,9 @@
 
 class MaterialBase;
 class Dx12Resource;
-
+class TextureData;
+class UiManager;
+class ObjectManager;
 
 class TitleScene :
 	public BaseScene
@@ -16,10 +18,8 @@ private:
 	SceneUPtr Update(SceneUPtr scene) final;
 	void Draw(void) final;
 	const SceneID GetID(void) const noexcept final { return SceneID::Title; }
-
-	std::unique_ptr< MaterialBase> testMaterial_;
-	std::unique_ptr< MaterialBase> testMaterial2_;
-	std::shared_ptr<CbValue<float>> alpha_;
-	std::shared_ptr<Dx12Resource> tex_;
+	std::shared_ptr<TextureData> textureData_;
+	std::unique_ptr<UiManager> uiManager_;
+	std::unique_ptr<ObjectManager> objManager_;
 };
 

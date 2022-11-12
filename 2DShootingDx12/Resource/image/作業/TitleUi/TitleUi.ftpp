@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "version": "0.6.7"
+  },
+  "savePath": "",
+  "images": [
+    {
+      "name": "TitleLogo.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/TitleUi/TitleLogo.png",
+      "folder": ""
+    },
+    {
+      "name": "TitleMess.png",
+      "path": "C:/Users/eugen/Desktop/ほぼ個人/VS-project/DirectX12使用/2DShootingGame/2DShootingDx12/Resource/image/作業/TitleUi/TitleMess.png",
+      "folder": ""
+    }
+  ],
+  "folders": [],
+  "packOptions": {
+    "textureName": "TitleUi",
+    "textureFormat": "png",
+    "removeFileExtension": false,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "XML",
+    "fileName": "pack-result",
+    "savePath": "",
+    "width": 1024,
+    "height": 128,
+    "fixedSize": false,
+    "powerOfTwo": true,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": false,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "OptimalPacker",
+    "packerMethod": "Automatic"
+  }
+}
