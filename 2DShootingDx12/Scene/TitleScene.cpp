@@ -34,7 +34,6 @@ BaseScene::SceneUPtr TitleScene::Update(SceneUPtr scene)
 	{
 		return std::make_unique<FadeIn>(std::move(scene), std::make_unique<GameScene>(renderMng_, dx12_, xaudio_, input_), renderMng_, dx12_,xaudio_, input_);
 	}
-	uiManager_->Update(*objManager_);
 	return scene;
 }
 

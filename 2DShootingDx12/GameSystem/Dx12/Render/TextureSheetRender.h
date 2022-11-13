@@ -24,7 +24,7 @@ class TextureSheetRender
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
 public:
 	TextureSheetRender(const std::string& imgKey,Dx12Wrapper& dx12, std::shared_ptr< TextureData>& texData, std::uint32_t maxNum);
-	virtual ~TextureSheetRender();
+	~TextureSheetRender();
 
 	void Draw(const Math::Vector2& pos, const std::string& key, float rot = 0.0f,int idx = 0);
 
@@ -34,6 +34,10 @@ public:
 	void Update(void);
 	const Math::Vector2& GetImgSize(const std::string& key);
 
+	void SetImgKey(const std::string& imgKey)
+	{
+		imgKey_ = imgKey;
+	}
 private:
 
 	bool CreateRootSignature(void);

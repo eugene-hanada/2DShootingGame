@@ -20,6 +20,5 @@ private:
 	const SceneID GetID(void) const noexcept final { return SceneID::Title; }
 	std::shared_ptr<TextureData> textureData_;
 	std::unique_ptr<UiManager> uiManager_;
-	std::unique_ptr<ObjectManager> objManager_;
 };
 

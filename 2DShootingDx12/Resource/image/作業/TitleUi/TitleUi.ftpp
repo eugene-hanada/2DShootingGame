@@ -2,7 +2,7 @@
   "meta": {
     "version": "0.6.7"
   },
-  "savePath": "",
+  "savePath": "C:\\Users\\eugen\\Desktop\\ほぼ個人\\VS-project\\DirectX12使用\\2DShootingGame\\2DShootingDx12\\Resource\\image",
   "images": [
     {
       "name": "TitleLogo.png",
@@ -28,7 +28,7 @@
     "filter": "none",
     "exporter": "XML",
     "fileName": "pack-result",
-    "savePath": "",
+    "savePath": "C:\\Users\\eugen\\Desktop\\ほぼ個人\\VS-project\\DirectX12使用\\2DShootingGame\\2DShootingDx12\\Resource\\image",
     "width": 1024,
     "height": 128,
     "fixedSize": false,

@@ -6,3 +6,6 @@ pause
 
 TextureDataConvert.exe ./TitleUi.xml ./TitleUi.tdat
 pause
+
+TextureDataConvert.exe ./ResultUi.xml ./ResultUi.tdat
+pause

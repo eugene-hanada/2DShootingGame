@@ -19,6 +19,7 @@ public:
 	void Draw(RenderManager& renderMng, CbMatrix& cbMat);
 	void CreateGameUi(void);
 	void CreateTitleUi(void);
+	void CreateResultUi(unsigned int score);
 private:
 	std::unique_ptr< TextureSheetRender> texSheetRender_;
 	std::shared_ptr<TextureData> textureData_;

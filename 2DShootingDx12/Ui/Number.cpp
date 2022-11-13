@@ -1,8 +1,8 @@
 #include "Number.h"
 #include "../GameSystem/Dx12/Render/TextureSheetRender.h"
 
-Number::Number(std::function<int(ObjectManager&)>&& bindFunc, const int digit, const Math::Vector2& pos, const std::string& imgKey) :
-	UiBase{pos,imgKey}, bindFunc_{std::move(bindFunc)},digit_{digit}, value_{0}
+Number::Number(int defaultValue, std::function<int(ObjectManager&)>&& bindFunc, const int digit, const Math::Vector2& pos, const std::string& imgKey) :
+	UiBase{pos,imgKey}, bindFunc_{std::move(bindFunc)},digit_{digit}, value_{ defaultValue }
 {
 }
 

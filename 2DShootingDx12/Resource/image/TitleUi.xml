@@ -14,7 +14,7 @@ oY => y-corner offset
 oW => original width
 oH => original height
 r => 'y' if sprite is rotated-->
-<TextureAtlas imagePath="TitleUi.png" width="1024" height="128" scale="1" format="RGBA8888">
+<TextureAtlas imagePath="TitleUi.png" width="1024" height="64" scale="1" format="RGBA8888">
   <sprite n="TitleLogo.png" x="0" y="0" w="492" h="40" pX="0.5" pY="0.5" oX="10" oY="12" oW="512" oH="64"/>
-  <sprite n="TitleMess.png" x="0" y="40" w="755" h="26" pX="0.5" pY="0.5"/>
+  <sprite n="TitleMess.png" x="0" y="40" w="581" h="20" pX="0.5" pY="0.5"/>
 </TextureAtlas>

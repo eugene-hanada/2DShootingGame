@@ -6,7 +6,6 @@
 #include "../Component/Transform.h"
 #include "../Object/ObjectManager.h"
 #include "../GameSystem/Input/InputSystem.h"
-//#include "../common/AnimationData.h"
 #include "../Application.h"
 #include "../common/Debug.h"
 #include "../common/TextureData.h"
@@ -16,6 +15,8 @@
 #include "Transition/FadeIn.h"
 #include "ResultScene.h"
 #include "../GameSystem/Window.h"
+#include "../Object/Object.h"
+#include "../Component/ObjectBehavior/StageBehavior.h"
 
 GameScene::GameScene(std::shared_ptr<RenderManager>& renderMng,Dx12Wrapper& dx12, Xaudio2& xaudio, std::shared_ptr<InputSystem>& input) :
 	BaseScene{ renderMng,dx12,xaudio,input}
@@ -43,7 +44,17 @@ BaseScene::SceneUPtr GameScene::Update(SceneUPtr scene)
 {
 	if (objManager_->Update())
 	{
-		return std::make_unique<FadeIn>(std::move(scene), std::make_unique<ResultScene>(renderMng_, dx12_, xaudio_, input_), renderMng_, dx12_, xaudio_, input_);
+		auto& [stage,result] = objManager_->FindObject(ObjectID::Stage);
+		unsigned int score{ 0u };
+		if (result)
+		{
+			auto comp = (*stage)->GetCcomponent<StageBehavior>(ComponentID::Behavior);
+			if (!comp.expired())
+			{
+				score = comp.lock()->GetScore();
+			}
+		}
+		return std::make_unique<FadeIn>(std::move(scene), std::make_unique<ResultScene>( score,renderMng_, dx12_, xaudio_, input_), renderMng_, dx12_, xaudio_, input_);
 	}
 	uiManager_->Update(*objManager_);
 	return scene;
