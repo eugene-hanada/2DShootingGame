@@ -23,7 +23,7 @@ EnemyBehavior::~EnemyBehavior()
 
 void EnemyBehavior::OnHit(Collider& collider, ObjectManager& objectManager)
 {
-	if (collider.GetOnwer()->GetID() == ObjectID::PlayerBullet)
+	if (collider.GetOnwer()->GetID() == ObjectID::PlayerBullet || collider.GetOnwer()->GetID() == ObjectID::Missile)
 	{
 		// ƒvƒŒƒCƒ„[‚Ì’e‚É“–‚½‚Á‚½hp‚ğŒ¸‚ç‚·
 		if (--hp_ <= 0)

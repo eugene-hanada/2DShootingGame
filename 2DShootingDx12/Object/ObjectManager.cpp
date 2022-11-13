@@ -27,7 +27,7 @@ ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::sha
 	animData_->Load("Resource/animation/anim.adat");
 
 	// ’e‚Ì¶¬ƒNƒ‰ƒXì¬
-	auto bulletFactory = std::make_shared<BulletFactory>();
+	auto bulletFactory = std::make_shared<BulletFactory>(xaudio);
 
 	auto effectFactory = std::make_shared<EffectFactory>(animData_, xaudio);
 
@@ -153,10 +153,21 @@ std::unique_ptr<Object> ObjectManager::RemovObjecte(std::list<std::unique_ptr<Ob
 }
 
 
+
 const std::pair<ObjectManager::ObjectList::const_iterator, bool> ObjectManager::FindObject(ObjectID id)
 {
 	auto itr = std::find_if(objList_.begin(), objList_.end(), [id](auto& obj) { return obj->GetID() == id; });
 	auto ret = itr != objList_.end();
 	return { itr,ret };
 }
+
+const std::pair<ObjectManager::ObjectList::const_iterator, bool> ObjectManager::FindNearObject(ObjectID id, Math::Vector2 pos)
+{
+	objList_.sort([&pos](ObjectUptr& a, ObjectUptr& b) { return (a->GetPos() - pos).SqMagnitude() < (b->GetPos() - pos).SqMagnitude(); });
+	auto itr = std::find_if(objList_.begin(), objList_.end(), [id](auto& obj) { return obj->GetID() == id; });
+	auto ret = itr != objList_.end();
+	return { itr,ret };
+}
+
+
 

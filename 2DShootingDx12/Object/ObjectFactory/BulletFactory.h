@@ -6,13 +6,14 @@
 class ObjectManager;
 class Object;
 class Component;
+class Xaudio2;
 
 // 弾の生成クラス
 class BulletFactory
 {
 public:
 	using ComponentShPtr = std::shared_ptr<Component>;
-	BulletFactory();
+	BulletFactory(Xaudio2& xaudio2);
 
 	/// <summary>
 	/// 通常の弾の生成
@@ -46,10 +47,16 @@ public:
 	/// <param name="moveVec"> 移動方向 </param>
 	/// <param name="speed"> スピード </param>
 	void CreateApBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed);
+
+	void CreateMissile(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec);
+
+	void DeleteMissile(std::unique_ptr<Object>&& obj);
 private:
 	std::forward_list<ComponentShPtr> normalShotBehaviorList_;
 	std::forward_list<ComponentShPtr> renderList_;
 	std::forward_list<ComponentShPtr> colliderList_;
+	std::forward_list<ComponentShPtr> missileList_;
+	std::forward_list<ComponentShPtr> missileSoundList_;
 	std::forward_list<std::unique_ptr<Object>> objPool_;
 
 };

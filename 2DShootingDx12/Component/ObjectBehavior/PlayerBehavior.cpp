@@ -29,6 +29,13 @@ constexpr struct Shot2
 	float radL{ Math::Deg2Rad(270.0f - 10.0f) };		// 発射の角度
 } shot2;
 
+constexpr struct Shot3
+{
+	float interval{ 0.3f };			// 発射interval
+	float radR{ Math::Deg2Rad(270.0f + 20.0f) };		// 発射の角度
+	float radL{ Math::Deg2Rad(270.0f - 20.0f) };		// 発射の角度
+} shot3;
+
 // オブジェクトごとのヒット時の処理のテーブル
 std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&, ObjectManager&)> PlayerBehavior::hitFuncTbl_
 {
@@ -40,8 +47,8 @@ std::unordered_map<ObjectID, void(PlayerBehavior::*)(Collider&, ObjectManager&)>
 // 各レベルの射撃処理と次への取得数
 PlayerBehavior::ShotFuncPair PlayerBehavior::shotFuncs_
 {
-	{&PlayerBehavior::ShotLevel1,2},
-	{&PlayerBehavior::ShotLevel2,4},
+	{&PlayerBehavior::ShotLevel1,5},
+	{&PlayerBehavior::ShotLevel2,10},
 	{&PlayerBehavior::ShotLevel3,0}
 };
 
@@ -247,6 +254,7 @@ void PlayerBehavior::ShotLevel2(ObjectManager& objectManager)
 void PlayerBehavior::ShotLevel3(ObjectManager& objectManager)
 {
 	shotTime_ -= Time.GetDeltaTime<float>();
+	missileTime_ -= Time.GetDeltaTime<float>();
 	if (input_->IsPressedStay(InputID::Shot) && shotTime_ <= 0.0f)
 	{
 		sound_.lock()->Start();
@@ -256,6 +264,14 @@ void PlayerBehavior::ShotLevel3(ObjectManager& objectManager)
 		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);
 		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::Vector2{ std::cos(shot2.radL), std::sin(shot2.radL) }, shot2.speed);
 		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::Vector2{ std::cos(shot2.radR), std::sin(shot2.radR) }, shot2.speed);
+	}
+
+	
+	if (input_->IsPressedStay(InputID::Shot2) && missileTime_ <= 0.0f)
+	{
+		missileTime_ = shot3.interval;
+		bulletFactory_->CreateMissile(objectManager, owner_->pos_  + Math::leftVector2<float> *5.0f, Math::Vector2{ std::cos(shot3.radL), std::sin(shot3.radL) });
+		bulletFactory_->CreateMissile(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::Vector2{ std::cos(shot3.radR), std::sin(shot3.radR) });
 	}
 }
 

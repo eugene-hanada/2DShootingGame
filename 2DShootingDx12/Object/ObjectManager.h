@@ -27,6 +27,7 @@ public:
 	void AddObject(ObjectUptr&& object);
 	ObjectUptr RemovObjecte(ObjectList::iterator itr);
 	const std::pair<ObjectList::const_iterator, bool> FindObject(ObjectID id);
+	const std::pair<ObjectList::const_iterator, bool> FindNearObject(ObjectID id, const Math::Vector2 pos);
 	void GameEnd(void);
 
 	static constexpr Math::Vector2 fieldSize_{ 550.0f, 600.0f };

@@ -17,6 +17,7 @@ enum class ObjectID
 	PowerUpItem,
 	Stage,
 	Effect,
+	Missile,
 };
 
 class Object
