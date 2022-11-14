@@ -14,7 +14,8 @@ constexpr int maxBullet{ missileMax + normalBulletMax };
 
 constexpr float bulletRadius{ 5.0f };
 
-BulletFactory::BulletFactory(Xaudio2& xaudio2)
+BulletFactory::BulletFactory(Xaudio2& xaudio2, std::shared_ptr<EffectFactory>& effectFactory) :
+	effect_{ effectFactory }
 {
 	for (int i = 0; i < normalBulletMax; i++)
 	{
@@ -24,7 +25,7 @@ BulletFactory::BulletFactory(Xaudio2& xaudio2)
 	wave->Load("Resource/Sound/missile.wav");
 	for (int i = 0; i < missileMax; i++)
 	{
-		missileList_.emplace_front(std::make_shared<MissileBehavior>(*this));
+		missileList_.emplace_front(std::make_shared<MissileBehavior>(*this, *effect_));
 		missileSoundList_.emplace_front(std::make_shared<Sound>(xaudio2,wave));
 	}
 	for (int i = 0; i < maxBullet; i++)

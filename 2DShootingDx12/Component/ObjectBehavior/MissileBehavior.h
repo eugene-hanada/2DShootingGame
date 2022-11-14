@@ -5,12 +5,13 @@
 class Sound;
 class BulletFactory;
 class ObjRender;
+class EffectFactory;
 
 class MissileBehavior :
     public ObjectBehavior
 {
 public:
-	MissileBehavior(BulletFactory& factory);
+	MissileBehavior(BulletFactory& factory, EffectFactory& effect);
 	void SetMoveVec(const Math::Vector2& moveVec)
 	{
 		moveVec_ = moveVec;
@@ -29,6 +30,7 @@ private:
 	void (MissileBehavior::* update_)(void);
 
 	BulletFactory& factory_;
+	EffectFactory& effect_;
 	Math::Vector2 moveVec_;
 	Object* target_;
 	std::weak_ptr<Sound> sound_;

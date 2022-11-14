@@ -7,11 +7,12 @@
 #include "../Collider/Collider.h"
 #include "../../Object/ObjectFactory/BulletFactory.h"
 #include "../Render/ObjRender.h"
+#include "../../Object/ObjectFactory/EffectFactory.h"
 
 constexpr float speed_{ 120.0f };
 
-MissileBehavior::MissileBehavior(BulletFactory& factory) :
-	factory_{factory},target_{nullptr},update_{nullptr}
+MissileBehavior::MissileBehavior(BulletFactory& factory, EffectFactory& effect) :
+	factory_{factory},target_{nullptr},update_{nullptr}, effect_{effect}
 {
 }
 
@@ -81,5 +82,6 @@ void MissileBehavior::OnHit(Collider& collider, ObjectManager& objectManager)
 			sound_.lock()->Start();
 		}
 		owner_->Destory();
+		effect_.CreateExpS(objectManager, owner_->GetPos());
 	}
 }

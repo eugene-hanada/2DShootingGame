@@ -26,10 +26,10 @@ ObjectManager::ObjectManager(std::shared_ptr<TextureData>& textureData, std::sha
 	animData_ = std::make_shared<AnimationData>();
 	animData_->Load("Resource/animation/anim.adat");
 
-	// 弾の生成クラス作成
-	auto bulletFactory = std::make_shared<BulletFactory>(xaudio);
-
 	auto effectFactory = std::make_shared<EffectFactory>(animData_, xaudio);
+
+	// 弾の生成クラス作成
+	auto bulletFactory = std::make_shared<BulletFactory>(xaudio, effectFactory);
 
 	// プレイヤー作成
 	auto& p = objList_.emplace_front(std::make_unique<Object>());

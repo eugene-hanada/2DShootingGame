@@ -60,6 +60,39 @@ void EffectFactory::CreateExpM(ObjectManager& objectManager, const Math::Vector2
 	objectManager.AddObject(std::move(obj));
 }
 
+void EffectFactory::CreateExpS(ObjectManager& objectManager, const Math::Vector2& pos)
+{
+	if (objPool_.empty())
+	{
+		return;
+	}
+	auto obj = std::move(objPool_.front());
+	objPool_.pop_front();
+
+	auto render = std::static_pointer_cast<AnimationRender>(std::move(renderPool_.front()));
+	render->SetImgKey("exps");
+	obj->AddComponent(std::move(render));
+	renderPool_.pop_front();
+
+	auto behavior = std::static_pointer_cast<EffectBehavior>(std::move(behaviorPool_.front()));
+	behavior->SetType(EffectType::ExpM);
+	obj->AddComponent(std::move(behavior));
+	behaviorPool_.pop_front();
+
+	// ƒTƒEƒ“ƒh‚Ì‚â‚Â‚ð’Ç‰Á
+	std::static_pointer_cast<Sound>(expMSound_.front())->Start();
+	obj->AddComponent(std::move(expMSound_.front()));
+	expMSound_.pop_front();
+
+	auto anim = std::static_pointer_cast<Animator>(std::move(animatorPool_.front()));
+	animatorPool_.pop_front();
+	obj->AddComponent(anim);
+	anim->SetState("exp");
+	obj->SetPos(pos);
+	obj->SetID(ObjectID::Effect);
+	objectManager.AddObject(std::move(obj));
+}
+
 void EffectFactory::CreateScore(ObjectManager& objectManager, const Math::Vector2& pos, const std::string& scoreStr)
 {
 	if (objPool_.empty())

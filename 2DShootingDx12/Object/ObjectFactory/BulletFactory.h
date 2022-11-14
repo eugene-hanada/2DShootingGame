@@ -7,13 +7,14 @@ class ObjectManager;
 class Object;
 class Component;
 class Xaudio2;
+class EffectFactory;
 
 // ’e‚Ì¶¬ƒNƒ‰ƒX
 class BulletFactory
 {
 public:
 	using ComponentShPtr = std::shared_ptr<Component>;
-	BulletFactory(Xaudio2& xaudio2);
+	BulletFactory(Xaudio2& xaudio2, std::shared_ptr<EffectFactory>& effectFactory);
 
 	/// <summary>
 	/// ’Êí‚Ì’e‚Ì¶¬
@@ -58,6 +59,6 @@ private:
 	std::forward_list<ComponentShPtr> missileList_;
 	std::forward_list<ComponentShPtr> missileSoundList_;
 	std::forward_list<std::unique_ptr<Object>> objPool_;
-
+	std::shared_ptr< EffectFactory> effect_;
 };
 
