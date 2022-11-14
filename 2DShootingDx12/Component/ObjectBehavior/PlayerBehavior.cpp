@@ -255,23 +255,24 @@ void PlayerBehavior::ShotLevel3(ObjectManager& objectManager)
 {
 	shotTime_ -= Time.GetDeltaTime<float>();
 	missileTime_ -= Time.GetDeltaTime<float>();
-	if (input_->IsPressedStay(InputID::Shot) && shotTime_ <= 0.0f)
+	if (input_->IsPressedStay(InputID::Shot))
 	{
-		sound_.lock()->Start();
-		shotTime_ = shot2.interval;
-		missileTime_ = shot2.interval;
-		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);
-		bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::Vector2{ std::cos(shot2.radL), std::sin(shot2.radL) }, shot2.speed);
-		bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::Vector2{ std::cos(shot2.radR), std::sin(shot2.radR) }, shot2.speed);
-	}
-
-	
-	if (input_->IsPressedStay(InputID::Shot2) && missileTime_ <= 0.0f)
-	{
-		missileTime_ = shot3.interval;
-		bulletFactory_->CreateMissile(objectManager, owner_->pos_  + Math::leftVector2<float> *5.0f, Math::Vector2{ std::cos(shot3.radL), std::sin(shot3.radL) });
-		bulletFactory_->CreateMissile(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::Vector2{ std::cos(shot3.radR), std::sin(shot3.radR) });
+		if (shotTime_ <= 0.0f)
+		{
+			sound_.lock()->Start();
+			shotTime_ = shot2.interval;
+			missileTime_ = shot2.interval;
+			bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);
+			bulletFactory_->CreateApBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::upVector2<float>, shot2.apSpeed);
+			bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::Vector2{ std::cos(shot2.radL), std::sin(shot2.radL) }, shot2.speed);
+			bulletFactory_->CreateNormalBullet(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::Vector2{ std::cos(shot2.radR), std::sin(shot2.radR) }, shot2.speed);
+		}
+		if (missileTime_ <= 0.0f)
+		{
+			missileTime_ = shot3.interval;
+			bulletFactory_->CreateMissile(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::Vector2{ std::cos(shot3.radL), std::sin(shot3.radL) });
+			bulletFactory_->CreateMissile(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::Vector2{ std::cos(shot3.radR), std::sin(shot3.radR) });
+		}
 	}
 }
 

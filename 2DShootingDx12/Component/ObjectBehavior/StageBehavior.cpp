@@ -6,19 +6,29 @@
 #include "../../Object/ObjectManager.h"
 #include "../../Application.h"
 
+StageBehavior::StageLevelVec StageBehavior::stageLevelVec_{
+	{1,{&StageBehavior::SpawnMoveToPos1}}
+};
+
 StageBehavior::StageBehavior(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory) :
 	score_{0u}
 {
 	enemyFactory_ = std::make_unique<EnemyFactory>(animData, bulletFactory, effectFactory);
+
 }
 
 void StageBehavior::Update(ObjectManager& objectManager)
+{
+	SpawnMoveToPos1(objectManager);
+}
+
+void StageBehavior::SpawnMoveToPos1(ObjectManager& objectManager)
 {
 	timer_ += Time.GetDeltaTime<float>();
 	if (timer_ >= 30.0f)
 	{
 		timer_ = 0.0f;
-		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ /2.0f };
+		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ / 2.0f };
 		spPos.y = 0.0f;
 		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x, spPos.y + 250.0f });
 		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x + 100.0f, spPos.y + 250.0f });

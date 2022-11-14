@@ -1,17 +1,23 @@
 #pragma once
 #include "ObjectBehavior.h"
+#include <vector>
 
 class AnimationData;
 class EnemyFactory;
 class BulletFactory;
 class EffectFactory;
+class ObjectManager;
 
 class StageBehavior :
 	public ObjectBehavior
 {
+	using SpawnFuncVec = std::vector<void(StageBehavior::*)(ObjectManager&)>;
+	using SpawnPair = std::pair<int, SpawnFuncVec>;
+	using StageLevelVec = std::vector<SpawnPair>;
 public:
 	StageBehavior(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory);
 	void Update(ObjectManager& objectManager) final;
+	void SpawnMoveToPos1(ObjectManager& objectManager);
 	void Begin(ObjectManager& objectManager) final;
 	const unsigned int GetScore(void) const
 	{
@@ -40,5 +46,9 @@ private:
 
 	// ÉXÉRÉA
 	unsigned int score_;
+
+	static StageLevelVec stageLevelVec_;
+	SpawnFuncVec::const_iterator spawnItr_;
+	StageLevelVec::const_iterator nowLevel_;
 };
 

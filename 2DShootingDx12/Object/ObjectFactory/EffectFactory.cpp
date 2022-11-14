@@ -29,7 +29,7 @@ EffectFactory::EffectFactory(std::shared_ptr<AnimationData>& animData, Xaudio2& 
 
 void EffectFactory::CreateExpM(ObjectManager& objectManager, const Math::Vector2& pos)
 {
-	if (objPool_.empty())
+	if (expMSound_.empty())
 	{
 		return;
 	}

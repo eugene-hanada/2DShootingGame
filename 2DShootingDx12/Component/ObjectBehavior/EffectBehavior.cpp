@@ -43,11 +43,12 @@ void EffectBehavior::Destory(std::unique_ptr<Object>&& obj)
 
 void EffectBehavior::DestoryExpM(std::unique_ptr<Object>&& obj)
 {
+	factory_.DeleteExpM(std::move(obj));
 }
 
 void EffectBehavior::DestoryExpS(std::unique_ptr<Object>&& obj)
 {
-
+	factory_.DeleteExpS(std::move(obj));
 }
 
 void EffectBehavior::DestoryScore(std::unique_ptr<Object>&& obj)

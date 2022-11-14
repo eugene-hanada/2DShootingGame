@@ -13,7 +13,6 @@ enum class InputID
 	Right,		// 右
 	Left,		// 左
 	Shot,		// 射撃
-	Shot2,
 	Speed,		// スピード切替
 	Esc			// エスケープキー
 };

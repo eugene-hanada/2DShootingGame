@@ -29,7 +29,7 @@ EnemyFactory::EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared
 	}
 }
 
-void EnemyFactory::CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end)
+void EnemyFactory::CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, float shotSpeed = 5.0f)
 {
 	if (moveToPosBehaviorList_.empty())
 	{
@@ -56,7 +56,7 @@ void EnemyFactory::CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::
 	moveToPosBehaviorList_.pop_front();
 	behavior->SetDestination(end);
 	behavior->SetHp(6);
-	behavior->SetShotSpeed(5.0f);
+	behavior->SetShotSpeed(shotSpeed);
 	behavior->SetBulletSpeed(180.0f);
 	obj->AddComponent(std::move(behavior));
 
@@ -72,7 +72,7 @@ void EnemyFactory::CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::
 
 }
 
-void EnemyFactory::CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end)
+void EnemyFactory::CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, float shotSpeed = 5.0f)
 {
 	if (moveToPosBehaviorList_.empty())
 	{
@@ -98,9 +98,9 @@ void EnemyFactory::CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::
 	auto behavior = std::static_pointer_cast<EnemyMoveToPos>(std::move(moveToPosBehaviorList_.front()));
 	moveToPosBehaviorList_.pop_front();
 	behavior->SetDestination(end);
-	behavior->SetHp(6);
-	behavior->SetShotSpeed(5.0f);
-	behavior->SetBulletSpeed(180.0f);
+	behavior->SetHp(10);
+	behavior->SetShotSpeed(shotSpeed);
+	behavior->SetBulletSpeed(200.0f);
 	obj->AddComponent(std::move(behavior));
 
 	// “–‚½‚è”»’è—pƒNƒ‰ƒX
