@@ -11,13 +11,12 @@ class ObjectManager;
 class StageBehavior :
 	public ObjectBehavior
 {
-	using SpawnFuncVec = std::vector<void(StageBehavior::*)(ObjectManager&)>;
+	using SpawnFuncVec = std::vector<bool(StageBehavior::*)(ObjectManager&)>;
 	using SpawnPair = std::pair<int, SpawnFuncVec>;
 	using StageLevelVec = std::vector<SpawnPair>;
 public:
 	StageBehavior(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory);
 	void Update(ObjectManager& objectManager) final;
-	void SpawnMoveToPos1(ObjectManager& objectManager);
 	void Begin(ObjectManager& objectManager) final;
 	const unsigned int GetScore(void) const
 	{
@@ -37,6 +36,10 @@ public:
 	void SubScore(unsigned int subValue);
 
 private:
+
+
+	bool SpawnMoveToPos1(ObjectManager& objectManager);
+	bool SpawnMoveToPos2(ObjectManager& objectManager);
 
 	// ƒ^ƒCƒ€
 	float timer_;

@@ -19,9 +19,12 @@ public:
 
 	void CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, float shotSpeed = 5.0f);
 	void CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, float shotSpeed = 5.0f);
+	void CreateMoveEnemyS(ObjectManager& objManager, const Math::Vector2& pos, const Math::Vector2& moveDir, float shotSpeed = 5.0f);
 	void DestoryMoveToPosEnemy(std::unique_ptr<Object>&& obj);
+	void DeleteMoveEnemy(std::unique_ptr<Object>&& obj);
 private:
 	std::forward_list<ComponentShPtr> moveToPosBehaviorList_;
+	std::forward_list<ComponentShPtr> moveBehaviorList_;
 	std::forward_list<ComponentShPtr> renderList_;
 	std::forward_list<ComponentShPtr> colliderList_;
 	std::forward_list<ComponentShPtr> animatorList_;

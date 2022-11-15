@@ -54,7 +54,7 @@ void EnemyMoveToPos::UpdateShot(ObjectManager& objectManager)
 	if (IsShot())
 	{
 		bulletFactory_->CreateEnemyNormalBullet(objectManager, owner_->GetPos(), moveVec_, bulletSpeed_);
-		DebugLog("”­ŽË");
+		//DebugLog("”­ŽË");
 		shotTimer_ = 0.0f;
 	}
 }

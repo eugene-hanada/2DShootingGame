@@ -7,22 +7,30 @@
 #include "../../Application.h"
 
 StageBehavior::StageLevelVec StageBehavior::stageLevelVec_{
-	{1,{&StageBehavior::SpawnMoveToPos1}}
+	{1,{&StageBehavior::SpawnMoveToPos1,&StageBehavior::SpawnMoveToPos2}}
 };
 
 StageBehavior::StageBehavior(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory) :
-	score_{0u}
+	score_{ 0u }
 {
 	enemyFactory_ = std::make_unique<EnemyFactory>(animData, bulletFactory, effectFactory);
-
+	nowLevel_ = stageLevelVec_.cbegin();
+	spawnItr_ = nowLevel_->second.cbegin();
 }
 
 void StageBehavior::Update(ObjectManager& objectManager)
 {
-	SpawnMoveToPos1(objectManager);
+	if ((this->*(*spawnItr_))(objectManager))
+	{
+		++spawnItr_;
+		if (spawnItr_ == nowLevel_->second.cend())
+		{
+			spawnItr_ = nowLevel_->second.cbegin();
+		}
+	}
 }
 
-void StageBehavior::SpawnMoveToPos1(ObjectManager& objectManager)
+bool StageBehavior::SpawnMoveToPos1(ObjectManager& objectManager)
 {
 	timer_ += Time.GetDeltaTime<float>();
 	if (timer_ >= 30.0f)
@@ -33,7 +41,25 @@ void StageBehavior::SpawnMoveToPos1(ObjectManager& objectManager)
 		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x, spPos.y + 250.0f });
 		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x + 100.0f, spPos.y + 250.0f });
 		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x - 100.0f, spPos.y + 250.0f });
+		return true;
 	}
+	return false;
+}
+
+bool StageBehavior::SpawnMoveToPos2(ObjectManager& objectManager)
+{
+	timer_ += Time.GetDeltaTime<float>();
+	if (timer_ >= 30.0f)
+	{
+		timer_ = 0.0f;
+		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ / 2.0f };
+		spPos.y = 0.0f;
+		enemyFactory_->CreateMoveEnemyS(objectManager, spPos, Math::downVector2<float>);
+		enemyFactory_->CreateMoveEnemyS(objectManager, spPos + Math::Vector2{200.0f, 0.0f}, Math::downVector2<float>);
+		enemyFactory_->CreateMoveEnemyS(objectManager, spPos + Math::Vector2{ -200.0f, 0.0f }, Math::downVector2<float>);
+		return true;
+	}
+	return false;
 }
 
 void StageBehavior::Begin(ObjectManager& objectManager)
