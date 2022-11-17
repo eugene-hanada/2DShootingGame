@@ -31,7 +31,7 @@ EnemyFactory::EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared
 	}
 }
 
-void EnemyFactory::CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, float shotSpeed )
+void EnemyFactory::CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, const ShotType type, float shotSpeed )
 {
 	if (moveToPosBehaviorList_.empty())
 	{
@@ -60,6 +60,7 @@ void EnemyFactory::CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::
 	behavior->SetHp(6);
 	behavior->SetShotSpeed(shotSpeed);
 	behavior->SetBulletSpeed(180.0f);
+	behavior->SetShotFunc(type);
 	obj->AddComponent(std::move(behavior));
 
 	// 当たり判定用クラス
@@ -74,7 +75,7 @@ void EnemyFactory::CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::
 
 }
 
-void EnemyFactory::CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, float shotSpeed)
+void EnemyFactory::CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, const ShotType type, float shotSpeed)
 {
 	if (moveToPosBehaviorList_.empty())
 	{
@@ -103,6 +104,7 @@ void EnemyFactory::CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::
 	behavior->SetHp(10);
 	behavior->SetShotSpeed(shotSpeed);
 	behavior->SetBulletSpeed(200.0f);
+	behavior->SetShotFunc(type);
 	obj->AddComponent(std::move(behavior));
 
 	// 当たり判定用クラス
@@ -116,7 +118,7 @@ void EnemyFactory::CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::
 	objManager.AddObject(std::move(obj));
 }
 
-void EnemyFactory::CreateMoveEnemyS(ObjectManager& objManager, const Math::Vector2& pos, const Math::Vector2& moveDir, float shotSpeed)
+void EnemyFactory::CreateMoveEnemyS(ObjectManager& objManager, const Math::Vector2& pos, const Math::Vector2& moveDir, const ShotType type, float shotSpeed)
 {
 	if (moveBehaviorList_.empty())
 	{
@@ -143,6 +145,7 @@ void EnemyFactory::CreateMoveEnemyS(ObjectManager& objManager, const Math::Vecto
 	behavior->SetHp(6);
 	behavior->SetShotSpeed(shotSpeed);
 	behavior->SetBulletSpeed(180.0f);
+	behavior->SetShotFunc(type);
 	obj->AddComponent(std::move(behavior));
 
 	// 当たり判定用クラス

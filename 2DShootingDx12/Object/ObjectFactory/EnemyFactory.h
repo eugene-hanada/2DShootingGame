@@ -11,15 +11,17 @@ class BulletFactory;
 class PowerUpItemFactory;
 class EffectFactory;
 
+enum class ShotType;
+
 class EnemyFactory
 {
 	using ComponentShPtr = std::shared_ptr<Component>;
 public:
 	EnemyFactory(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory);
 
-	void CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, float shotSpeed = 5.0f);
-	void CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, float shotSpeed = 5.0f);
-	void CreateMoveEnemyS(ObjectManager& objManager, const Math::Vector2& pos, const Math::Vector2& moveDir, float shotSpeed = 5.0f);
+	void CreateMoveToPosEnemyS(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, const ShotType type, float shotSpeed = 5.0f);
+	void CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::Vector2& start, const Math::Vector2& end, const ShotType type, float shotSpeed = 5.0f);
+	void CreateMoveEnemyS(ObjectManager& objManager, const Math::Vector2& pos, const Math::Vector2& moveDir, const ShotType type, float shotSpeed = 5.0f);
 	void DestoryMoveToPosEnemy(std::unique_ptr<Object>&& obj);
 	void DeleteMoveEnemy(std::unique_ptr<Object>&& obj);
 private:

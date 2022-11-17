@@ -1,6 +1,7 @@
 #pragma once
 #include "ObjectBehavior.h"
 #include <memory>
+#include <unordered_map>
 #include "../../common/Vector2.h"
 
 class EnemyFactory;
@@ -8,6 +9,13 @@ class BulletFactory;
 class PowerUpItemFactory;
 class EffectFactory;
 class StageBehavior;
+
+enum class ShotType
+{
+	Normal,
+	ThreeWay,
+	Random,
+};
 
 // 敵の動きの基底クラス
 class EnemyBehavior :
@@ -62,6 +70,8 @@ public:
 		score_ = score;
 	}
 
+	void SetShotFunc(const ShotType type);
+
 protected:
 
 	/// <summary>
@@ -82,6 +92,15 @@ protected:
 	}
 
 	void Begin(ObjectManager& objectManager) override;
+
+
+	void ShotFront(const Math::Vector2& front, ObjectManager& objectManager);
+
+	void Shot3Way(const Math::Vector2& front, ObjectManager& objectManager);
+
+	void ShotRandom(const Math::Vector2& front, ObjectManager& objectManager);
+
+	void (EnemyBehavior::* shotFunc_)(const Math::Vector2&, ObjectManager&);
 
 	// 敵の生成クラス
 	EnemyFactory& factory_;
@@ -114,9 +133,12 @@ protected:
 	unsigned int score_;
 
 private:
+	using ShotFunc = void (EnemyBehavior::*)(const Math::Vector2&, ObjectManager&);
 	
 	// 発射スピード
 	float shotSpeed_;
+
+	static std::unordered_map<ShotType, ShotFunc> shotFuncTbl_;
 
 };
 

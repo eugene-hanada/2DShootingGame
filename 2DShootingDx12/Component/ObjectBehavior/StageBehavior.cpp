@@ -5,6 +5,7 @@
 #include "../../Object/ObjectFactory/PowerUpItemFactory.h"
 #include "../../Object/ObjectManager.h"
 #include "../../Application.h"
+#include "EnemyBehavior.h"
 
 StageBehavior::StageLevelVec StageBehavior::stageLevelVec_{
 	{1,{&StageBehavior::SpawnMoveToPos1,&StageBehavior::SpawnMoveToPos2}}
@@ -38,9 +39,9 @@ bool StageBehavior::SpawnMoveToPos1(ObjectManager& objectManager)
 		timer_ = 0.0f;
 		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ / 2.0f };
 		spPos.y = 0.0f;
-		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x, spPos.y + 250.0f });
-		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x + 100.0f, spPos.y + 250.0f });
-		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x - 100.0f, spPos.y + 250.0f });
+		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x, spPos.y + 250.0f }, ShotType::Normal);
+		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x + 100.0f, spPos.y + 250.0f }, ShotType::Normal);
+		enemyFactory_->CreateMoveToPosEnemyS(objectManager, spPos, Math::Vector2{ spPos.x - 100.0f, spPos.y + 250.0f }, ShotType::Normal);
 		return true;
 	}
 	return false;
@@ -54,9 +55,9 @@ bool StageBehavior::SpawnMoveToPos2(ObjectManager& objectManager)
 		timer_ = 0.0f;
 		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ / 2.0f };
 		spPos.y = 0.0f;
-		enemyFactory_->CreateMoveEnemyS(objectManager, spPos, Math::downVector2<float>);
-		enemyFactory_->CreateMoveEnemyS(objectManager, spPos + Math::Vector2{200.0f, 0.0f}, Math::downVector2<float>);
-		enemyFactory_->CreateMoveEnemyS(objectManager, spPos + Math::Vector2{ -200.0f, 0.0f }, Math::downVector2<float>);
+		enemyFactory_->CreateMoveEnemyS(objectManager, spPos, Math::downVector2<float>, ShotType::Normal);
+		enemyFactory_->CreateMoveEnemyS(objectManager, spPos + Math::Vector2{200.0f, 0.0f}, Math::downVector2<float>, ShotType::Normal);
+		enemyFactory_->CreateMoveEnemyS(objectManager, spPos + Math::Vector2{ -200.0f, 0.0f }, Math::downVector2<float>, ShotType::Normal);
 		return true;
 	}
 	return false;
