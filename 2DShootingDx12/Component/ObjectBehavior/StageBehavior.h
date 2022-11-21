@@ -50,6 +50,8 @@ private:
 	// ÉXÉRÉA
 	unsigned int score_;
 
+
+
 	static StageLevelVec stageLevelVec_;
 	SpawnFuncVec::const_iterator spawnItr_;
 	StageLevelVec::const_iterator nowLevel_;

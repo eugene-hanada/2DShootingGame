@@ -22,6 +22,7 @@ class EnemyBehavior :
 	public ObjectBehavior
 {
 public:
+	using ShotFunc = void (EnemyBehavior::*)(const Math::Vector2&, ObjectManager&);
 	EnemyBehavior(EnemyFactory& factory, std::shared_ptr<BulletFactory>& bulletFactory,PowerUpItemFactory& itemFactory, EffectFactory& effectFactory);
 	virtual ~EnemyBehavior();
 
@@ -133,7 +134,7 @@ protected:
 	unsigned int score_;
 
 private:
-	using ShotFunc = void (EnemyBehavior::*)(const Math::Vector2&, ObjectManager&);
+	
 	
 	// 発射スピード
 	float shotSpeed_;

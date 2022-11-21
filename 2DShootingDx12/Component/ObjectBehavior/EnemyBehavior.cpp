@@ -12,7 +12,7 @@
 #include "../../Object/ObjectFactory/BulletFactory.h"
 #include "../../common/Debug.h"
 
-std::unordered_map<ShotType, EnemyBehavior::ShotFunc> EnemyBehavior::shotFuncTbl
+std::unordered_map<ShotType, EnemyBehavior::ShotFunc> EnemyBehavior::shotFuncTbl_
 {
 	{ShotType::Normal, &EnemyBehavior::ShotFront},
 	{ShotType::ThreeWay, &EnemyBehavior::Shot3Way},
@@ -23,7 +23,7 @@ EnemyBehavior::EnemyBehavior(EnemyFactory& factory, std::shared_ptr< BulletFacto
 	factory_{factory},itemFactory_{itemFactory}, hp_{0}, bulletFactory_{bulletFactory}, effectFactory_{effectFactory},
 	shotSpeed_{0.0f}, shotTimer_{0.0f}, bulletSpeed_{0.0f}, moveSpeed_{0.0f}, score_{100u}
 {
-	shotFunc_ = shotFuncTbl.begin()->second;
+	shotFunc_ = shotFuncTbl_.begin()->second;
 }
 
 EnemyBehavior::~EnemyBehavior()
@@ -32,9 +32,9 @@ EnemyBehavior::~EnemyBehavior()
 
 void EnemyBehavior::SetShotFunc(const ShotType type)
 {
-	if (shotFuncTbl.contains(type))
+	if (shotFuncTbl_.contains(type))
 	{
-		shotFunc_ = shotFuncTbl[type];
+		shotFunc_ = shotFuncTbl_[type];
 	}
 }
 
