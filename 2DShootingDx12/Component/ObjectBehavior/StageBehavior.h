@@ -50,6 +50,7 @@ private:
 	// ÉXÉRÉA
 	unsigned int score_;
 
+	float spawnTime_;
 
 
 	static StageLevelVec stageLevelVec_;

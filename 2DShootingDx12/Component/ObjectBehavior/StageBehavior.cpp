@@ -7,6 +7,8 @@
 #include "../../Application.h"
 #include "EnemyBehavior.h"
 
+constexpr float spawnStartTime{ 5.0f };
+
 StageBehavior::StageLevelVec StageBehavior::stageLevelVec_{
 	{1,{&StageBehavior::SpawnMoveToPos1,&StageBehavior::SpawnMoveToPos2}}
 };
@@ -17,6 +19,7 @@ StageBehavior::StageBehavior(std::shared_ptr<AnimationData>& animData, std::shar
 	enemyFactory_ = std::make_unique<EnemyFactory>(animData, bulletFactory, effectFactory);
 	nowLevel_ = stageLevelVec_.cbegin();
 	spawnItr_ = nowLevel_->second.cbegin();
+	spawnTime_ = spawnStartTime;
 }
 
 void StageBehavior::Update(ObjectManager& objectManager)
@@ -34,7 +37,7 @@ void StageBehavior::Update(ObjectManager& objectManager)
 bool StageBehavior::SpawnMoveToPos1(ObjectManager& objectManager)
 {
 	timer_ += Time.GetDeltaTime<float>();
-	if (timer_ >= 30.0f)
+	if (timer_ >= spawnTime_)
 	{
 		timer_ = 0.0f;
 		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ / 2.0f };
@@ -50,7 +53,7 @@ bool StageBehavior::SpawnMoveToPos1(ObjectManager& objectManager)
 bool StageBehavior::SpawnMoveToPos2(ObjectManager& objectManager)
 {
 	timer_ += Time.GetDeltaTime<float>();
-	if (timer_ >= 30.0f)
+	if (timer_ >= spawnTime_)
 	{
 		timer_ = 0.0f;
 		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ / 2.0f };
@@ -65,7 +68,7 @@ bool StageBehavior::SpawnMoveToPos2(ObjectManager& objectManager)
 
 void StageBehavior::Begin(ObjectManager& objectManager)
 {
-	timer_ = 30.0f;
+	timer_ = spawnStartTime;
 	owner_->SetID(ObjectID::Stage);
 }
 

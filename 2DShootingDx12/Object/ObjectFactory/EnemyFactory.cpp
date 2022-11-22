@@ -141,6 +141,7 @@ void EnemyFactory::CreateMoveEnemyS(ObjectManager& objManager, const Math::Vecto
 
 	// ビヘイビアクラスを追加
 	auto behavior = std::static_pointer_cast<EnemyMove>(std::move(moveBehaviorList_.front()));
+	moveBehaviorList_.pop_front();
 	behavior->SetMoveDir(moveDir);
 	behavior->SetHp(6);
 	behavior->SetShotSpeed(shotSpeed);
