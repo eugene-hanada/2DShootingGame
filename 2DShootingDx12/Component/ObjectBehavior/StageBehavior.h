@@ -40,6 +40,7 @@ private:
 
 	bool SpawnMoveToPos1(ObjectManager& objectManager);
 	bool SpawnMoveToPos2(ObjectManager& objectManager);
+	bool SpawnMoveToPos3(ObjectManager& objectManager);
 
 	// ƒ^ƒCƒ€
 	float timer_;

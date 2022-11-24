@@ -63,6 +63,21 @@ bool StageBehavior::SpawnMoveToPos2(ObjectManager& objectManager)
 	return false;
 }
 
+bool StageBehavior::SpawnMoveToPos3(ObjectManager& objectManager)
+{
+	timer_ += Time.GetDeltaTime<float>();
+	if (timer_ >= 30.0f)
+	{
+		timer_ = 0.0f;
+		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ / 2.0f };
+		spPos.y = 0.0f;;
+		enemyFactory_->CreateMoveToPosEnemyM(objectManager, Math::Vector2{ 200.0f, 0.0f }, spPos + Math::Vector2{ 200.0f, 70.0f }, ShotType::ThreeWay);
+		enemyFactory_->CreateMoveToPosEnemyM(objectManager, Math::Vector2{ -200.0f, 0.0f }, Math::Vector2{ -200.0f, 70.0f }, ShotType::ThreeWay);
+		return true;
+	}
+	return false;
+}
+
 void StageBehavior::Begin(ObjectManager& objectManager)
 {
 	timer_ = 30.0f;
