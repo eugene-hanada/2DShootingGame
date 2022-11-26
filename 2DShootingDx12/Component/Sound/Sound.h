@@ -38,7 +38,7 @@ private:
 
 	// ’âŽ~‚µ‚Ä‚¢‚é‚©‚Ìƒtƒ‰ƒO
 	bool isStop_;
-	const ComponentID GetID(void) const noexcept
+	const ComponentID GetID(void) const  noexcept final
 	{
 		return ComponentID::Sound;
 	}

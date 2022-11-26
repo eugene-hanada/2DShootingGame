@@ -5,6 +5,7 @@
 #include "../../Object/ObjectFactory/EnemyFactory.h"
 #include "../../Object/ObjectManager.h"
 #include "../../Object/ObjectFactory/BulletFactory.h"
+#include "../Collider/CircleCollider.h"
 
 EnemyMove::EnemyMove(EnemyFactory& factory, std::shared_ptr<BulletFactory>& bulletFactory, PowerUpItemFactory& itemFactory, EffectFactory& effectFactory) :
 	EnemyBehavior{factory, bulletFactory, itemFactory, effectFactory}
@@ -14,23 +15,22 @@ EnemyMove::EnemyMove(EnemyFactory& factory, std::shared_ptr<BulletFactory>& bull
 void EnemyMove::Update(ObjectManager& objectManager)
 {
 	owner_->SetPos(owner_->GetPos()  + moveDir_ * moveSpeed_ * Time.GetDeltaTime<float>());
-	if (owner_->GetPos().x < 0 || owner_->GetPos().x > ObjectManager::fieldSize_.x || owner_->GetPos().y < 0 || owner_->GetPos().y >ObjectManager::fieldSize_.y)
+	if (owner_->GetPos().x < -collider_.lock()->GetRadius() ||
+		owner_->GetPos().x > ObjectManager::fieldSize_.x + collider_.lock()->GetRadius() ||
+		owner_->GetPos().y <  -collider_.lock()->GetRadius() ||
+		owner_->GetPos().y >ObjectManager::fieldSize_.y + collider_.lock()->GetRadius()
+		)
 	{
 		owner_->Destory();
 	}
 
 	shotTimer_ += Time.GetDeltaTime<float>();
-	if (IsShot())
-	{
-		bulletFactory_->CreateEnemyNormalBullet(objectManager, owner_->GetPos(), moveDir_, bulletSpeed_);
-		//DebugLog("”­ŽË");
-		shotTimer_ = 0.0f;
-	}
+	(this->*shotFunc_)(objectManager);
 }
 
 void EnemyMove::Destory(std::unique_ptr<Object>&& obj)
 {
-	factory_.DestoryMoveToPosEnemy(std::move(obj));
+	factory_.DeleteMoveEnemy(std::move(obj));
 }
 
 void EnemyMove::Begin(ObjectManager& objectManager)

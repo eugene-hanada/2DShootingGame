@@ -20,7 +20,6 @@ void EffectBehavior::Update(ObjectManager& objectManager)
 {
 	if (!animator_.expired())
 	{
-		DebugLog(animator_.lock()->GetIdx());
 		if (animator_.lock()->IsEnd())
 		{
 			owner_->Destory();

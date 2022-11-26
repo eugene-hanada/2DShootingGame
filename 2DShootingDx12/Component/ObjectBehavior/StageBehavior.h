@@ -42,6 +42,9 @@ private:
 	bool SpawnMoveToPos2(ObjectManager& objectManager);
 	bool SpawnMoveToPos3(ObjectManager& objectManager);
 
+	bool SpawnMove1(ObjectManager& objectManager);
+	bool SpawnMove2(ObjectManager& objectManager);
+
 	// ƒ^ƒCƒ€
 	float timer_;
 
@@ -57,5 +60,6 @@ private:
 	static StageLevelVec stageLevelVec_;
 	SpawnFuncVec::const_iterator spawnItr_;
 	StageLevelVec::const_iterator nowLevel_;
+	int loopCount_;
 };
 

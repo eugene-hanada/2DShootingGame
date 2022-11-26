@@ -7,7 +7,9 @@
 #include "../../GameSystem/Xaudio2/Wave.h"
 #include "../../Component/Sound/Sound.h"
 
-constexpr int expMMax{ 10 };
+#include "../../common/Debug.h"
+
+constexpr int expMMax{ 20 };
 
 EffectFactory::EffectFactory(std::shared_ptr<AnimationData>& animData, Xaudio2& xaudio2)
 {
@@ -29,7 +31,7 @@ EffectFactory::EffectFactory(std::shared_ptr<AnimationData>& animData, Xaudio2& 
 
 void EffectFactory::CreateExpM(ObjectManager& objectManager, const Math::Vector2& pos)
 {
-	if (expMSound_.empty())
+	if (expMSound_.empty() || objPool_.empty())
 	{
 		return;
 	}
@@ -47,9 +49,11 @@ void EffectFactory::CreateExpM(ObjectManager& objectManager, const Math::Vector2
 	behaviorPool_.pop_front();
 
 	// ƒTƒEƒ“ƒh‚Ì‚â‚Â‚ð’Ç‰Á
-	std::static_pointer_cast<Sound>(expMSound_.front())->Start();
-	obj->AddComponent(std::move(expMSound_.front()));
+	auto sound = std::static_pointer_cast<Sound>(std::move(expMSound_.front()));
 	expMSound_.pop_front();
+	sound->Start();
+	obj->AddComponent(std::move(sound));
+	
 
 	auto anim = std::static_pointer_cast<Animator>(std::move(animatorPool_.front()));
 	animatorPool_.pop_front();
@@ -58,11 +62,12 @@ void EffectFactory::CreateExpM(ObjectManager& objectManager, const Math::Vector2
 	obj->SetPos(pos);
 	obj->SetID(ObjectID::Effect);
 	objectManager.AddObject(std::move(obj));
+
 }
 
 void EffectFactory::CreateExpS(ObjectManager& objectManager, const Math::Vector2& pos)
 {
-	if (objPool_.empty())
+	if (objPool_.empty() || expMSound_.empty())
 	{
 		return;
 	}
@@ -75,7 +80,7 @@ void EffectFactory::CreateExpS(ObjectManager& objectManager, const Math::Vector2
 	renderPool_.pop_front();
 
 	auto behavior = std::static_pointer_cast<EffectBehavior>(std::move(behaviorPool_.front()));
-	behavior->SetType(EffectType::ExpM);
+	behavior->SetType(EffectType::ExpS);
 	obj->AddComponent(std::move(behavior));
 	behaviorPool_.pop_front();
 
@@ -90,6 +95,7 @@ void EffectFactory::CreateExpS(ObjectManager& objectManager, const Math::Vector2
 	anim->SetState("exp");
 	obj->SetPos(pos);
 	obj->SetID(ObjectID::Effect);
+
 	objectManager.AddObject(std::move(obj));
 }
 
@@ -107,7 +113,9 @@ void EffectFactory::CreateScore(ObjectManager& objectManager, const Math::Vector
 	obj->AddComponent(std::move(render));
 	renderPool_.pop_front();
 
-	obj->AddComponent(std::move(behaviorPool_.front()));
+	auto behavior = std::static_pointer_cast<EffectBehavior>(std::move(behaviorPool_.front()));
+	behavior->SetType(EffectType::Score);
+	obj->AddComponent(std::move(behavior));
 	behaviorPool_.pop_front();
 
 	auto anim = std::static_pointer_cast<Animator>(std::move(animatorPool_.front()));
@@ -126,6 +134,7 @@ void EffectFactory::Delete(std::unique_ptr<Object>&& obj)
 
 void EffectFactory::DeleteExpM(std::unique_ptr<Object>&& obj)
 {
+	
 	animatorPool_.emplace_front(obj->RemoveComponent(ComponentID::Animator));
 	renderPool_.emplace_front(obj->RemoveComponent(ComponentID::Render));
 	behaviorPool_.emplace_front(obj->RemoveComponent(ComponentID::Behavior));

@@ -25,10 +25,10 @@ private:
 	void UpdateMove(ObjectManager& objectManager);
 
 	/// <summary>
-	/// 射撃時の更新処理
+	/// 停止時の更新処理
 	/// </summary>
 	/// <param name="objectManager"></param>
-	void UpdateShot(ObjectManager& objectManager);
+	void UpdateStop(ObjectManager& objectManager);
 
 	void Begin(ObjectManager& objectManager) final;
 
@@ -36,7 +36,7 @@ private:
 	Math::Vector2 dest_;
 
 	// 移動方向
-	Math::Vector2 moveVec_;
+	Math::Vector2 moveDir_;
 
 	// 更新処理
 	void (EnemyMoveToPos::* update_)(ObjectManager&);

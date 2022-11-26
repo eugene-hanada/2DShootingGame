@@ -23,6 +23,8 @@ r => 'y' if sprite is rotated-->
   <sprite n="num3.png" x="96" y="20" w="32" h="40" pX="0.5" pY="0.5" oX="16" oY="16" oW="64" oH="64"/>
   <sprite n="num4.png" x="128" y="20" w="32" h="40" pX="0.5" pY="0.5" oX="16" oY="16" oW="64" oH="64"/>
   <sprite n="num5.png" x="160" y="20" w="32" h="40" pX="0.5" pY="0.5" oX="16" oY="16" oW="64" oH="64"/>
-  <sprite n="num8.png" x="192" y="20" w="32" h="40" pX="0.5" pY="0.5" oX="16" oY="16" oW="64" oH="64"/>
-  <sprite n="num9.png" x="224" y="20" w="32" h="40" pX="0.5" pY="0.5" oX="16" oY="16" oW="64" oH="64"/>
+  <sprite n="num6.png" x="192" y="20" w="32" h="40" pX="0.5" pY="0.5" oX="16" oY="16" oW="64" oH="64"/>
+  <sprite n="num7.png" x="224" y="20" w="32" h="40" pX="0.5" pY="0.5" oX="16" oY="16" oW="64" oH="64"/>
+  <sprite n="num8.png" x="256" y="20" w="32" h="40" pX="0.5" pY="0.5" oX="16" oY="16" oW="64" oH="64"/>
+  <sprite n="num9.png" x="288" y="20" w="32" h="40" pX="0.5" pY="0.5" oX="16" oY="16" oW="64" oH="64"/>
 </TextureAtlas>

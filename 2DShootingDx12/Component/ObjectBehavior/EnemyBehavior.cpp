@@ -2,7 +2,7 @@
 #include "EnemyBehavior.h"
 #include "../../Object/ObjectFactory/EnemyFactory.h"
 #include "../../Object/Object.h"
-#include "../Collider/Collider.h"
+#include "../Collider/CircleCollider.h"
 #include "../../common/Random.h"
 #include "../../Object/ObjectFactory/PowerUpItemFactory.h"
 #include "../../Application.h"
@@ -73,34 +73,36 @@ void EnemyBehavior::Begin(ObjectManager& objectManager)
 	{
 		stage_ = (*obj)->GetCcomponent<StageBehavior>(ComponentID::Behavior);
 	}
+
+	collider_ = owner_->GetCcomponent<CircleCollider>(ComponentID::Collider);
+	shotTimer_ = shotSpeed_;
 }
 
-void EnemyBehavior::ShotFront(const Math::Vector2& front, ObjectManager& objectManager)
+void EnemyBehavior::ShotFront(ObjectManager& objectManager)
 {
 	shotTimer_ += Time.GetDeltaTime<float>();
 	if (IsShot())
 	{
-		bulletFactory_->CreateEnemyNormalBullet(objectManager, owner_->GetPos(), front, bulletSpeed_);
+		bulletFactory_->CreateEnemyNormalBullet(objectManager, owner_->GetPos(), Math::downVector2<float>, bulletSpeed_);
 		shotTimer_ = 0.0f;
 	}
 }
 
-void EnemyBehavior::Shot3Way(const Math::Vector2& front, ObjectManager& objectManager)
+void EnemyBehavior::Shot3Way(ObjectManager& objectManager)
 {
 	shotTimer_ += Time.GetDeltaTime<float>();
 	if (IsShot())
 	{
-		bulletFactory_->CreateEnemyNormalBullet(objectManager, owner_->GetPos(), front, bulletSpeed_);
-		auto angleA = front.GetAngle();
-		auto angleB = angleA + Math::Deg2Rad(30);
-		angleA -= Math::Deg2Rad(30);
-		bulletFactory_->CreateEnemyNormalBullet(objectManager, owner_->GetPos(), Math::Vector2{std::cos(angleA),std::sin(angleA)}, bulletSpeed_);
-		bulletFactory_->CreateEnemyNormalBullet(objectManager, owner_->GetPos(), Math::Vector2{ std::cos(angleB),std::sin(angleB) }, bulletSpeed_);
+		bulletFactory_->CreateEnemyNormalBullet(objectManager, owner_->GetPos(), Math::downVector2<float>, bulletSpeed_);
+		auto angle = Math::downVector2<float>.GetAngle();
+		constexpr auto rad{ Math::Deg2Rad(30.0f) };
+		bulletFactory_->CreateEnemyNormalBullet(objectManager, owner_->GetPos(), Math::Vector2{std::cos(angle + rad),std::sin(angle + rad) }, bulletSpeed_);
+		bulletFactory_->CreateEnemyNormalBullet(objectManager, owner_->GetPos(), Math::Vector2{ std::cos(angle - rad),std::sin(angle - rad) }, bulletSpeed_);
 		shotTimer_ = 0.0f;
 	}
 }
 
-void EnemyBehavior::ShotRandom(const Math::Vector2& front, ObjectManager& objectManager)
+void EnemyBehavior::ShotRandom(ObjectManager& objectManager)
 {
 	shotTimer_ += Time.GetDeltaTime<float>();
 	if (IsShot())

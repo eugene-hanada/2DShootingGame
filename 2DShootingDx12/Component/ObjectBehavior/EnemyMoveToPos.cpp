@@ -14,7 +14,7 @@ void EnemyMoveToPos::Begin(ObjectManager& objectManager)
 {
 	EnemyBehavior::Begin(objectManager);
 	update_ = &EnemyMoveToPos::UpdateMove;
-	moveVec_ = (dest_ - owner_->GetPos()).Normalized();
+	moveDir_ = (dest_ - owner_->GetPos()).Normalized();
 	shotTimer_ = 0.0f;
 }
 
@@ -31,30 +31,25 @@ void EnemyMoveToPos::SetDestination(const Math::Vector2& dest)
 void EnemyMoveToPos::Update(ObjectManager& objectManager)
 {
 	(this->*update_)(objectManager);
+	(this->*shotFunc_)(objectManager);
 }
 
 void EnemyMoveToPos::Destory(std::unique_ptr<Object>&& obj)
 {
-	factory_.DestoryMoveToPosEnemy(std::move(obj));
+	factory_.DeleteMoveToPosEnemy(std::move(obj));
 }
 
 void EnemyMoveToPos::UpdateMove(ObjectManager& objectManager)
 {
-	auto moveSpeed = Time.GetDeltaTime<float>() * 120.0f;
-	owner_->pos_ += moveVec_ * moveSpeed;
+	auto moveSpeed = Time.GetDeltaTime<float>() * moveSpeed_;
+	owner_->pos_ += moveDir_ * moveSpeed;
 	if ((owner_->pos_ - dest_).SqMagnitude() <= Math::Square(moveSpeed))
 	{
-		update_ = &EnemyMoveToPos::UpdateShot;
+		update_ = &EnemyMoveToPos::UpdateStop;
 	}
 }
 
-void EnemyMoveToPos::UpdateShot(ObjectManager& objectManager)
+void EnemyMoveToPos::UpdateStop(ObjectManager& objectManager)
 {
-	shotTimer_ += Time.GetDeltaTime<float>();
-	if (IsShot())
-	{
-		bulletFactory_->CreateEnemyNormalBullet(objectManager, owner_->GetPos(), moveVec_, bulletSpeed_);
-		//DebugLog("”­ŽË");
-		shotTimer_ = 0.0f;
-	}
+	// ‰½‚à‚µ‚È‚¢
 }

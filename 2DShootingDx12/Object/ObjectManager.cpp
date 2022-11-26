@@ -86,6 +86,12 @@ bool ObjectManager::Update(void)
 				{
 					continue;
 				}
+
+				if (!(*b)->IsActive())
+				{
+					continue;
+				}
+
 				auto colA = (*b)->GetCcomponent<Collider>(ComponentID::Collider);
 				auto colB = (*s)->GetCcomponent<Collider>(ComponentID::Collider);
 				if (!colA.expired() && !colB.expired())

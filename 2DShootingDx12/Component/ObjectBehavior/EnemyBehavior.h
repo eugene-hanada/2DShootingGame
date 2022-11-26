@@ -9,6 +9,7 @@ class BulletFactory;
 class PowerUpItemFactory;
 class EffectFactory;
 class StageBehavior;
+class CircleCollider;
 
 enum class ShotType
 {
@@ -22,7 +23,7 @@ class EnemyBehavior :
 	public ObjectBehavior
 {
 public:
-	using ShotFunc = void (EnemyBehavior::*)(const Math::Vector2&, ObjectManager&);
+	using ShotFunc = void (EnemyBehavior::*)(ObjectManager&);
 	EnemyBehavior(EnemyFactory& factory, std::shared_ptr<BulletFactory>& bulletFactory,PowerUpItemFactory& itemFactory, EffectFactory& effectFactory);
 	virtual ~EnemyBehavior();
 
@@ -95,13 +96,13 @@ protected:
 	void Begin(ObjectManager& objectManager) override;
 
 
-	void ShotFront(const Math::Vector2& front, ObjectManager& objectManager);
+	void ShotFront(ObjectManager& objectManager);
 
-	void Shot3Way(const Math::Vector2& front, ObjectManager& objectManager);
+	void Shot3Way(ObjectManager& objectManager);
 
-	void ShotRandom(const Math::Vector2& front, ObjectManager& objectManager);
+	void ShotRandom(ObjectManager& objectManager);
 
-	void (EnemyBehavior::* shotFunc_)(const Math::Vector2&, ObjectManager&);
+	void (EnemyBehavior::* shotFunc_)(ObjectManager&);
 
 	// 敵の生成クラス
 	EnemyFactory& factory_;
@@ -117,6 +118,8 @@ protected:
 
 	// ステージクラス
 	std::weak_ptr<StageBehavior> stage_;
+
+	std::weak_ptr<CircleCollider> collider_;
 
 	// hp
 	int hp_;
