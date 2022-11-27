@@ -54,7 +54,7 @@ void UiManager::CreateGameUi(void)
 				}
 				return 0; 
 			},
-			4, Math::Vector2{ 0.0f, 130.0f }, "num"
+			10, Math::Vector2{ 0.0f, 130.0f }, "num"
 				)
 	);
 	uiList_.emplace_back(std::make_unique<Image>(Math::Vector2{ 0.0f, 100.0f }, "score"));
@@ -75,7 +75,7 @@ void UiManager::CreateGameUi(void)
 				}
 				return 0;
 			},
-			4, Math::Vector2{ 0.0f, 230.0f }, "num"
+			3, Math::Vector2{ 0.0f, 230.0f }, "num"
 	));
 }
 
@@ -97,6 +97,6 @@ void UiManager::CreateResultUi(unsigned int score)
 			[](ObjectManager& objMng) {
 				return 0;
 			},
-			5, Math::Vector2{ scSize_.x / 2.0f - 78.75f, scSize_.y / 2.0f + 31.5f }, "num"
+			10, Math::Vector2{ scSize_.x / 2.0f - 157.5f, scSize_.y / 2.0f + 31.5f }, "num"
 				));
 }

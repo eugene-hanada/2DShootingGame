@@ -13,7 +13,8 @@ constexpr float defShotTime{ 2.5f };
 StageBehavior::StageLevelVec StageBehavior::stageLevelVec_{
 	{10,{&StageBehavior::SpawnMoveToPos1,&StageBehavior::SpawnMoveToPos2}},
 	{10,{&StageBehavior::SpawnMoveToPos1,&StageBehavior::SpawnMoveToPos2, &StageBehavior::SpawnMove1}},
-	{15,{&StageBehavior::SpawnMoveToPos1,&StageBehavior::SpawnMoveToPos2, &StageBehavior::SpawnMove1,&StageBehavior::SpawnMove2}}
+	{15,{&StageBehavior::SpawnMoveToPos1,&StageBehavior::SpawnMoveToPos2, &StageBehavior::SpawnMove1,&StageBehavior::SpawnMove2}},
+	{20, {&StageBehavior::SpawnMoveToPos1,&StageBehavior::SpawnMoveToPos2, &StageBehavior::SpawnMoveToPos4, &StageBehavior::SpawnMove3}}
 };
 
 StageBehavior::StageBehavior(std::shared_ptr<AnimationData>& animData, std::shared_ptr<BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory) :
@@ -90,9 +91,26 @@ bool StageBehavior::SpawnMoveToPos3(ObjectManager& objectManager)
 	{
 		timer_ = 0.0f;
 		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ / 2.0f };
-		spPos.y = 0.0f;;
+		spPos.y = 0.0f;
 		enemyFactory_->CreateMoveToPosEnemyM(objectManager, Math::Vector2{ spPos.x, 0.0f }, Math::Vector2{ spPos.x + 50.0f, 70.0f }, ShotType::ThreeWay, defShotTime * (spawnTime_ / spawnStartTime));
 		enemyFactory_->CreateMoveToPosEnemyM(objectManager, Math::Vector2{ spPos.x, 0.0f }, Math::Vector2{ spPos.x - 50.0f, 70.0f }, ShotType::ThreeWay, defShotTime * (spawnTime_ / spawnStartTime));
+		return true;
+	}
+	return false;
+}
+
+bool StageBehavior::SpawnMoveToPos4(ObjectManager& objectManager)
+{
+	timer_ += Time.GetDeltaTime<float>();
+	if (timer_ >= spawnTime_)
+	{
+		timer_ = 0.0f;
+		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ / 2.0f };
+		constexpr auto startY{ ObjectManager::fieldSize_.y * 1.0f / 3.0f };
+		constexpr auto moveVal{ ObjectManager::fieldSize_.x * 1.0f/3.0f};
+		enemyFactory_->CreateMoveToPosEnemyM(objectManager, Math::Vector2{ spPos.x, 0.0f }, spPos, ShotType::ThreeWay, defShotTime * (spawnTime_ / spawnStartTime));
+		enemyFactory_->CreateMoveToPosEnemyS(objectManager, Math::Vector2{ ObjectManager::fieldSize_.x, startY },  Math::Vector2{ ObjectManager::fieldSize_.x - moveVal , startY }, ShotType::Random, defShotTime * (spawnTime_ / spawnStartTime));
+		enemyFactory_->CreateMoveToPosEnemyS(objectManager, Math::Vector2{ 0.0f, startY }, Math::Vector2{ moveVal, startY }, ShotType::Random, defShotTime * (spawnTime_ / spawnStartTime));
 		return true;
 	}
 	return false;
@@ -125,6 +143,22 @@ bool StageBehavior::SpawnMove2(ObjectManager& objectManager)
 		enemyFactory_->CreateMoveEnemyS(objectManager, spPos, Math::downVector2<float>, ShotType::Normal);
 		enemyFactory_->CreateMoveEnemyS(objectManager, spPos + Math::Vector2{ 200.0f, 0.0f }, Math::downVector2<float>, ShotType::Normal, defShotTime * (spawnTime_ / spawnStartTime));
 		enemyFactory_->CreateMoveEnemyS(objectManager, spPos + Math::Vector2{ -200.0f, 0.0f }, Math::downVector2<float>, ShotType::Normal, defShotTime * (spawnTime_ / spawnStartTime));
+		return true;
+	}
+	return false;
+}
+
+bool StageBehavior::SpawnMove3(ObjectManager& objectManager)
+{
+	timer_ += Time.GetDeltaTime<float>();
+	if (timer_ >= spawnTime_)
+	{
+		timer_ = 0.0f;
+		auto spPos = Math::Vector2{ ObjectManager::fieldSize_ / 2.0f };
+		constexpr auto rad{ Math::Deg2Rad(45.0f) };
+		const auto upRad{ Math::upVector2<float>.GetAngle() };
+		enemyFactory_->CreateMoveEnemyM(objectManager, Math::Vector2{ ObjectManager::fieldSize_.x, spPos.y }, Math::Vector2{ std::cos(upRad - rad), std::sin(upRad - rad) }, ShotType::Random, defShotTime * (spawnTime_ / spawnStartTime));
+		enemyFactory_->CreateMoveEnemyM(objectManager, Math::Vector2{ 0.0f, spPos.y }, Math::Vector2{ std::cos(upRad + rad), std::sin(upRad + rad) }, ShotType::Random, defShotTime * (spawnTime_ / spawnStartTime));
 		return true;
 	}
 	return false;

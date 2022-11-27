@@ -116,7 +116,7 @@ bool ObjectManager::Update(void)
 	if (isEnd_)
 	{
 		endTimer_ += Time.GetDeltaTime<float>();
-		if (endTimer_ >= 5.0f)
+		if (endTimer_ >= 2.0f)
 		{
 			return true;
 		}

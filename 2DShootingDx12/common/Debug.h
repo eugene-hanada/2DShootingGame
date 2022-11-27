@@ -1,11 +1,11 @@
 #pragma once
+#include <cassert>
 #ifdef _DEBUG
 #include <Windows.h>	// OutPutDebugStringnがある所
 #include <iostream>		// コンソールに標準出力
 #include <sstream>		// stringの上位版文字列ストリーム
 #include <array>
 #include <memory>		// ユニークポインタとかの
-#include <cassert>
 
 // クリエイト関数を呼ぶマクロ関数
 #define DebugStart() (DebugClass::Create())
