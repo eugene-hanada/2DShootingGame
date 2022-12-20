@@ -102,7 +102,7 @@ void EnemyFactory::CreateMoveToPosEnemyM(ObjectManager& objManager, const Math::
 	auto behavior = std::static_pointer_cast<EnemyMoveToPos>(std::move(moveToPosBehaviorList_.front()));
 	moveToPosBehaviorList_.pop_front();
 	behavior->SetDestination(end);
-	behavior->SetHp(12.0f);
+	behavior->SetHp(12);
 	behavior->SetShotSpeed(shotSpeed);
 	behavior->SetBulletSpeed(200.0f);
 	behavior->SetMoveSpeed(100.0f);
@@ -188,7 +188,7 @@ void EnemyFactory::CreateMoveEnemyM(ObjectManager& objManager, const Math::Vecto
 	auto behavior = std::static_pointer_cast<EnemyMove>(std::move(moveBehaviorList_.front()));
 	moveBehaviorList_.pop_front();
 	behavior->SetMoveDir(moveDir);
-	behavior->SetHp(12.0f);
+	behavior->SetHp(12);
 	behavior->SetShotSpeed(shotSpeed);
 	behavior->SetBulletSpeed(200.0f);
 	behavior->SetShotFunc(type);

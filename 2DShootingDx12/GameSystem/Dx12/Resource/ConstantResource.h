@@ -84,6 +84,7 @@ inline ConstantResource<T>::ConstantResource(Dx12Wrapper& dx12, size_t num) :
 template<CbC T>
 inline ConstantResource<T>::~ConstantResource()
 {
+	resource_->Unmap(0, nullptr);
 }
 
 template<CbC T>

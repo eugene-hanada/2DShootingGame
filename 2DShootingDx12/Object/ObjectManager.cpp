@@ -1,6 +1,5 @@
 #include "Object.h"
 #include "../Component/ObjectBehavior/PlayerBehavior.h"
-#include "../Component/Material.h"
 #include "../GameSystem/Dx12/Resource/Texture.h"
 #include "../Component/Render/ObjRender.h"
 #include "../GameSystem/Dx12/Render/TextureSheetRender.h"
