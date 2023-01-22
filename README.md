@@ -10,6 +10,10 @@
 * zキーで射撃
 * シフトキーで低速移動
 
+## ゲーム画像
+
+![ゲーム画像](GameImage/Dx12ShootingGame1.jpg)
+
 ## 使用素材
 
 * https://ansimuz.itch.io/spaceship-shooter-environment
