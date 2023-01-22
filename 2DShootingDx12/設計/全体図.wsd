@@ -1,18 +1,158 @@
 @startuml classD
 
-class TexturSheetRender{
-    +Draw(Vector2, string)
-    +Draw(Vector2,Vector2,Vector2,Vector2,string)
-    -string imgKey 
+
+package GameSystem <<Folder>>
+{
+
+    class Dx12
+    {
+
+    }
+    package Dx12 <<Folder>>
+    {
+
+        package Resource <<Folder>>
+        {
+             abstract class Resource{
+            +ID3D12DescriptorHeap& DescriptorHeap(void)
+            +ComPtr<ID3D12Resource>& GetResource(void)
+            -bool CreateView(Dx12Wrapper&){abstract}
+            -bool CreateResource(Dx12Wrapper&,D3D12_RESOURCE_DESC&){abstract}
+            -bool CreateDescriptorHeap(Dx12Wrapper&)
+            -ComPtr<ID3D12Resource> resourse_
+            -ComPtr<ID3D12DescriptorHeap> descriptorHeap_ 
+            }
+
+            abstract class ConstantResource<T>{
+                +void Update(void){abstract}
+                #T*
+                #size_t size_
+            }
+
+            Resource <|-- ConstantResource
+
+            class CbValue<T>{
+                +T val_
+            }
+
+            ConstantResource <|-- CbValue
+
+            class CbMatrix{
+                
+            }
+
+            class transform{
+                -Matrix3X3 mat_
+                -Matrix3X3* mappedMat_
+            }
+
+            Resource <|-- transform
+
+            class Texture{
+            }
+
+            Resource <|-- Texture
+
+
+            class Mesh{
+                -vector<Vertex> vert_
+                -D3D12_VERTEX_BUFFER_VIEW vbView_
+                ComPtr<ID3D12Resource> vb_;
+            }
+
+            Material *-- Mesh
+
+            class Material{
+                -Render& render_
+                -Mesh mesh
+                -pair<Resource&,int> shaderPair_    
+            }
+
+
+            class RenderTarget{
+                -Resource rt_
+                -Resource srv_
+                -Resource screenMat_
+            }
+        }
+
+        package Render <<Folder>>
+        {
+            class TexturSheetRender{
+                +Draw(Vector2, string)
+                +Draw(Vector2,Vector2,Vector2,Vector2,string)
+                -string imgKey 
+            }
+
+            class RenderBase
+            {
+
+            }
+
+            class BasicRender
+            {
+            }
+
+            class AlphaRender
+            {
+
+            }
+
+            BasicRender --|> RenderBase
+            AlphaRender --|> RenderBase
+
+            class RenderManager
+            {
+
+            }
+
+            RenderManager -- RenderBase : 持つ
+
+        }
+
+
+       
+    }
+
+    package Xaudio2 <<Folder>>
+    {
+        class Wave
+        {
+
+        }
+
+        class Xaudio2
+        {
+
+        }
+    }
+
+    package Input <<Folder>>
+    {
+        enum InputID
+        {
+            Up
+            Down
+            Right
+            Left
+            Shot
+            Speed
+            Esc
+        }
+        class InputSystem
+        {
+
+        }
+    }
 }
 
-class ObjectManager{
+class ObjectManager
+{
     +void Update(void)
     +void Draw(void)
     -TexturSheetRender TexturSheetRender_
 }
 
-ObjectManager -- TexturSheetRender
 
 class Object{
     +void Update(void)
@@ -24,9 +164,7 @@ class Object{
 
 ObjectManager -- Object
 
-class Dx12{
 
-}
 
 
 
@@ -83,11 +221,7 @@ class PlayerBehavior{
 ObjectBehavior <|-- PlayerBehavior
 PlayerBehavior -- BulletFactory
 
-class RenderTarget{
-    -Resource rt_
-    -Resource srv_
-    -Resource screenMat_
-}
+
 
 class EnemyBehavior
 {
@@ -147,65 +281,7 @@ PlayerBehavior -- EffectFactory
 EnemyBehavior -- EffectFactory
 NormalBulletBehavior -- EffectFactory
 
-abstract class Resource{
-    +ID3D12DescriptorHeap& DescriptorHeap(void)
-    +ComPtr<ID3D12Resource>& GetResource(void)
-    -bool CreateView(Dx12Wrapper&){abstract}
-    -bool CreateResource(Dx12Wrapper&,D3D12_RESOURCE_DESC&){abstract}
-    -bool CreateDescriptorHeap(Dx12Wrapper&)
-    -ComPtr<ID3D12Resource> resourse_
-    -ComPtr<ID3D12DescriptorHeap> descriptorHeap_ 
-}
-
-abstract class ConstantResource<T>{
-    +void Update(void){abstract}
-    #T*
-    #size_t size_
-}
-
-Resource <|-- ConstantResource
-
-class CbValue<T>{
-    +T val_
-}
-
-ConstantResource <|-- CbValue
-
-class CbMatrix{
-    
-}
-
-class transform{
-    -Matrix3X3 mat_
-    -Matrix3X3* mappedMat_
-}
-
-Resource <|-- transform
-
-class Textur{
-}
-
-Resource <|-- Textur
 
 
-class Mesh{
-    -vector<Vertex> vert_
-    -D3D12_VERTEX_BUFFER_VIEW vbView_
-    ComPtr<ID3D12Resource> vb_;
-}
-
-Material *-- Mesh
-
-class Material{
-    -Render& render_
-    -Mesh mesh
-    -pair<Resource&,int> shaderPair_    
-}
-
-
-
-class Render{
-    
-}
 
 @enduml

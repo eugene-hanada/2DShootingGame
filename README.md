@@ -14,6 +14,10 @@
 
 ![ゲーム画像](GameImage/Dx12ShootingGame1.jpg)
 
+## クラス図
+
+![クラス](GameImage/classD.png)
+
 ## 使用素材
 
 * https://ansimuz.itch.io/spaceship-shooter-environment
