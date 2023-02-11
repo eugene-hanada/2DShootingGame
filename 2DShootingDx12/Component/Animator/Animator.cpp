@@ -60,6 +60,13 @@ void Animator::Begin(ObjectManager& objectManager)
 	}
 }
 
+void Animator::End(void)
+{
+	// 終了時何もないステートを入れとく
+	state_ = "";
+
+}
+
 void Animator::Update(ObjectManager& objectManager)
 {
 	playTime_ += Time.GetDeltaTime<float>();

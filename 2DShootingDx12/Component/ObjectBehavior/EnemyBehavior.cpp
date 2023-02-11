@@ -45,7 +45,7 @@ void EnemyBehavior::OnHit(Collider& collider, ObjectManager& objectManager)
 		// ƒvƒŒƒCƒ„[‚Ì’e‚É“–‚½‚Á‚½hp‚ğŒ¸‚ç‚·
 		if (--hp_ <= 0)
 		{
-			if (Rand.GetRandom(0.2))
+			if (Rand.GetRandom(0.9))
 			{
 				itemFactory_.Create(objectManager,owner_->pos_);
 			}

@@ -57,7 +57,7 @@ constexpr float speed_{ 300.0f };
 
 PlayerBehavior::PlayerBehavior(std::shared_ptr<InputSystem>& input, std::shared_ptr< BulletFactory>& bulletFactory, std::shared_ptr< EffectFactory>& effectFactory) :
 	input_{input}, bulletFactory_{bulletFactory}, moveStateFunc_{nullptr},effectFactory_{effectFactory},
-	shotTime_{0.0f}, state_{MoveState::Other}, powerItemCount_{0}, nowLevel_{1u}
+	shotTime_{0.0f}, state_{MoveState::Other}, powerItemCount_{5}, nowLevel_{1u}
 {
 	nowShotItr_ = shotFuncs_.cbegin();
 }
@@ -110,12 +110,12 @@ void PlayerBehavior::HitPowerUpItem(Collider& collider, ObjectManager& objectMan
 
 void PlayerBehavior::HitEnemy(Collider& collider, ObjectManager& objectManager)
 {
-	nowShotItr_ = shotFuncs_.cbegin();
-	powerItemCount_ = 0U;
-	nowLevel_ = 0u;
+	//nowShotItr_ = shotFuncs_.cbegin();
+	//powerItemCount_ = 0U;
+	//nowLevel_ = 0u;
 	effectFactory_->CreateExpM(objectManager, owner_->pos_);
-	objectManager.GameEnd();
-	owner_->Destory();
+	//objectManager.GameEnd();
+	//owner_->Destory();
 }
 
 void PlayerBehavior::OnHit(Collider& collider, ObjectManager& objectManager)
@@ -271,7 +271,7 @@ void PlayerBehavior::ShotLevel3(ObjectManager& objectManager)
 		if (missileTime_ < 0.0f)
 		{
 			missileTime_ = shot3.interval;
-			DebugLog("missile");
+			//DebugLog("missile");
 			bulletFactory_->CreateMissile(objectManager, owner_->pos_ + Math::leftVector2<float> *5.0f, Math::Vector2{ std::cos(shot3.radL), std::sin(shot3.radL) });
 			bulletFactory_->CreateMissile(objectManager, owner_->pos_ + Math::rightVector2<float> *5.0f, Math::Vector2{ std::cos(shot3.radR), std::sin(shot3.radR) });
 		}

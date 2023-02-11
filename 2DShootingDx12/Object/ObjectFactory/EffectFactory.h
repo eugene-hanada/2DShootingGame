@@ -24,12 +24,18 @@ public:
 	void DeleteExpS(std::unique_ptr<Object>&& obj);
 	void DeleteScore(std::unique_ptr<Object>&& obj);
 private:
+	void CheckObjPool(void);
+	void CheckAnimetorPool(void);
+	void CheckRenderPool(void);
+	void CheckBehaviorPool(void);
 	std::forward_list<std::unique_ptr<Object>> objPool_;
 	std::forward_list<ComponentShPtr> animatorPool_;
 	std::forward_list<ComponentShPtr> renderPool_;
 	std::forward_list<ComponentShPtr> behaviorPool_;
 	std::forward_list<ComponentShPtr> expMSound_;
 	std::forward_list<ComponentShPtr> expSSound_;
+
+	std::shared_ptr<AnimationData> animData_;
 	
 };
 

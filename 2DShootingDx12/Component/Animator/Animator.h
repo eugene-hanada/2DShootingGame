@@ -39,6 +39,7 @@ public:
 	const bool IsEnd(void) const;
 private:
 	void Begin(ObjectManager& objectManager) final;
+	void End(void) final;
 	void Update(ObjectManager& objectManager) final;
 	const ComponentID GetID(void) const noexcept final { return ComponentID::Animator; }
 	
