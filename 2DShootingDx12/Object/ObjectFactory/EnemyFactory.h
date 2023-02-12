@@ -26,6 +26,13 @@ public:
 	void DeleteMoveToPosEnemy(std::unique_ptr<Object>&& obj);
 	void DeleteMoveEnemy(std::unique_ptr<Object>&& obj);
 private:
+	void CheckMoveToPosPool(void);
+	void CheckMovePool(void);
+	void CheckRenderPool(void);
+	void CheckCollider(void);
+	void CheckAnimator(void);
+	void CheckObjPool(void);
+
 	std::forward_list<ComponentShPtr> moveToPosBehaviorList_;
 	std::forward_list<ComponentShPtr> moveBehaviorList_;
 	std::forward_list<ComponentShPtr> renderList_;
@@ -34,5 +41,7 @@ private:
 	std::forward_list<std::unique_ptr<Object>> objPool_;
 	std::unique_ptr< PowerUpItemFactory> itemfactory_;
 	std::shared_ptr< EffectFactory> effectFactory_;
+	std::shared_ptr<BulletFactory> bulletFactory_;
+	std::shared_ptr<AnimationData> animData_;
 };
 

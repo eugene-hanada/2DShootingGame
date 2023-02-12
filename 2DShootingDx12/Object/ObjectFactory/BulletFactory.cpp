@@ -38,16 +38,13 @@ BulletFactory::BulletFactory(Xaudio2& xaudio2, std::shared_ptr<EffectFactory>& e
 
 void BulletFactory::CreateNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed)
 {
-	if (normalShotBehaviorList_.empty())
-	{
-		return;
-	}
-
 	// オブジェクトクラスを取得
+	CheckObjPool();
 	auto obj = std::move(objPool_.front());
 	objPool_.pop_front();
 
 	// ビヘイビアクラスを取る
+	CheckShotBehaviorPool();
 	auto behavior = std::static_pointer_cast<NormalBullet>(std::move(normalShotBehaviorList_.front()));
 	normalShotBehaviorList_.pop_front();
 	behavior->SetMoveVec(moveVec);
@@ -56,6 +53,7 @@ void BulletFactory::CreateNormalBullet(ObjectManager& objectManager, const Math:
 	obj->AddComponent(std::move(behavior));
 
 	// レンダークラスをセット
+	CheckRenderPool();
 	auto render = std::static_pointer_cast<DefaultRender>(std::move(renderList_.front()));
 	renderList_.pop_front();
 	render->SetImgKey("bulletC");
@@ -64,6 +62,7 @@ void BulletFactory::CreateNormalBullet(ObjectManager& objectManager, const Math:
 	obj->pos_ = pos;
 
 	// 当たり判定クラスを追加する
+	CheckColliderPool();
 	auto col = std::static_pointer_cast<CircleCollider>(std::move(colliderList_.front()));
 	colliderList_.pop_front();
 	col->SetRadius(bulletRadius);
@@ -83,16 +82,13 @@ void BulletFactory::DeleteNormalBullet(std::unique_ptr<Object>&& obj)
 
 void BulletFactory::CreateEnemyNormalBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed)
 {
-	if (normalShotBehaviorList_.empty())
-	{
-		return;
-	}
-
 	// オブジェクトクラスを取得
+	CheckObjPool();
 	auto obj = std::move(objPool_.front());
 	objPool_.pop_front();
 
 	// ビヘイビアクラスを取る
+	CheckShotBehaviorPool();
 	auto behavior = std::static_pointer_cast<NormalBullet>(std::move(normalShotBehaviorList_.front()));
 	normalShotBehaviorList_.pop_front();
 	behavior->SetSpeed(speed);
@@ -101,6 +97,7 @@ void BulletFactory::CreateEnemyNormalBullet(ObjectManager& objectManager, const 
 	obj->AddComponent(std::move(behavior));
 
 	// レンダークラスをセット
+	CheckRenderPool();
 	auto render = std::static_pointer_cast<DefaultRender>(std::move(renderList_.front()));
 	renderList_.pop_front();
 	render->SetImgKey("bulletA");
@@ -109,6 +106,7 @@ void BulletFactory::CreateEnemyNormalBullet(ObjectManager& objectManager, const 
 	obj->pos_ = pos;
 
 	// 当たり判定クラスを追加する
+	CheckColliderPool();
 	auto col = std::static_pointer_cast<CircleCollider>(std::move(colliderList_.front()));
 	colliderList_.pop_front();
 	col->SetRadius(bulletRadius);
@@ -121,16 +119,13 @@ void BulletFactory::CreateEnemyNormalBullet(ObjectManager& objectManager, const 
 
 void BulletFactory::CreateApBullet(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec, float speed)
 {
-	if (normalShotBehaviorList_.empty())
-	{
-		return;
-	}
-
 	// オブジェクトクラスを取得
+	CheckObjPool();
 	auto obj = std::move(objPool_.front());
 	objPool_.pop_front();
 
 	// ビヘイビアクラスを取る
+	CheckShotBehaviorPool();
 	auto behavior = std::static_pointer_cast<NormalBullet>(std::move(normalShotBehaviorList_.front()));
 	normalShotBehaviorList_.pop_front();
 	behavior->SetMoveVec(Math::upVector2<float>);
@@ -140,6 +135,7 @@ void BulletFactory::CreateApBullet(ObjectManager& objectManager, const Math::Vec
 	obj->AddComponent(std::move(behavior));
 
 	// レンダークラスをセット
+	CheckRenderPool();
 	auto render = std::static_pointer_cast<DefaultRender>(std::move(renderList_.front()));
 	renderList_.pop_front();
 	render->SetImgKey("bulletD");
@@ -148,6 +144,7 @@ void BulletFactory::CreateApBullet(ObjectManager& objectManager, const Math::Vec
 	obj->pos_ = pos;
 
 	// 当たり判定クラスを追加する
+	CheckColliderPool();
 	auto col = std::static_pointer_cast<CircleCollider>(std::move(colliderList_.front()));
 	colliderList_.pop_front();
 	col->SetRadius(bulletRadius);
@@ -159,22 +156,25 @@ void BulletFactory::CreateApBullet(ObjectManager& objectManager, const Math::Vec
 
 void BulletFactory::CreateMissile(ObjectManager& objectManager, const Math::Vector2& pos, const Math::Vector2& moveVec)
 {
-	if (missileList_.empty())
+	if (missileSoundList_.empty())
 	{
 		return;
 	}
 
 	// オブジェクトクラスを取得
+	CheckObjPool();
 	auto obj = std::move(objPool_.front());
 	objPool_.pop_front();
 
 	// ビヘイビアクラスを取る
+	CheckMissileBehaviorPool();
 	auto behavior = std::static_pointer_cast<MissileBehavior>(std::move(missileList_.front()));
 	missileList_.pop_front();
 	behavior->SetMoveVec(moveVec);
 	obj->AddComponent(std::move(behavior));
 
 	// レンダークラスをセット
+	CheckRenderPool();
 	auto render = std::static_pointer_cast<DefaultRender>(std::move(renderList_.front()));
 	renderList_.pop_front();
 	render->SetImgKey("missileB");
@@ -183,6 +183,7 @@ void BulletFactory::CreateMissile(ObjectManager& objectManager, const Math::Vect
 	obj->pos_ = pos;
 
 	// 当たり判定クラスを追加する
+	CheckColliderPool();
 	auto col = std::static_pointer_cast<CircleCollider>(std::move(colliderList_.front()));
 	colliderList_.pop_front();
 	col->SetRadius(bulletRadius);
@@ -203,5 +204,46 @@ void BulletFactory::DeleteMissile(std::unique_ptr<Object>&& obj)
 	renderList_.emplace_front(std::move(obj->RemoveComponent(ComponentID::Render)));
 	missileList_.emplace_front(std::move(obj->RemoveComponent(ComponentID::Behavior)));
 	objPool_.emplace_front(std::move(obj));
+}
+
+void BulletFactory::CheckShotBehaviorPool(void)
+{
+	if (normalShotBehaviorList_.empty())
+	{
+		normalShotBehaviorList_.emplace_front(std::make_shared<NormalBullet>(*this));
+	}
+}
+
+void BulletFactory::CheckRenderPool(void)
+{
+	if (renderList_.empty())
+	{
+		renderList_.emplace_front(std::make_shared<DefaultRender>());
+	}
+}
+
+void BulletFactory::CheckColliderPool(void)
+{
+	if (colliderList_.empty())
+	{
+		colliderList_.emplace_front(std::make_shared<CircleCollider>());
+	}
+}
+
+void BulletFactory::CheckMissileBehaviorPool(void)
+{
+	if (missileList_.empty())
+	{
+		missileList_.emplace_front(std::make_shared<MissileBehavior>(*this, *effect_));
+	}
+}
+
+
+void BulletFactory::CheckObjPool(void)
+{
+	if (objPool_.empty())
+	{
+		objPool_.emplace_front(std::make_unique<Object>());
+	}
 }
 

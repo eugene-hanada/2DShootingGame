@@ -53,6 +53,12 @@ public:
 
 	void DeleteMissile(std::unique_ptr<Object>&& obj);
 private:
+	void CheckShotBehaviorPool(void);
+	void CheckRenderPool(void);
+	void CheckColliderPool(void);
+	void CheckMissileBehaviorPool(void);
+	void CheckObjPool(void);
+
 	std::forward_list<ComponentShPtr> normalShotBehaviorList_;
 	std::forward_list<ComponentShPtr> renderList_;
 	std::forward_list<ComponentShPtr> colliderList_;
