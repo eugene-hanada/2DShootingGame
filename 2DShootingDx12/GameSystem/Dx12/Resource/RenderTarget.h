@@ -92,6 +92,7 @@ private:
 	// レンダーターゲット用デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> rtDescriptorHeap_;
 
+	// マテリアル
 	std::unique_ptr<MaterialBase> material_;
 
 	// テクスチャ

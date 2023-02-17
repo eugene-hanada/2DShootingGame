@@ -25,7 +25,11 @@ public:
 	virtual void Update(void) = 0;
 	
 protected:
+
+	// mapしたポインタ
 	T* mapped_;
+
+	// サイズ
 	std::size_t size_;
 };
 

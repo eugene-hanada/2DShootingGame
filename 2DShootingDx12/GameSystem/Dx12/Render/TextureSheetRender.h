@@ -45,6 +45,7 @@ private:
 	bool CreateVertex(void);
 	bool CreateIdx(void);
 	
+	// DirectX12のラッパークラス
 	Dx12Wrapper& dx12_;
 
 	// パイプライン

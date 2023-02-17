@@ -1,6 +1,7 @@
 #include <fstream>
 #include "AnimationData.h"
 
+// データファイルのヘッダー情報
 struct Header
 {
 	char sig[4];

@@ -18,6 +18,8 @@ private:
     void Update(ObjectManager& objectManager) final;
     void Destory(std::unique_ptr<Object>&& obj) final;
     void Begin(ObjectManager& objectManager) final;
+
+    // ˆÚ“®•ûŒü
     Math::Vector2 moveDir_;
 };
 

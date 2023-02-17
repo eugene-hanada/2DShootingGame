@@ -5,6 +5,7 @@
 
 #include "../../common/Debug.h"
 
+// 破棄用関数をエフェクトタイプごとに持つテーブル
 std::unordered_map<EffectType, void(EffectBehavior::*)(std::unique_ptr<Object>&&)> EffectBehavior::destoryFunc_{
 	{ EffectType::ExpM,&EffectBehavior::DestoryExpM },
 	{ EffectType::ExpS,&EffectBehavior::DestoryExpS },

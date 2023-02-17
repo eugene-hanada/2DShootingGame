@@ -51,7 +51,11 @@ private:
 	virtual bool CreateResource(Dx12Wrapper& dx12,D3D12_RESOURCE_DESC&  resourceDesc) = 0;
 protected:
 	bool CreateDescriptorHeap(Dx12Wrapper& dx12);
+
+	// リソース
 	ComPtr<ID3D12Resource> resource_;
+
+	// ディスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descriptorHeap_;
 };
 

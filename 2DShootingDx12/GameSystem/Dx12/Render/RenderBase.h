@@ -22,7 +22,7 @@ protected:
 	virtual bool CreatePipelineState(ComPtr<ID3DBlob>& vs, ComPtr<ID3DBlob>& ps) = 0;
 	virtual bool CreateRootSignature(void) = 0;
 	
-
+	// DirectX12のラッパークラス
 	Dx12Wrapper& dx12_;
 
 	// パイプライン

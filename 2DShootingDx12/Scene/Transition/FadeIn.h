@@ -11,6 +11,8 @@ public:
 private:
 	void Draw(void) final;
 	bool TransitionUpdate(void);
+
+	// 定数バッファ
 	std::shared_ptr<CbValue<float>> alpha_;
 };
 

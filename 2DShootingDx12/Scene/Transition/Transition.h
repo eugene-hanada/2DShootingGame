@@ -8,7 +8,11 @@ public:
     virtual ~Transition();
 protected:
     virtual bool TransitionUpdate(void) = 0;
+
+    // ビフォークラス
     SceneUPtr befor_;
+
+    // アフタークラス
     SceneUPtr after_;
 
     // 経過時間

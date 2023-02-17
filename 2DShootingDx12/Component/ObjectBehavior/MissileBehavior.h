@@ -27,13 +27,25 @@ private:
 
 	void OnHit(Collider& collider, ObjectManager& objectManager) final;
 
+	// アップデート関数の関数ポインタ
 	void (MissileBehavior::* update_)(void);
 
+	// 弾の生成用クラス
 	BulletFactory& factory_;
+
+	// エフェクト生成クラス
 	EffectFactory& effect_;
+
+	// 移動ベクトル
 	Math::Vector2 moveVec_;
+
+	// ターゲットオブジェクトのポインタ
 	Object* target_;
+
+	// サウンド
 	std::weak_ptr<Sound> sound_;
+
+	// レンダー
 	std::weak_ptr< ObjRender> render_;
 };
 

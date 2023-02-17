@@ -21,9 +21,11 @@ void EnemyMove::Update(ObjectManager& objectManager)
 		owner_->GetPos().y >ObjectManager::fieldSize_.y + collider_.lock()->GetRadius()
 		)
 	{
+		// 範囲外の時オブジェクトを破棄する
 		owner_->Destory();
 	}
 
+	// 射撃処理
 	shotTimer_ += Time.GetDeltaTime<float>();
 	(this->*shotFunc_)(objectManager);
 }

@@ -20,10 +20,20 @@ public:
 	virtual void Draw(void) = 0;
 	RenderTarget& GetRenderTarget(void) { return *rt_; }
 protected:
+
+	// レンダーターゲット
 	std::unique_ptr<RenderTarget> rt_;
+
+	// レンダーmanager
 	std::shared_ptr<RenderManager>  renderMng_;
+
+	// 入力系
 	std::shared_ptr<InputSystem> input_;
+
+	// DirectX12のラッパークラス
 	Dx12Wrapper& dx12_;
+
+	// XAudio2のラッパークラス
 	Xaudio2& xaudio_;
 private:
 	virtual const SceneID GetID(void) const noexcept = 0;

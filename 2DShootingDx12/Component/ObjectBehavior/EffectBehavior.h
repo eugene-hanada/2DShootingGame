@@ -5,11 +5,12 @@
 class Animator;
 class EffectFactory;
 
+// エフェクトの種類
 enum class EffectType
 {
-	ExpM,
-	ExpS,
-	Score
+	ExpM,			// 爆発
+	ExpS,			// 爆発小
+	Score			// スコア
 };
 
 // エフェクト制御ようクラス

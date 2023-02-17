@@ -56,12 +56,19 @@ private:
 	// スコア
 	unsigned int score_;
 
+	// スポーンまでの時間
 	float spawnTime_;
 
-
+	// レベルごとのFunc
 	static StageLevelVec stageLevelVec_;
+
+	// スポーン処理のイテレーター
 	SpawnFuncVec::const_iterator spawnItr_;
+
+	// 現在のレベルのイテレーター
 	StageLevelVec::const_iterator nowLevel_;
+
+	// ループ数
 	int loopCount_;
 };
 

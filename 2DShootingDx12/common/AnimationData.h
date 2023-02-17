@@ -7,6 +7,7 @@ class AnimationData
 {
 public:
 
+	// データ
 	struct Data
 	{
 		// ループ回数

@@ -11,11 +11,12 @@ class EffectFactory;
 class StageBehavior;
 class CircleCollider;
 
+// 射撃タイプ
 enum class ShotType
 {
-	Normal,
-	ThreeWay,
-	Random,
+	Normal,		// 通常
+	ThreeWay,	// 3Way
+	Random,		// ランダム
 };
 
 // 敵の動きの基底クラス
@@ -95,13 +96,25 @@ protected:
 
 	void Begin(ObjectManager& objectManager) override;
 
-
+	/// <summary>
+	/// 正面に発射する
+	/// </summary>
+	/// <param name="objectManager"></param>
 	void ShotFront(ObjectManager& objectManager);
 
+	/// <summary>
+	/// 三方向に発射する
+	/// </summary>
+	/// <param name="objectManager"></param>
 	void Shot3Way(ObjectManager& objectManager);
 
+	/// <summary>
+	/// ランダムに発射する
+	/// </summary>
+	/// <param name="objectManager"></param>
 	void ShotRandom(ObjectManager& objectManager);
 
+	// 発射処理の関数ポインタ
 	void (EnemyBehavior::* shotFunc_)(ObjectManager&);
 
 	// 敵の生成クラス
@@ -119,6 +132,7 @@ protected:
 	// ステージクラス
 	std::weak_ptr<StageBehavior> stage_;
 
+	// コライダー
 	std::weak_ptr<CircleCollider> collider_;
 
 	// hp
@@ -142,6 +156,7 @@ private:
 	// 発射スピード
 	float shotSpeed_;
 
+	// 射撃タイプごとの関数のテーブル
 	static std::unordered_map<ShotType, ShotFunc> shotFuncTbl_;
 
 };

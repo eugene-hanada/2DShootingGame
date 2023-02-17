@@ -16,10 +16,20 @@ private:
 	SceneUPtr Update(SceneUPtr scene) final;
 	void Draw(void) final;
 	const SceneID GetID(void) const noexcept final { return SceneID::Game; }
+
+	// オブジェクトマネージャー
 	std::unique_ptr<ObjectManager> objManager_;
+
+	// Uiのマネージャー
 	std::unique_ptr< UiManager> uiManager_;
+
+	// オブジェクト描画用レンダーターゲット
 	std::unique_ptr<RenderTarget> objRt_;
+
+	// UI描画用レンダーターゲット
 	std::unique_ptr<RenderTarget> uiRt_;
+
+	// テクスチャデータ
 	std::shared_ptr<TextureData> textureData_;
 };
 
